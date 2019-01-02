@@ -1,10 +1,7 @@
 <template lang="pug">
   #birl-spa-container
-    header Sua Mãe
-
+    #menu Sua Mãe
     #contents
-
-    footer Com limão
 </template>
 
 <script lang="coffee">
