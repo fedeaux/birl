@@ -10,8 +10,10 @@ gem 'webpacker'
 gem 'jbuilder', '~> 2.5'
 
 gem 'awesome_print'
+gem 'devise'
 gem 'slim-rails'
 gem 'table_print'
+gem 'devise-semantified', git: 'https://github.com/ajex13/devise-semantified.git'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
