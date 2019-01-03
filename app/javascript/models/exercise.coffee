@@ -1,4 +1,5 @@
 import BaseModel from './base_model'
+import User from './user'
 
 class Exercise extends BaseModel
   @collection = 'exercises'
@@ -9,7 +10,7 @@ class Exercise extends BaseModel
     {
       id: {}
       name: {}
-      user_id: {}
+      user: { type: User }
     }
 
 export default Exercise

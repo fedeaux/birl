@@ -1,4 +1,5 @@
 import BaseModel from './base_model'
+import User from './user'
 
 class Challenge extends BaseModel
   @collection = 'challenges'
@@ -10,7 +11,7 @@ class Challenge extends BaseModel
       id: {}
       name: {}
       description: {}
-      user_id: {}
+      user: { type: User }
     }
 
 export default Challenge

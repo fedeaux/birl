@@ -44,11 +44,26 @@ class EntityGenerator < Rails::Generators::NamedBase
   end
 
   def attributes_as_front_model_list
-    '      ' + attributes.map(&:column_name).join(": {}\n      ")+": {}"
+    '      ' + attributes.map(&method(:attribute_as_front_model_list_item)).join("\n      ")
   end
 
   def guarded_template(source, target)
     return if (File.exists?(target) and File.readlines(target).last.strip == '# NO-OVERRIDE') or !template_exists?(source)
     template source, target
+  end
+
+  def attribute_as_front_model_list_item(attribute)
+    "#{attribute.name}: #{attribute_front_model_list_item_type(attribute)}"
+  end
+
+  def attribute_front_model_list_item_type(attribute)
+    return "{ type: #{attribute.name.camelize} }" if attribute.reference?
+    '{}'
+  end
+
+  def reference_attributes_as_front_model_imports
+    attributes.select(&:reference?).map do |attribute|
+      "import #{attribute.name.camelize} from './#{attribute.name}'"
+    end.join "\n"
   end
 end

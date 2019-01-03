@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_03_194132) do
+ActiveRecord::Schema.define(version: 2019_01_03_202238) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,17 @@ ActiveRecord::Schema.define(version: 2019_01_03_194132) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_challenges_on_user_id"
+  end
+
+  create_table "entries", force: :cascade do |t|
+    t.string "name"
+    t.bigint "progression_id"
+    t.string "values"
+    t.string "variables"
+    t.text "observations"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["progression_id"], name: "index_entries_on_progression_id"
   end
 
   create_table "exercises", force: :cascade do |t|
@@ -37,6 +48,7 @@ ActiveRecord::Schema.define(version: 2019_01_03_194132) do
     t.bigint "user_id"
     t.bigint "challenge_id"
     t.bigint "exercise_id"
+    t.datetime "last_entry_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["challenge_id"], name: "index_progressions_on_challenge_id"
@@ -62,6 +74,7 @@ ActiveRecord::Schema.define(version: 2019_01_03_194132) do
   end
 
   add_foreign_key "challenges", "users"
+  add_foreign_key "entries", "progressions"
   add_foreign_key "exercises", "users"
   add_foreign_key "progressions", "challenges"
   add_foreign_key "progressions", "exercises"

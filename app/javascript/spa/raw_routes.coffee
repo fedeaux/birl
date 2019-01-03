@@ -18,5 +18,13 @@ export default {
       path: '/challenges/:id'
       view: 'challenges/show',
     }
+    {
+      path: '/progressions'
+      view: 'progressions/index'
+    }
+    {
+      path: '/progressions/:id'
+      view: 'progressions/show',
+    }
   ]
 }

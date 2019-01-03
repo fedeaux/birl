@@ -1,4 +1,7 @@
 import BaseModel from './base_model'
+import User from './user'
+import Challenge from './challenge'
+import Exercise from './exercise'
 
 class Progression extends BaseModel
   @collection = 'progressions'
@@ -9,9 +12,10 @@ class Progression extends BaseModel
     {
       id: {}
       name: {}
-      user_id: {}
-      challenge_id: {}
-      exercise_id: {}
+      user: { type: User }
+      challenge: { type: Challenge }
+      exercise: { type: Exercise }
+      last_entry_at: {}
     }
 
 export default Progression
