@@ -6,12 +6,9 @@ class <%= controller_name %> < ApiController
   def show
   end
 
-  def edit
-  end
-
   def update
     if @<%= underscore_name %>.update(<%= plural_underscore_name %>_params)
-      render status: :ok
+      render 'show', status: :ok
     else
       render status: :unprocessable_entuty
     end
@@ -20,7 +17,7 @@ class <%= controller_name %> < ApiController
   def create
     @<%= underscore_name %> = <%= entity_name %>.new <%= plural_underscore_name %>_params
     if @<%= underscore_name %>.save
-      render status: :ok
+      render 'show', status: :created
     else
       render status: :unprocessable_entuty
     end
