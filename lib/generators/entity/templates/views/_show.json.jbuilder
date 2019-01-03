@@ -1,1 +1,1 @@
-json.extract! <%= underscore_name %>, <%= attributes_as_symbol_list %>
+json.extract! <%= underscore_name %>, :id, <%= attributes_as_symbol_list %>

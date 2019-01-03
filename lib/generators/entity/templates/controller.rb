@@ -1,4 +1,6 @@
-class <%= controller_name %> < ApiController
+class Api::V1::<%= controller_name %> < Api::V1::ApiController
+  before_action :set_<%= underscore_name %>, only: [:show, :update]
+
   def index
     @<%= plural_underscore_name %> = <%= entity_name %>.all
   end
@@ -30,6 +32,6 @@ class <%= controller_name %> < ApiController
   end
 
   def <%= underscore_name %>_params
-    params.require(:<%= underscore_name %>).permit(<%= attributes_as_symbol_list %>)
+    params.require(:<%= underscore_name %>).permit(:id, <%= attributes_as_symbol_list %>)
   end
 end

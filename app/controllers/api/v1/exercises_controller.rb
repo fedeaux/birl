@@ -1,4 +1,6 @@
-class ExercisesController < ApiController
+class Api::V1::ExercisesController < Api::V1::ApiController
+  before_action :set_exercise, only: [:show, :update]
+
   def index
     @exercises = Exercise.all
   end
@@ -30,6 +32,6 @@ class ExercisesController < ApiController
   end
 
   def exercise_params
-    params.require(:exercise).permit(:name, :user_id)
+    params.require(:exercise).permit(:id, :name, :user_id)
   end
 end

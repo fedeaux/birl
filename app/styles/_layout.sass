@@ -1,15 +1,42 @@
 $menu-height: 80px
 
+html, body
+  height: 100%
+  width: 100%
+  overflow-x: hidden
+
+*
+  font-weight: 300
+  color: $text-gray
+
+a
+  color: $text-red !important
+
+body
+  padding: 3em
+
+  &.birl-spa
+    padding: 0
+
 #birl-spa-container
+  min-height: 100%
+
   #menu
-    background-color: #de1122
+    background-color: $main-red
+    color: white
+    font-size: 32px
     height: $menu-height
-    position: fixed
-    width: 100%
     line-height: $menu-height
     padding: 0 $d4
-    font-size: 32px
-    color: white
+    position: fixed
+    width: 100%
 
-  #contents
-    padding-top: $menu-height + d2
+  #contents-wrapper
+    padding-top: $menu-height + $d2
+    height: 100%
+
+    #contents
+      overflowy: scroll
+
+  .default-container
+    padding: $d $d2 $d2 $d2

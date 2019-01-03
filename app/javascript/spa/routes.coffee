@@ -8,4 +8,4 @@ componentize = (raw_route) ->
   raw_route.children = (componentize(child) for child in raw_route.children) if raw_route.children
   raw_route
 
-export default (componentize(raw_route) for raw_route in raw_routes)
+export default (componentize(raw_route) for raw_route in raw_routes.routes)
