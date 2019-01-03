@@ -33,7 +33,6 @@ module GeneratorsCore
 
   def view_models_list
     %w[show index list list/item picker new edit form]
-    %w[index list list/item picker new edit form]
   end
 
   def ensure_directory(file)
@@ -41,5 +40,13 @@ module GeneratorsCore
     unless File.directory?(dirname)
       FileUtils.mkdir_p(dirname)
     end
+  end
+
+  def templates_path
+    'lib/generators/entity/templates'
+  end
+
+  def template_exists?(name)
+    File.exists? "#{templates_path}/#{name}"
   end
 end

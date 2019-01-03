@@ -1,23 +1,27 @@
 <template lang="pug">
-.entity-index.exercises-index.default-container
-  exercises-list(:exercises='exercises')
+.entity-show-wrapper.<%= plural_underscore_name %>-show-wrapper.default-container
+  .entity-show.<%= plural_underscore_name %>-show(v-if='<%= underscore_name %>')
+    h1.entity-show-header
+      | {{ <%= underscore_name %>.name }}
 </template>
 
 <script lang="coffee">
-import ExercisesResource from '../../resources/exercises_resource'
+import <%= plural_entity_name %>Resource from '../../resources/<%= plural_underscore_name %>_resource'
 
 export default
   data: ->
-    exercises: null
+    <%= underscore_name %>: null
+    <%= underscore_name %>_id: null
 
   methods:
-    loadExercises: ->
-      @exercises_resource.index @exercisesLoaded
+    load<%= entity_name %>: ->
+      @<%= plural_underscore_name %>_resource.get @<%= underscore_name %>_id, @<%= underscore_name %>Loaded
 
-    exercisesLoaded: (response) ->
-      @exercises = response.exercises
+    <%= underscore_name %>Loaded: (response) ->
+      @<%= underscore_name %> = response.<%= underscore_name %>
 
   mounted: ->
-    @exercises_resource = new ExercisesResource
-    @loadExercises()
+    @<%= plural_underscore_name %>_resource = new <%= plural_entity_name %>Resource
+    @<%= underscore_name %>_id = @$route.params.id
+    @load<%= entity_name %>()
 </script>

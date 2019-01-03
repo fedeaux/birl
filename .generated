@@ -1,2 +1,4 @@
 rails g entity exercise name user:references
 rails g templater exercise
+rails g entity challenge name description user:references
+rails g entity progression name user:references challenge:references exercise:references

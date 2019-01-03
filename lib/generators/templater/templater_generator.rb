@@ -19,7 +19,7 @@ class TemplaterGenerator < Rails::Generators::NamedBase
 
   def generate_template_from_rendered(view_model_name)
     file_name = view_model_file_name(view_model_name)
-    template_file_name = "lib/generators/entity/templates/view_models/#{view_model_name}.vue"
+    template_file_name = "#{templates_path}/view_models/#{view_model_name}.vue"
     return unless File.exists?(file_name)
     contents = File.read file_name
 

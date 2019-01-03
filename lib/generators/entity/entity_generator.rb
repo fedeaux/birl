@@ -13,7 +13,7 @@ class EntityGenerator < Rails::Generators::NamedBase
   end
 
   def generate_controller
-    template "controller.rb", controller_file_name
+    guarded_template "controller.rb", controller_file_name
   end
 
   def add_route
@@ -21,19 +21,19 @@ class EntityGenerator < Rails::Generators::NamedBase
   end
 
   def generate_responses
-    template "views/_show.json.jbuilder", response_file_name('_show')
-    template "views/show.json.jbuilder", response_file_name('show')
-    template "views/index.json.jbuilder", response_file_name('index')
+    guarded_template "views/_show.json.jbuilder", response_file_name('_show')
+    guarded_template "views/show.json.jbuilder", response_file_name('show')
+    guarded_template "views/index.json.jbuilder", response_file_name('index')
   end
 
   def generate_coffeescripts
-    template "coffeescripts/model.coffee", "app/javascript/models/#{underscore_name}.coffee"
-    template "coffeescripts/resource.coffee", "app/javascript/resources/#{plural_underscore_name}_resource.coffee"
+    guarded_template "coffeescripts/model.coffee", "app/javascript/models/#{underscore_name}.coffee"
+    guarded_template "coffeescripts/resource.coffee", "app/javascript/resources/#{plural_underscore_name}_resource.coffee"
   end
 
   def generate_view_models
     view_models_list.each do |view_model_name|
-      template "view_models/#{view_model_name}.vue", view_model_file_name(view_model_name)
+      guarded_template "view_models/#{view_model_name}.vue", view_model_file_name(view_model_name)
     end
   end
 
@@ -45,5 +45,10 @@ class EntityGenerator < Rails::Generators::NamedBase
 
   def attributes_as_front_model_list
     '      ' + attributes.map(&:column_name).join(": {}\n      ")+": {}"
+  end
+
+  def guarded_template(source, target)
+    return if (File.exists?(target) and File.readlines(target).last.strip == '# NO-OVERRIDE') or !template_exists?(source)
+    template source, target
   end
 end

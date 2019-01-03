@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      resources :progressions
+      resources :challenges
       resources :exercises
       resources :training_sessions
     end
