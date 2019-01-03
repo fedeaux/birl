@@ -1,1 +1,2 @@
 rails g entity exercise name user:references
+rails g templater exercise
