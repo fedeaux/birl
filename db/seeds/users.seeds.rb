@@ -3,6 +3,9 @@ errors = []
 [
   {
     email: 'phec06@gmail.com'
+  },
+  {
+    email: 'mariane.cn01@gmail.com'
   }
 ].each do |user_attributes|
   user = User.where(email: user_attributes[:email]).first_or_initialize

@@ -3,11 +3,14 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :entries
-      resources :progressions
       resources :challenges
+      resources :entries
       resources :exercises
+      resources :progressions
+      resources :session_progressions
+      resources :sessions
       resources :training_sessions
+      resources :trainings
     end
   end
 

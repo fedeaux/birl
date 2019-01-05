@@ -11,6 +11,7 @@ class Exercise extends BaseModel
       id: {}
       name: {}
       user: { type: User }
+      slug: {}
     }
 
 export default Exercise

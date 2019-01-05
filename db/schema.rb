@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_03_202238) do
+ActiveRecord::Schema.define(version: 2019_01_05_224633) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 2019_01_03_202238) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
     t.index ["user_id"], name: "index_exercises_on_user_id"
   end
 
@@ -54,6 +55,32 @@ ActiveRecord::Schema.define(version: 2019_01_03_202238) do
     t.index ["challenge_id"], name: "index_progressions_on_challenge_id"
     t.index ["exercise_id"], name: "index_progressions_on_exercise_id"
     t.index ["user_id"], name: "index_progressions_on_user_id"
+  end
+
+  create_table "session_progressions", force: :cascade do |t|
+    t.bigint "session_id"
+    t.bigint "progression_id"
+    t.integer "order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["progression_id"], name: "index_session_progressions_on_progression_id"
+    t.index ["session_id"], name: "index_session_progressions_on_session_id"
+  end
+
+  create_table "sessions", force: :cascade do |t|
+    t.string "name"
+    t.bigint "training_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["training_id"], name: "index_sessions_on_training_id"
+  end
+
+  create_table "trainings", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_trainings_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -79,4 +106,8 @@ ActiveRecord::Schema.define(version: 2019_01_03_202238) do
   add_foreign_key "progressions", "challenges"
   add_foreign_key "progressions", "exercises"
   add_foreign_key "progressions", "users"
+  add_foreign_key "session_progressions", "progressions"
+  add_foreign_key "session_progressions", "sessions"
+  add_foreign_key "sessions", "trainings"
+  add_foreign_key "trainings", "users"
 end

@@ -28,6 +28,9 @@ class BaseModel
   collectionPath: ->
     "/#{@collection()}"
 
+  editPath: ->
+    "/#{@collection()}/#{@id}/edit"
+
   isNewRecord: ->
     ! @id
 

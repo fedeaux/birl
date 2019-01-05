@@ -1,8 +1,12 @@
 <template lang="pug">
-.entity-show-wrapper.<%= plural_underscore_name %>-show-wrapper.default-container
+.entity-show-wrapper.<%= plural_underscore_name %>-show-wrapper.default-container.with-footer
   .entity-show.<%= plural_underscore_name %>-show(v-if='<%= underscore_name %>')
     h1.entity-show-header
       | {{ <%= underscore_name %>.name }}
+
+  shared-footer
+    router-link.ui.fluid.red.basic.button(:to='<%= underscore_name %>.editPath()')
+      | Edit
 </template>
 
 <script lang="coffee">

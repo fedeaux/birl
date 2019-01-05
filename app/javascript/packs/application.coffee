@@ -18,7 +18,7 @@ view_model_aliases = {
 }
 
 for view_model_path in view_model_paths.paths
-  main_component_name = view_model_path.replace(/^shared\//, '').replace(/\//g, '-').replace /_/g, '-'
+  main_component_name = view_model_path.replace(/\//g, '-').replace /_/g, '-'
   component = require("view_models/#{view_model_path}").default
 
   # register the component by its main name and aliases

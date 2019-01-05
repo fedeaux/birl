@@ -1,8 +1,12 @@
 <template lang="pug">
-.entity-show-wrapper.exercises-show-wrapper.default-container
+.entity-show-wrapper.exercises-show-wrapper.default-container.with-footer
   .entity-show.exercises-show(v-if='exercise')
     h1.entity-show-header
       | {{ exercise.name }}
+
+  shared-footer
+    router-link.ui.fluid.red.basic.button(:to='exercise.editPath()')
+      | Edit
 </template>
 
 <script lang="coffee">

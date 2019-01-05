@@ -2,6 +2,8 @@
 
 export default {
   paths: [
+    'shared/footer'
+
     'entity/list/empty'
     'entity/list/item/divider'
 
@@ -9,6 +11,9 @@ export default {
     'exercises/index'
     'exercises/list'
     'exercises/list/item'
+    'exercises/form'
+    'exercises/new'
+    'exercises/edit'
 
     'challenges/show'
     'challenges/index'
@@ -19,5 +24,10 @@ export default {
     'progressions/index'
     'progressions/list'
     'progressions/list/item'
+
+    'trainings/show'
+    'trainings/index'
+    'trainings/list'
+    'trainings/list/item'
   ]
 }

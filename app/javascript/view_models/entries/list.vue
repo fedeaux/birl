@@ -1,6 +1,6 @@
 <template lang="pug">
 .entity-list.entry-list.default-container
-  entries-list-item(v-for='entry in entries' v-if='entries' :entry='entry')
+  entries-list-item(v-for='entry in entries' v-if='entries' :entry='entry' :key='entry.id')
   entity-list-empty(v-if='!entries || entries.length == 0')
 </template>
 
