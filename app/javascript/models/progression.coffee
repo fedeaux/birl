@@ -16,6 +16,7 @@ class Progression extends BaseModel
       challenge: { type: Challenge }
       exercise: { type: Exercise }
       last_entry_at: {}
+      details: {}
     }
 
 export default Progression

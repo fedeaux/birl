@@ -1,6 +1,6 @@
 rails g entity exercise name user:references slug
 rails g entity challenge name description user:references
-rails g entity progression name user:references challenge:references exercise:references last_entry_at:datetime
+rails g entity progression name user:references challenge:references exercise:references last_entry_at:datetime details
 rails g entity entry name progression:references values variables observations:text
 rails g entity training name user:references
 rails g entity session name training:belongs_to

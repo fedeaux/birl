@@ -7,4 +7,5 @@ class User < ApplicationRecord
   has_many :exercises
   has_many :challenges
   has_many :progressions
+  has_many :trainings
 end

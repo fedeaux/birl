@@ -1,8 +1,12 @@
 <template lang="pug">
-.entity-show-wrapper.progressions-show-wrapper.default-container
+.entity-show-wrapper.progressions-show-wrapper.default-container.with-footer
   .entity-show.progressions-show(v-if='progression')
     h1.entity-show-header
       | {{ progression.name }}
+
+  shared-footer
+    router-link.ui.fluid.red.basic.button(:to='progression.editPath()')
+      | Edit
 </template>
 
 <script lang="coffee">

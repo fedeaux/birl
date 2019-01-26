@@ -3,6 +3,8 @@
   .entity-show.trainings-show(v-if='training')
     h1.entity-show-header
       | {{ training.name }}
+
+  sessions-list(:sessions='training.sessions')
 </template>
 
 <script lang="coffee">

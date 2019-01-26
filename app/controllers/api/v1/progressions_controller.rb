@@ -32,6 +32,6 @@ class Api::V1::ProgressionsController < Api::V1::ApiController
   end
 
   def progression_params
-    params.require(:progression).permit(:id, :name, :user_id, :challenge_id, :exercise_id, :last_entry_at)
+    params.require(:progression).permit(:id, :name, :user_id, :challenge_id, :exercise_id, :last_entry_at, :details)
   end
 end
