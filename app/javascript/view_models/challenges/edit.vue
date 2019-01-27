@@ -1,11 +1,11 @@
 <template lang="pug">
-.entity-edit.exercise-edit.default-container
-  exercises-form(:exercise_id='exercise_id')
+.entity-edit.challenge-edit.default-container
+  challenges-form(:challenge_id='challenge_id')
 </template>
 
 <script lang="coffee">
 export default
   computed:
-    exercise_id: ->
+    challenge_id: ->
       @$route.params.id
 </script>

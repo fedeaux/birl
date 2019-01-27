@@ -16,7 +16,6 @@ export default
 
     progressionsLoaded: (response) ->
       @progressions = response.progressions
-      console.log '@progressions', @progressions
 
   mounted: ->
     @progressions_resource = new ProgressionsResource

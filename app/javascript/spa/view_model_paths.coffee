@@ -14,17 +14,20 @@ export default {
     'exercises/form'
     'exercises/new'
     'exercises/edit'
+    'exercises/select'
 
     'challenges/show'
     'challenges/index'
     'challenges/list'
     'challenges/list/item'
+    'challenges/select'
 
     'progressions/index'
     'progressions/list'
     'progressions/list/item'
     'progressions/manager'
     'progressions/show'
+    'progressions/form'
 
     'trainings/show'
     'trainings/index'

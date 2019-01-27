@@ -1,8 +1,12 @@
 <template lang="pug">
-.entity-show-wrapper.sessions-show-wrapper.default-container
+.entity-show-wrapper.sessions-show-wrapper.default-container.with-footer
   .entity-show.sessions-show(v-if='session')
     h1.entity-show-header
       | {{ session.name }}
+
+  shared-footer(v-if='session')
+    router-link.ui.fluid.red.basic.button(:to='session.editPath()')
+      | Edit
 </template>
 
 <script lang="coffee">

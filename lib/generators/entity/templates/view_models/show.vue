@@ -4,7 +4,10 @@
     h1.entity-show-header
       | {{ <%= underscore_name %>.name }}
 
-  shared-footer
+    h2.entity-show-subheader Progressions
+    progressions-manager(:context='{ <%= underscore_name %>_id: <%= underscore_name %>.id }')
+
+  shared-footer(v-if='<%= underscore_name %>')
     router-link.ui.fluid.red.basic.button(:to='<%= underscore_name %>.editPath()')
       | Edit
 </template>

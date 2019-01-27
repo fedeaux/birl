@@ -3,6 +3,10 @@ class Api::V1::ProgressionsController < Api::V1::ApiController
 
   def index
     @progressions = current_user.progressions
+
+    if params[:exercise_id]
+      @progressions = @progressions.where(params.permit(:exercise_id))
+    end
   end
 
   def show

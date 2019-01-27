@@ -1,10 +1,12 @@
 <template lang="pug">
-.entity-show-wrapper.trainings-show-wrapper.default-container
+.entity-show-wrapper.trainings-show-wrapper.default-container.with-footer
   .entity-show.trainings-show(v-if='training')
     h1.entity-show-header
       | {{ training.name }}
 
-  sessions-list(:sessions='training.sessions')
+  shared-footer(v-if='training')
+    router-link.ui.fluid.red.basic.button(:to='training.editPath()')
+      | Edit
 </template>
 
 <script lang="coffee">

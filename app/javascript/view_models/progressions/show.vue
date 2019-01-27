@@ -4,7 +4,7 @@
     h1.entity-show-header
       | {{ progression.name }}
 
-  shared-footer
+  shared-footer(v-if='progression')
     router-link.ui.fluid.red.basic.button(:to='progression.editPath()')
       | Edit
 </template>

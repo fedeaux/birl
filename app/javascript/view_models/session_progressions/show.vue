@@ -1,8 +1,12 @@
 <template lang="pug">
-.entity-show-wrapper.session_progressions-show-wrapper.default-container
+.entity-show-wrapper.session_progressions-show-wrapper.default-container.with-footer
   .entity-show.session_progressions-show(v-if='session_progression')
     h1.entity-show-header
       | {{ session_progression.name }}
+
+  shared-footer(v-if='session_progression')
+    router-link.ui.fluid.red.basic.button(:to='session_progression.editPath()')
+      | Edit
 </template>
 
 <script lang="coffee">

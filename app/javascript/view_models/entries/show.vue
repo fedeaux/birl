@@ -1,8 +1,12 @@
 <template lang="pug">
-.entity-show-wrapper.entries-show-wrapper.default-container
+.entity-show-wrapper.entries-show-wrapper.default-container.with-footer
   .entity-show.entries-show(v-if='entry')
     h1.entity-show-header
       | {{ entry.name }}
+
+  shared-footer(v-if='entry')
+    router-link.ui.fluid.red.basic.button(:to='entry.editPath()')
+      | Edit
 </template>
 
 <script lang="coffee">
