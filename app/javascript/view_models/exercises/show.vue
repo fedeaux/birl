@@ -4,12 +4,12 @@
     h1.entity-show-header
       | {{ exercise.name }}
 
-    exercises-progressions-list(:exercise_id='exercise.id')
+    h2.entity-show-subheader Progressions
+    progressions-manager(:context='{ exercise_id: exercise.id }')
 
-  shared-footer
+  shared-footer(v-if='exercise')
     router-link.ui.fluid.red.basic.button(:to='exercise.editPath()')
       | Edit
-
 </template>
 
 <script lang="coffee">

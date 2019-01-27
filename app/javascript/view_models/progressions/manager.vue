@@ -1,5 +1,5 @@
 <template lang="pug">
-.entity-index.progressions-index.default-container
+.entity-manager.progressions-manager.default-container
   progressions-list(:progressions='progressions')
 </template>
 
@@ -7,16 +7,19 @@
 import ProgressionsResource from '../../resources/progressions_resource'
 
 export default
+  props:
+    context:
+      default: -> {}
+
   data: ->
     progressions: null
 
   methods:
     loadProgressions: ->
-      @progressions_resource.index @progressionsLoaded
+      @progressions_resource.index @progressionsLoaded, @context
 
     progressionsLoaded: (response) ->
       @progressions = response.progressions
-      console.log '@progressions', @progressions
 
   mounted: ->
     @progressions_resource = new ProgressionsResource

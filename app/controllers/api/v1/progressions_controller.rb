@@ -2,7 +2,7 @@ class Api::V1::ProgressionsController < Api::V1::ApiController
   before_action :set_progression, only: [:show, :update]
 
   def index
-    @progressions = Progression.all
+    @progressions = current_user.progressions
   end
 
   def show

@@ -10,9 +10,9 @@ after(:challenges) do
       name: 'Push A',
       order: 1,
       progressions: [
+        ['Agachamento', '5/4/3/2/1'],
         ['Supino Reto', '5/4/3/2/1'],
         ['Supino Inclinado', 'Resistência de Força'],
-        ['Agachamento', 'Profilático'],
         ['Super Crucifixo & Supino', 'Destruição'],
         ['Elevação Lateral', 'Destruição'],
       ]

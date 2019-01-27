@@ -1,4 +1,4 @@
-$menu-height: 80px
+$header-height: 80px
 
 html, body
   height: 100%
@@ -21,18 +21,23 @@ body
 #birl-spa-container
   min-height: 100%
 
-  #menu
+  #header
     background-color: $main-red
     color: white
     font-size: 32px
-    height: $menu-height
-    line-height: $menu-height
+    height: $header-height
+    line-height: $header-height
     padding: 0 $d4
     position: fixed
     width: 100%
 
+  #menu
+    position: absolute
+    top: $header-height + $d2
+    left: $d2
+
   #contents-wrapper
-    padding-top: $menu-height + $d2
+    padding-top: $header-height + $d2
     height: 100%
 
     #contents

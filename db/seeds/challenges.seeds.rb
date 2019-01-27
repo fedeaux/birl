@@ -32,8 +32,8 @@ after(:exercises) do
       },
       {
         name: 'Resistência de Força (ultraleve)',
-        description: '5 séries. 30 na primeira. Falling star: 30 25 21 18 15'
-      }
+        description: '6 séries. Primeira mais pesada, 30 na segunda. Falling star: 4 30 25 21 18 15'
+      },
     ].each do |challenge_attrs|
       challenge = user.challenges.find_or_initialize_by(name: challenge_attrs[:name])
       return if challenge.persisted?

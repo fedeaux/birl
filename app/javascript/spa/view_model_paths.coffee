@@ -20,10 +20,11 @@ export default {
     'challenges/list'
     'challenges/list/item'
 
-    'progressions/show'
     'progressions/index'
     'progressions/list'
     'progressions/list/item'
+    'progressions/manager'
+    'progressions/show'
 
     'trainings/show'
     'trainings/index'

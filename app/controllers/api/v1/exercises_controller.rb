@@ -2,7 +2,7 @@ class Api::V1::ExercisesController < Api::V1::ApiController
   before_action :set_exercise, only: [:show, :update]
 
   def index
-    @exercises = Exercise.all
+    @exercises = current_user.exercises
   end
 
   def show

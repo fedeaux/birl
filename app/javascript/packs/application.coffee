@@ -4,9 +4,12 @@ window.$ = require 'jquery'
 window.jQuery = window.$
 window.moment = require 'moment'
 
+require 'semantic-ui-sass'
+
 import routes from '../spa/routes'
 import SuiVue from 'semantic-ui-vue'
 Vue.use SuiVue
+
 VueRouter = require('vue-router').default
 Vue.use VueRouter
 
