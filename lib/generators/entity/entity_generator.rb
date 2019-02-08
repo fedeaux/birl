@@ -47,11 +47,10 @@ class EntityGenerator < Rails::Generators::NamedBase
     attr_strings = []
 
     attributes.each do |attribute|
-      byebug
+      attr_strings.concat attribute_as_front_model_list_item(attribute)
     end
 
-
-    '      ' + attributes.map(&method(:attribute_as_front_model_list_item)).join("\n      ")
+    '      ' + attr_strings.join("\n      ")
   end
 
   def guarded_template(source, target)
@@ -60,7 +59,14 @@ class EntityGenerator < Rails::Generators::NamedBase
   end
 
   def attribute_as_front_model_list_item(attribute)
-    "#{attribute.name}: #{attribute_front_model_list_item_type(attribute)}"
+    if attribute.reference?
+      [
+        "#{attribute.name}: #{attribute_front_model_list_item_type(attribute)}",
+        "#{attribute.column_name}: {}"
+      ]
+    else
+      ["#{attribute.name}: #{attribute_front_model_list_item_type(attribute)}"]
+    end
   end
 
   def attribute_front_model_list_item_type(attribute)
