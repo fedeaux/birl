@@ -44,6 +44,13 @@ class EntityGenerator < Rails::Generators::NamedBase
   end
 
   def attributes_as_front_model_list
+    attr_strings = []
+
+    attributes.each do |attribute|
+      byebug
+    end
+
+
     '      ' + attributes.map(&method(:attribute_as_front_model_list_item)).join("\n      ")
   end
 

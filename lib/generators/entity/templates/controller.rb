@@ -9,7 +9,7 @@ class Api::V1::<%= controller_name %> < Api::V1::ApiController
   end
 
   def update
-    if @<%= underscore_name %>.update(<%= plural_underscore_name %>_params)
+    if @<%= underscore_name %>.update(<%= underscore_name %>_params)
       render 'show', status: :ok
     else
       render status: :unprocessable_entuty
@@ -17,7 +17,7 @@ class Api::V1::<%= controller_name %> < Api::V1::ApiController
   end
 
   def create
-    @<%= underscore_name %> = <%= entity_name %>.new <%= plural_underscore_name %>_params
+    @<%= underscore_name %> = <%= entity_name %>.new <%= underscore_name %>_params
     if @<%= underscore_name %>.save
       render 'show', status: :created
     else

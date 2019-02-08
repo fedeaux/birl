@@ -1,4 +1,5 @@
 class Api::V1::EntriesController < Api::V1::ApiController
+  before_action :set_progression, only: [:show, :update]
   before_action :set_entry, only: [:show, :update]
 
   def index
@@ -9,7 +10,7 @@ class Api::V1::EntriesController < Api::V1::ApiController
   end
 
   def update
-    if @entry.update(entries_params)
+    if @entry.update(entry_params)
       render 'show', status: :ok
     else
       render status: :unprocessable_entuty
@@ -17,7 +18,8 @@ class Api::V1::EntriesController < Api::V1::ApiController
   end
 
   def create
-    @entry = Entry.new entries_params
+    @entry = Entry.new entry_params
+
     if @entry.save
       render 'show', status: :created
     else
@@ -26,6 +28,10 @@ class Api::V1::EntriesController < Api::V1::ApiController
   end
 
   private
+
+  def set_progression
+    @progression = Progression.find(params[:progression_id])
+  end
 
   def set_entry
     @entry = Entry.find(params[:id])

@@ -29,6 +29,13 @@ export default {
     'progressions/show'
     'progressions/form'
 
+    'entries/index'
+    'entries/list'
+    'entries/list/item'
+    'entries/manager'
+    'entries/show'
+    'entries/form'
+
     'trainings/show'
     'trainings/index'
     'trainings/list'
