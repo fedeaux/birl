@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_18_162649) do
+ActiveRecord::Schema.define(version: 2019_02_18_214501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 2019_02_18_162649) do
     t.datetime "last_entry_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "entries_count"
     t.index ["challenge_id"], name: "index_progressions_on_challenge_id"
     t.index ["exercise_id"], name: "index_progressions_on_exercise_id"
     t.index ["user_id"], name: "index_progressions_on_user_id"

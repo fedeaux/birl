@@ -20,6 +20,7 @@ class Progression extends BaseModel
       exercise: { type: Exercise }
       exercise_id: {}
       last_entry_at: {}
+      entries_count: {}
     }
 
 export default Progression

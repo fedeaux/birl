@@ -11,6 +11,13 @@
   .entity-list-item.progression-list-item(v-else)
     | {{ progression.name }}
 
+    .progression-list-item-entries-count
+      template(v-if='progression.entries_count')
+        | {{ progression.entries_count }}
+        |  entries
+      template(v-else)
+        |  never trained
+
     .entity-list-item-actions-wrapper(v-if='allow_actions')
       i.ellipsis.vertical.icon(@click.stop='showActions($event)' v-if='!show_actions')
 
