@@ -1,5 +1,5 @@
 class Api::V1::ProgressionsController < Api::V1::ApiController
-  before_action :set_progression, only: [:show, :update]
+  before_action :set_progression, only: [:show, :update, :destroy]
 
   def index
     @progressions = current_user.progressions
@@ -25,6 +25,10 @@ class Api::V1::ProgressionsController < Api::V1::ApiController
     else
       render 'show', status: :unprocessable_entuty
     end
+  end
+
+  def destroy
+    @progression.destroy
   end
 
   private

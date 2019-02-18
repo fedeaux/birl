@@ -4,7 +4,7 @@
     h1.entity-show-header
       | {{ exercise.name }}
 
-  progressions-manager(v-if='exercise_id' :context='{ exercise_id: exercise_id }')
+  progressions-manager(v-if='exercise_id' :context='{ exercise_id: exercise_id }' :allow_actions='true')
 
   shared-footer(v-if='exercise')
     router-link.ui.fluid.red.basic.button(:to='exercise.editPath()')

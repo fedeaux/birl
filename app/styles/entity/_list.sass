@@ -7,6 +7,7 @@
     .entity-list-item
       padding: $d 0
       position: relative
+      display: block
 
       .entity-list-item-actions-wrapper
         position: absolute
@@ -14,6 +15,11 @@
         right: $d
 
         .entity-list-item-actions
+          position: absolute
+          top: 0
+          right: 0
+          z-index: 1000
+
           .item
             text-align: right
 

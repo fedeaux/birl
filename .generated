@@ -7,4 +7,4 @@ rails g entity training name user:references
 rails g entity session name training:belongs_to
 rails g entity session_progression session:belongs_to progression:belongs_to order:integer
 
-rails g templater exercise
+rails g templater entry

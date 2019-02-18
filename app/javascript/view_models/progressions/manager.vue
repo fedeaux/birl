@@ -9,7 +9,10 @@
     #new-progression-button.ui.primary.top.attached.fluid.small.icon.button(@click='newProgression')
       | Add
 
-    progressions-list(:progressions='progressions')
+    progressions-list(:progressions='progressions'
+                      :allow_actions='true'
+                      @edit='editProgression($event)'
+                      @destroy='destroyProgression($event)')
 </template>
 
 <script lang="coffee">
@@ -26,6 +29,12 @@ export default
     form_progression: null
 
   methods:
+    editProgression: (data) ->
+      @setFormProgression data.progression
+
+    destroyProgression: (data) ->
+      @progressions_resource.destroy data.progression, @progressionRemoved
+
     loadProgressions: ->
       @progressions_resource.index @progressionsLoaded, @context
 
@@ -33,7 +42,7 @@ export default
       @progressions = response.progressions
 
     newProgression: ->
-      @setFormProgression new Progression(@context)
+      @setFormProgression new Progression @context
 
     setFormProgression: (@form_progression) ->
 
@@ -61,6 +70,11 @@ export default
     progressionSaved: (data) ->
       @addProgression data.progression
       @clearFormProgression()
+
+    progressionRemoved: (data) ->
+      index = @progressionIndex data.progression.id
+      return if index == -1
+      @progressions.splice index, 1
 
   mounted: ->
     @progressions_resource = new ProgressionsResource

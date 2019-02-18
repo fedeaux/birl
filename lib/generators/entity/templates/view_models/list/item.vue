@@ -1,7 +1,31 @@
 <template lang="pug">
 .entity-list-item-wrapper.<%= underscore_name %>-list-item-wrapper
-  router-link.entity-list-item.<%= underscore_name %>-list-item(:to='<%= underscore_name %>.path()')
+  .entity-list-item-confirming-destroy(v-if='confirming_destroy')
+    .ui.red.message
+      .centered Confirm destroy?
+
+    .ui.small.fluid.buttons
+      .ui.red.button(@click='$emit("destroy")') Destroy
+      .ui.basic.button(@click='cancelDestroy()') Cancel
+
+  .entity-list-item.<%= underscore_name %>-list-item(v-else)
     | {{ <%= underscore_name %>.name }}
+
+    .entity-list-item-actions-wrapper(v-if='allow_actions')
+      i.ellipsis.vertical.icon(@click='showActions($event)' v-if='!show_actions')
+
+      .ui.vertical.text.menu.entity-list-item-actions(v-if='show_actions')
+        router-link.item(:to='<%= underscore_name %>.path()')
+          | View
+          i.eye.icon
+
+        a.item(@click='edit($event)')
+          | Edit
+          i.edit.icon
+
+        a.item(@click='confirmDestroy($event)')
+          | Destroy
+          i.trash.icon
 
   entity-list-item-divider
 </template>
@@ -9,7 +33,40 @@
 <script lang="coffee">
 
 export default
+  data: ->
+    confirming_destroy: false
+    show_actions: false
+
   props:
     <%= underscore_name %>:
       required: true
+
+    allow_actions:
+      default: false
+
+  methods:
+    confirmDestroy: ($event) ->
+      @confirming_destroy = true
+      $event.stopPropagation()
+
+    cancelDestroy: ->
+      @confirming_destroy = false
+
+    edit: ($event) ->
+      @$emit 'edit'
+      $event.stopPropagation()
+
+    showActions: ($event) ->
+      @show_actions = true
+      $event.stopPropagation()
+
+    hideActions: ->
+      @show_actions = false
+
+  mounted: ->
+    $(document).on 'click', @hideActions
+
+  beforeDestroy: ->
+    $(document).off 'click', @hideActions
+
 </script>

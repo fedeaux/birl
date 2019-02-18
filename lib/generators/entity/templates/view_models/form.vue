@@ -2,6 +2,10 @@
 .entity-form-wrapper.<%= plural_underscore_name %>-form-wrapper.default-container(v-if='<%= underscore_name %>')
   .entity-form.<%= plural_underscore_name %>-form
     .ui.form
+      .field
+        label name
+        input(type='text' v-model='<%= underscore_name %>.name')
+
       .field.ui.fluid.buttons
         .ui.primary.button(@click='save()') Save
         .ui.basic.button(@click='cancel()') Cancel
@@ -24,6 +28,7 @@ export default
 
   methods:
     save: ->
+      @$emit 'input', @<%= underscore_name %>
       @$emit 'save'
 
     cancel: ->

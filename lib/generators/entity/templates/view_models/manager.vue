@@ -9,7 +9,10 @@
     #new-<%= underscore_name %>-button.ui.primary.top.attached.fluid.small.icon.button(@click='new<%= entity_name %>')
       | Add
 
-    <%= plural_underscore_name %>-list(:<%= plural_underscore_name %>='<%= plural_underscore_name %>')
+    <%= plural_underscore_name %>-list(:<%= plural_underscore_name %>='<%= plural_underscore_name %>'
+    <%= plural_underscore_name_as_spaces %>      :allow_actions='true'
+    <%= plural_underscore_name_as_spaces %>      @edit='edit<%= entity_name %>($event)'
+    <%= plural_underscore_name_as_spaces %>      @destroy='destroy<%= entity_name %>($event)')
 </template>
 
 <script lang="coffee">
@@ -26,6 +29,12 @@ export default
     form_<%= underscore_name %>: null
 
   methods:
+    edit<%= entity_name %>: (data) ->
+      @setForm<%= entity_name %> data.<%= underscore_name %>
+
+    destroy<%= entity_name %>: (data) ->
+      @<%= plural_underscore_name %>_resource.destroy data.<%= underscore_name %>, @<%= lowercase_entity_name %>Removed
+
     load<%= plural_entity_name %>: ->
       @<%= plural_underscore_name %>_resource.index @<%= plural_underscore_name %>Loaded, @context
 
@@ -33,7 +42,7 @@ export default
       @<%= plural_underscore_name %> = response.<%= plural_underscore_name %>
 
     new<%= entity_name %>: ->
-      @setForm<%= entity_name %> new <%= entity_name %>(@context)
+      @setForm<%= entity_name %> new <%= entity_name %> @context
 
     setForm<%= entity_name %>: (@form_<%= underscore_name %>) ->
 
@@ -60,6 +69,12 @@ export default
 
     <%= lowercase_entity_name %>Saved: (data) ->
       @add<%= entity_name %> data.<%= underscore_name %>
+      @clearForm<%= entity_name %>()
+
+    <%= lowercase_entity_name %>Removed: (data) ->
+      index = @<%= underscore_name %>Index data.<%= underscore_name %>.id
+      return if index == -1
+      @<%= plural_underscore_name %>.splice index, 1
 
   mounted: ->
     @<%= plural_underscore_name %>_resource = new <%= plural_entity_name %>Resource
