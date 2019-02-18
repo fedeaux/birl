@@ -9,7 +9,7 @@ class Api::V1::SessionProgressionsController < Api::V1::ApiController
   end
 
   def update
-    if @session_progression.update(session_progressions_params)
+    if @session_progression.update(session_progression_params)
       render 'show', status: :ok
     else
       render status: :unprocessable_entuty
@@ -17,7 +17,7 @@ class Api::V1::SessionProgressionsController < Api::V1::ApiController
   end
 
   def create
-    @session_progression = SessionProgression.new session_progressions_params
+    @session_progression = SessionProgression.new session_progression_params
     if @session_progression.save
       render 'show', status: :created
     else

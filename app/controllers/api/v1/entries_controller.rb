@@ -2,7 +2,7 @@ class Api::V1::EntriesController < Api::V1::ApiController
   before_action :set_entry, only: [:show, :update]
 
   def index
-    @entries = Progression.find(params[:progression_id]).entries
+    @entries = Entry.all
   end
 
   def show

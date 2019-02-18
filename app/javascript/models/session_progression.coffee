@@ -11,7 +11,9 @@ class SessionProgression extends BaseModel
     {
       id: {}
       session: { type: Session }
+      session_id: {}
       progression: { type: Progression }
+      progression_id: {}
       order: {}
     }
 

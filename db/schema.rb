@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_05_230330) do
+ActiveRecord::Schema.define(version: 2019_02_18_162649) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,22 +37,32 @@ ActiveRecord::Schema.define(version: 2019_01_05_230330) do
 
   create_table "exercises", force: :cascade do |t|
     t.string "name"
+    t.string "slug"
+    t.bigint "user_id"
+    t.bigint "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_exercises_on_group_id"
+    t.index ["user_id"], name: "index_exercises_on_user_id"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string "name"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "slug"
-    t.index ["user_id"], name: "index_exercises_on_user_id"
+    t.index ["user_id"], name: "index_groups_on_user_id"
   end
 
   create_table "progressions", force: :cascade do |t|
     t.string "name"
+    t.string "details"
     t.bigint "user_id"
     t.bigint "challenge_id"
     t.bigint "exercise_id"
     t.datetime "last_entry_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "details"
     t.index ["challenge_id"], name: "index_progressions_on_challenge_id"
     t.index ["exercise_id"], name: "index_progressions_on_exercise_id"
     t.index ["user_id"], name: "index_progressions_on_user_id"
@@ -103,7 +113,9 @@ ActiveRecord::Schema.define(version: 2019_01_05_230330) do
 
   add_foreign_key "challenges", "users"
   add_foreign_key "entries", "progressions"
+  add_foreign_key "exercises", "groups"
   add_foreign_key "exercises", "users"
+  add_foreign_key "groups", "users"
   add_foreign_key "progressions", "challenges"
   add_foreign_key "progressions", "exercises"
   add_foreign_key "progressions", "users"

@@ -1,1 +1,1 @@
-json.extract! exercise, :id, :name, :user_id, :slug
+json.extract! exercise, :id, :name, :slug, :user_id, :group_id

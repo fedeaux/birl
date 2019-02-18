@@ -5,8 +5,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :challenges
       resources :entries
-      resources :entries
       resources :exercises
+      resources :groups
       resources :progressions
       resources :session_progressions
       resources :sessions

@@ -4,7 +4,7 @@ export default {
   routes: [
     {
       path: ''
-      view: 'trainings/index'
+      view: 'groups/index'
     }
     {
       path: '/exercises'

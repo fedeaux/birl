@@ -4,6 +4,9 @@
     h1.entity-show-header
       | {{ training.name }}
 
+    h2.entity-show-subheader Progressions
+    progressions-manager(:context='{ training_id: training.id }')
+
   shared-footer(v-if='training')
     router-link.ui.fluid.red.basic.button(:to='training.editPath()')
       | Edit

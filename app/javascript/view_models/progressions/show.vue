@@ -4,8 +4,8 @@
     h1.entity-show-header
       | {{ progression.name }}
 
-    h2.entity-show-subheader Entries
-    entries-manager(:context='{ progression_id: progression.id, progression: progression.serialize() }')
+    h2.entity-show-subheader Progressions
+    progressions-manager(:context='{ progression_id: progression.id }')
 
   shared-footer(v-if='progression')
     router-link.ui.fluid.red.basic.button(:to='progression.editPath()')

@@ -4,7 +4,7 @@
       i#side-menu-toggle.bars.icon(@click='showMenu($event)')
     #contents-wrapper
       .ui.vertical.large.menu#menu(v-if='show_menu')
-        router-link.item(to='/exercises') Exercises
+        router-link.item(to='/') Exercise Groups
         router-link.item(to='/challenges') Challenges
         router-link.item(to='/progressions') Progressions
       #contents

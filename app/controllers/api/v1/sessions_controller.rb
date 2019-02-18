@@ -9,7 +9,7 @@ class Api::V1::SessionsController < Api::V1::ApiController
   end
 
   def update
-    if @session.update(sessions_params)
+    if @session.update(session_params)
       render 'show', status: :ok
     else
       render status: :unprocessable_entuty
@@ -17,7 +17,7 @@ class Api::V1::SessionsController < Api::V1::ApiController
   end
 
   def create
-    @session = Session.new sessions_params
+    @session = Session.new session_params
     if @session.save
       render 'show', status: :created
     else

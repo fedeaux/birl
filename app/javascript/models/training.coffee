@@ -11,6 +11,7 @@ class Training extends BaseModel
       id: {}
       name: {}
       user: { type: User }
+      user_id: {}
     }
 
 export default Training

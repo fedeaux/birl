@@ -1,7 +1,7 @@
 <template lang="pug">
 .entity-manager.progressions-manager.default-container
   .entity-manager-form(v-if='form_progression')
-    progressions-form(:original_progression='form_progression')
+    progressions-form(v-model='form_progression' @save='saveFormProgression()')
 
   .entity-manager-list(v-else)
     #new-progression-button.ui.primary.small.icon.button(@click='newProgression')
@@ -29,11 +29,34 @@ export default
 
     progressionsLoaded: (response) ->
       @progressions = response.progressions
+      @$nextTick ->
+        $('#new-progression-button').click()
 
     newProgression: ->
       @setFormProgression new Progression(@context)
 
     setFormProgression: (@form_progression) ->
+
+    progressionIndex: (progression_id) ->
+      for index, progression of @progressions
+        return index if progression.id == progression_id
+
+      -1
+
+    saveFormProgression: ->
+      @progressions_resource.save @form_progression, @progressionSaved
+
+    addProgression: (progression) ->
+      index = @progressionIndex progression.id
+
+      if index == -1
+        @progressions.push progression
+        return
+
+      Vue.set @progressions, index, progression
+
+    progressionSaved: (data) ->
+      @addProgression data.progression
 
   mounted: ->
     @progressions_resource = new ProgressionsResource

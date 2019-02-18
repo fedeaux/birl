@@ -12,11 +12,14 @@ class Progression extends BaseModel
     {
       id: {}
       name: {}
-      user: { type: User }
-      challenge: { type: Challenge }
-      exercise: { type: Exercise }
-      last_entry_at: {}
       details: {}
+      user: { type: User }
+      user_id: {}
+      challenge: { type: Challenge }
+      challenge_id: {}
+      exercise: { type: Exercise }
+      exercise_id: {}
+      last_entry_at: {}
     }
 
 export default Progression

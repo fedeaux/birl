@@ -12,6 +12,7 @@ class Challenge extends BaseModel
       name: {}
       description: {}
       user: { type: User }
+      user_id: {}
     }
 
 export default Challenge

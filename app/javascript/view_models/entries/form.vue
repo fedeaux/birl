@@ -2,14 +2,6 @@
 .entity-form-wrapper.entries-form-wrapper.default-container(v-if='entry')
   .entity-form.entries-form
     .ui.form
-      .field
-        label Values
-        input(type='text' v-model='entry.values')
-
-      .field
-        label Observations
-        input(type='text' v-model='entry.observations')
-
       .field.ui.fluid.buttons
         .ui.primary.button(@click='save()') Save
         .ui.basic.button(@click='cancel()') Cancel
@@ -29,7 +21,6 @@ export default
 
   data: ->
     entry: null
-    last_entry_signature: null
 
   methods:
     save: ->
@@ -41,15 +32,6 @@ export default
   mounted: ->
 
   watch:
-    entry:
-      deep: true
-      handler: ->
-        return unless @entry
-        entry_signature = JSON.stringify @entry.serialize()
-        return if entry_signature == @last_entry_signature
-        @last_entry_signature = entry_signature
-        @$emit 'input', @entry
-
     original_entry:
       immediate: true
       deep: true

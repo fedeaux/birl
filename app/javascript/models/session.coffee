@@ -11,6 +11,7 @@ class Session extends BaseModel
       id: {}
       name: {}
       training: { type: Training }
+      training_id: {}
     }
 
 export default Session

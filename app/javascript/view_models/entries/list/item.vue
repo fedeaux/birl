@@ -1,7 +1,7 @@
 <template lang="pug">
 .entity-list-item-wrapper.entry-list-item-wrapper
-  .entity-list-item.entry-list-item
-    | {{ entry.values }}
+  router-link.entity-list-item.entry-list-item(:to='entry.path()')
+    | {{ entry.name }}
 
   entity-list-item-divider
 </template>

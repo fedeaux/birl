@@ -1,21 +1,10 @@
 <template lang="pug">
 .entity-form-wrapper.progressions-form-wrapper.default-container(v-if='progression')
   .entity-form.progressions-form
-    form.ui.form
-      .field
-        label Name
-        input(type='text')
-
-      .field
-        label Exercise
-        exercises-select(v-model='progression.exercise')
-
-      .field
-        label Challenge
-        challenges-select(v-model='progression.challenge')
-
-      .field
+    .ui.form
+      .field.ui.fluid.buttons
         .ui.primary.button(@click='save()') Save
+        .ui.basic.button(@click='cancel()') Cancel
 
 </template>
 
@@ -24,6 +13,9 @@ import ProgressionsResource from '../../resources/progressions_resource'
 import Progression from '../../models/progression'
 
 export default
+  model:
+    prop: 'original_progression'
+
   props:
     original_progression: null
 
@@ -32,6 +24,10 @@ export default
 
   methods:
     save: ->
+      @$emit 'save'
+
+    cancel: ->
+      @$emit 'cancel'
 
   mounted: ->
 

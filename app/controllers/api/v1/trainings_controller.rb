@@ -9,7 +9,7 @@ class Api::V1::TrainingsController < Api::V1::ApiController
   end
 
   def update
-    if @training.update(trainings_params)
+    if @training.update(training_params)
       render 'show', status: :ok
     else
       render status: :unprocessable_entuty
@@ -17,7 +17,7 @@ class Api::V1::TrainingsController < Api::V1::ApiController
   end
 
   def create
-    @training = Training.new trainings_params
+    @training = Training.new training_params
     if @training.save
       render 'show', status: :created
     else

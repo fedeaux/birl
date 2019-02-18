@@ -2,14 +2,14 @@ class Api::V1::ChallengesController < Api::V1::ApiController
   before_action :set_challenge, only: [:show, :update]
 
   def index
-    @challenges = current_user.challenges
+    @challenges = Challenge.all
   end
 
   def show
   end
 
   def update
-    if @challenge.update(challenges_params)
+    if @challenge.update(challenge_params)
       render 'show', status: :ok
     else
       render status: :unprocessable_entuty
@@ -17,7 +17,7 @@ class Api::V1::ChallengesController < Api::V1::ApiController
   end
 
   def create
-    @challenge = Challenge.new challenges_params
+    @challenge = Challenge.new challenge_params
     if @challenge.save
       render 'show', status: :created
     else

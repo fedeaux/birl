@@ -1,50 +1,43 @@
 <template lang="pug">
+.entity-form-wrapper.challenges-form-wrapper.default-container(v-if='challenge')
+  .entity-form.challenges-form
+    .ui.form
+      .field.ui.fluid.buttons
+        .ui.primary.button(@click='save()') Save
+        .ui.basic.button(@click='cancel()') Cancel
+
 </template>
 
 <script lang="coffee">
-
-import Challenge from '../../models/challenge'
 import ChallengesResource from '../../resources/challenges_resource'
+import Challenge from '../../models/challenge'
 
 export default
-  props: ['challenge_id']
+  model:
+    prop: 'original_challenge'
+
+  props:
+    original_challenge: null
 
   data: ->
     challenge: null
-    loading: false
 
   methods:
     save: ->
-      # @validate =>
-      @loading = true
-      @challenges_resource.save @challenge, @challengeSaved
+      @$emit 'save'
 
-    validate: (onValid) ->
-      @$validator.validateAll().then (valid) =>
-        onValid() if onValid and valid
-
-    challengeSaved: (data) ->
-      @setChallenge data
-      @loading = false
-      @$router.push name: 'challenges-show', params: { id: @challenge.id }
-
-    setChallenge: (data) ->
-      @challenge = data.challenge
-
-    loadChallenge: ->
-      @loading = true
-      id = @challenge_id or @challenge.id
-      return unless id
-
-      @challenges_resource.get id, (data) =>
-        @setChallenge data
-        @loading = false
+    cancel: ->
+      @$emit 'cancel'
 
   mounted: ->
-    @challenges_resource = new ChallengesResource
 
-    if @challenge_id
-      @loadChallenge()
-    else
-      @setChallenge challenge: new Challenge()
+  watch:
+    original_challenge:
+      immediate: true
+      deep: true
+      handler: ->
+        if @original_challenge
+          @challenge = @original_challenge.clone()
+        else
+          @challenge = null
 </script>
