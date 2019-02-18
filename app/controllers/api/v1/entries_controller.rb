@@ -1,5 +1,5 @@
 class Api::V1::EntriesController < Api::V1::ApiController
-  before_action :set_entry, only: [:show, :update]
+  before_action :set_entry, only: [:show, :update, :destroy]
 
   def index
     return unless params[:progression_id]
@@ -26,10 +26,14 @@ class Api::V1::EntriesController < Api::V1::ApiController
     end
   end
 
+  def destroy
+    @entry.destroy
+  end
+
   private
 
   def set_entry
-    @entry = current_user.entries.find(params[:id])
+    @entry = Entry.find(params[:id])
   end
 
   def entry_params

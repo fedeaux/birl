@@ -5,8 +5,20 @@
 .entity-list
   .entity-list-item-wrapper
     .entity-list-item
-       padding: $d 0
-       display: block
+      padding: $d 0
+      position: relative
+
+      .entity-list-item-actions-wrapper
+        position: absolute
+        top: $d
+        right: $d
+
+        .entity-list-item-actions
+          .item
+            text-align: right
+
+            .icon
+              margin-left: $d
 
     .entity-list-item-divider
       border: none

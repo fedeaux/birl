@@ -9,7 +9,7 @@
     #new-entry-button.ui.primary.top.attached.fluid.small.icon.button(@click='newEntry')
       | Add
 
-    entries-list(:entries='entries')
+    entries-list(:entries='entries' @edit='editEntry($event)' @destroy='destroyEntry($event)')
 </template>
 
 <script lang="coffee">
@@ -26,6 +26,12 @@ export default
     form_entry: null
 
   methods:
+    editEntry: (data) ->
+      @setFormEntry data.entry
+
+    destroyEntry: (data) ->
+      @entries_resource.destroy data.entry, @entryRemoved
+
     loadEntries: ->
       @entries_resource.index @entriesLoaded, @context
 
@@ -67,6 +73,11 @@ export default
     entrySaved: (data) ->
       @addEntry data.entry
       @clearFormEntry()
+
+    entryRemoved: (data) ->
+      index = @entryIndex data.entry.id
+      return if index == -1
+      @entries.splice index, 1
 
   mounted: ->
     @entries_resource = new EntriesResource

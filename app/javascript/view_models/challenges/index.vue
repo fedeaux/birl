@@ -1,6 +1,6 @@
 <template lang="pug">
 .entity-index.challenges-index.default-container
-  challenges-list(:challenges='challenges')
+  challenges-manager
 </template>
 
 <script lang="coffee">
