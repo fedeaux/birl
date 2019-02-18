@@ -12,23 +12,23 @@ class Api::V1::ChallengesController < Api::V1::ApiController
     if @challenge.update(challenge_params)
       render 'show', status: :ok
     else
-      render status: :unprocessable_entuty
+      render 'show', status: :unprocessable_entuty
     end
   end
 
   def create
-    @challenge = Challenge.new challenge_params
+    @challenge = current_user.challenges.new challenge_params
     if @challenge.save
       render 'show', status: :created
     else
-      render status: :unprocessable_entuty
+      render 'show', status: :unprocessable_entuty
     end
   end
 
   private
 
   def set_challenge
-    @challenge = Challenge.find(params[:id])
+    @challenge = current_user.challenges.find(params[:id])
   end
 
   def challenge_params

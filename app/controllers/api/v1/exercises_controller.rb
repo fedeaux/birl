@@ -2,7 +2,7 @@ class Api::V1::ExercisesController < Api::V1::ApiController
   before_action :set_exercise, only: [:show, :update]
 
   def index
-    @exercises = Exercise.all
+    @exercises = current_user.exercises
   end
 
   def show
@@ -12,23 +12,23 @@ class Api::V1::ExercisesController < Api::V1::ApiController
     if @exercise.update(exercise_params)
       render 'show', status: :ok
     else
-      render status: :unprocessable_entuty
+      render 'show', status: :unprocessable_entuty
     end
   end
 
   def create
-    @exercise = Exercise.new exercise_params
+    @exercise = current_user.exercises.new exercise_params
     if @exercise.save
       render 'show', status: :created
     else
-      render status: :unprocessable_entuty
+      render 'show', status: :unprocessable_entuty
     end
   end
 
   private
 
   def set_exercise
-    @exercise = Exercise.find(params[:id])
+    @exercise = current_user.exercises.find(params[:id])
   end
 
   def exercise_params

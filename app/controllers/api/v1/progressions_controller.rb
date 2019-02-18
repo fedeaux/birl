@@ -14,23 +14,23 @@ class Api::V1::ProgressionsController < Api::V1::ApiController
     if @progression.update(progression_params)
       render 'show', status: :ok
     else
-      render status: :unprocessable_entuty
+      render 'show', status: :unprocessable_entuty
     end
   end
 
   def create
-    @progression = Progression.new progression_params
+    @progression = current_user.progressions.new progression_params
     if @progression.save
       render 'show', status: :created
     else
-      render status: :unprocessable_entuty
+      render 'show', status: :unprocessable_entuty
     end
   end
 
   private
 
   def set_progression
-    @progression = Progression.find(params[:id])
+    @progression = current_user.progressions.find(params[:id])
   end
 
   def progression_params

@@ -1,43 +1,30 @@
 # TODO: Auto generate paths
 
-export default {
-  routes: [
+routes = [
     {
       path: ''
       view: 'groups/index'
     }
-    {
-      path: '/exercises'
-      view: 'exercises/index'
-    }
-    {
-      path: '/exercises/new'
-      view: 'exercises/new',
-    }
-    {
-      path: '/exercises/:id'
-      view: 'exercises/show',
-    }
-    {
-      path: '/exercises/:id/edit'
-      view: 'exercises/edit',
-    }
-
-    {
-      path: '/challenges'
-      view: 'challenges/index'
-    }
-    {
-      path: '/challenges/:id'
-      view: 'challenges/show',
-    }
-    {
-      path: '/progressions'
-      view: 'progressions/index'
-    }
-    {
-      path: '/progressions/:id'
-      view: 'progressions/show',
-    }
   ]
-}
+
+add_rest = (routes, resource) ->
+  routes.push
+    path: "/#{resource}"
+    view: "#{resource}/index"
+
+  routes.push
+    path: "/#{resource}/:id"
+    view: "#{resource}/show"
+
+  routes.push
+    path: "/#{resource}/new"
+    view: "#{resource}/new"
+
+  routes.push
+    path: "/#{resource}/:id/edit"
+    view: "#{resource}/edit"
+
+for resource in ['exercises', 'challenges', 'progressions', 'entries', 'trainings']
+  add_rest routes, resource
+
+export default { routes }

@@ -2,7 +2,7 @@ class Api::V1::TrainingsController < Api::V1::ApiController
   before_action :set_training, only: [:show, :update]
 
   def index
-    @trainings = Training.all
+    @trainings = current_user.trainings
   end
 
   def show
@@ -12,23 +12,23 @@ class Api::V1::TrainingsController < Api::V1::ApiController
     if @training.update(training_params)
       render 'show', status: :ok
     else
-      render status: :unprocessable_entuty
+      render 'show', status: :unprocessable_entuty
     end
   end
 
   def create
-    @training = Training.new training_params
+    @training = current_user.trainings.new training_params
     if @training.save
       render 'show', status: :created
     else
-      render status: :unprocessable_entuty
+      render 'show', status: :unprocessable_entuty
     end
   end
 
   private
 
   def set_training
-    @training = Training.find(params[:id])
+    @training = current_user.trainings.find(params[:id])
   end
 
   def training_params

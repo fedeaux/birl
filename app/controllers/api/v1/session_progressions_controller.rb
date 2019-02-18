@@ -2,7 +2,7 @@ class Api::V1::SessionProgressionsController < Api::V1::ApiController
   before_action :set_session_progression, only: [:show, :update]
 
   def index
-    @session_progressions = SessionProgression.all
+    @session_progressions = current_user.session_progressions
   end
 
   def show
@@ -12,23 +12,23 @@ class Api::V1::SessionProgressionsController < Api::V1::ApiController
     if @session_progression.update(session_progression_params)
       render 'show', status: :ok
     else
-      render status: :unprocessable_entuty
+      render 'show', status: :unprocessable_entuty
     end
   end
 
   def create
-    @session_progression = SessionProgression.new session_progression_params
+    @session_progression = current_user.session_progressions.new session_progression_params
     if @session_progression.save
       render 'show', status: :created
     else
-      render status: :unprocessable_entuty
+      render 'show', status: :unprocessable_entuty
     end
   end
 
   private
 
   def set_session_progression
-    @session_progression = SessionProgression.find(params[:id])
+    @session_progression = current_user.session_progressions.find(params[:id])
   end
 
   def session_progression_params

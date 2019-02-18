@@ -2,7 +2,7 @@ class Api::V1::<%= controller_name %> < Api::V1::ApiController
   before_action :set_<%= underscore_name %>, only: [:show, :update]
 
   def index
-    @<%= plural_underscore_name %> = <%= entity_name %>.all
+    @<%= plural_underscore_name %> = current_user.<%= plural_underscore_name %>
   end
 
   def show
@@ -12,23 +12,23 @@ class Api::V1::<%= controller_name %> < Api::V1::ApiController
     if @<%= underscore_name %>.update(<%= underscore_name %>_params)
       render 'show', status: :ok
     else
-      render status: :unprocessable_entuty
+      render 'show', status: :unprocessable_entuty
     end
   end
 
   def create
-    @<%= underscore_name %> = <%= entity_name %>.new <%= underscore_name %>_params
+    @<%= underscore_name %> = current_user.<%= plural_underscore_name %>.new <%= underscore_name %>_params
     if @<%= underscore_name %>.save
       render 'show', status: :created
     else
-      render status: :unprocessable_entuty
+      render 'show', status: :unprocessable_entuty
     end
   end
 
   private
 
   def set_<%= underscore_name %>
-    @<%= underscore_name %> = <%= entity_name %>.find(params[:id])
+    @<%= underscore_name %> = current_user.<%= plural_underscore_name %>.find(params[:id])
   end
 
   def <%= underscore_name %>_params

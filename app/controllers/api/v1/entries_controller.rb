@@ -2,7 +2,7 @@ class Api::V1::EntriesController < Api::V1::ApiController
   before_action :set_entry, only: [:show, :update]
 
   def index
-    @entries = Entry.all
+    @entries = current_user.entries
   end
 
   def show
@@ -12,23 +12,23 @@ class Api::V1::EntriesController < Api::V1::ApiController
     if @entry.update(entry_params)
       render 'show', status: :ok
     else
-      render status: :unprocessable_entuty
+      render 'show', status: :unprocessable_entuty
     end
   end
 
   def create
-    @entry = Entry.new entry_params
+    @entry = current_user.entries.new entry_params
     if @entry.save
       render 'show', status: :created
     else
-      render status: :unprocessable_entuty
+      render 'show', status: :unprocessable_entuty
     end
   end
 
   private
 
   def set_entry
-    @entry = Entry.find(params[:id])
+    @entry = current_user.entries.find(params[:id])
   end
 
   def entry_params

@@ -25,10 +25,8 @@ after(:challenges) do
   progressions_attributes.each do |progression_attributes|
     exercise = Exercise.find_by(user_id: user.id, name: progression_attributes[0])
     challenge = Challenge.find_by(user_id: user.id, name: progression_attributes[1])
-    progression_name = "#{exercise.name} - #{challenge.name}"
 
-    Progression.where(name: progression_name,
-                      exercise: exercise,
+    Progression.where(exercise: exercise,
                       challenge: challenge,
                       user_id: user.id).first_or_create
   end

@@ -2,7 +2,7 @@ class Api::V1::SessionsController < Api::V1::ApiController
   before_action :set_session, only: [:show, :update]
 
   def index
-    @sessions = Session.all
+    @sessions = current_user.sessions
   end
 
   def show
@@ -12,23 +12,23 @@ class Api::V1::SessionsController < Api::V1::ApiController
     if @session.update(session_params)
       render 'show', status: :ok
     else
-      render status: :unprocessable_entuty
+      render 'show', status: :unprocessable_entuty
     end
   end
 
   def create
-    @session = Session.new session_params
+    @session = current_user.sessions.new session_params
     if @session.save
       render 'show', status: :created
     else
-      render status: :unprocessable_entuty
+      render 'show', status: :unprocessable_entuty
     end
   end
 
   private
 
   def set_session
-    @session = Session.find(params[:id])
+    @session = current_user.sessions.find(params[:id])
   end
 
   def session_params

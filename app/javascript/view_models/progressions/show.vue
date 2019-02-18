@@ -4,6 +4,10 @@
     h1.entity-show-header
       | {{ progression.name }}
 
+  br
+  br
+
+  .entity-show-subheader Entries
   entries-manager(v-if='progression_id' :context='{ progression_id: progression_id }')
 
   shared-footer(v-if='progression')
