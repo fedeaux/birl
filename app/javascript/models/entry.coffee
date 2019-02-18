@@ -11,6 +11,7 @@ class Entry extends BaseModel
       id: {}
       name: {}
       progression: { type: Progression }
+      progression_id: {}
       values: {}
       variables: {}
       observations: {}

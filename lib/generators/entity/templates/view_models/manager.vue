@@ -1,7 +1,7 @@
 <template lang="pug">
 .entity-manager.<%= plural_underscore_name %>-manager.default-container
   .entity-manager-form(v-if='form_<%= underscore_name %>')
-    <%= plural_underscore_name %>-form(:original_<%= underscore_name %>='form_<%= underscore_name %>')
+    <%= plural_underscore_name %>-form(v-model='form_<%= underscore_name %>' @save='saveForm<%= entity_name %>()')
 
   .entity-manager-list(v-else)
     #new-<%= underscore_name %>-button.ui.primary.small.icon.button(@click='new<%= entity_name %>')
@@ -27,7 +27,7 @@ export default
     load<%= plural_entity_name %>: ->
       @<%= plural_underscore_name %>_resource.index @<%= plural_underscore_name %>Loaded, @context
 
-    <%= plural_underscore_name %>Loaded: (response) ->
+    <%= lowercase_plural_entity_name %>Loaded: (response) ->
       @<%= plural_underscore_name %> = response.<%= plural_underscore_name %>
       @$nextTick ->
         $('#new-<%= underscore_name %>-button').click()
@@ -36,6 +36,27 @@ export default
       @setForm<%= entity_name %> new <%= entity_name %>(@context)
 
     setForm<%= entity_name %>: (@form_<%= underscore_name %>) ->
+
+    <%= lowercase_entity_name %>Index: (<%= underscore_name %>_id) ->
+      for index, <%= underscore_name %> of @<%= plural_underscore_name %>
+        return index if <%= underscore_name %>.id == <%= underscore_name %>_id
+
+      -1
+
+    saveForm<%= entity_name %>: ->
+      @<%= plural_underscore_name %>_resource.save @form_<%= underscore_name %>, @<%= lowercase_entity_name %>Saved
+
+    add<%= entity_name %>: (<%= underscore_name %>) ->
+      index = @<%= lowercase_entity_name %>Index <%= underscore_name %>.id
+
+      if index == -1
+        @<%= plural_underscore_name %>.push <%= underscore_name %>
+        return
+
+      Vue.set @<%= plural_underscore_name %>, index, <%= underscore_name %>
+
+    <%= lowercase_entity_name %>Saved: (data) ->
+      @add<%= entity_name %> data.<%= underscore_name %>
 
   mounted: ->
     @<%= plural_underscore_name %>_resource = new <%= plural_entity_name %>Resource

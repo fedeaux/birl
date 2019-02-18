@@ -29,19 +29,19 @@ export default
 
     entriesLoaded: (response) ->
       @entries = response.entries
-      @$nextTick ->
-        $('#new-entry-button').click()
+      # @$nextTick ->
+      #   $('#new-entry-button').click()
+
+    newEntry: ->
+      @setFormEntry new Entry(@context)
+
+    setFormEntry: (@form_entry) ->
 
     entryIndex: (entry_id) ->
       for index, entry of @entries
         return index if entry.id == entry_id
 
       -1
-
-    newEntry: ->
-      @setFormEntry new Entry(@context)
-
-    setFormEntry: (@form_entry) ->
 
     saveFormEntry: ->
       @entries_resource.save @form_entry, @entrySaved
@@ -56,7 +56,14 @@ export default
       Vue.set @entries, index, entry
 
     entrySaved: (data) ->
+      @form_entry = null
       @addEntry data.entry
+
+  watch:
+    form_entry:
+      deep: true
+      handler: ->
+        console.log 'form_entry', @form_entry
 
   mounted: ->
     @entries_resource = new EntriesResource

@@ -4,6 +4,9 @@
     h1.entity-show-header
       | {{ entry.name }}
 
+    h2.entity-show-subheader Progressions
+    progressions-manager(:context='{ entry_id: entry.id }')
+
   shared-footer(v-if='entry')
     router-link.ui.fluid.red.basic.button(:to='entry.editPath()')
       | Edit

@@ -7,12 +7,20 @@ module GeneratorsCore
     singular_name.camelcase
   end
 
+  def lowercase_entity_name
+    singular_name.camelize(:lower)
+  end
+
   def plural_underscore_name
     name.underscore.pluralize
   end
 
   def plural_entity_name
     name.camelcase.pluralize
+  end
+
+  def lowercase_plural_entity_name
+    name.camelcase(:lower).pluralize
   end
 
   def controller_file_name

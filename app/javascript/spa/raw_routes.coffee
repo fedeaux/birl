@@ -6,7 +6,6 @@ export default {
       path: ''
       view: 'trainings/index'
     }
-
     {
       path: '/exercises'
       view: 'exercises/index'

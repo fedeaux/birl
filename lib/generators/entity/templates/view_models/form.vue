@@ -1,21 +1,10 @@
 <template lang="pug">
 .entity-form-wrapper.<%= plural_underscore_name %>-form-wrapper.default-container(v-if='<%= underscore_name %>')
   .entity-form.<%= plural_underscore_name %>-form
-    form.ui.form
-      .field
-        label Name
-        input(type='text')
-
-      .field
-        label Exercise
-        exercises-select(v-model='<%= underscore_name %>.exercise')
-
-      .field
-        label Challenge
-        challenges-select(v-model='<%= underscore_name %>.challenge')
-
-      .field
+    .ui.form
+      .field.ui.fluid.buttons
         .ui.primary.button(@click='save()') Save
+        .ui.basic.button(@click='cancel()') Cancel
 
 </template>
 
@@ -24,6 +13,9 @@ import <%= plural_entity_name %>Resource from '../../resources/<%= plural_unders
 import <%= entity_name %> from '../../models/<%= underscore_name %>'
 
 export default
+  model:
+    prop: 'original_<%= underscore_name %>'
+
   props:
     original_<%= underscore_name %>: null
 
@@ -32,6 +24,10 @@ export default
 
   methods:
     save: ->
+      @$emit 'save'
+
+    cancel: ->
+      @$emit 'cancel'
 
   mounted: ->
 

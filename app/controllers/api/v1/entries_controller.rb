@@ -1,9 +1,8 @@
 class Api::V1::EntriesController < Api::V1::ApiController
-  before_action :set_progression, only: [:show, :update]
   before_action :set_entry, only: [:show, :update]
 
   def index
-    @entries = Entry.all
+    @entries = Progression.find(params[:progression_id]).entries
   end
 
   def show
@@ -19,7 +18,6 @@ class Api::V1::EntriesController < Api::V1::ApiController
 
   def create
     @entry = Entry.new entry_params
-
     if @entry.save
       render 'show', status: :created
     else
@@ -28,10 +26,6 @@ class Api::V1::EntriesController < Api::V1::ApiController
   end
 
   private
-
-  def set_progression
-    @progression = Progression.find(params[:progression_id])
-  end
 
   def set_entry
     @entry = Entry.find(params[:id])
