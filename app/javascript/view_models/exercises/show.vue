@@ -4,6 +4,10 @@
     h1.entity-show-header
       | {{ exercise.name }}
 
+  br
+  br
+
+  .entity-show-subheader Progressions
   progressions-manager(v-if='exercise_id' :context='{ exercise_id: exercise_id }' :allow_actions='true')
 
   shared-footer(v-if='exercise')
