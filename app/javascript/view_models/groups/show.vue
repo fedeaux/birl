@@ -4,9 +4,6 @@
     h1.entity-show-header
       | {{ group.name }}
 
-    h2.entity-show-subheader Progressions
-    progressions-manager(:context='{ group_id: group.id }')
-
   shared-footer(v-if='group')
     router-link.ui.fluid.red.basic.button(:to='group.editPath()')
       | Edit

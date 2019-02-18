@@ -29,8 +29,6 @@ export default
 
     sessionProgressionsLoaded: (response) ->
       @session_progressions = response.session_progressions
-      @$nextTick ->
-        $('#new-session_progression-button').click()
 
     newSessionProgression: ->
       @setFormSessionProgression new SessionProgression(@context)

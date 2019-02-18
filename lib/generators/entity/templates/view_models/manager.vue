@@ -29,8 +29,6 @@ export default
 
     <%= lowercase_plural_entity_name %>Loaded: (response) ->
       @<%= plural_underscore_name %> = response.<%= plural_underscore_name %>
-      @$nextTick ->
-        $('#new-<%= underscore_name %>-button').click()
 
     new<%= entity_name %>: ->
       @setForm<%= entity_name %> new <%= entity_name %>(@context)

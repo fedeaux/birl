@@ -29,8 +29,6 @@ export default
 
     entriesLoaded: (response) ->
       @entries = response.entries
-      @$nextTick ->
-        $('#new-entry-button').click()
 
     newEntry: ->
       @setFormEntry new Entry(@context)

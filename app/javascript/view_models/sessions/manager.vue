@@ -29,8 +29,6 @@ export default
 
     sessionsLoaded: (response) ->
       @sessions = response.sessions
-      @$nextTick ->
-        $('#new-session-button').click()
 
     newSession: ->
       @setFormSession new Session(@context)

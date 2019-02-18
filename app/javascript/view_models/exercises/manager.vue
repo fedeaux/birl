@@ -29,8 +29,6 @@ export default
 
     exercisesLoaded: (response) ->
       @exercises = response.exercises
-      @$nextTick ->
-        $('#new-exercise-button').click()
 
     newExercise: ->
       @setFormExercise new Exercise(@context)

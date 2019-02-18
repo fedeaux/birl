@@ -29,8 +29,6 @@ export default
 
     trainingsLoaded: (response) ->
       @trainings = response.trainings
-      @$nextTick ->
-        $('#new-training-button').click()
 
     newTraining: ->
       @setFormTraining new Training(@context)

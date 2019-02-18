@@ -29,8 +29,6 @@ export default
 
     groupsLoaded: (response) ->
       @groups = response.groups
-      @$nextTick ->
-        $('#new-group-button').click()
 
     newGroup: ->
       @setFormGroup new Group(@context)

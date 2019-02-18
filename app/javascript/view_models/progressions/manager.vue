@@ -29,8 +29,6 @@ export default
 
     progressionsLoaded: (response) ->
       @progressions = response.progressions
-      @$nextTick ->
-        $('#new-progression-button').click()
 
     newProgression: ->
       @setFormProgression new Progression(@context)

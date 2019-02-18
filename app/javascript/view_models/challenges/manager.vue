@@ -29,8 +29,6 @@ export default
 
     challengesLoaded: (response) ->
       @challenges = response.challenges
-      @$nextTick ->
-        $('#new-challenge-button').click()
 
     newChallenge: ->
       @setFormChallenge new Challenge(@context)
