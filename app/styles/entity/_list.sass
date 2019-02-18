@@ -15,13 +15,17 @@
         right: $d
 
         .entity-list-item-actions
+          +box-shadow
           position: absolute
           top: 0
           right: 0
           z-index: 1000
+          background-color: white
 
           .item
             text-align: right
+            color: inherit !important
+            cursor: pointer
 
             .icon
               margin-left: $d
@@ -45,4 +49,5 @@
       user-select: none
       width: 100%
       -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
-      background-image: linear-gradient(to right, $main-red-opc-2, $main-red-opc-2, $main-red-opc-1, $main-red-opc-1, $main-red-opc-1, transparent, transparent)
+      /* background-image: linear-gradient(to right, $main-red-opc-2, $main-red-opc-2, $main-red-opc-1, $main-red-opc-1, $main-red-opc-1, transparent, transparent)
+      background-color: $main-red-opc-2

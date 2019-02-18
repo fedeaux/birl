@@ -1,6 +1,6 @@
 <template lang="pug">
 .entity-index.progressions-index.default-container
-  progressions-list(:progressions='progressions')
+  progressions-manager
 </template>
 
 <script lang="coffee">
@@ -19,5 +19,4 @@ export default
 
   mounted: ->
     @progressions_resource = new ProgressionsResource
-    @loadProgressions()
 </script>
