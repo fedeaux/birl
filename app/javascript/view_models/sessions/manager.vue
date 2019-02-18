@@ -1,12 +1,14 @@
 <template lang="pug">
 .entity-manager.sessions-manager.default-container
   .entity-manager-form(v-if='form_session')
-    sessions-form(v-model='form_session' @save='saveFormSession()')
+    sessions-form(v-model='form_session'
+                  @save='saveFormSession()'
+                  @cancel='clearFormSession()')
 
   .entity-manager-list(v-else)
-    #new-session-button.ui.primary.small.icon.button(@click='newSession')
-      i.add.icon
-      | add
+    #new-session-button.ui.primary.top.attached.fluid.small.icon.button(@click='newSession')
+      | Add
+
     sessions-list(:sessions='sessions')
 </template>
 
@@ -34,6 +36,9 @@ export default
       @setFormSession new Session(@context)
 
     setFormSession: (@form_session) ->
+
+    clearFormSession: ->
+      @setFormSession null
 
     sessionIndex: (session_id) ->
       for index, session of @sessions

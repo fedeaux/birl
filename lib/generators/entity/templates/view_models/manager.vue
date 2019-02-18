@@ -1,12 +1,14 @@
 <template lang="pug">
 .entity-manager.<%= plural_underscore_name %>-manager.default-container
   .entity-manager-form(v-if='form_<%= underscore_name %>')
-    <%= plural_underscore_name %>-form(v-model='form_<%= underscore_name %>' @save='saveForm<%= entity_name %>()')
+    <%= plural_underscore_name %>-form(v-model='form_<%= underscore_name %>'
+    <%= plural_underscore_name_as_spaces %>      @save='saveForm<%= entity_name %>()'
+    <%= plural_underscore_name_as_spaces %>      @cancel='clearForm<%= entity_name %>()')
 
   .entity-manager-list(v-else)
-    #new-<%= underscore_name %>-button.ui.primary.small.icon.button(@click='new<%= entity_name %>')
-      i.add.icon
-      | add
+    #new-<%= underscore_name %>-button.ui.primary.top.attached.fluid.small.icon.button(@click='new<%= entity_name %>')
+      | Add
+
     <%= plural_underscore_name %>-list(:<%= plural_underscore_name %>='<%= plural_underscore_name %>')
 </template>
 
@@ -34,6 +36,9 @@ export default
       @setForm<%= entity_name %> new <%= entity_name %>(@context)
 
     setForm<%= entity_name %>: (@form_<%= underscore_name %>) ->
+
+    clearForm<%= entity_name %>: ->
+      @setForm<%= entity_name %> null
 
     <%= lowercase_entity_name %>Index: (<%= underscore_name %>_id) ->
       for index, <%= underscore_name %> of @<%= plural_underscore_name %>

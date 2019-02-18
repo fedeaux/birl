@@ -1,12 +1,14 @@
 <template lang="pug">
 .entity-manager.entries-manager.default-container
   .entity-manager-form(v-if='form_entry')
-    entries-form(v-model='form_entry' @save='saveFormEntry()')
+    entries-form(v-model='form_entry'
+                 @save='saveFormEntry()'
+                 @cancel='clearFormEntry()')
 
   .entity-manager-list(v-else)
-    #new-entry-button.ui.primary.small.icon.button(@click='newEntry')
-      i.add.icon
-      | add
+    #new-entry-button.ui.primary.top.attached.fluid.small.icon.button(@click='newEntry')
+      | Add
+
     entries-list(:entries='entries')
 </template>
 
@@ -34,6 +36,9 @@ export default
       @setFormEntry new Entry(@context)
 
     setFormEntry: (@form_entry) ->
+
+    clearFormEntry: ->
+      @setFormEntry null
 
     entryIndex: (entry_id) ->
       for index, entry of @entries

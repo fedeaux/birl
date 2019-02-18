@@ -1,12 +1,14 @@
 <template lang="pug">
 .entity-manager.trainings-manager.default-container
   .entity-manager-form(v-if='form_training')
-    trainings-form(v-model='form_training' @save='saveFormTraining()')
+    trainings-form(v-model='form_training'
+                   @save='saveFormTraining()'
+                   @cancel='clearFormTraining()')
 
   .entity-manager-list(v-else)
-    #new-training-button.ui.primary.small.icon.button(@click='newTraining')
-      i.add.icon
-      | add
+    #new-training-button.ui.primary.top.attached.fluid.small.icon.button(@click='newTraining')
+      | Add
+
     trainings-list(:trainings='trainings')
 </template>
 
@@ -34,6 +36,9 @@ export default
       @setFormTraining new Training(@context)
 
     setFormTraining: (@form_training) ->
+
+    clearFormTraining: ->
+      @setFormTraining null
 
     trainingIndex: (training_id) ->
       for index, training of @trainings

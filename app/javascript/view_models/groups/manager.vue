@@ -1,12 +1,14 @@
 <template lang="pug">
 .entity-manager.groups-manager.default-container
   .entity-manager-form(v-if='form_group')
-    groups-form(v-model='form_group' @save='saveFormGroup()')
+    groups-form(v-model='form_group'
+                @save='saveFormGroup()'
+                @cancel='clearFormGroup()')
 
   .entity-manager-list(v-else)
-    #new-group-button.ui.primary.small.icon.button(@click='newGroup')
-      i.add.icon
-      | add
+    #new-group-button.ui.primary.top.attached.fluid.small.icon.button(@click='newGroup')
+      | Add
+
     groups-list(:groups='groups')
 </template>
 
@@ -34,6 +36,9 @@ export default
       @setFormGroup new Group(@context)
 
     setFormGroup: (@form_group) ->
+
+    clearFormGroup: ->
+      @setFormGroup null
 
     groupIndex: (group_id) ->
       for index, group of @groups

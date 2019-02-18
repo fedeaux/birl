@@ -1,12 +1,14 @@
 <template lang="pug">
 .entity-manager.challenges-manager.default-container
   .entity-manager-form(v-if='form_challenge')
-    challenges-form(v-model='form_challenge' @save='saveFormChallenge()')
+    challenges-form(v-model='form_challenge'
+                    @save='saveFormChallenge()'
+                    @cancel='clearFormChallenge()')
 
   .entity-manager-list(v-else)
-    #new-challenge-button.ui.primary.small.icon.button(@click='newChallenge')
-      i.add.icon
-      | add
+    #new-challenge-button.ui.primary.top.attached.fluid.small.icon.button(@click='newChallenge')
+      | Add
+
     challenges-list(:challenges='challenges')
 </template>
 
@@ -34,6 +36,9 @@ export default
       @setFormChallenge new Challenge(@context)
 
     setFormChallenge: (@form_challenge) ->
+
+    clearFormChallenge: ->
+      @setFormChallenge null
 
     challengeIndex: (challenge_id) ->
       for index, challenge of @challenges

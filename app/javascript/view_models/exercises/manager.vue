@@ -1,12 +1,14 @@
 <template lang="pug">
 .entity-manager.exercises-manager.default-container
   .entity-manager-form(v-if='form_exercise')
-    exercises-form(v-model='form_exercise' @save='saveFormExercise()')
+    exercises-form(v-model='form_exercise'
+                   @save='saveFormExercise()'
+                   @cancel='clearFormExercise()')
 
   .entity-manager-list(v-else)
-    #new-exercise-button.ui.primary.small.icon.button(@click='newExercise')
-      i.add.icon
-      | add
+    #new-exercise-button.ui.primary.top.attached.fluid.small.icon.button(@click='newExercise')
+      | Add
+
     exercises-list(:exercises='exercises')
 </template>
 
@@ -34,6 +36,9 @@ export default
       @setFormExercise new Exercise(@context)
 
     setFormExercise: (@form_exercise) ->
+
+    clearFormExercise: ->
+      @setFormExercise null
 
     exerciseIndex: (exercise_id) ->
       for index, exercise of @exercises

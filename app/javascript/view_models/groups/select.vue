@@ -1,13 +1,21 @@
 <template lang="pug">
-  sui-dropdown(:options='groups_as_options' :loading='loading' placeholder='Group' v-model='selected_group_id')
+  sui-dropdown(:options='groups_as_options'
+               :loading='loading'
+               :search='true'
+               :selection='true'
+               placeholder='Group'
+               v-model='selected_group_id')
 </template>
 
 <script lang="coffee">
 import GroupsResource from '../../resources/groups_resource'
 
 export default
+  model:
+    prop: 'group_id'
+
   props:
-    value: null
+    group_id: null
 
   data: ->
     groups: null
@@ -41,13 +49,13 @@ export default
 
   watch:
     selected_group_id: ->
-      @$emit 'input', @getGroup @selected_group_id
+      @$emit 'input', @selected_group_id
 
-    value:
+    group_id:
       immediate: true
       handler: ->
-        return unless @value and @value.id
-        @selected_group_id = @value.id
+        return unless @group_id
+        @selected_group_id = parseInt @group_id
 
   mounted: ->
     @groups_resource = new GroupsResource

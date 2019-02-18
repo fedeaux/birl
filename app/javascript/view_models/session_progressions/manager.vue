@@ -1,12 +1,14 @@
 <template lang="pug">
 .entity-manager.session_progressions-manager.default-container
   .entity-manager-form(v-if='form_session_progression')
-    session_progressions-form(v-model='form_session_progression' @save='saveFormSessionProgression()')
+    session_progressions-form(v-model='form_session_progression'
+                              @save='saveFormSessionProgression()'
+                              @cancel='clearFormSessionProgression()')
 
   .entity-manager-list(v-else)
-    #new-session_progression-button.ui.primary.small.icon.button(@click='newSessionProgression')
-      i.add.icon
-      | add
+    #new-session_progression-button.ui.primary.top.attached.fluid.small.icon.button(@click='newSessionProgression')
+      | Add
+
     session_progressions-list(:session_progressions='session_progressions')
 </template>
 
@@ -34,6 +36,9 @@ export default
       @setFormSessionProgression new SessionProgression(@context)
 
     setFormSessionProgression: (@form_session_progression) ->
+
+    clearFormSessionProgression: ->
+      @setFormSessionProgression null
 
     sessionProgressionIndex: (session_progression_id) ->
       for index, session_progression of @session_progressions

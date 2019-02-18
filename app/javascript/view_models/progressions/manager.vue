@@ -1,7 +1,9 @@
 <template lang="pug">
 .entity-manager.progressions-manager.default-container
   .entity-manager-form(v-if='form_progression')
-    progressions-form(v-model='form_progression' @save='saveFormProgression()' @cancel='clearFormProgression')
+    progressions-form(v-model='form_progression'
+                      @save='saveFormProgression()'
+                      @cancel='clearFormProgression()')
 
   .entity-manager-list(v-else)
     #new-progression-button.ui.primary.top.attached.fluid.small.icon.button(@click='newProgression')
@@ -62,6 +64,4 @@ export default
   mounted: ->
     @progressions_resource = new ProgressionsResource
     @loadProgressions()
-    console.log '@context', @context
-
 </script>
