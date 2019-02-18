@@ -1,13 +1,21 @@
 <template lang="pug">
-  sui-dropdown(:options='entries_as_options' :loading='loading' placeholder='Entry' v-model='selected_entry_id')
+  sui-dropdown(:options='entries_as_options'
+               :loading='loading'
+               :search='true'
+               :selection='true'
+               placeholder='Entry'
+               v-model='selected_entry_id')
 </template>
 
 <script lang="coffee">
 import EntriesResource from '../../resources/entries_resource'
 
 export default
+  model:
+    prop: 'entry_id'
+
   props:
-    value: null
+    entry_id: null
 
   data: ->
     entries: null
@@ -41,13 +49,13 @@ export default
 
   watch:
     selected_entry_id: ->
-      @$emit 'input', @getEntry @selected_entry_id
+      @$emit 'input', @selected_entry_id
 
-    value:
+    entry_id:
       immediate: true
       handler: ->
-        return unless @value and @value.id
-        @selected_entry_id = @value.id
+        return unless @entry_id
+        @selected_entry_id = parseInt @entry_id
 
   mounted: ->
     @entries_resource = new EntriesResource

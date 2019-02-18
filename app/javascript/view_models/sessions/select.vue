@@ -1,13 +1,21 @@
 <template lang="pug">
-  sui-dropdown(:options='sessions_as_options' :loading='loading' placeholder='Session' v-model='selected_session_id')
+  sui-dropdown(:options='sessions_as_options'
+               :loading='loading'
+               :search='true'
+               :selection='true'
+               placeholder='Session'
+               v-model='selected_session_id')
 </template>
 
 <script lang="coffee">
 import SessionsResource from '../../resources/sessions_resource'
 
 export default
+  model:
+    prop: 'session_id'
+
   props:
-    value: null
+    session_id: null
 
   data: ->
     sessions: null
@@ -41,13 +49,13 @@ export default
 
   watch:
     selected_session_id: ->
-      @$emit 'input', @getSession @selected_session_id
+      @$emit 'input', @selected_session_id
 
-    value:
+    session_id:
       immediate: true
       handler: ->
-        return unless @value and @value.id
-        @selected_session_id = @value.id
+        return unless @session_id
+        @selected_session_id = parseInt @session_id
 
   mounted: ->
     @sessions_resource = new SessionsResource

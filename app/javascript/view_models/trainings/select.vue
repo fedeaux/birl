@@ -1,13 +1,21 @@
 <template lang="pug">
-  sui-dropdown(:options='trainings_as_options' :loading='loading' placeholder='Training' v-model='selected_training_id')
+  sui-dropdown(:options='trainings_as_options'
+               :loading='loading'
+               :search='true'
+               :selection='true'
+               placeholder='Training'
+               v-model='selected_training_id')
 </template>
 
 <script lang="coffee">
 import TrainingsResource from '../../resources/trainings_resource'
 
 export default
+  model:
+    prop: 'training_id'
+
   props:
-    value: null
+    training_id: null
 
   data: ->
     trainings: null
@@ -41,13 +49,13 @@ export default
 
   watch:
     selected_training_id: ->
-      @$emit 'input', @getTraining @selected_training_id
+      @$emit 'input', @selected_training_id
 
-    value:
+    training_id:
       immediate: true
       handler: ->
-        return unless @value and @value.id
-        @selected_training_id = @value.id
+        return unless @training_id
+        @selected_training_id = parseInt @training_id
 
   mounted: ->
     @trainings_resource = new TrainingsResource

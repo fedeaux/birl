@@ -1,13 +1,21 @@
 <template lang="pug">
-  sui-dropdown(:options='session_progressions_as_options' :loading='loading' placeholder='SessionProgression' v-model='selected_session_progression_id')
+  sui-dropdown(:options='session_progressions_as_options'
+               :loading='loading'
+               :search='true'
+               :selection='true'
+               placeholder='SessionProgression'
+               v-model='selected_session_progression_id')
 </template>
 
 <script lang="coffee">
 import SessionProgressionsResource from '../../resources/session_progressions_resource'
 
 export default
+  model:
+    prop: 'session_progression_id'
+
   props:
-    value: null
+    session_progression_id: null
 
   data: ->
     session_progressions: null
@@ -41,13 +49,13 @@ export default
 
   watch:
     selected_session_progression_id: ->
-      @$emit 'input', @getSessionProgression @selected_session_progression_id
+      @$emit 'input', @selected_session_progression_id
 
-    value:
+    session_progression_id:
       immediate: true
       handler: ->
-        return unless @value and @value.id
-        @selected_session_progression_id = @value.id
+        return unless @session_progression_id
+        @selected_session_progression_id = parseInt @session_progression_id
 
   mounted: ->
     @session_progressions_resource = new SessionProgressionsResource

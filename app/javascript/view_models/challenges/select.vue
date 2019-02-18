@@ -1,13 +1,21 @@
 <template lang="pug">
-  sui-dropdown(:options='challenges_as_options' :loading='loading' placeholder='Challenge' v-model='selected_challenge_id')
+  sui-dropdown(:options='challenges_as_options'
+               :loading='loading'
+               :search='true'
+               :selection='true'
+               placeholder='Challenge'
+               v-model='selected_challenge_id')
 </template>
 
 <script lang="coffee">
 import ChallengesResource from '../../resources/challenges_resource'
 
 export default
+  model:
+    prop: 'challenge_id'
+
   props:
-    value: null
+    challenge_id: null
 
   data: ->
     challenges: null
@@ -41,13 +49,13 @@ export default
 
   watch:
     selected_challenge_id: ->
-      @$emit 'input', @getChallenge @selected_challenge_id
+      @$emit 'input', @selected_challenge_id
 
-    value:
+    challenge_id:
       immediate: true
       handler: ->
-        return unless @value and @value.id
-        @selected_challenge_id = @value.id
+        return unless @challenge_id
+        @selected_challenge_id = parseInt @challenge_id
 
   mounted: ->
     @challenges_resource = new ChallengesResource

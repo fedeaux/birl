@@ -2,7 +2,9 @@ class Api::V1::ProgressionsController < Api::V1::ApiController
   before_action :set_progression, only: [:show, :update]
 
   def index
-    @progressions = Progression.all
+    @progressions = current_user.progressions
+    return unless params[:exercise_id]
+    @progressions = @progressions.where(exercise_id: params[:exercise_id])
   end
 
   def show

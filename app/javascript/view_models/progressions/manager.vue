@@ -1,12 +1,12 @@
 <template lang="pug">
 .entity-manager.progressions-manager.default-container
   .entity-manager-form(v-if='form_progression')
-    progressions-form(v-model='form_progression' @save='saveFormProgression()')
+    progressions-form(v-model='form_progression' @save='saveFormProgression()' @cancel='clearFormProgression')
 
   .entity-manager-list(v-else)
-    #new-progression-button.ui.primary.small.icon.button(@click='newProgression')
-      i.add.icon
-      | add
+    #new-progression-button.ui.primary.top.attached.fluid.small.icon.button(@click='newProgression')
+      | Add
+
     progressions-list(:progressions='progressions')
 </template>
 
@@ -35,6 +35,9 @@ export default
 
     setFormProgression: (@form_progression) ->
 
+    clearFormProgression: ->
+      @setFormProgression null
+
     progressionIndex: (progression_id) ->
       for index, progression of @progressions
         return index if progression.id == progression_id
@@ -59,4 +62,6 @@ export default
   mounted: ->
     @progressions_resource = new ProgressionsResource
     @loadProgressions()
+    console.log '@context', @context
+
 </script>

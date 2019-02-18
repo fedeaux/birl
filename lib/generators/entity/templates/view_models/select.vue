@@ -1,13 +1,21 @@
 <template lang="pug">
-  sui-dropdown(:options='<%= plural_underscore_name %>_as_options' :loading='loading' placeholder='<%= entity_name %>' v-model='selected_<%= underscore_name %>_id')
+  sui-dropdown(:options='<%= plural_underscore_name %>_as_options'
+               :loading='loading'
+               :search='true'
+               :selection='true'
+               placeholder='<%= entity_name %>'
+               v-model='selected_<%= underscore_name %>_id')
 </template>
 
 <script lang="coffee">
 import <%= plural_entity_name %>Resource from '../../resources/<%= plural_underscore_name %>_resource'
 
 export default
+  model:
+    prop: '<%= underscore_name %>_id'
+
   props:
-    value: null
+    <%= underscore_name %>_id: null
 
   data: ->
     <%= plural_underscore_name %>: null
@@ -41,13 +49,13 @@ export default
 
   watch:
     selected_<%= underscore_name %>_id: ->
-      @$emit 'input', @get<%= entity_name %> @selected_<%= underscore_name %>_id
+      @$emit 'input', @selected_<%= underscore_name %>_id
 
-    value:
+    <%= underscore_name %>_id:
       immediate: true
       handler: ->
-        return unless @value and @value.id
-        @selected_<%= underscore_name %>_id = @value.id
+        return unless @<%= underscore_name %>_id
+        @selected_<%= underscore_name %>_id = parseInt @<%= underscore_name %>_id
 
   mounted: ->
     @<%= plural_underscore_name %>_resource = new <%= plural_entity_name %>Resource

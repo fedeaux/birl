@@ -2,6 +2,14 @@
 .entity-form-wrapper.progressions-form-wrapper.default-container(v-if='progression')
   .entity-form.progressions-form
     .ui.form
+      .field
+        label Exercise
+        exercises-select(v-model='progression.exercise_id')
+
+      .field
+        label Challenge
+        challenges-select(v-model='progression.challenge_id')
+
       .field.ui.fluid.buttons
         .ui.primary.button(@click='save()') Save
         .ui.basic.button(@click='cancel()') Cancel
@@ -40,4 +48,10 @@ export default
           @progression = @original_progression.clone()
         else
           @progression = null
+
+    progression:
+      deep: true
+      handler: ->
+        console.log 'progression changed', @progression.exercise_id
+
 </script>
