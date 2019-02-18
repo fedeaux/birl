@@ -35,5 +35,3 @@ class Api::V1::GroupsController < Api::V1::ApiController
     params.require(:group).permit(:id, :name)
   end
 end
-
-# NO-OVERRIDE

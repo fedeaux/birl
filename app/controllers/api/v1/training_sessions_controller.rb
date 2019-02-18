@@ -1,4 +1,4 @@
-class TrainingSessionsController < ApiController
+class TrainingSessionsController < Api::V1::ApiController
   def index
     @training_sessions = TrainingSession.all
   end
