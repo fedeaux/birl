@@ -2,6 +2,14 @@
 .entity-form-wrapper.entries-form-wrapper.default-container(v-if='entry')
   .entity-form.entries-form
     .ui.form
+      .field
+        label Value
+        input(type='text' v-model='entry.values')
+
+      .field
+        label Observations
+        input(type='text' v-model='entry.observations')
+
       .field.ui.fluid.buttons
         .ui.primary.button(@click='save()') Save
         .ui.basic.button(@click='cancel()') Cancel
@@ -24,6 +32,7 @@ export default
 
   methods:
     save: ->
+      @$emit 'input', @entry
       @$emit 'save'
 
     cancel: ->

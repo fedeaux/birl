@@ -10,6 +10,10 @@
         label Challenge
         challenges-select(v-model='progression.challenge_id')
 
+      .field
+        label Details
+        input(type='text' v-model='progression.details')
+
       .field.ui.fluid.buttons
         .ui.primary.button(@click='save()') Save
         .ui.basic.button(@click='cancel()') Cancel

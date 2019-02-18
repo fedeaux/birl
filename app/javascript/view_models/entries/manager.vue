@@ -33,7 +33,13 @@ export default
       @entries = response.entries
 
     newEntry: ->
-      @setFormEntry new Entry(@context)
+      last_entry = @entries[0]
+
+      if last_entry
+        @setFormEntry new Entry _.extend {}, @context, { values: last_entry.values }
+        return
+
+      @setFormEntry new Entry @context
 
     setFormEntry: (@form_entry) ->
 
@@ -60,6 +66,7 @@ export default
 
     entrySaved: (data) ->
       @addEntry data.entry
+      @clearFormEntry()
 
   mounted: ->
     @entries_resource = new EntriesResource

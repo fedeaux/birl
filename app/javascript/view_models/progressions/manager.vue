@@ -60,6 +60,7 @@ export default
 
     progressionSaved: (data) ->
       @addProgression data.progression
+      @clearFormProgression()
 
   mounted: ->
     @progressions_resource = new ProgressionsResource

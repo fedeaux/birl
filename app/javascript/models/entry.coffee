@@ -15,6 +15,7 @@ class Entry extends BaseModel
       values: {}
       variables: {}
       observations: {}
+      created_at: { type: moment }
     }
 
 export default Entry

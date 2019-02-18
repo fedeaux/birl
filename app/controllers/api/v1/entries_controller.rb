@@ -2,7 +2,8 @@ class Api::V1::EntriesController < Api::V1::ApiController
   before_action :set_entry, only: [:show, :update]
 
   def index
-    @entries = current_user.entries
+    return unless params[:progression_id]
+    @entries = Entry.where(progression_id: params[:progression_id]).order('created_at DESC')
   end
 
   def show
@@ -17,7 +18,7 @@ class Api::V1::EntriesController < Api::V1::ApiController
   end
 
   def create
-    @entry = current_user.entries.new entry_params
+    @entry = Entry.new entry_params
     if @entry.save
       render 'show', status: :created
     else

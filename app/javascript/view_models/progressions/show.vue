@@ -4,6 +4,9 @@
     h1.entity-show-header
       | {{ progression.name }}
 
+    p.centered
+      | {{ progression.details }}
+
   br
   br
 
