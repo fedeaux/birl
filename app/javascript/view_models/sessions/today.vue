@@ -1,6 +1,14 @@
 <template lang="pug">
-.entity-edit.session-edit.default-container
-  sessions-show(:parent_session='session' v-if='session')
+.entity-edit.session-edit.default-container(v-if='session')
+  sessions-show(:parent_session='session')
+
+  .default-container
+    .ui.two.column.centered.grid
+      .column
+        .ui.fluid.basic.icon.button(@click='forceReload')
+          i.refresh.icon
+          |  Force Reload
+
 </template>
 
 <script lang="coffee">
@@ -14,9 +22,11 @@ export default
 
   methods:
     loadSession: ->
+      @load()
       @sessions_resource.todays @sessionLoaded
 
     sessionLoaded: (response) ->
+      @loaded()
       loaded_session = response.session
       current_session = @currentSession()
 
@@ -27,11 +37,17 @@ export default
 
       # Some man just want to see the world burn
       (new Database).set 'current_session', @session
+      @$forceUpdate()
 
     currentSession: ->
       session_attributes = (new Database).get 'current_session'
       return null unless session_attributes
       new Session session_attributes
+
+    forceReload: ->
+      @load()
+      (new Database).delete 'current_session'
+      @loadSession()
 
   mounted: ->
     @sessions_resource = new SessionsResource

@@ -9,9 +9,10 @@
       .ui.basic.button(@click='cancelDestroy()') Cancel
 
   .entity-list-item.progression-list-item(v-else)
-    | {{ progression.name }}
+    router-link(:to='progression.path()')
+      | {{ progression.name }}
 
-    .progression-list-item-entries-count
+    router-link.progression-list-item-entries-count(:to='progression.path()')
       template(v-if='progression.entries_count')
         | {{ progression.entries_count }}
         |  entries

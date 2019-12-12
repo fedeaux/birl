@@ -17,6 +17,7 @@ class Session extends BaseModel
       weekday: {}
       human_weekday: {}
       complete: {}
+      started: {}
       updated_at: { type: moment }
     }
 

@@ -33,12 +33,12 @@ export default
       @entries_resource.destroy data.entry, @entryRemoved
 
     loadEntries: ->
-      Global.events.$emit 'Global::StartLoading'
+      @load()
       @entries_resource.index @entriesLoaded, @context
 
     entriesLoaded: (response) ->
+      @loaded()
       @entries = response.entries
-      Global.events.$emit 'Global::StopLoading'
 
     newEntry: ->
       last_entry = @entries[0]

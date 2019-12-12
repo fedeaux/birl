@@ -5,14 +5,18 @@
       | {{ session.name }}
       | [{{ session.human_weekday }}]
 
-  .ui.green.message(v-if='session.complete')
-    | Completed! Good work :)
+  .default-container
+    .ui.green.message(v-if='session.complete')
+      | Completed! Good work :)
 
   progressions-manager(:parent_progressions='session.progressions')
 
-  .ui.three.column.centered.grid
+  .ui.two.column.centered.grid(v-if='!session.started')
     .column
-      .ui.huge.fluid.primary.button(@click='startSession') Start
+      .ui.fluid.huge.primary.icon.button(@click='startSession')
+        | Start
+        | &nbsp;
+        i.play.icon
 
   shared-footer(v-if='session')
     router-link.ui.fluid.red.basic.button(:to='session.editPath()')
@@ -39,13 +43,13 @@ export default
       @session = response.session
 
     startSession: ->
+      @session.started = true
       (new Database).set 'current_session', @session
       @$router.push @session.progressions[0].path()
 
   mounted: ->
     if @parent_session
       @session = @parent_session
-      console.log "session", @session
       return
 
     @sessions_resource = new SessionsResource
