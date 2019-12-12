@@ -13,4 +13,16 @@ class User < ApplicationRecord
   def current_training
     trainings.first
   end
+
+  def sessions_on_this_weekday
+    weekday = Date.today.wday
+    current_training.sessions.where(weekday: weekday)
+  end
+
+  def current_session
+    being_performed_now_session = sessions_on_this_weekday.where('updated_at >= ?', 12.hours.ago).first
+    return being_performed_now_session if being_performed_now_session
+
+    sessions_on_this_weekday.order(:updated_at).first
+  end
 end

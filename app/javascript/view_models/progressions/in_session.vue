@@ -10,6 +10,9 @@
       | {{ next_progression.name }}
       | &rarr;
 
+    .ui.primary.button(v-if='!next_progression && prev_progression' @click='finishSession')
+      | Finish
+
 </template>
 
 <script lang="coffee">
@@ -23,13 +26,24 @@ export default
     next_progression: null
     prev_progression: null
 
+  methods:
+    finishSession: ->
+      session = @currentSession()
+      session.complete = true
+      (new Database).set 'current_session', session
+      @$router.push '/'
+
+    currentSession: ->
+      session_attributes = (new Database).get 'current_session'
+      return null unless session_attributes
+      new Session session_attributes
+
   watch:
     current_progression_id:
       immediate: true
       handler: ->
-        session_attributes = (new Database).get 'current_session'
-        return null unless session_attributes
-        session = new Session session_attributes
+        session = @currentSession()
+        return unless session
         passed_current = false
         @next_progression = null
         @prev_progression = null

@@ -2,17 +2,15 @@ class Api::V1::SessionsController < Api::V1::ApiController
   before_action :set_session, only: [:show, :update]
 
   def index
-    @sessions = current_user.current_training.sessions
+    @sessions = current_user.current_training.sessions.order(:weekday)
   end
 
   def today
-    weekday = Date.today.wday
-    @session = current_user.current_training.sessions.where(weekday: weekday).first
+    @session = current_user.current_session
     render 'show'
   end
 
-  def show
-  end
+  def show; end
 
   def update
     if @session.update(session_params)

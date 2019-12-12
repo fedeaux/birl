@@ -14,6 +14,10 @@ class Session extends BaseModel
       training: { type: Training }
       training_id: {}
       progressions: { type: Progression }
+      weekday: {}
+      human_weekday: {}
+      complete: {}
+      updated_at: { type: moment }
     }
 
 export default Session
