@@ -3,9 +3,6 @@ errors = []
 [
   {
     email: 'phec06@gmail.com'
-  },
-  {
-    email: 'mariane.cn01@gmail.com'
   }
 ].each do |user_attributes|
   user = User.where(email: user_attributes[:email]).first_or_initialize
@@ -13,8 +10,10 @@ errors = []
 
   next if user.persisted? && user.valid_password?(password)
 
-  user.assign_attributes user_attributes.merge(password: password,
-    password_confirmation: password )
+  user.assign_attributes user_attributes.merge(
+                           password: password,
+                           password_confirmation: password
+                         )
 
   if user.save
     print '.'

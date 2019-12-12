@@ -1,5 +1,6 @@
 class BaseResource
   index: (success, params = {}) ->
+    # GET /exercises
     $.ajax
       url: @collectionUrl()
       type: 'get'

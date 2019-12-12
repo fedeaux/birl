@@ -25,9 +25,11 @@ export default
 
   methods:
     loadExercise: ->
+      @load()
       @exercises_resource.get @exercise_id, @exerciseLoaded
 
     exerciseLoaded: (response) ->
+      @loaded()
       @exercise = response.exercise
 
   mounted: ->

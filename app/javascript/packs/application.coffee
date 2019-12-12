@@ -3,6 +3,8 @@ window._ = require 'underscore'
 window.$ = require 'jquery'
 window.jQuery = window.$
 window.moment = require 'moment'
+window.Global =
+  events: new Vue()
 
 require 'semantic-ui-sass'
 
@@ -14,8 +16,10 @@ VueRouter = require('vue-router').default
 Vue.use VueRouter
 
 import App from '../view_models/app'
-
 import view_model_paths from '../spa/view_model_paths'
+import LoadableMixin from '../mixins/loadable'
+
+Vue.mixin LoadableMixin
 
 view_model_aliases = {
 }

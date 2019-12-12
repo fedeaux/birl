@@ -7,8 +7,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
       <%= javascript_pack_tag 'application' %>
-      <%= stylesheet_pack_tag 'semantic_ui' %>
-      <%= stylesheet_pack_tag 'theme' %>
+      <%= stylesheet_link_tag(*sources_from_manifest_entries(['semantic_ui', 'theme'], type: :stylesheet)) %>
   </head>
 
   <body class="<%= @body_class %>">
