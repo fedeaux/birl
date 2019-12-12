@@ -9,4 +9,8 @@ class User < ApplicationRecord
   has_many :challenges
   has_many :progressions
   has_many :trainings
+
+  def current_training
+    trainings.first
+  end
 end

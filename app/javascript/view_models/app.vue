@@ -10,6 +10,7 @@
       .ui.vertical.large.menu#menu(v-if='show_menu')
         router-link.item(to='/') Today's Session
         router-link.item(to='/challenges') Challenges
+        router-link.item(to='/sessions') Sessions
         router-link.item(to='/progressions') Progressions
 
       #contents
