@@ -24,6 +24,8 @@ export default
     context:
       default: -> {}
 
+    parent_progressions: null
+
   data: ->
     progressions: null
     form_progression: null
@@ -77,6 +79,10 @@ export default
       @progressions.splice index, 1
 
   mounted: ->
+    if @parent_progressions
+      @progressions = @parent_progressions
+      return
+
     @progressions_resource = new ProgressionsResource
     @loadProgressions()
 </script>

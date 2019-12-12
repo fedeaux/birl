@@ -5,6 +5,12 @@ class Api::V1::SessionsController < Api::V1::ApiController
     @sessions = current_user.sessions
   end
 
+  def today
+    weekday = Date.today.wday
+    @session = current_user.trainings.first.sessions.where(weekday: weekday).first
+    render 'show'
+  end
+
   def show
   end
 

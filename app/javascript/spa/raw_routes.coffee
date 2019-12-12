@@ -3,7 +3,7 @@
 routes = [
     {
       path: ''
-      view: 'groups/index'
+      view: 'sessions/today'
     }
   ]
 

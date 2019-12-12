@@ -8,7 +8,7 @@
 
     #contents-wrapper
       .ui.vertical.large.menu#menu(v-if='show_menu')
-        router-link.item(to='/') Exercise Groups
+        router-link.item(to='/') Today's Session
         router-link.item(to='/challenges') Challenges
         router-link.item(to='/progressions') Progressions
 
@@ -31,11 +31,10 @@ export default
       @show_menu = false
 
     startLoading: ->
-      console.log 'uéééé'
       @loading = true
 
     stopLoading: ->
-      # @loading = false
+      @loading = false
 
   mounted: ->
     Global.events.$on 'Global::StartLoading', @startLoading

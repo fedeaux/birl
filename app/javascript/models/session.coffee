@@ -1,5 +1,6 @@
 import BaseModel from './base_model'
 import Training from './training'
+import Progression from './progression'
 
 class Session extends BaseModel
   @collection = 'sessions'
@@ -12,6 +13,7 @@ class Session extends BaseModel
       name: {}
       training: { type: Training }
       training_id: {}
+      progressions: { type: Progression }
     }
 
 export default Session

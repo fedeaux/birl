@@ -23,20 +23,20 @@ after(:exercises) do
         description: '4 séries com pouco descanso (10-30s), um peso maior na primeira série e menor nas demais'
       },
       {
+        name: 'Resistência de Força (ultraleve)',
+        description: '6 séries. Primeira mais pesada, 30 na segunda. Falling star: 4 30 25 21 18 15'
+      },
+      {
         name: 'HIIT 40s/20s',
         description: 'Find a speed for 10 sprints, increase speed and sprints one by one, up to 20 sprints of maximum speed'
       },
       {
         name: '12min constant',
         description: 'Find a speed for 10min, increase speed and minutes one by one, up to 20min of maximum speed'
-      },
-      {
-        name: 'Resistência de Força (ultraleve)',
-        description: '6 séries. Primeira mais pesada, 30 na segunda. Falling star: 4 30 25 21 18 15'
-      },
+      }
     ].each do |challenge_attrs|
       challenge = user.challenges.find_or_initialize_by(name: challenge_attrs[:name])
-      return if challenge.persisted?
+      next if challenge.persisted?
       challenge.assign_attributes challenge_attrs
       challenge.save
     end

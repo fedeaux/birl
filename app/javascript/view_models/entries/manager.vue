@@ -33,10 +33,12 @@ export default
       @entries_resource.destroy data.entry, @entryRemoved
 
     loadEntries: ->
+      Global.events.$emit 'Global::StartLoading'
       @entries_resource.index @entriesLoaded, @context
 
     entriesLoaded: (response) ->
       @entries = response.entries
+      Global.events.$emit 'Global::StopLoading'
 
     newEntry: ->
       last_entry = @entries[0]
@@ -79,7 +81,10 @@ export default
       return if index == -1
       @entries.splice index, 1
 
-  mounted: ->
-    @entries_resource = new EntriesResource
-    @loadEntries()
+  watch:
+    context:
+      immediate: true
+      handler: ->
+        @entries_resource ?= new EntriesResource
+        @loadEntries()
 </script>

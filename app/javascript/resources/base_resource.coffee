@@ -85,10 +85,6 @@ class BaseResource
     @constructor.model()
 
   path2url: (path) ->
-    # omg
-    if window.TatApp
-      "#{TatApp.config.api_url}#{path}"
-    else
-      "/api/v1#{path}"
+    "/api/v1#{path}"
 
 export default BaseResource

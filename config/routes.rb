@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :groups
       resources :progressions
       resources :session_progressions
+      get 'sessions/todays' => 'sessions#today'
       resources :sessions
       resources :training_sessions
       resources :trainings

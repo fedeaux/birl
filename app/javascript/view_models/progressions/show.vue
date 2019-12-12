@@ -1,6 +1,6 @@
 <template lang="pug">
-.entity-show-wrapper.progressions-show-wrapper.default-container.with-footer
-  .entity-show.progressions-show(v-if='progression')
+.entity-show-wrapper.progressions-show-wrapper.default-container.with-footer(v-if='progression')
+  .entity-show.progressions-show
     h1.entity-show-header
       | {{ progression.name }}
 
@@ -11,7 +11,9 @@
   br
 
   .entity-show-subheader Entries
-  entries-manager(v-if='progression_id' :context='{ progression_id: progression_id }')
+  entries-manager(:context='{ progression_id: progression_id }')
+
+  progressions-in-session(:current_progression_id='progression_id')
 
   shared-footer(v-if='progression')
     router-link.ui.fluid.red.basic.button(:to='progression.editPath()')
@@ -33,8 +35,11 @@ export default
     progressionLoaded: (response) ->
       @progression = response.progression
 
-  mounted: ->
-    @progressions_resource = new ProgressionsResource
-    @progression_id = @$route.params.id
-    @loadProgression()
+  watch:
+    '$route.params.id':
+      immediate: true
+      handler: ->
+        @progressions_resource ?= new ProgressionsResource
+        @progression_id = parseInt @$route.params.id
+        @loadProgression()
 </script>

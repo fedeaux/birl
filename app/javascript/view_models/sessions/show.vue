@@ -4,6 +4,8 @@
     h1.entity-show-header
       | {{ session.name }}
 
+  progressions-manager(v-if='session' :parent_progressions='session.progressions')
+
   shared-footer(v-if='session')
     router-link.ui.fluid.red.basic.button(:to='session.editPath()')
       | Edit
@@ -13,6 +15,9 @@
 import SessionsResource from '../../resources/sessions_resource'
 
 export default
+  props:
+    parent_session: null
+
   data: ->
     session: null
     session_id: null
@@ -25,6 +30,10 @@ export default
       @session = response.session
 
   mounted: ->
+    if @parent_session
+      @session = @parent_session
+      return
+
     @sessions_resource = new SessionsResource
     @session_id = @$route.params.id
     @loadSession()

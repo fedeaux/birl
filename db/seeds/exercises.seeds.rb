@@ -1,5 +1,7 @@
 # coding: utf-8
 after(:users) do
+  return
+
   User.find_each do |user|
     [
       {
