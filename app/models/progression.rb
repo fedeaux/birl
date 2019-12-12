@@ -10,4 +10,8 @@ class Progression < ApplicationRecord
   def ensure_name
     self.name = "#{exercise.name} - #{challenge.name}"
   end
+
+  def exercise_name
+    name.split('-').first.strip
+  end
 end

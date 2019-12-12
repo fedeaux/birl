@@ -3,11 +3,11 @@
   .progressions-in-session-prev.column
     router-link(v-if='prev_progression' :to='prev_progression.path()')
       | &larr;
-      | {{ prev_progression.name }}
+      | {{ prev_progression.exercise_name }}
 
   .progressions-in-session-next.column
     router-link(v-if='next_progression' :to='next_progression.path()')
-      | {{ next_progression.name }}
+      | {{ next_progression.exercise_name }}
       | &rarr;
 
     .ui.primary.button(v-if='!next_progression && prev_progression' @click='finishSession')

@@ -45,8 +45,8 @@ export default
       new Session session_attributes
 
     forceReload: ->
+      localStorage.clear()
       @load()
-      (new Database).delete 'current_session'
       @loadSession()
 
   mounted: ->
