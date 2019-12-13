@@ -1,20 +1,20 @@
 <template lang="pug">
-  #birl-spa-container(@click='hideMenu()')
-    sui-dimmer(:active='global_loading' inverted)
-      sui-loader.massive
+#birl-spa-container(@click='hideMenu()')
+  sui-dimmer(:active='global_loading' inverted)
+    sui-loader.massive
 
-    #header
-      i#side-menu-toggle.bars.icon(@click='showMenu($event)')
+  sui-sidebar#menu(animation='push' class='inverted' :visible='show_menu' direction='right')
+    router-link.item(to='/') Today's Session
+    router-link.item(to='/sessions') Sessions
+    router-link.item(to='/challenges') Challenges
+    router-link.item(to='/progressions') Progressions
 
-    #contents-wrapper
-      .ui.vertical.large.menu#menu(v-if='show_menu')
-        router-link.item(to='/') Today's Session
-        router-link.item(to='/sessions') Sessions
-        router-link.item(to='/challenges') Challenges
-        router-link.item(to='/progressions') Progressions
+  #header
+    i#side-menu-toggle.bars.icon(@click='toggleMenu($event)')
 
-      #contents
-        router-view
+  #contents-wrapper
+    #contents
+     router-view
 </template>
 
 <script lang="coffee">
@@ -23,8 +23,8 @@ export default
     show_menu: false
 
   methods:
-    showMenu: (e) ->
-      @show_menu = true
+    toggleMenu: (e) ->
+      @show_menu = !@show_menu
       e.stopPropagation() if $(e.target).is '#side-menu-toggle'
 
     hideMenu: ->
