@@ -1,9 +1,12 @@
 <template lang="pug">
-.entity-show-wrapper.sessions-show-wrapper.default-container.with-footer(v-if='session')
-  .entity-show.sessions-show
+.entity-show-wrapper.sessions-show-wrapper.default-container(v-if='session')
+  .entity-show.sessions-show.default-container
     h1.entity-show-header
       | {{ session.name }}
       | [{{ session.human_weekday }}]
+
+      router-link.entity-show-header-actions(:to='session.editPath()')
+        i.edit.icon
 
   .default-container
     .ui.green.message(v-if='session.complete')
@@ -17,10 +20,6 @@
         | Start
         | &nbsp;
         i.play.icon
-
-  shared-footer(v-if='session')
-    router-link.ui.fluid.red.basic.button(:to='session.editPath()')
-      | Edit
 </template>
 
 <script lang="coffee">
