@@ -4,6 +4,7 @@ class Api::V1::ProgressionsController < Api::V1::ApiController
   def index
     @progressions = current_user.progressions
     return unless params[:exercise_id]
+
     @progressions = @progressions.where(exercise_id: params[:exercise_id])
   end
 
@@ -38,6 +39,7 @@ class Api::V1::ProgressionsController < Api::V1::ApiController
   end
 
   def progression_params
-    params.require(:progression).permit(:id, :name, :details, :user_id, :challenge_id, :exercise_id, :last_entry_at)
+    params.require(:progression).permit(:id, :name, :details, :challenge_id, :exercise_id, :last_entry_at)
+      .merge(user_id: current_user.id)
   end
 end

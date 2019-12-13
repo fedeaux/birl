@@ -2,7 +2,7 @@ class Progression < ApplicationRecord
   belongs_to :user
   belongs_to :challenge
   belongs_to :exercise
-  belongs_to :session_progression, touch: true
+  belongs_to :session_progression, touch: true, optional: true
   has_many :entries, dependent: :destroy
 
   before_save :ensure_name
@@ -12,6 +12,8 @@ class Progression < ApplicationRecord
   end
 
   def exercise_name
+    return nil unless name
+
     name.split('-').first.strip
   end
 end

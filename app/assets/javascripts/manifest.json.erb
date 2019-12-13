@@ -4,7 +4,7 @@
   "short_name": "birl",
   "start_url": "/",
   "icons": [
-  <% icon_sizes.map { |s| "#{s}x#{s}" }.each.with_index do |dim, i| %>
+  <% icon_sizes.each.with_index do |dim, i| %>
     {
       "src": "<%= image_path "icons/#{dim}.png" %>",
       "sizes": "<%= dim %>",
