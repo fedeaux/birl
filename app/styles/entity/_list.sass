@@ -12,6 +12,11 @@
   line-height: 1.4rem
 
   .entity-list-item-wrapper
+    .entity-list-item-confirming-destroy-message
+      text-align: right
+      font-size: 0.8em
+      margin-top: .45em
+
     .entity-list-item
       padding: $d 0
       position: relative
@@ -25,7 +30,7 @@
       .entity-list-item-actions-wrapper
         position: absolute
         top: $d
-        right: $d
+        right: -$d2
 
         .entity-list-item-actions
           +box-shadow
