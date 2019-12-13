@@ -8,6 +8,7 @@ paths = [
   'entity/list/empty'
   'entity/list/item/divider'
   'progressions/in_session'
+  'entries/form/reps_picker'
 ]
 
 for entity in entities

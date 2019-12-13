@@ -23,7 +23,7 @@ export default
       default: -> {}
 
   data: ->
-    entries: null
+    entries: -> []
     form_entry: null
 
   methods:
@@ -38,6 +38,8 @@ export default
 
     entriesLoaded: (response) ->
       @entries = response.entries
+      @$nextTick ->
+        @newEntry()
 
     newEntry: ->
       last_entry = @entries[0]

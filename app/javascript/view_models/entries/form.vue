@@ -3,8 +3,8 @@
   .entity-form.entries-form
     .ui.form
       .field
-        label Value
-        input(type='text' v-model='entry.values')
+        label Repetitions
+        entries-form-reps-picker(v-model='entry.values')
 
       .field
         label Observations
