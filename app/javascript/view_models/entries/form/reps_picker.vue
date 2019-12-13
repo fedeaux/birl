@@ -22,7 +22,7 @@
       value: ''
 
     data: ->
-      repetitions: [5, 5, 5, 5]
+      repetitions: [0, 0, 0]
 
     methods:
       addRepetition: ->
@@ -52,5 +52,5 @@
             @repetitions = @value.split '/'
             return
 
-          @repetitions = [5, 5, 5, 5]
+          @repetitions = [0, 0, 0]
 </script>

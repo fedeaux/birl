@@ -13,6 +13,11 @@
     .ui.primary.button(v-if='!next_progression && prev_progression' @click='finishSession')
       | Finish
 
+  .centered.column(v-if='current_session')
+    router-link(:to='current_session.path()')
+      h3 Session
+      | {{ current_session.name }}
+
 </template>
 
 <script lang="coffee">
@@ -27,27 +32,21 @@ export default
 
   methods:
     finishSession: ->
-      session = @currentSession()
-      session.complete = true
-      Global.db.set 'current_session', session
+      return unless @current_session
+      @current_session.complete = true
+      @setCurrentSession @current_session
       @$router.push '/'
-
-    currentSession: ->
-      session_attributes = Global.db.get 'current_session'
-      return null unless session_attributes
-      new Session session_attributes
 
   watch:
     current_progression_id:
       immediate: true
       handler: ->
-        session = @currentSession()
-        return unless session
-        passed_current = false
         @next_progression = null
         @prev_progression = null
+        passed_current = false
+        return unless @current_session
 
-        for progression in session.progressions
+        for progression in @current_session.progressions
           if passed_current
             @next_progression = progression
             return
@@ -56,7 +55,5 @@ export default
 
           unless passed_current
             @prev_progression = progression
-
-        null
 
 </script>
