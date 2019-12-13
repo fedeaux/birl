@@ -3,7 +3,8 @@
   router-link.entity-list-item.session-list-item(:to='session.path()')
     | [{{ session.human_weekday }}]
     | {{ session.name }}
-    .detail
+
+    .entity-list-item-detail
       | {{ session.updated_at.fromNow() }}
 
   entity-list-item-divider

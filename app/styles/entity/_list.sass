@@ -1,13 +1,17 @@
-.entity-index
+.entity-list
   font-size: 1.4rem
   line-height: 1.4rem
 
-.entity-list
   .entity-list-item-wrapper
     .entity-list-item
       padding: $d 0
       position: relative
       display: block
+
+      .entity-list-item-detail
+        @extend .detail
+        display: block
+        margin-top: $d
 
       .entity-list-item-actions-wrapper
         position: absolute

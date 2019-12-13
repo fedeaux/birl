@@ -12,7 +12,7 @@
     router-link(:to='progression.path()')
       | {{ progression.name }}
 
-    router-link.progression-list-item-entries-count(:to='progression.path()')
+    router-link.entity-list-item-detail(:to='progression.path()')
       template(v-if='progression.entries_count')
         | {{ progression.entries_count }}
         |  entries
