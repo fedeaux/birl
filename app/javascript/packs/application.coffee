@@ -25,19 +25,25 @@ Vue.use(Vuex)
 store = new Vuex.Store(
   state:
     current_session: null
+    loading: false
 
   mutations:
     setCurrentSession: (state, data) ->
       state.current_session = data.current_session
       Global.db.set 'current_session', state.current_session
 
+    setLoading: (state, data) ->
+      state.loading = data.loading
+
   actions:
     loadCurrentSession: (context) ->
       session_attributes = Global.db.get 'current_session'
       if session_attributes
         context.commit 'setCurrentSession', current_session: new Session session_attributes
-)
 
+    setLoading: (context, data) ->
+      context.commit 'setLoading', data
+)
 
 import App from '../view_models/app'
 import view_model_paths from '../spa/view_model_paths'
@@ -71,4 +77,6 @@ $ ->
       render: (h) => h App,
       created: ->
         @$store.dispatch 'loadCurrentSession'
+        $(document).ajaxStart(@load).ajaxComplete(@loaded)
+
     ).$mount '#birl-spa-container'

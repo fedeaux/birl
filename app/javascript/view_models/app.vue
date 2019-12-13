@@ -1,7 +1,7 @@
 <template lang="pug">
   #birl-spa-container(@click='hideMenu()')
-    sui-dimmer(:active='loading')
-      sui-loader
+    sui-dimmer(:active='loading' inverted)
+      sui-loader.massive
 
     #header
       i#side-menu-toggle.bars.icon(@click='showMenu($event)')
@@ -21,7 +21,6 @@
 export default
   data: ->
     show_menu: false
-    loading: false
 
   methods:
     showMenu: (e) ->
@@ -31,17 +30,4 @@ export default
     hideMenu: ->
       @show_menu = false
 
-    startLoading: ->
-      @loading = true
-
-    stopLoading: ->
-      @loading = false
-
-  mounted: ->
-    Global.events.$on 'Global::StartLoading', @startLoading
-    Global.events.$on 'Global::StopLoading', @stopLoading
-
-  beforeDestroy: ->
-    Global.events.$off 'Global::StartLoading', @startLoading
-    Global.events.$off 'Global::StopLoading', @stopLoading
 </script>

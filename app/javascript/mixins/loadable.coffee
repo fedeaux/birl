@@ -1,7 +1,11 @@
 export default
   methods:
     load: ->
-      Global.events.$emit 'Global::StartLoading'
+      @$store.dispatch 'setLoading', loading: true
 
     loaded: ->
-      Global.events.$emit 'Global::StopLoading'
+      @$store.dispatch 'setLoading', loading: false
+
+  computed:
+    loading: ->
+      @$store.state.loading

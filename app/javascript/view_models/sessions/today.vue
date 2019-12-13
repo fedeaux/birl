@@ -20,11 +20,9 @@ export default
 
   methods:
     loadSession: ->
-      @load()
       @sessions_resource.todays @sessionLoaded
 
     sessionLoaded: (response) ->
-      @loaded()
       loaded_session = response.session
       current_session = @current_session
 
@@ -38,7 +36,6 @@ export default
 
     forceReload: ->
       localStorage.clear()
-      @load()
       @loadSession()
 
   mounted: ->

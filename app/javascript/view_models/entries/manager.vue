@@ -5,6 +5,7 @@
                  @save='saveFormEntry()'
                  @cancel='clearFormEntry()')
 
+
   .entity-manager-list(v-else)
     #new-entry-button.ui.primary.top.attached.fluid.small.icon.button(@click='newEntry')
       | Add
@@ -33,11 +34,9 @@ export default
       @entries_resource.destroy data.entry, @entryRemoved
 
     loadEntries: ->
-      @load()
       @entries_resource.index @entriesLoaded, @context
 
     entriesLoaded: (response) ->
-      @loaded()
       @entries = response.entries
 
     newEntry: ->
@@ -53,6 +52,7 @@ export default
 
     clearFormEntry: ->
       @setFormEntry null
+
 
     entryIndex: (entry_id) ->
       for index, entry of @entries
