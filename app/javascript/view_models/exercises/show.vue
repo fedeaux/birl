@@ -1,8 +1,11 @@
 <template lang="pug">
-.entity-show-wrapper.exercises-show-wrapper.default-container.with-footer
-  .entity-show.exercises-show(v-if='exercise')
+.entity-show-wrapper.exercises-show-wrapper.default-container(v-if='exercise')
+  .entity-show.exercises-show
     h1.entity-show-header
       | {{ exercise.name }}
+
+      router-link.entity-show-header-actions(:to='exercise.editPath()')
+        i.edit.icon
 
   br
   br
@@ -10,15 +13,15 @@
   .entity-show-subheader Progressions
   progressions-manager(v-if='exercise_id' :context='{ exercise_id: exercise_id }' :allow_actions='true')
 
-  shared-footer(v-if='exercise')
-    router-link.ui.fluid.red.basic.button(:to='exercise.editPath()')
-      | Edit
 </template>
 
 <script lang="coffee">
 import ExercisesResource from '../../resources/exercises_resource'
 
 export default
+  props:
+    parent_exercise: null
+
   data: ->
     exercise: null
     exercise_id: null
@@ -31,6 +34,10 @@ export default
       @exercise = response.exercise
 
   mounted: ->
+    if @parent_exercise
+      @exercise = @parent_exercise
+      return
+
     @exercises_resource = new ExercisesResource
     @exercise_id = @$route.params.id
     @loadExercise()

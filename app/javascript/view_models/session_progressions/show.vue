@@ -1,18 +1,21 @@
 <template lang="pug">
-.entity-show-wrapper.session_progressions-show-wrapper.default-container.with-footer
-  .entity-show.session_progressions-show(v-if='session_progression')
+.entity-show-wrapper.session_progressions-show-wrapper.default-container(v-if='session_progression')
+  .entity-show.session_progressions-show
     h1.entity-show-header
       | {{ session_progression.name }}
 
-  shared-footer(v-if='session_progression')
-    router-link.ui.fluid.red.basic.button(:to='session_progression.editPath()')
-      | Edit
+      router-link.entity-show-header-actions(:to='session_progression.editPath()')
+        i.edit.icon
+
 </template>
 
 <script lang="coffee">
 import SessionProgressionsResource from '../../resources/session_progressions_resource'
 
 export default
+  props:
+    parent_session_progression: null
+
   data: ->
     session_progression: null
     session_progression_id: null
@@ -25,6 +28,10 @@ export default
       @session_progression = response.session_progression
 
   mounted: ->
+    if @parent_session_progression
+      @session_progression = @parent_session_progression
+      return
+
     @session_progressions_resource = new SessionProgressionsResource
     @session_progression_id = @$route.params.id
     @loadSessionProgression()

@@ -1,12 +1,13 @@
 <template lang="pug">
 .entity-show-wrapper.sessions-show-wrapper.default-container(v-if='session')
-  .entity-show.sessions-show.default-container
+  .entity-show.sessions-show
     h1.entity-show-header
       | {{ session.name }}
       | [{{ session.human_weekday }}]
 
       router-link.entity-show-header-actions(:to='session.editPath()')
         i.edit.icon
+
 
   .default-container
     .ui.green.message(v-if='session.complete')

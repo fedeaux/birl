@@ -1,18 +1,21 @@
 <template lang="pug">
-.entity-show-wrapper.entries-show-wrapper.default-container.with-footer
-  .entity-show.entries-show(v-if='entry')
+.entity-show-wrapper.entries-show-wrapper.default-container(v-if='entry')
+  .entity-show.entries-show
     h1.entity-show-header
       | {{ entry.name }}
 
-  shared-footer(v-if='entry')
-    router-link.ui.fluid.red.basic.button(:to='entry.editPath()')
-      | Edit
+      router-link.entity-show-header-actions(:to='entry.editPath()')
+        i.edit.icon
+
 </template>
 
 <script lang="coffee">
 import EntriesResource from '../../resources/entries_resource'
 
 export default
+  props:
+    parent_entry: null
+
   data: ->
     entry: null
     entry_id: null
@@ -25,6 +28,10 @@ export default
       @entry = response.entry
 
   mounted: ->
+    if @parent_entry
+      @entry = @parent_entry
+      return
+
     @entries_resource = new EntriesResource
     @entry_id = @$route.params.id
     @loadEntry()

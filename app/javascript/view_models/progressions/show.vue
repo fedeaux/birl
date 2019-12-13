@@ -1,29 +1,32 @@
 <template lang="pug">
-.entity-show-wrapper.progressions-show-wrapper.default-container.with-footer(v-if='progression')
+.entity-show-wrapper.progressions-show-wrapper.default-container(v-if='progression')
   .entity-show.progressions-show
     h1.entity-show-header
       | {{ progression.name }}
 
+      router-link.entity-show-header-actions(:to='progression.editPath()')
+        i.edit.icon
+
     p.centered
       | {{ progression.details }}
 
-  br
-  br
+    br
+    br
 
-  .entity-show-subheader Entries
-  entries-manager(:context='{ progression_id: progression_id }')
+    .entity-show-subheader Entries
+    entries-manager(:context='{ progression_id: progression_id }')
 
-  progressions-in-session(:current_progression_id='progression_id')
+    progressions-in-session(:current_progression_id='progression_id')
 
-  shared-footer(v-if='progression')
-    router-link.ui.fluid.red.basic.button(:to='progression.editPath()')
-      | Edit
 </template>
 
 <script lang="coffee">
 import ProgressionsResource from '../../resources/progressions_resource'
 
 export default
+  props:
+    parent_progression: null
+
   data: ->
     progression: null
     progression_id: null
@@ -42,4 +45,13 @@ export default
         @progressions_resource ?= new ProgressionsResource
         @progression_id = parseInt @$route.params.id
         @loadProgression()
+
+  mounted: ->
+    if @parent_progression
+      @progression = @parent_progression
+      return
+
+    @progressions_resource = new ProgressionsResource
+    @progression_id = @$route.params.id
+    @loadProgression()
 </script>
