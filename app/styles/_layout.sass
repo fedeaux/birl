@@ -24,13 +24,35 @@ body
     font-size: 24px
     height: $header-height
     line-height: $header-height
-    padding: 0 $d4
     position: fixed
     width: 100%
     z-index: 999
+    font-size: 0
+
+    .header-button
+      border-radius: $d
+      display: inline-block
+      height: $header-height - $d2
+      line-height: $header-height - $d2
+      padding: $d
+      position: absolute
+      top: $d
+      vertical-align: middle
+      font-size: 2rem
+
+      i
+        color: white
+        position: relative
+        top: -3px
+
+      &:active
+        background-color: rgba(black, 0.1)
 
     #side-menu-toggle
-      float: right
+      right: $d
+
+    #back-button
+      left: $d
 
   #menu
     z-index: 998

@@ -10,7 +10,11 @@
     router-link.item(to='/progressions') Progressions
 
   #header
-    i#side-menu-toggle.bars.icon(@click='toggleMenu($event)')
+    .header-button#back-button(@click='back()')
+      i.angle.left.icon
+
+    .header-button#side-menu-toggle(@click='toggleMenu($event)')
+      i.bars.icon
 
   #contents-wrapper
     #contents
@@ -25,9 +29,12 @@ export default
   methods:
     toggleMenu: (e) ->
       @show_menu = !@show_menu
-      e.stopPropagation() if $(e.target).is '#side-menu-toggle'
+      e.stopPropagation() if $(e.target).is 'i.bars.icon, #side-menu-toggle'
 
     hideMenu: ->
       @show_menu = false
+
+    back: ->
+      @$router.go -1
 
 </script>
