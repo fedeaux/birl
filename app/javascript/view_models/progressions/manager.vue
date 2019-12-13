@@ -79,10 +79,11 @@ export default
       @progressions.splice index, 1
 
   mounted: ->
+    @progressions_resource = new ProgressionsResource
+
     if @parent_progressions
       @progressions = @parent_progressions
       return
 
-    @progressions_resource = new ProgressionsResource
     @loadProgressions()
 </script>

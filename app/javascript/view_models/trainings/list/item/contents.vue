@@ -1,5 +1,6 @@
 <template lang="pug">
-  .training-list-item-contents
+router-link.training-list-item-contents(:to='training.path()')
+  | {{ training.name }}
 </template>
 
 <script lang="coffee">

@@ -1,5 +1,5 @@
 class Api::V1::ChallengesController < Api::V1::ApiController
-  before_action :set_challenge, only: [:show, :update]
+  before_action :set_challenge, only: [:show, :update, :destroy]
 
   def index
     @challenges = current_user.challenges
@@ -23,6 +23,10 @@ class Api::V1::ChallengesController < Api::V1::ApiController
     else
       render 'show', status: :unprocessable_entuty
     end
+  end
+
+  def destroy
+    @challenge.destroy
   end
 
   private

@@ -25,7 +25,7 @@ Vue.use(Vuex)
 store = new Vuex.Store(
   state:
     current_session: null
-    loading: false
+    global_loading: false
 
   mutations:
     setCurrentSession: (state, data) ->
@@ -33,7 +33,7 @@ store = new Vuex.Store(
       Global.db.set 'current_session', state.current_session
 
     setLoading: (state, data) ->
-      state.loading = data.loading
+      state.global_loading = data.loading
 
   actions:
     loadCurrentSession: (context) ->

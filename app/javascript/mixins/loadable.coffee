@@ -7,5 +7,5 @@ export default
       @$store.dispatch 'setLoading', loading: false
 
   computed:
-    loading: ->
-      @$store.state.loading
+    global_loading: ->
+      @$store.state.global_loading

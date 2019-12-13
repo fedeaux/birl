@@ -1,5 +1,6 @@
 <template lang="pug">
-  .session_progression-list-item-contents
+router-link.session_progression-list-item-contents(:to='session_progression.path()')
+  | {{ session_progression.name }}
 </template>
 
 <script lang="coffee">

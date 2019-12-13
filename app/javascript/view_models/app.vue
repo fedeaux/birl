@@ -1,6 +1,6 @@
 <template lang="pug">
   #birl-spa-container(@click='hideMenu()')
-    sui-dimmer(:active='loading' inverted)
+    sui-dimmer(:active='global_loading' inverted)
       sui-loader.massive
 
     #header

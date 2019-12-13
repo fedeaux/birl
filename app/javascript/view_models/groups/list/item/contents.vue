@@ -1,5 +1,6 @@
 <template lang="pug">
-  .group-list-item-contents
+router-link.group-list-item-contents(:to='group.path()')
+  | {{ group.name }}
 </template>
 
 <script lang="coffee">

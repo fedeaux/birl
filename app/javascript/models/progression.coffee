@@ -19,7 +19,7 @@ class Progression extends BaseModel
       challenge_id: {}
       exercise: { type: Exercise }
       exercise_id: {}
-      last_entry_at: {}
+      last_entry_at: { type: moment }
       entries_count: {}
       exercise_name: {}
     }

@@ -1,5 +1,6 @@
 <template lang="pug">
-  .session-list-item-contents
+router-link.session-list-item-contents(:to='session.path()')
+  | {{ session.name }}
 </template>
 
 <script lang="coffee">
