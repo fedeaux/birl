@@ -3,7 +3,7 @@
   .entity-form.<%= plural_underscore_name %>-form
     .ui.form
       .field
-        label name
+        label Name
         input(type='text' v-model='<%= underscore_name %>.name')
 
       .field.ui.fluid.buttons

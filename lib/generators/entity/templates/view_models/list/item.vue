@@ -1,31 +1,43 @@
 <template lang="pug">
 .entity-list-item-wrapper.<%= underscore_name %>-list-item-wrapper
-  .entity-list-item-confirming-destroy(v-if='confirming_destroy')
-    .ui.red.message
-      .centered Confirm destroy?
+  .entity-list-item-confirming-destroy(v-if='confirming_destroy && !showing_actions')
+    .ui.four.column.grid
+      .column
+        .entity-list-item-confirming-destroy-message Are you sure?
 
-    .ui.small.fluid.buttons
-      .ui.red.button(@click='$emit("destroy")') Destroy
-      .ui.basic.button(@click='cancelDestroy()') Cancel
+      .column
+        .ui.red.fluid.button(@click='$emit("destroy")') Destroy
 
-  .entity-list-item.<%= underscore_name %>-list-item(v-else)
-    | {{ <%= underscore_name %>.name }}
+      .column
+        .ui.basic.fluid.button(@click='cancelDestroy()') Cancel
+
+  .entity-list-item-actions(v-if='!confirming_destroy && showing_actions')
+    .ui.four.column.grid
+      .column(@click='$emit("edit")')
+        router-link.ui.basic.fluid.green.icon.button(:to='<%= underscore_name %>.path()')
+          i.eye.icon
+          |  View
+
+      .column(@click='$emit("edit")')
+        .ui.basic.fluid.blue.icon.button
+          i.edit.icon
+          |  Edit
+
+      .column(@click='confirmDestroy')
+        .ui.basic.fluid.red.icon.button
+          i.trash.icon
+          |  Destroy
+
+      .column(@click='hideActions()')
+        .ui.basic.fluid.icon.button
+          i.cancel.icon
+          |  Cancel
+
+  .entity-list-item.<%= underscore_name %>-list-item(v-if='!confirming_destroy && !showing_actions')
+    <%= plural_underscore_name %>-list-item-contents(:<%= underscore_name %>='<%= underscore_name %>')
 
     .entity-list-item-actions-wrapper(v-if='allow_actions')
-      i.ellipsis.vertical.icon(@click='showActions($event)' v-if='!show_actions')
-
-      .ui.vertical.text.menu.entity-list-item-actions(v-if='show_actions')
-        router-link.item(:to='<%= underscore_name %>.path()')
-          | View
-          i.eye.icon
-
-        a.item(@click='edit($event)')
-          | Edit
-          i.edit.icon
-
-        a.item(@click='confirmDestroy($event)')
-          | Destroy
-          i.trash.icon
+      i.ellipsis.vertical.icon(@click='showActions($event)')
 
   entity-list-item-divider
 </template>
@@ -34,8 +46,8 @@
 
 export default
   data: ->
+    showing_actions: false
     confirming_destroy: false
-    show_actions: false
 
   props:
     <%= underscore_name %>:
@@ -45,28 +57,19 @@ export default
       default: false
 
   methods:
-    confirmDestroy: ($event) ->
+    confirmDestroy: ->
       @confirming_destroy = true
-      $event.stopPropagation()
+      @showing_actions = false
 
     cancelDestroy: ->
       @confirming_destroy = false
 
-    edit: ($event) ->
-      @$emit 'edit'
-      $event.stopPropagation()
-
     showActions: ($event) ->
-      @show_actions = true
+      @showing_actions = true
+      @confirming_destroy = false
       $event.stopPropagation()
 
     hideActions: ->
-      @show_actions = false
-
-  mounted: ->
-    $(document).on 'click', @hideActions
-
-  beforeDestroy: ->
-    $(document).off 'click', @hideActions
+      @showing_actions = false
 
 </script>
