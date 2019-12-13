@@ -3,11 +3,16 @@ window._ = require 'underscore'
 window.$ = require 'jquery'
 window.jQuery = window.$
 window.moment = require 'moment'
+
+import Database from 'lib/database'
+
 window.Global =
-  events: new Vue()
+  events: new Vue
+  db: new Database
 
 require 'semantic-ui-sass'
 
+import Session from '../models/session'
 import routes from '../spa/routes'
 import SuiVue from 'semantic-ui-vue'
 Vue.use SuiVue
@@ -15,11 +20,32 @@ Vue.use SuiVue
 VueRouter = require('vue-router').default
 Vue.use VueRouter
 
+import Vuex from 'vuex'
+Vue.use(Vuex)
+store = new Vuex.Store(
+  state:
+    current_session: null
+
+  mutations:
+    setCurrentSession: (state, data) ->
+      state.current_session = data.current_session
+      Global.db.set 'current_session', state.current_session
+
+  actions:
+    loadCurrentSession: (context) ->
+      session_attributes = Global.db.get 'current_session'
+      if session_attributes
+        context.commit 'setCurrentSession', current_session: new Session session_attributes
+)
+
+
 import App from '../view_models/app'
 import view_model_paths from '../spa/view_model_paths'
 import LoadableMixin from '../mixins/loadable'
+import StateMixin from '../mixins/state'
 
 Vue.mixin LoadableMixin
+Vue.mixin StateMixin
 
 view_model_aliases = {
 }
@@ -41,5 +67,8 @@ $ ->
 
     new Vue(
       router: router,
-      render: (h) => h App
+      store: store,
+      render: (h) => h App,
+      created: ->
+        @$store.dispatch 'loadCurrentSession'
     ).$mount '#birl-spa-container'

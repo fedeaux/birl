@@ -25,7 +25,6 @@
 
 <script lang="coffee">
 import SessionsResource from '../../resources/sessions_resource'
-import Database from '../../lib/database'
 
 export default
   props:
@@ -44,7 +43,7 @@ export default
 
     startSession: ->
       @session.started = true
-      (new Database).set 'current_session', @session
+      @setCurrentSession @session
       @$router.push @session.progressions[0].path()
 
   mounted: ->

@@ -16,7 +16,6 @@
 </template>
 
 <script lang="coffee">
-import Database from '../../lib/database'
 import Session from '../../models/session'
 
 export default
@@ -30,11 +29,11 @@ export default
     finishSession: ->
       session = @currentSession()
       session.complete = true
-      (new Database).set 'current_session', session
+      Global.db.set 'current_session', session
       @$router.push '/'
 
     currentSession: ->
-      session_attributes = (new Database).get 'current_session'
+      session_attributes = Global.db.get 'current_session'
       return null unless session_attributes
       new Session session_attributes
 
