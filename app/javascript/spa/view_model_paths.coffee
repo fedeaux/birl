@@ -7,6 +7,7 @@ paths = [
   'shared/footer'
   'entity/list/empty'
   'entity/list/item/divider'
+  'entries/list/item/contents'
   'progressions/in_session'
 ]
 
