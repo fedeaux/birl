@@ -1,5 +1,7 @@
 <template lang="pug">
-  .challenge-list-item-contents
+router-link.challenge-list-item-contents(:to='challenge.path()')
+  | {{ challenge.name }}
+  .entity-list-item-detail {{ challenge.description }}
 </template>
 
 <script lang="coffee">

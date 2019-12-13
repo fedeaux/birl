@@ -9,7 +9,10 @@
     #new-challenge-button.ui.primary.top.attached.fluid.small.icon.button(@click='newChallenge')
       | Add
 
-    challenges-list(:challenges='challenges')
+    challenges-list(:challenges='challenges'
+                    :allow_actions='true'
+                    @edit='editChallenge($event)'
+                    @destroy='destroyChallenge($event)')
 </template>
 
 <script lang="coffee">
@@ -26,6 +29,12 @@ export default
     form_challenge: null
 
   methods:
+    editChallenge: (data) ->
+      @setFormChallenge data.challenge
+
+    destroyChallenge: (data) ->
+      @challenges_resource.destroy data.challenge, @challengeRemoved
+
     loadChallenges: ->
       @challenges_resource.index @challengesLoaded, @context
 
@@ -33,7 +42,7 @@ export default
       @challenges = response.challenges
 
     newChallenge: ->
-      @setFormChallenge new Challenge(@context)
+      @setFormChallenge new Challenge @context
 
     setFormChallenge: (@form_challenge) ->
 
@@ -60,6 +69,12 @@ export default
 
     challengeSaved: (data) ->
       @addChallenge data.challenge
+      @clearFormChallenge()
+
+    challengeRemoved: (data) ->
+      index = @challengeIndex data.challenge.id
+      return if index == -1
+      @challenges.splice index, 1
 
   mounted: ->
     @challenges_resource = new ChallengesResource

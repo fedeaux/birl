@@ -2,6 +2,14 @@
 .entity-form-wrapper.challenges-form-wrapper.default-container(v-if='challenge')
   .entity-form.challenges-form
     .ui.form
+      .field
+        label Name
+        input(type='text' v-model='challenge.name')
+
+      .field
+        label Description
+        input(type='text' v-model='challenge.description')
+
       .field.ui.fluid.buttons
         .ui.primary.button(@click='save()') Save
         .ui.basic.button(@click='cancel()') Cancel
@@ -24,6 +32,7 @@ export default
 
   methods:
     save: ->
+      @$emit 'input', @challenge
       @$emit 'save'
 
     cancel: ->
