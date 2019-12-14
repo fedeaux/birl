@@ -2,10 +2,13 @@
 .entity-form-wrapper.trainings-form-wrapper.default-container(v-if='training')
   .entity-form.trainings-form
     .ui.form
+      .field
+        label Name
+        input(type='text' v-model='training.name')
+
       .field.ui.fluid.buttons
         .ui.primary.button(@click='save()') Save
         .ui.basic.button(@click='cancel()') Cancel
-
 </template>
 
 <script lang="coffee">
@@ -24,12 +27,11 @@ export default
 
   methods:
     save: ->
+      @$emit 'input', @training
       @$emit 'save'
 
     cancel: ->
       @$emit 'cancel'
-
-  mounted: ->
 
   watch:
     original_training:

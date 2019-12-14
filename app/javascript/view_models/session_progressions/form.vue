@@ -2,10 +2,17 @@
 .entity-form-wrapper.session_progressions-form-wrapper.default-container(v-if='session_progression')
   .entity-form.session_progressions-form
     .ui.form
+      .field
+        label Session
+        sessions-select(v-model='session_progression.session_id')
+
+      .field
+        label Progression
+        progressions-select(v-model='session_progression.progression_id')
+
       .field.ui.fluid.buttons
         .ui.primary.button(@click='save()') Save
         .ui.basic.button(@click='cancel()') Cancel
-
 </template>
 
 <script lang="coffee">
@@ -24,12 +31,11 @@ export default
 
   methods:
     save: ->
+      @$emit 'input', @session_progression
       @$emit 'save'
 
     cancel: ->
       @$emit 'cancel'
-
-  mounted: ->
 
   watch:
     original_session_progression:

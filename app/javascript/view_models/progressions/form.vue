@@ -3,16 +3,20 @@
   .entity-form.progressions-form
     .ui.form
       .field
-        label Exercise
-        exercises-select(v-model='progression.exercise_id')
+        label Name
+        input(type='text' v-model='progression.name')
+
+      .field
+        label Details
+        input(type='text' v-model='progression.details')
 
       .field
         label Challenge
         challenges-select(v-model='progression.challenge_id')
 
       .field
-        label Details
-        input(type='text' v-model='progression.details')
+        label Exercise
+        exercises-select(v-model='progression.exercise_id')
 
       .field.ui.fluid.buttons
         .ui.primary.button(@click='save()') Save
@@ -50,5 +54,4 @@ export default
           @progression = @original_progression.clone()
         else
           @progression = null
-
 </script>

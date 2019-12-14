@@ -2,10 +2,13 @@
 .entity-form-wrapper.groups-form-wrapper.default-container(v-if='group')
   .entity-form.groups-form
     .ui.form
+      .field
+        label Name
+        input(type='text' v-model='group.name')
+
       .field.ui.fluid.buttons
         .ui.primary.button(@click='save()') Save
         .ui.basic.button(@click='cancel()') Cancel
-
 </template>
 
 <script lang="coffee">
@@ -24,12 +27,11 @@ export default
 
   methods:
     save: ->
+      @$emit 'input', @group
       @$emit 'save'
 
     cancel: ->
       @$emit 'cancel'
-
-  mounted: ->
 
   watch:
     original_group:

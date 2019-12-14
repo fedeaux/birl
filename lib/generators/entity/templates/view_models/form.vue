@@ -2,10 +2,18 @@
 .entity-form-wrapper.<%= plural_underscore_name %>-form-wrapper.default-container(v-if='<%= underscore_name %>')
   .entity-form.<%= plural_underscore_name %>-form
     .ui.form
+<%- attributes.each do |attribute| -%>
+<%-   if attribute.name != 'user' && [:string, :interger, :references, :belongs_to].include?(attribute.type) -%>
       .field
-        label Name
-        input(type='text' v-model='<%= underscore_name %>.name')
+        label <%= attribute.name.titleize %>
+<%-     if [:string, :interger].include? attribute.type -%>
+        input(type='text' v-model='<%= underscore_name %>.<%= attribute.name %>')
+<%-     elsif [:references, :belongs_to].include? attribute.type -%>
+        <%= attribute.name.pluralize %>-select(v-model='<%= underscore_name %>.<%= attribute.name %>_id')
+<%- end -%>
 
+<%- end -%>
+<%- end -%>
       .field.ui.fluid.buttons
         .ui.primary.button(@click='save()') Save
         .ui.basic.button(@click='cancel()') Cancel
@@ -32,8 +40,6 @@ export default
 
     cancel: ->
       @$emit 'cancel'
-
-  mounted: ->
 
   watch:
     original_<%= underscore_name %>:

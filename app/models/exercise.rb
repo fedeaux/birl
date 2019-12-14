@@ -4,4 +4,8 @@ class Exercise < ApplicationRecord
 
   has_many :progressions
   has_many :entries, through: :progressions
+
+  def group_name
+    group&.name
+  end
 end

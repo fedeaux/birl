@@ -55,6 +55,7 @@ class EntityGenerator < Rails::Generators::NamedBase
 
   def guarded_template(source, target)
     return if (File.exists?(target) and File.readlines(target).last.strip == '# NO-OVERRIDE') or !template_exists?(source)
+
     template source, target
   end
 
