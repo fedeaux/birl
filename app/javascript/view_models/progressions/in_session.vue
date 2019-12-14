@@ -1,9 +1,14 @@
 <template lang="pug">
-.progressions-in-session.ui.two.column.grid
+.progressions-in-session.ui.three.column.grid
   .progressions-in-session-prev.column
     router-link(v-if='prev_progression' :to='prev_progression.path()')
       | &larr;
       | {{ prev_progression.exercise_name }}
+
+  .progressions-in-session-session.column(v-if='current_session')
+    router-link(:to='current_session.path()')
+      h3 Session
+      | {{ current_session.name }}
 
   .progressions-in-session-next.column
     router-link(v-if='next_progression' :to='next_progression.path()')
@@ -13,18 +18,15 @@
     .ui.primary.button(v-if='!next_progression && prev_progression' @click='finishSession')
       | Finish
 
-  .centered.column(v-if='current_session')
-    router-link(:to='current_session.path()')
-      h3 Session
-      | {{ current_session.name }}
-
 </template>
 
 <script lang="coffee">
 import Session from '../../models/session'
 
 export default
-  props: ['current_progression_id']
+  props:
+    current_progression_id:
+      type: Number
 
   data: ->
     next_progression: null
@@ -44,6 +46,7 @@ export default
         @next_progression = null
         @prev_progression = null
         passed_current = false
+
         return unless @current_session
 
         for progression in @current_session.progressions
@@ -55,5 +58,9 @@ export default
 
           unless passed_current
             @prev_progression = progression
+
+        unless passed_current
+          @next_progression = null
+          @prev_progression = null
 
 </script>

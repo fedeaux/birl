@@ -5,8 +5,8 @@
       router-link.entity-show-header-actions(:to='session.editPath()')
         i.edit.icon
 
-  .default-container
-    .ui.green.message(v-if='session.complete')
+  .default-container(v-if='session.complete')
+    .ui.green.message
       | Completed! Good work :)
 
   progressions-manager(:parent_progressions='session.progressions')

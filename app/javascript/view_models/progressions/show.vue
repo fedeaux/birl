@@ -35,9 +35,8 @@ export default
       return
 
     @progressions_resource = new ProgressionsResource
-    @progression_id = @$route.params.id
+    @progression_id = parseInt @$route.params.id
     @loadProgression()
-
 
   watch:
     '$route.params.id':
