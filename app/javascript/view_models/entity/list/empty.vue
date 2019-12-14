@@ -1,5 +1,5 @@
 <template lang="pug">
-  .entity-list-empty.muted-text
+  .entity-list-empty(v-if='!global_loading')
     | {{ text }}
 </template>
 
