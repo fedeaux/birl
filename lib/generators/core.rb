@@ -41,7 +41,7 @@ module GeneratorsCore
 
   def view_models_list
     %w[show index list list/item picker new edit form select manager]
-    %w[index new edit form]
+    %w[edit]
   end
 
   def ensure_directory(file)
