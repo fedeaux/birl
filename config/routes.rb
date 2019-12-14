@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get '.well-known/acme-challenge/rWJMshGiEIOoSHdhAuZXU7XLjLxwZgonfp-ogI5vJsA' => 'spa#acme'
+
   # Everything else goes to spa. TODO: Use app/javascript/spa/raw_routes.coffee to draw something more secure
   get "*all" => 'spa#index'
   root 'spa#index'
