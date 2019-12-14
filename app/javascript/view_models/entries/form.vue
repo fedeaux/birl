@@ -4,7 +4,7 @@
     .ui.form
       .field
         label Repetitions
-        entries-form-reps-picker(v-model='entry.values')
+        component(v-model='entry.values' :is='picker_component_name')
 
       .field
         label Observations
@@ -13,7 +13,6 @@
       .field.ui.fluid.buttons
         .ui.primary.button(@click='save()') Save
         .ui.basic.button(@click='cancel()') Cancel
-
 </template>
 
 <script lang="coffee">
@@ -26,6 +25,7 @@ export default
 
   props:
     original_entry: null
+    progression_type: null
 
   data: ->
     entry: null
@@ -38,7 +38,10 @@ export default
     cancel: ->
       @$emit 'cancel'
 
-  mounted: ->
+  computed:
+    picker_component_name: ->
+      return 'input' unless @progression_type in ['repetitions', 'treadmill']
+      "entries-form-#{@progression_type}-picker"
 
   watch:
     original_entry:

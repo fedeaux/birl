@@ -69,6 +69,7 @@ class TrainingSeeder
   def ensure_progression(signature)
     parts = signature.split('-').map(&:strip)
     exercise = Exercise.where(name: parts[0], user_id: user.id).first_or_create
+    exercise.update(progression_type: 'repetitions') unless exercise.progression_type
     challenge = Challenge.where(name: parts[1], user_id: user.id).first_or_create
     progression = Progression.where(challenge_id: challenge.id, exercise_id: exercise.id, user_id: user.id).first_or_create
 

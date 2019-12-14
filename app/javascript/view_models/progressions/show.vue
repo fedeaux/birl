@@ -5,7 +5,9 @@
       router-link.entity-show-header-actions(:to='progression.editPath()')
         i.edit.icon
 
-  entries-manager(:context='{ progression_id: progression_id }', :auto_add_new='!progression.done_today')
+  entries-manager(:context='{ progression_id: progression_id }'
+                  :auto_add_new='!progression.done_today'
+                  :progression_type='progression.progression_type')
 
   shared-footer(v-if='current_session')
     progressions-in-session(:current_progression_id='progression_id')

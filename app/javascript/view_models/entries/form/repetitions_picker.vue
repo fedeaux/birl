@@ -1,6 +1,6 @@
 <template lang="pug">
-.entry-reps-picker
-  .entry-reps-picker-item(v-for='(repetition, index) in repetitions')
+.entry-repetitions-picker
+  .entry-repetitions-picker-item(v-for='(repetition, index) in repetitions')
     .ui.icon.basic.small.circular.button(@click='increase(index)')
       i.up.angle.icon
 
@@ -12,7 +12,7 @@
     .ui.icon.red.tiny.circular.button(@click='removeRepetition(index)')
       i.minus.icon
 
-  .ui.icon.primary.small.circular.button.reps-counter(@click='addRepetition')
+  .ui.icon.primary.small.circular.button.repetitions-counter(@click='addRepetition')
     i.plus.icon
 </template>
 

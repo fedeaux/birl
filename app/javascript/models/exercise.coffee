@@ -12,6 +12,7 @@ class Exercise extends BaseModel
       id: {}
       name: {}
       slug: {}
+      progression_type: {}
       user: { type: User }
       user_id: {}
       group: { type: Group }

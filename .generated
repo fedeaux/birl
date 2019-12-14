@@ -1,6 +1,6 @@
 rails g entity challenge name description user:references
 rails g entity entry name progression:references values variables observations:text
-rails g entity exercise name slug user:references group:references
+rails g entity exercise name slug progression_type user:references group:references
 rails g entity group name user:references
 rails g entity progression name details user:references challenge:references exercise:references last_entry_at:datetime
 rails g entity session name training:belongs_to
@@ -9,7 +9,7 @@ rails g entity training name user:references
 
 rails g entity challenge name description user:references -f
 rails g entity entry name progression:references values variables observations:text -f
-rails g entity exercise name slug user:references group:references -f
+rails g entity exercise name slug progression_type user:references group:references -f
 rails g entity group name user:references -f
 rails g entity progression name details user:references challenge:references exercise:references last_entry_at:datetime -f
 rails g entity session name training:belongs_to -f

@@ -2,6 +2,7 @@
 .entity-manager.entries-manager.default-container
   .entity-manager-form(v-if='form_entry')
     entries-form(v-model='form_entry'
+                 :progression_type='progression_type'
                  @save='saveFormEntry()'
                  @cancel='clearFormEntry()')
 
@@ -28,6 +29,7 @@ export default
 
     parent_entries: null
     auto_add_new: false
+    progression_type: null
 
   data: ->
     entries: null

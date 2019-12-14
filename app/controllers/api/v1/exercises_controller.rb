@@ -32,6 +32,6 @@ class Api::V1::ExercisesController < Api::V1::ApiController
   end
 
   def exercise_params
-    params.require(:exercise).permit(:id, :name, :slug, :user_id, :group_id)
+    params.require(:exercise).permit(:id, :name, :slug, :progression_type, :user_id, :group_id)
   end
 end

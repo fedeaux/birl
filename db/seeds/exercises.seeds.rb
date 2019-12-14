@@ -148,16 +148,16 @@ after(:users) do
       {
         group: 'Aeróbico',
         exercises: [
-          { name: 'Esteira' }
+          { name: 'Esteira', progression_type: 'treadmill' }
         ]
       },
     ].each do |info|
       info[:exercises].each do |exercise_attrs|
         group = user.groups.where(name: info[:group]).first_or_create
+        exercise_attrs = { progression_type: 'repetitions' }.merge(exercise_attrs)
 
         slug = exercise_attrs[:name].parameterize
         exercise = user.exercises.find_or_initialize_by(slug: slug)
-        next if exercise.persisted?
         exercise.assign_attributes exercise_attrs.merge(group: group)
         exercise.save
       end

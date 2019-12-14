@@ -11,6 +11,10 @@
         input(type='text' v-model='exercise.slug')
 
       .field
+        label Progression Type
+        input(type='text' v-model='exercise.progression_type')
+
+      .field
         label Group
         groups-select(v-model='exercise.group_id')
 
