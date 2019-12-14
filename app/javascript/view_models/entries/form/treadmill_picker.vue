@@ -1,18 +1,20 @@
 <template lang="pug">
-.entry-repetitions-picker
-  .entry-repetitions-picker-item(v-for='(repetition, index) in repetitions')
-    .ui.icon.basic.small.circular.button(@click='increase(index)')
-      i.up.angle.icon
+.entry-treadmill-picker
+  .entry-treadmill-picker-item(v-for='(entry, index) in entries')
 
-    input(type='text' :value='repetition')
+    .entry-treadmill-picker-item-dimension(v-for='dimension in dimensions' :class='classForDimension(dimension)')
+      .ui.icon.basic.small.circular.button(@click='increase(index)')
+        i.up.angle.icon
 
-    .ui.icon.basic.small.circular.button(@click='decrease(index)')
-      i.down.angle.icon
+      input(type='text' :value='entry[dimension]')
 
-    .ui.icon.red.tiny.circular.button(@click='removeRepetition(index)')
+      .ui.icon.basic.small.circular.button(@click='decrease(index)')
+        i.down.angle.icon
+
+    .ui.icon.red.tiny.circular.button.entry-treadmill-picker-remove-entry-button(@click='removeEntry(index)')
       i.minus.icon
 
-  .ui.icon.primary.small.circular.button.repetitions-counter(@click='addRepetition')
+  .ui.icon.primary.small.circular.button.treadmill-counter(@click='addEntry')
     i.plus.icon
 </template>
 
@@ -22,14 +24,37 @@
       value: ''
 
     data: ->
-      repetitions: [8.0, 8.0, 8.0]
+      dimensions: ['sprints', 'time', 'unity', 'speed']
+      entries: [
+        {
+          sprints: 10,
+          time: 40,
+          unity: 's',
+          speed: 8.0
+        },
+        {
+          sprints: 5,
+          time: 40,
+          unity: 's',
+          speed: 7.0
+        }
+      ]
 
     methods:
-      addRepetition: ->
-        @repetitions.push 5
+      treadmillEntry: (sprints = 1, time = 10, unity = 's', speed = 8.0) ->
+        sprints: sprints
+        time: time
+        unity: unity
+        speed: speed
 
-      removeRepetition: (index) ->
-        @repetitions.splice(index, 1)
+      classForDimension: (dimension) ->
+        "entry-treadmill-picker-item-#{dimension}"
+
+      addEntry: ->
+        @entries.push @treadmillEntry()
+
+      removeEntry: (index) ->
+        @entries.splice(index, 1)
 
       increase: (index) ->
         value = parseInt @repetitions[index]
@@ -40,19 +65,11 @@
         Vue.set @repetitions, index, value - 0.1
 
     watch:
-      repetitions:
+      entries:
         immediate: true
         handler: ->
-          as_string = @repetitions.join '/'
-          return if as_string == @value
-          @$emit 'input', as_string
 
       value:
         immediate: true
         handler: ->
-          if @value and @value.split
-            @repetitions = @value.split '/'
-            return
-
-          @repetitions = [8.0, 8.0, 8.0]
 </script>
