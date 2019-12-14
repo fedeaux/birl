@@ -1,13 +1,9 @@
 <template lang="pug">
 .entity-edit.session-edit.default-container(v-if='session')
-  sessions-show(:parent_session='session')
+  sessions-show(:parent_session='session' @forceReload='forceReload' :force_reloadable='true')
 
   .default-container
     .ui.two.column.centered.grid
-      .column
-        .ui.fluid.basic.icon.button(@click='forceReload')
-          i.refresh.icon
-          |  Force Reload
 </template>
 
 <script lang="coffee">

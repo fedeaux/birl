@@ -7,7 +7,8 @@
 
   entries-manager(:context='{ progression_id: progression_id }')
 
-  progressions-in-session(:current_progression_id='progression_id')
+  shared-footer
+    progressions-in-session(:current_progression_id='progression_id')
 </template>
 
 <script lang="coffee">

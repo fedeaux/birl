@@ -11,9 +11,13 @@
 
   progressions-manager(:parent_progressions='session.progressions')
 
-  .ui.two.column.centered.grid(v-if='!session.started')
-    .column
-      .ui.fluid.huge.primary.icon.button(@click='startSession')
+  shared-footer
+    .ui.two.buttons
+      .ui.fluid.basic.icon.button(@click='$emit("forceReload")' v-if='force_reloadable')
+        i.refresh.icon
+        |  Force Reload
+
+      .ui.fluid.primary.icon.button(@click='startSession' v-if='!session.started')
         | Start
         | &nbsp;
         i.play.icon
@@ -25,6 +29,7 @@ import SessionsResource from '../../resources/sessions_resource'
 export default
   props:
     parent_session: null
+    force_reloadable: false
 
   data: ->
     session: null
