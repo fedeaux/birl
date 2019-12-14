@@ -5,7 +5,7 @@
       router-link.entity-show-header-actions(:to='progression.editPath()')
         i.edit.icon
 
-  entries-manager(:context='{ progression_id: progression_id }')
+  entries-manager(:context='{ progression_id: progression_id }', :auto_add_new='!progression.done_today')
 
   shared-footer
     progressions-in-session(:current_progression_id='progression_id')
@@ -28,6 +28,7 @@ export default
 
     progressionLoaded: (response) ->
       @progression = response.progression
+      console.log @progression
 
   mounted: ->
     if @parent_progression

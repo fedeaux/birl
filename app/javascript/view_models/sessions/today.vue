@@ -19,16 +19,8 @@ export default
       @sessions_resource.todays @sessionLoaded
 
     sessionLoaded: (response) ->
-      loaded_session = response.session
-      current_session = @current_session
-
-      if current_session and current_session.id == loaded_session.id
-        @session = current_session
-      else
-        @session = loaded_session
-
+      @session = response.session
       @setCurrentSession @session
-      @$forceUpdate()
 
     forceReload: ->
       localStorage.clear()

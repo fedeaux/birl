@@ -1,7 +1,7 @@
 class Entry < ApplicationRecord
   belongs_to :progression, counter_cache: true, touch: true
   before_save :copy_progression_details
-  after_create :update_progression
+  after_commit :update_progression_last_entry_at
 
   def copy_progression_details
     return if self.variables
@@ -9,7 +9,7 @@ class Entry < ApplicationRecord
     self.variables = progression.details
   end
 
-  def update_progression
-    progression.update(last_entry_at: Time.now)
+  def update_progression_last_entry_at
+    progression.update_last_entry_at
   end
 end

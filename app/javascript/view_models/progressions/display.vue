@@ -1,7 +1,11 @@
 <template lang="pug">
 .entity-display(v-if="progression")
-  .entity-display-main
+  .entity-display-main(:class='klass')
     | {{ progression.exercise_name }}
+
+    template(v-if='progression.done_today')
+      | &nbsp;
+      i.checkmark.small.icon
 
   .entity-display-detail
     | {{ progression.challenge_name }}
@@ -36,4 +40,8 @@
         event.preventDefault()
         event.stopPropagation()
         @$emit 'action', event
+
+   computed:
+     klass: ->
+       return 'text-green' if @progression.done_today
 </script>

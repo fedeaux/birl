@@ -19,6 +19,8 @@ class Session extends BaseModel
       complete: {}
       started: {}
       updated_at: { type: moment }
+      done_today: {}
+      started_today: {}
     }
 
 export default Session

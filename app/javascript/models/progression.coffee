@@ -23,6 +23,7 @@ class Progression extends BaseModel
       entries_count: {}
       exercise_name: {}
       challenge_name: {}
+      done_today: {}
     }
 
 export default Progression

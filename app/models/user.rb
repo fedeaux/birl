@@ -14,9 +14,12 @@ class User < ApplicationRecord
     trainings.first
   end
 
+  def todays_weekday_in_timezone
+    DateTime.now.in_time_zone(timezone).wday
+  end
+
   def sessions_on_this_weekday
-    weekday = Date.today.wday
-    current_training.sessions.where(weekday: weekday)
+    current_training.sessions.where(weekday: todays_weekday_in_timezone)
   end
 
   def current_session

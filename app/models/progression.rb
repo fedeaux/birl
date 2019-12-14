@@ -22,4 +22,12 @@ class Progression < ApplicationRecord
 
     name.split('-').last.strip
   end
+
+  def done_today
+    last_entry_at && last_entry_at > 12.hours.ago
+  end
+
+  def update_last_entry_at
+    update last_entry_at: entries.maximum(:created_at)
+  end
 end

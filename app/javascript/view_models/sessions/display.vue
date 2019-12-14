@@ -1,7 +1,11 @@
 <template lang="pug">
 .entity-display(v-if="session")
-  .entity-display-main
+  .entity-display-main(:class='klass')
     | {{ session.name }}
+
+    template(v-if='session.done_today')
+      | &nbsp;
+      i.checkmark.small.icon
 
   .entity-display-detail
     | {{ session.human_weekday }}
@@ -24,4 +28,8 @@
         event.preventDefault()
         event.stopPropagation()
         @$emit 'action', event
+
+   computed:
+     klass: ->
+       return 'text-green' if @session.done_today
 </script>

@@ -12,7 +12,8 @@ errors = []
 
   user.assign_attributes user_attributes.merge(
                            password: password,
-                           password_confirmation: password
+                           password_confirmation: password,
+                           timezone: 'Brasilia'
                          )
 
   if user.save

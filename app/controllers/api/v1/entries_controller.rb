@@ -1,14 +1,13 @@
 class Api::V1::EntriesController < Api::V1::ApiController
   before_action :set_entry, only: [:show, :update, :destroy]
-  after_action :touch_current_session, only: [:show, :update, :destroy]
 
   def index
     return unless params[:progression_id]
+
     @entries = Entry.where(progression_id: params[:progression_id]).order('created_at DESC')
   end
 
-  def show
-  end
+  def show; end
 
   def update
     if @entry.update(entry_params)
@@ -32,10 +31,6 @@ class Api::V1::EntriesController < Api::V1::ApiController
   end
 
   private
-
-  def touch_current_session
-    current_user.current_session&.touch
-  end
 
   def set_entry
     @entry = Entry.find(params[:id])

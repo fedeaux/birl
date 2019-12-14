@@ -30,7 +30,5 @@ module Birl2
       g.javascripts     false
       g.helper          false
     end
-
-    config.timezone = 'Brasilia'
   end
 end

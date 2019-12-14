@@ -22,28 +22,30 @@
       value: ''
 
     data: ->
-      repetitions: [0, 0, 0]
+      repetitions: [1, 1, 1]
 
     methods:
       addRepetition: ->
         @repetitions.push 5
-        @$emit 'input', @repetitions.join '/'
 
       removeRepetition: (index) ->
         @repetitions.splice(index, 1)
-        @$emit 'input', @repetitions.join '/'
 
       increase: (index) ->
         value = parseInt @repetitions[index]
         Vue.set @repetitions, index, value + 1
-        @$emit 'input', @repetitions.join '/'
 
       decrease: (index) ->
         value = parseInt @repetitions[index]
         Vue.set @repetitions, index, value - 1
-        @$emit 'input', @repetitions.join '/'
 
     watch:
+      repetitions:
+        immediate: true
+        handler: ->
+          as_string = @repetitions.join '/'
+          return if as_string == @value
+          @$emit 'input', as_string
 
       value:
         immediate: true
@@ -52,5 +54,5 @@
             @repetitions = @value.split '/'
             return
 
-          @repetitions = [0, 0, 0]
+          @repetitions = [1, 1, 1]
 </script>

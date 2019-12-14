@@ -5,9 +5,11 @@
       router-link.entity-show-header-actions(:to='session.editPath()')
         i.edit.icon
 
-  .default-container(v-if='session.complete')
+  .default-container(v-if='session.done_today')
+    br
     .ui.green.message
       | Completed! Good work :)
+    br
 
   progressions-manager(:parent_progressions='session.progressions')
 
@@ -17,8 +19,11 @@
         i.refresh.icon
         |  Force Reload
 
-      .ui.fluid.primary.icon.button(@click='startSession' v-if='!session.started')
-        | Start
+      .ui.fluid.primary.icon.button(@click='executeNextProgression' v-if='!session.done_today')
+        template(v-if='session.started_today')
+          | Continue
+        template(v-else)
+          | Start
         | &nbsp;
         i.play.icon
 </template>
@@ -42,10 +47,12 @@ export default
     sessionLoaded: (response) ->
       @session = response.session
 
-    startSession: ->
-      @session.started = true
+    executeNextProgression: ->
       @setCurrentSession @session
-      @$router.push @session.progressions[0].path()
+      for progression in @session.progressions
+        unless progression.done_today
+          @$router.push progression.path()
+          return
 
   mounted: ->
     if @parent_session

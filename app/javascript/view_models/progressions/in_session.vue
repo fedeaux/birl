@@ -34,9 +34,10 @@ export default
 
   methods:
     finishSession: ->
-      return unless @current_session
-      @current_session.complete = true
-      @setCurrentSession @current_session
+      if @current_session
+        @$router.push @current_session.path()
+        return
+
       @$router.push '/'
 
   watch:
