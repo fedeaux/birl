@@ -1,6 +1,6 @@
 <template lang="pug">
 .entity-index.session_progressions-index.default-container
-  session_progressions-list(:session_progressions='session_progressions')
+  session_progressions-manager(:session_progressions='session_progressions')
 </template>
 
 <script lang="coffee">
