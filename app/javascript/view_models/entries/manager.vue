@@ -5,12 +5,16 @@
                  @save='saveFormEntry()'
                  @cancel='clearFormEntry()')
 
-
   .entity-manager-list(v-else)
-    #new-entry-button.ui.primary.top.attached.fluid.small.icon.button(@click='newEntry')
-      | Add
+    .entity-manager-list-header
+      #new-entry-button.ui.primary.top.attached.fluid.small.icon.button(@click='newEntry')
+        i.plus.icon
+        |  Add
 
-    entries-list(:entries='entries' @edit='editEntry($event)' @destroy='destroyEntry($event)')
+    entries-list(:entries='entries'
+                 :allow_actions='true'
+                 @edit='editEntry($event)'
+                 @destroy='destroyEntry($event)')
 </template>
 
 <script lang="coffee">
@@ -22,8 +26,10 @@ export default
     context:
       default: -> {}
 
+    parent_entries: null
+
   data: ->
-    entries: -> []
+    entries: null
     form_entry: null
 
   methods:
@@ -42,19 +48,18 @@ export default
         @newEntry()
 
     newEntry: ->
-      last_entry = @entries[0]
-
-      if last_entry
-        @setFormEntry new Entry _.extend {}, @context, { values: last_entry.values }
+      if !@entries or @entries.length == 0
+        @setFormEntry new Entry @context
         return
 
-      @setFormEntry new Entry @context
+      last_entry = @entries[0]
+
+      @setFormEntry new Entry _.extend {}, @context, { values: last_entry.values }
 
     setFormEntry: (@form_entry) ->
 
     clearFormEntry: ->
       @setFormEntry null
-
 
     entryIndex: (entry_id) ->
       for index, entry of @entries
@@ -69,7 +74,7 @@ export default
       index = @entryIndex entry.id
 
       if index == -1
-        @entries.push entry
+        @entries.unshift entry
         return
 
       Vue.set @entries, index, entry
@@ -82,6 +87,15 @@ export default
       index = @entryIndex data.entry.id
       return if index == -1
       @entries.splice index, 1
+
+  mounted: ->
+    @entries_resource = new EntriesResource
+
+    if @parent_entries
+      @entries = @parent_entries
+      return
+
+    @loadEntries()
 
   watch:
     context:

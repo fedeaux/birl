@@ -6,10 +6,15 @@
                    @cancel='clearFormExercise()')
 
   .entity-manager-list(v-else)
-    #new-exercise-button.ui.primary.top.attached.fluid.small.icon.button(@click='newExercise')
-      | Add
+    .entity-manager-list-header
+      #new-exercise-button.ui.primary.top.attached.fluid.small.icon.button(@click='newExercise')
+        i.plus.icon
+        |  Add
 
-    exercises-list(:exercises='exercises')
+    exercises-list(:exercises='exercises'
+                   :allow_actions='true'
+                   @edit='editExercise($event)'
+                   @destroy='destroyExercise($event)')
 </template>
 
 <script lang="coffee">
@@ -21,11 +26,19 @@ export default
     context:
       default: -> {}
 
+    parent_exercises: null
+
   data: ->
     exercises: null
     form_exercise: null
 
   methods:
+    editExercise: (data) ->
+      @setFormExercise data.exercise
+
+    destroyExercise: (data) ->
+      @exercises_resource.destroy data.exercise, @exerciseRemoved
+
     loadExercises: ->
       @exercises_resource.index @exercisesLoaded, @context
 
@@ -33,7 +46,7 @@ export default
       @exercises = response.exercises
 
     newExercise: ->
-      @setFormExercise new Exercise(@context)
+      @setFormExercise new Exercise @context
 
     setFormExercise: (@form_exercise) ->
 
@@ -60,8 +73,19 @@ export default
 
     exerciseSaved: (data) ->
       @addExercise data.exercise
+      @clearFormExercise()
+
+    exerciseRemoved: (data) ->
+      index = @exerciseIndex data.exercise.id
+      return if index == -1
+      @exercises.splice index, 1
 
   mounted: ->
     @exercises_resource = new ExercisesResource
+
+    if @parent_exercises
+      @exercises = @parent_exercises
+      return
+
     @loadExercises()
 </script>

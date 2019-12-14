@@ -6,8 +6,10 @@
     <%= plural_underscore_name_as_spaces %>      @cancel='clearForm<%= entity_name %>()')
 
   .entity-manager-list(v-else)
-    #new-<%= underscore_name %>-button.ui.primary.top.attached.fluid.small.icon.button(@click='new<%= entity_name %>')
-      | Add
+    .entity-manager-list-header
+      #new-<%= underscore_name %>-button.ui.primary.top.attached.fluid.small.icon.button(@click='new<%= entity_name %>')
+        i.plus.icon
+        |  Add
 
     <%= plural_underscore_name %>-list(:<%= plural_underscore_name %>='<%= plural_underscore_name %>'
     <%= plural_underscore_name_as_spaces %>      :allow_actions='true'
@@ -23,6 +25,8 @@ export default
   props:
     context:
       default: -> {}
+
+    parent_<%= plural_underscore_name %>: null
 
   data: ->
     <%= plural_underscore_name %>: null
@@ -78,5 +82,10 @@ export default
 
   mounted: ->
     @<%= plural_underscore_name %>_resource = new <%= plural_entity_name %>Resource
+
+    if @parent_<%= plural_underscore_name %>
+      @<%= plural_underscore_name %> = @parent_<%= plural_underscore_name %>
+      return
+
     @load<%= plural_entity_name %>()
 </script>

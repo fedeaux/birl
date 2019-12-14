@@ -16,4 +16,10 @@ class Progression < ApplicationRecord
 
     name.split('-').first.strip
   end
+
+  def challenge_name
+    return nil unless name
+
+    name.split('-').last.strip
+  end
 end

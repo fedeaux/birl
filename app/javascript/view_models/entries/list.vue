@@ -3,7 +3,7 @@
   entries-list-item(v-for='entry in entries'
                     v-if='entries'
                     :entry='entry'
-                    :controls='controls'
+                    :allow_actions='allow_actions'
                     :key='entry.id'
                     @edit='$emit("edit", { entry: entry })'
                     @destroy='$emit("destroy", { entry: entry })')
@@ -14,7 +14,7 @@
 <script lang="coffee">
 export default
   props:
-    controls:
+    allow_actions:
       default: false
 
     entries:

@@ -6,8 +6,10 @@
                     @cancel='clearFormChallenge()')
 
   .entity-manager-list(v-else)
-    #new-challenge-button.ui.primary.top.attached.fluid.small.icon.button(@click='newChallenge')
-      | Add
+    .entity-manager-list-header
+      #new-challenge-button.ui.primary.top.attached.fluid.small.icon.button(@click='newChallenge')
+        i.plus.icon
+        |  Add
 
     challenges-list(:challenges='challenges'
                     :allow_actions='true'
@@ -23,6 +25,8 @@ export default
   props:
     context:
       default: -> {}
+
+    parent_challenges: null
 
   data: ->
     challenges: null
@@ -78,5 +82,10 @@ export default
 
   mounted: ->
     @challenges_resource = new ChallengesResource
+
+    if @parent_challenges
+      @challenges = @parent_challenges
+      return
+
     @loadChallenges()
 </script>

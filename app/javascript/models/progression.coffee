@@ -22,6 +22,7 @@ class Progression extends BaseModel
       last_entry_at: { type: moment }
       entries_count: {}
       exercise_name: {}
+      challenge_name: {}
     }
 
 export default Progression

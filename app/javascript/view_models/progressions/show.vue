@@ -5,10 +5,9 @@
       router-link.entity-show-header-actions(:to='progression.editPath()')
         i.edit.icon
 
-    .entity-show-subheader Entries
-    entries-manager(:context='{ progression_id: progression_id }')
+  entries-manager(:context='{ progression_id: progression_id }')
 
-    progressions-in-session(:current_progression_id='progression_id')
+  progressions-in-session(:current_progression_id='progression_id')
 </template>
 
 <script lang="coffee">

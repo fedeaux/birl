@@ -6,10 +6,15 @@
                   @cancel='clearFormSession()')
 
   .entity-manager-list(v-else)
-    #new-session-button.ui.primary.top.attached.fluid.small.icon.button(@click='newSession')
-      | Add
+    .entity-manager-list-header
+      #new-session-button.ui.primary.top.attached.fluid.small.icon.button(@click='newSession')
+        i.plus.icon
+        |  Add
 
-    sessions-list(:sessions='sessions')
+    sessions-list(:sessions='sessions'
+                  :allow_actions='true'
+                  @edit='editSession($event)'
+                  @destroy='destroySession($event)')
 </template>
 
 <script lang="coffee">
@@ -21,11 +26,19 @@ export default
     context:
       default: -> {}
 
+    parent_sessions: null
+
   data: ->
     sessions: null
     form_session: null
 
   methods:
+    editSession: (data) ->
+      @setFormSession data.session
+
+    destroySession: (data) ->
+      @sessions_resource.destroy data.session, @sessionRemoved
+
     loadSessions: ->
       @sessions_resource.index @sessionsLoaded, @context
 
@@ -33,7 +46,7 @@ export default
       @sessions = response.sessions
 
     newSession: ->
-      @setFormSession new Session(@context)
+      @setFormSession new Session @context
 
     setFormSession: (@form_session) ->
 
@@ -60,8 +73,19 @@ export default
 
     sessionSaved: (data) ->
       @addSession data.session
+      @clearFormSession()
+
+    sessionRemoved: (data) ->
+      index = @sessionIndex data.session.id
+      return if index == -1
+      @sessions.splice index, 1
 
   mounted: ->
     @sessions_resource = new SessionsResource
+
+    if @parent_sessions
+      @sessions = @parent_sessions
+      return
+
     @loadSessions()
 </script>

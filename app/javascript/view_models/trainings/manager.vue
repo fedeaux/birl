@@ -6,10 +6,15 @@
                    @cancel='clearFormTraining()')
 
   .entity-manager-list(v-else)
-    #new-training-button.ui.primary.top.attached.fluid.small.icon.button(@click='newTraining')
-      | Add
+    .entity-manager-list-header
+      #new-training-button.ui.primary.top.attached.fluid.small.icon.button(@click='newTraining')
+        i.plus.icon
+        |  Add
 
-    trainings-list(:trainings='trainings')
+    trainings-list(:trainings='trainings'
+                   :allow_actions='true'
+                   @edit='editTraining($event)'
+                   @destroy='destroyTraining($event)')
 </template>
 
 <script lang="coffee">
@@ -21,11 +26,19 @@ export default
     context:
       default: -> {}
 
+    parent_trainings: null
+
   data: ->
     trainings: null
     form_training: null
 
   methods:
+    editTraining: (data) ->
+      @setFormTraining data.training
+
+    destroyTraining: (data) ->
+      @trainings_resource.destroy data.training, @trainingRemoved
+
     loadTrainings: ->
       @trainings_resource.index @trainingsLoaded, @context
 
@@ -33,7 +46,7 @@ export default
       @trainings = response.trainings
 
     newTraining: ->
-      @setFormTraining new Training(@context)
+      @setFormTraining new Training @context
 
     setFormTraining: (@form_training) ->
 
@@ -60,8 +73,19 @@ export default
 
     trainingSaved: (data) ->
       @addTraining data.training
+      @clearFormTraining()
+
+    trainingRemoved: (data) ->
+      index = @trainingIndex data.training.id
+      return if index == -1
+      @trainings.splice index, 1
 
   mounted: ->
     @trainings_resource = new TrainingsResource
+
+    if @parent_trainings
+      @trainings = @parent_trainings
+      return
+
     @loadTrainings()
 </script>

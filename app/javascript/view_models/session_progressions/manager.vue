@@ -6,10 +6,15 @@
                               @cancel='clearFormSessionProgression()')
 
   .entity-manager-list(v-else)
-    #new-session_progression-button.ui.primary.top.attached.fluid.small.icon.button(@click='newSessionProgression')
-      | Add
+    .entity-manager-list-header
+      #new-session_progression-button.ui.primary.top.attached.fluid.small.icon.button(@click='newSessionProgression')
+        i.plus.icon
+        |  Add
 
-    session_progressions-list(:session_progressions='session_progressions')
+    session_progressions-list(:session_progressions='session_progressions'
+                              :allow_actions='true'
+                              @edit='editSessionProgression($event)'
+                              @destroy='destroySessionProgression($event)')
 </template>
 
 <script lang="coffee">
@@ -21,11 +26,19 @@ export default
     context:
       default: -> {}
 
+    parent_session_progressions: null
+
   data: ->
     session_progressions: null
     form_session_progression: null
 
   methods:
+    editSessionProgression: (data) ->
+      @setFormSessionProgression data.session_progression
+
+    destroySessionProgression: (data) ->
+      @session_progressions_resource.destroy data.session_progression, @sessionProgressionRemoved
+
     loadSessionProgressions: ->
       @session_progressions_resource.index @session_progressionsLoaded, @context
 
@@ -33,7 +46,7 @@ export default
       @session_progressions = response.session_progressions
 
     newSessionProgression: ->
-      @setFormSessionProgression new SessionProgression(@context)
+      @setFormSessionProgression new SessionProgression @context
 
     setFormSessionProgression: (@form_session_progression) ->
 
@@ -60,8 +73,19 @@ export default
 
     sessionProgressionSaved: (data) ->
       @addSessionProgression data.session_progression
+      @clearFormSessionProgression()
+
+    sessionProgressionRemoved: (data) ->
+      index = @session_progressionIndex data.session_progression.id
+      return if index == -1
+      @session_progressions.splice index, 1
 
   mounted: ->
     @session_progressions_resource = new SessionProgressionsResource
+
+    if @parent_session_progressions
+      @session_progressions = @parent_session_progressions
+      return
+
     @loadSessionProgressions()
 </script>

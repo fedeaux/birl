@@ -8,6 +8,9 @@
       |  {{ entry.variables }}
       |  &middot;
     |  {{ entry.created_at.fromNow() }}
+    template(v-if='entry.observations')
+      |  &middot;
+      |  {{ entry.observations }}
 
   .entity-display-actions(v-if='allow_actions' @click='action($event)')
     slot
