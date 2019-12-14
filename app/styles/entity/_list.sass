@@ -22,36 +22,14 @@
       font-size: 0.8em
       margin-top: .45em
 
+    &:first-child
+      .entity-list-item
+        padding: 0
+
     .entity-list-item
       padding: $d 0
-      position: relative
       display: block
-
-      .entity-list-item-detail
-        @extend .detail
-        display: block
-        margin-top: $d
-
-      .entity-list-item-actions-wrapper
-        position: absolute
-        top: $d
-        right: -$d2
-
-        .entity-list-item-actions
-          +box-shadow
-          position: absolute
-          top: 0
-          right: 0
-          z-index: 1000
-          background-color: white
-
-          .item
-            text-align: right
-            color: inherit !important
-            cursor: pointer
-
-            .icon
-              margin-left: $d
+      font-size: 1rem
 
     .entity-list-item-divider
       border: none
@@ -64,8 +42,8 @@
       letter-spacing: 0.7px
       line-height: $d
       margin-bottom: $d
-      margin-left: 0px
-      margin-right: 0px
+      margin-left: 0
+      margin-right: 0
       margin-top: $d
       text-size-adjust: 100%
       text-transform: uppercase
@@ -73,4 +51,4 @@
       width: 100%
       -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
       /* background-image: linear-gradient(to right, $main-red-opc-2, $main-red-opc-2, $main-red-opc-1, $main-red-opc-1, $main-red-opc-1, transparent, transparent)
-      background-color: $main-red-opc-2
+      background-color: $main-red-opc-1

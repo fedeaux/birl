@@ -34,10 +34,10 @@
           |  Cancel
 
   .entity-list-item.session-list-item(v-if='!confirming_destroy && !showing_actions')
-    sessions-list-item-contents(:session='session')
-
-    .entity-list-item-actions-wrapper(v-if='allow_actions')
-      i.ellipsis.vertical.icon(@click='showActions($event)')
+    sessions-display(:session='session'
+                     :allow_actions='allow_actions'
+                     @click='showActions($event)')
+      i.ellipsis.vertical.icon()
 
   entity-list-item-divider
 </template>
@@ -54,7 +54,7 @@ export default
       required: true
 
     allow_actions:
-      default: false
+      default: true
 
   methods:
     confirmDestroy: ->
