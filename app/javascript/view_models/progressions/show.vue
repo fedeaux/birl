@@ -7,7 +7,7 @@
 
   entries-manager(:context='{ progression_id: progression_id }', :auto_add_new='!progression.done_today')
 
-  shared-footer
+  shared-footer(v-if='current_session')
     progressions-in-session(:current_progression_id='progression_id')
 </template>
 
@@ -28,7 +28,6 @@ export default
 
     progressionLoaded: (response) ->
       @progression = response.progression
-      console.log @progression
 
   mounted: ->
     if @parent_progression

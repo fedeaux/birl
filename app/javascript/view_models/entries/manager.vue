@@ -46,7 +46,6 @@ export default
     entriesLoaded: (response) ->
       @entries = response.entries
 
-      console.log '@auto_add_new', @auto_add_new
       return unless @auto_add_new
 
       @$nextTick ->
