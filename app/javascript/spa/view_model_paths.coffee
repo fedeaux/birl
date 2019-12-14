@@ -1,7 +1,7 @@
 # TODO: Auto generate paths
 
 entities = ['groups', 'exercises', 'challenges', 'progressions', 'entries', 'trainings', 'sessions']
-views = ['show', 'index', 'list', 'list/item', 'list/item/contents', 'form', 'new', 'edit', 'select', 'manager']
+views = ['show', 'index', 'display', 'list', 'list/item', 'form', 'new', 'edit', 'select', 'manager']
 
 paths = [
   'shared/footer'
@@ -9,7 +9,6 @@ paths = [
   'entity/list/item/divider'
   'progressions/in_session'
   'entries/form/reps_picker'
-  'sessions/display'
 ]
 
 for entity in entities

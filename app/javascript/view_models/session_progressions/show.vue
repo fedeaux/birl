@@ -1,12 +1,9 @@
 <template lang="pug">
 .entity-show-wrapper.session_progressions-show-wrapper.default-container(v-if='session_progression')
   .entity-show.session_progressions-show
-    h1.entity-show-header
-      | {{ session_progression.name }}
-
+    session_progressions-display(:session_progression='session_progression')
       router-link.entity-show-header-actions(:to='session_progression.editPath()')
         i.edit.icon
-
 </template>
 
 <script lang="coffee">

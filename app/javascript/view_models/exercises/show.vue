@@ -1,18 +1,12 @@
 <template lang="pug">
 .entity-show-wrapper.exercises-show-wrapper.default-container(v-if='exercise')
   .entity-show.exercises-show
-    h1.entity-show-header
-      | {{ exercise.name }}
-
+    exercises-display(:exercise='exercise')
       router-link.entity-show-header-actions(:to='exercise.editPath()')
         i.edit.icon
 
-  br
-  br
-
-  .entity-show-subheader Progressions
-  progressions-manager(v-if='exercise_id' :context='{ exercise_id: exercise_id }' :allow_actions='true')
-
+    .entity-show-subheader Progressions
+    progressions-manager(v-if='exercise_id' :context='{ exercise_id: exercise_id }' :allow_actions='true')
 </template>
 
 <script lang="coffee">

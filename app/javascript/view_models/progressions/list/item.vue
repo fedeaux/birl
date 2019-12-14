@@ -33,11 +33,12 @@
           i.cancel.icon
           |  Cancel
 
-  .entity-list-item.progression-list-item(v-if='!confirming_destroy && !showing_actions')
-    progressions-list-item-contents(:progression='progression')
-
-    .entity-list-item-actions-wrapper(v-if='allow_actions')
-      i.ellipsis.vertical.icon(@click='showActions($event)')
+  router-link.entity-list-item.progression-list-item(v-if='!confirming_destroy && !showing_actions'
+                                                 :to='progression.path()')
+    progressions-display(:progression='progression'
+                     :allow_actions='allow_actions'
+                     @action='showActions')
+      i.ellipsis.vertical.icon
 
   entity-list-item-divider
 </template>
@@ -64,10 +65,9 @@ export default
     cancelDestroy: ->
       @confirming_destroy = false
 
-    showActions: ($event) ->
+    showActions: ->
       @showing_actions = true
       @confirming_destroy = false
-      $event.stopPropagation()
 
     hideActions: ->
       @showing_actions = false

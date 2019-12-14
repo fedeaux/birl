@@ -33,11 +33,12 @@
           i.cancel.icon
           |  Cancel
 
-  .entity-list-item.session-list-item(v-if='!confirming_destroy && !showing_actions')
+  router-link.entity-list-item.session-list-item(v-if='!confirming_destroy && !showing_actions'
+                                                 :to='session.path()')
     sessions-display(:session='session'
                      :allow_actions='allow_actions'
-                     @click='showActions($event)')
-      i.ellipsis.vertical.icon()
+                     @action='showActions')
+      i.ellipsis.vertical.icon
 
   entity-list-item-divider
 </template>
@@ -54,7 +55,7 @@ export default
       required: true
 
     allow_actions:
-      default: true
+      default: false
 
   methods:
     confirmDestroy: ->
@@ -64,10 +65,9 @@ export default
     cancelDestroy: ->
       @confirming_destroy = false
 
-    showActions: ($event) ->
+    showActions: ->
       @showing_actions = true
       @confirming_destroy = false
-      $event.stopPropagation()
 
     hideActions: ->
       @showing_actions = false

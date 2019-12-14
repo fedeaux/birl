@@ -1,10 +1,12 @@
 <template lang="pug">
-.entity-display(v-if="session")
+.entity-display(v-if="session_progression")
   .entity-display-main
-    | {{ session.name }}
+    | {{ session_progression.name }}
 
   .entity-display-detail
-    | {{ session.human_weekday }}
+    | detail1
+    | &middot;
+    | detail2
 
   .entity-display-actions(v-if='allow_actions' @click='action($event)')
     slot
@@ -13,7 +15,7 @@
 <script lang="coffee">
   export default
     props:
-      session:
+      session_progression:
         required: true
 
       allow_actions:

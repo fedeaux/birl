@@ -1,10 +1,13 @@
 <template lang="pug">
-.entity-display(v-if="session")
+.entity-display(v-if="entry")
   .entity-display-main
-    | {{ session.name }}
+    | {{ entry.values }}
 
   .entity-display-detail
-    | {{ session.human_weekday }}
+    template(v-if='entry.variables')
+      |  {{ entry.variables }}
+      |  &middot;
+    |  {{ entry.created_at.fromNow() }}
 
   .entity-display-actions(v-if='allow_actions' @click='action($event)')
     slot
@@ -13,7 +16,7 @@
 <script lang="coffee">
   export default
     props:
-      session:
+      entry:
         required: true
 
       allow_actions:

@@ -1,23 +1,14 @@
 <template lang="pug">
 .entity-show-wrapper.progressions-show-wrapper.default-container(v-if='progression')
   .entity-show.progressions-show
-    h1.entity-show-header
-      | {{ progression.name }}
-
+    progressions-display(:progression='progression')
       router-link.entity-show-header-actions(:to='progression.editPath()')
         i.edit.icon
-
-    p.centered
-      | {{ progression.details }}
-
-    br
-    br
 
     .entity-show-subheader Entries
     entries-manager(:context='{ progression_id: progression_id }')
 
     progressions-in-session(:current_progression_id='progression_id')
-
 </template>
 
 <script lang="coffee">
@@ -38,14 +29,6 @@ export default
     progressionLoaded: (response) ->
       @progression = response.progression
 
-  watch:
-    '$route.params.id':
-      immediate: true
-      handler: ->
-        @progressions_resource ?= new ProgressionsResource
-        @progression_id = parseInt @$route.params.id
-        @loadProgression()
-
   mounted: ->
     if @parent_progression
       @progression = @parent_progression
@@ -54,4 +37,13 @@ export default
     @progressions_resource = new ProgressionsResource
     @progression_id = @$route.params.id
     @loadProgression()
+
+
+  watch:
+    '$route.params.id':
+      immediate: true
+      handler: ->
+        @progressions_resource ?= new ProgressionsResource
+        @progression_id = parseInt @$route.params.id
+        @loadProgression()
 </script>

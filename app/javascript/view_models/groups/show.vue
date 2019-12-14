@@ -1,12 +1,9 @@
 <template lang="pug">
 .entity-show-wrapper.groups-show-wrapper.default-container(v-if='group')
   .entity-show.groups-show
-    h1.entity-show-header
-      | {{ group.name }}
-
+    groups-display(:group='group')
       router-link.entity-show-header-actions(:to='group.editPath()')
         i.edit.icon
-
 </template>
 
 <script lang="coffee">

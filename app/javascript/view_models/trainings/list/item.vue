@@ -33,11 +33,12 @@
           i.cancel.icon
           |  Cancel
 
-  .entity-list-item.training-list-item(v-if='!confirming_destroy && !showing_actions')
-    trainings-list-item-contents(:training='training')
-
-    .entity-list-item-actions-wrapper(v-if='allow_actions')
-      i.ellipsis.vertical.icon(@click='showActions($event)')
+  router-link.entity-list-item.training-list-item(v-if='!confirming_destroy && !showing_actions'
+                                                 :to='training.path()')
+    trainings-display(:training='training'
+                     :allow_actions='allow_actions'
+                     @action='showActions')
+      i.ellipsis.vertical.icon
 
   entity-list-item-divider
 </template>
@@ -64,10 +65,9 @@ export default
     cancelDestroy: ->
       @confirming_destroy = false
 
-    showActions: ($event) ->
+    showActions: ->
       @showing_actions = true
       @confirming_destroy = false
-      $event.stopPropagation()
 
     hideActions: ->
       @showing_actions = false

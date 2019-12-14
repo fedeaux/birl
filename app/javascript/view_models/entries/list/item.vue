@@ -33,11 +33,12 @@
           i.cancel.icon
           |  Cancel
 
-  .entity-list-item.entry-list-item(v-if='!confirming_destroy && !showing_actions')
-    entries-list-item-contents(:entry='entry')
-
-    .entity-list-item-actions-wrapper
-      i.ellipsis.vertical.icon(@click='showActions($event)')
+  router-link.entity-list-item.entry-list-item(v-if='!confirming_destroy && !showing_actions'
+                                                 :to='entry.path()')
+    entries-display(:entry='entry'
+                     :allow_actions='allow_actions'
+                     @action='showActions')
+      i.ellipsis.vertical.icon
 
   entity-list-item-divider
 </template>
@@ -53,6 +54,9 @@ export default
     entry:
       required: true
 
+    allow_actions:
+      default: false
+
   methods:
     confirmDestroy: ->
       @confirming_destroy = true
@@ -61,10 +65,9 @@ export default
     cancelDestroy: ->
       @confirming_destroy = false
 
-    showActions: ($event) ->
+    showActions: ->
       @showing_actions = true
       @confirming_destroy = false
-      $event.stopPropagation()
 
     hideActions: ->
       @showing_actions = false

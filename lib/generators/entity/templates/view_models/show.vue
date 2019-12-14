@@ -1,12 +1,9 @@
 <template lang="pug">
 .entity-show-wrapper.<%= plural_underscore_name %>-show-wrapper.default-container(v-if='<%= underscore_name %>')
   .entity-show.<%= plural_underscore_name %>-show
-    h1.entity-show-header
-      | {{ <%= underscore_name %>.name }}
-
+    <%= plural_underscore_name %>-display(:<%= underscore_name %>='<%= underscore_name %>')
       router-link.entity-show-header-actions(:to='<%= underscore_name %>.editPath()')
         i.edit.icon
-
 </template>
 
 <script lang="coffee">
