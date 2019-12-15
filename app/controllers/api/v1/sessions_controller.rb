@@ -2,11 +2,11 @@ class Api::V1::SessionsController < Api::V1::ApiController
   before_action :set_session, only: %i[show update]
 
   def index
-    @sessions = current_user.current_training.sessions.order(:weekday)
+    @sessions = current_context.current_training.sessions.order(:weekday)
   end
 
   def today
-    @session = current_user.current_session
+    @session = current_context.current_session
 
     if @session
       render 'show'
@@ -26,7 +26,7 @@ class Api::V1::SessionsController < Api::V1::ApiController
   end
 
   def create
-    @session = current_user.sessions.new session_params
+    @session = current_context.sessions.new session_params
     if @session.save
       render 'show', status: :created
     else
@@ -37,7 +37,7 @@ class Api::V1::SessionsController < Api::V1::ApiController
   private
 
   def set_session
-    @session = current_user.current_training.sessions.find(params[:id])
+    @session = current_context.current_training.sessions.find(params[:id])
   end
 
   def session_params

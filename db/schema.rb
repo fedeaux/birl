@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_15_180246) do
+ActiveRecord::Schema.define(version: 2019_12_15_181331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,10 +60,10 @@ ActiveRecord::Schema.define(version: 2019_12_15_180246) do
 
   create_table "groups", force: :cascade do |t|
     t.string "name"
-    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_groups_on_user_id"
+    t.bigint "context_id"
+    t.index ["context_id"], name: "index_groups_on_context_id"
   end
 
   create_table "progressions", force: :cascade do |t|
@@ -102,10 +102,10 @@ ActiveRecord::Schema.define(version: 2019_12_15_180246) do
 
   create_table "trainings", force: :cascade do |t|
     t.string "name"
-    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_trainings_on_user_id"
+    t.bigint "context_id"
+    t.index ["context_id"], name: "index_trainings_on_context_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -129,11 +129,9 @@ ActiveRecord::Schema.define(version: 2019_12_15_180246) do
   add_foreign_key "contexts", "users"
   add_foreign_key "entries", "progressions"
   add_foreign_key "exercises", "groups"
-  add_foreign_key "groups", "users"
   add_foreign_key "progressions", "challenges"
   add_foreign_key "progressions", "exercises"
   add_foreign_key "session_progressions", "progressions"
   add_foreign_key "session_progressions", "sessions"
   add_foreign_key "sessions", "trainings"
-  add_foreign_key "trainings", "users"
 end

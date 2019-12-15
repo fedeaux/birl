@@ -4,9 +4,7 @@
     | {{ context.name }}
 
   .entity-display-detail
-    | detail1
-    | &middot;
-    | detail2
+    | {{ context.color }}
 
   .entity-display-actions(v-if='allow_actions' @click='action($event)')
     slot

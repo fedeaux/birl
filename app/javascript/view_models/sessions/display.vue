@@ -9,6 +9,9 @@
 
   .entity-display-detail
     | {{ session.human_weekday }}
+    template(v-if='session.last_entry_at')
+    |  &middot;
+    |  {{ session.last_entry_at.fromNow() }}
 
   .entity-display-actions(v-if='allow_actions' @click='action($event)')
     slot

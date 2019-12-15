@@ -1,5 +1,5 @@
 require_relative '../support/training_seeder'
 
-after(:challenges) do
+after('bodybuilding:challenges') do
   TrainingSeeder.new.seed
 end

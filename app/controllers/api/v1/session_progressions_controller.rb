@@ -1,11 +1,12 @@
 class Api::V1::SessionProgressionsController < Api::V1::ApiController
-  before_action :set_session_progression, only: %i[show update]
+  before_action :set_session_progression, only: %i[show update destroy]
 
   def index
-    @session_progressions = current_user.session_progressions
+    @session_progressions = current_context.session_progressions
   end
 
-  def show; end
+  def show
+  end
 
   def update
     if @session_progression.update(session_progression_params)
@@ -16,7 +17,7 @@ class Api::V1::SessionProgressionsController < Api::V1::ApiController
   end
 
   def create
-    @session_progression = current_user.session_progressions.new session_progression_params
+    @session_progression = current_context.session_progressions.new session_progression_params
     if @session_progression.save
       render 'show', status: :created
     else
@@ -24,10 +25,14 @@ class Api::V1::SessionProgressionsController < Api::V1::ApiController
     end
   end
 
+  def destroy
+    @session_progression.destroy
+  end
+
   private
 
   def set_session_progression
-    @session_progression = current_user.session_progressions.find(params[:id])
+    @session_progression = current_context.session_progressions.find(params[:id])
   end
 
   def session_progression_params

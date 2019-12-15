@@ -15,22 +15,7 @@ class User < ApplicationRecord
     contexts.find_by(slug: slug)
   end
 
-  def current_training
-    trainings.first
-  end
-
-  def todays_weekday_in_timezone
-    DateTime.now.in_time_zone(timezone).wday
-  end
-
-  def sessions_on_this_weekday
-    current_training.sessions.where(weekday: todays_weekday_in_timezone)
-  end
-
-  def current_session
-    being_performed_now_session = sessions_on_this_weekday.where('updated_at >= ?', 12.hours.ago).first
-    return being_performed_now_session if being_performed_now_session
-
-    sessions_on_this_weekday.order(:updated_at).first
+  def current_context
+    context 'bodybuilding'
   end
 end

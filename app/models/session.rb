@@ -14,4 +14,8 @@ class Session < ApplicationRecord
   def started_today
     progressions.any?(&:done_today)
   end
+
+  def last_entry_at
+    progressions.maximum :last_entry_at
+  end
 end
