@@ -4,12 +4,14 @@
     sui-loader.massive
 
   sui-sidebar#menu(animation='push' class='inverted' :visible='show_menu' direction='right')
-    router-link.item(to='/') Today's Session
+    router-link.item(to='/today') Today's Session
     router-link.item(to='/sessions') Sessions
     router-link.item(to='/challenges') Challenges
     router-link.item(to='/progressions') Progressions
 
-  #header
+    a.item(@click='updateContext(null)' v-if='current_context') Leave {{ current_context.name }}
+
+  #header.context-dependent-background-color
     .header-button#back-button(@click='back()')
       i.angle.left.icon
 
@@ -22,6 +24,7 @@
 </template>
 
 <script lang="coffee">
+
 export default
   data: ->
     show_menu: false
@@ -36,5 +39,8 @@ export default
 
     back: ->
       @$router.go -1
+
+  created: ->
+    @setInitialUser()
 
 </script>

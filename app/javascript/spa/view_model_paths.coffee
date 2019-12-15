@@ -10,6 +10,7 @@ paths = [
   'progressions/in_session'
   'entries/form/repetitions_picker'
   'entries/form/treadmill_picker'
+  'contexts/choose'
 ]
 
 for entity in entities

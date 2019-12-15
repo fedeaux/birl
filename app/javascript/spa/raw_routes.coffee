@@ -3,6 +3,10 @@
 routes = [
     {
       path: ''
+      view: 'contexts/choose'
+    },
+    {
+      path: 'today'
       view: 'sessions/today'
     }
   ]

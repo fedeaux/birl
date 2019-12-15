@@ -8,7 +8,7 @@ class Context < ApplicationRecord
   has_many :trainings, dependent: :destroy
 
   def current_training
-    trainings.first
+    trainings.last
   end
 
   def todays_weekday_in_timezone

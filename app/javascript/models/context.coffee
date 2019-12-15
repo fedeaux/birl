@@ -12,9 +12,10 @@ class Context extends BaseModel
       name: {}
       slug: {}
       color: {}
-      user: { type: User }
-      user_id: {}
       meta: {}
     }
+
+  backgroundColor: ->
+    { "background-color": @color }
 
 export default Context

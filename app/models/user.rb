@@ -4,18 +4,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :contexts, dependent: :destroy
-  has_many :groups, dependent: :destroy
-  has_many :exercises, dependent: :destroy
-  has_many :challenges, dependent: :destroy
-  has_many :progressions, dependent: :destroy
-  has_many :trainings, dependent: :destroy
+  has_many :contexts
+  belongs_to :current_context, class_name: 'Context', optional: true
 
   def context(slug)
     contexts.find_by(slug: slug)
-  end
-
-  def current_context
-    context 'bodybuilding'
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_15_181331) do
+ActiveRecord::Schema.define(version: 2019_12_15_184039) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -122,6 +122,8 @@ ActiveRecord::Schema.define(version: 2019_12_15_181331) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "timezone"
+    t.bigint "current_context_id"
+    t.index ["current_context_id"], name: "index_users_on_current_context_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -134,4 +136,5 @@ ActiveRecord::Schema.define(version: 2019_12_15_181331) do
   add_foreign_key "session_progressions", "progressions"
   add_foreign_key "session_progressions", "sessions"
   add_foreign_key "sessions", "trainings"
+  add_foreign_key "users", "contexts", column: "current_context_id"
 end

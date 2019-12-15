@@ -15,5 +15,11 @@
 
   <body class="<%= @body_class %>">
     <%= yield %>
+
+    <% if current_user %>
+      <script type="text/json" id="server-json">
+       <%= raw render template: 'api/v1/users/show', locals: { '@user': current_user }, formats: :json %>
+      </script>
+    <% end %>
   </body>
 </html>

@@ -8,6 +8,7 @@ rails g entity session name training:belongs_to
 rails g entity session_progression session:belongs_to progression:belongs_to order:integer
 rails g entity training name context:references
 
+rails g entity user name email current_context:belongs_to -f
 rails g entity context name slug color user:belongs_to meta:jsonb -f
 rails g entity challenge name description context:references -f
 rails g entity entry name progression:references values variables observations:text -f

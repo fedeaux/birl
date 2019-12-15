@@ -3,7 +3,7 @@ after(:users) do
     [
       {
         name: 'Meditation',
-        color: '#b413ec'
+        color: '#A333C8'
       },
       {
         name: 'Bodybuilding',
@@ -11,7 +11,7 @@ after(:users) do
       },
       {
         name: 'Music: Guitar',
-        color: '#b03060'
+        color: '#DB2828'
       }
     ].each do |context_attrs|
       slug = context_attrs[:name].parameterize

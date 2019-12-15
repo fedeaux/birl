@@ -24,10 +24,31 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 store = new Vuex.Store(
   state:
+    current_context: null
     current_session: null
+    current_user: null
     global_loading: false
 
   mutations:
+    setCurrentContext: (state, data) ->
+      state.current_context = data.current_context
+
+      sheet = window.document.styleSheets[0]
+      if state.current_context
+        sheet.insertRule ".context-dependent-background-color, .ui.primary.button { background-color: #{state.current_context.color} !important; }", sheet.cssRules.length
+      else
+        sheet.insertRule ".context-dependent-background-color, .ui.primary.button { background-color: #888 !important; }", sheet.cssRules.length
+
+    setCurrentUser: (state, data) ->
+      state.current_user = data.current_user
+      state.current_context = data.current_user.current_context
+
+      sheet = window.document.styleSheets[0]
+      if state.current_context
+        sheet.insertRule ".context-dependent-background-color, .ui.primary.button { background-color: #{state.current_context.color} !important; }", sheet.cssRules.length
+      else
+        sheet.insertRule ".context-dependent-background-color, .ui.primary.button { background-color: #888 !important; }", sheet.cssRules.length
+
     setCurrentSession: (state, data) ->
       state.current_session = data.current_session
       Global.db.set 'current_session', state.current_session
@@ -75,8 +96,8 @@ $ ->
       router: router,
       store: store,
       render: (h) => h App,
+
       created: ->
         @$store.dispatch 'loadCurrentSession'
         $(document).ajaxStart(@load).ajaxComplete(@loaded)
-
     ).$mount '#birl-spa-container'
