@@ -2,13 +2,14 @@ class Api::V1::ProgressionsController < Api::V1::ApiController
   before_action :set_progression, only: %i[show update destroy]
 
   def index
-    @progressions = current_user.progressions
+    @progressions = current_context.progressions
     return unless params[:exercise_id]
 
     @progressions = @progressions.where(exercise_id: params[:exercise_id])
   end
 
-  def show; end
+  def show
+  end
 
   def update
     if @progression.update(progression_params)
@@ -19,7 +20,7 @@ class Api::V1::ProgressionsController < Api::V1::ApiController
   end
 
   def create
-    @progression = current_user.progressions.new progression_params
+    @progression = current_context.progressions.new progression_params
     if @progression.save
       render 'show', status: :created
     else
@@ -34,11 +35,10 @@ class Api::V1::ProgressionsController < Api::V1::ApiController
   private
 
   def set_progression
-    @progression = current_user.progressions.find(params[:id])
+    @progression = current_context.progressions.find(params[:id])
   end
 
   def progression_params
-    params.require(:progression).permit(:id, :name, :details, :challenge_id, :exercise_id, :last_entry_at)
-          .merge(user_id: current_user.id)
+    params.require(:progression).permit(:id, :name, :details, :context_id, :challenge_id, :exercise_id, :last_entry_at)
   end
 end

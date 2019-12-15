@@ -1,6 +1,5 @@
 import BaseModel from './base_model'
-import User from './user'
-import Exercise from './exercise'
+import Context from './context'
 
 class Group extends BaseModel
   @collection = 'groups'
@@ -11,9 +10,8 @@ class Group extends BaseModel
     {
       id: {}
       name: {}
-      user: { type: User }
-      exercises: { type: Exercise }
-      user_id: {}
+      context: { type: Context }
+      context_id: {}
     }
 
 export default Group

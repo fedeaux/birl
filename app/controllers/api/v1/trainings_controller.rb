@@ -1,11 +1,12 @@
 class Api::V1::TrainingsController < Api::V1::ApiController
-  before_action :set_training, only: %i[show update]
+  before_action :set_training, only: %i[show update destroy]
 
   def index
-    @trainings = current_user.trainings
+    @trainings = current_context.trainings
   end
 
-  def show; end
+  def show
+  end
 
   def update
     if @training.update(training_params)
@@ -16,7 +17,7 @@ class Api::V1::TrainingsController < Api::V1::ApiController
   end
 
   def create
-    @training = current_user.trainings.new training_params
+    @training = current_context.trainings.new training_params
     if @training.save
       render 'show', status: :created
     else
@@ -24,13 +25,17 @@ class Api::V1::TrainingsController < Api::V1::ApiController
     end
   end
 
+  def destroy
+    @training.destroy
+  end
+
   private
 
   def set_training
-    @training = current_user.trainings.find(params[:id])
+    @training = current_context.trainings.find(params[:id])
   end
 
   def training_params
-    params.require(:training).permit(:id, :name, :user_id)
+    params.require(:training).permit(:id, :name, :context_id)
   end
 end

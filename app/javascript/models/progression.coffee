@@ -1,5 +1,5 @@
 import BaseModel from './base_model'
-import User from './user'
+import Context from './context'
 import Challenge from './challenge'
 import Exercise from './exercise'
 
@@ -13,8 +13,8 @@ class Progression extends BaseModel
       id: {}
       name: {}
       details: {}
-      user: { type: User }
-      user_id: {}
+      context: { type: Context }
+      context_id: {}
       challenge: { type: Challenge }
       challenge_id: {}
       exercise: { type: Exercise }

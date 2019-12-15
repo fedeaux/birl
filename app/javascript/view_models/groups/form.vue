@@ -6,6 +6,10 @@
         label Name
         input(type='text' v-model='group.name')
 
+      .field
+        label Context
+        contexts-select(v-model='group.context_id')
+
       .field.ui.fluid.buttons
         .ui.primary.button(@click='save()') Save
         .ui.basic.button(@click='cancel()') Cancel

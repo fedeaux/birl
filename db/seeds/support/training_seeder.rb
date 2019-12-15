@@ -31,7 +31,7 @@ class TrainingSeeder
   end
 
   def seed_training_from_worksheet(worksheet)
-    self.training = Training.where(name: worksheet.title, user_id: user.id).first_or_create
+    self.training = Training.where(name: worksheet.title, context_id: context.id).first_or_create
     training.sessions.destroy_all
 
     session = nil
@@ -68,10 +68,10 @@ class TrainingSeeder
 
   def ensure_progression(signature)
     parts = signature.split('-').map(&:strip)
-    exercise = Exercise.where(name: parts[0], user_id: user.id).first_or_create
+    exercise = Exercise.where(name: parts[0], context_id: context.id).first_or_create
     exercise.update(progression_type: 'repetitions') unless exercise.progression_type
-    challenge = Challenge.where(name: parts[1], user_id: user.id).first_or_create
-    progression = Progression.where(challenge_id: challenge.id, exercise_id: exercise.id, user_id: user.id).first_or_create
+    challenge = Challenge.where(name: parts[1], context_id: context.id).first_or_create
+    progression = Progression.where(challenge_id: challenge.id, exercise_id: exercise.id, context_id: context.id).first_or_create
 
     puts "-> Failed to create exercise #{parts[0]}: #{exercise.errors.messages}" unless exercise.persisted?
     puts "-> Failed to create challenge #{parts[1]}: #{challenge.errors.messages}" unless challenge.persisted?
@@ -82,6 +82,10 @@ class TrainingSeeder
 
   def user
     @user ||= User.find_by(email: 'phec06@gmail.com')
+  end
+
+  def context
+    @context ||= user.context 'bodybuilding'
   end
 
   def training_spreadsheet

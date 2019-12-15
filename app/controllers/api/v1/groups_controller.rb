@@ -1,36 +1,41 @@
 class Api::V1::GroupsController < Api::V1::ApiController
-  before_action :set_group, only: %i[show update]
+  before_action :set_group, only: %i[show update destroy]
 
   def index
-    @groups = current_user.groups
+    @groups = current_context.groups
   end
 
-  def show; end
+  def show
+  end
 
   def update
     if @group.update(group_params)
       render 'show', status: :ok
     else
-      render status: :unprocessable_entuty
+      render 'show', status: :unprocessable_entuty
     end
   end
 
   def create
-    @group = Group.new group_params
+    @group = current_context.groups.new group_params
     if @group.save
       render 'show', status: :created
     else
-      render status: :unprocessable_entuty
+      render 'show', status: :unprocessable_entuty
     end
+  end
+
+  def destroy
+    @group.destroy
   end
 
   private
 
   def set_group
-    @group = Group.find(params[:id])
+    @group = current_context.groups.find(params[:id])
   end
 
   def group_params
-    params.require(:group).permit(:id, :name)
+    params.require(:group).permit(:id, :name, :context_id)
   end
 end

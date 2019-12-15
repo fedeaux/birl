@@ -1,5 +1,5 @@
 import BaseModel from './base_model'
-import User from './user'
+import Context from './context'
 
 class Training extends BaseModel
   @collection = 'trainings'
@@ -10,8 +10,8 @@ class Training extends BaseModel
     {
       id: {}
       name: {}
-      user: { type: User }
-      user_id: {}
+      context: { type: Context }
+      context_id: {}
     }
 
 export default Training

@@ -1,5 +1,5 @@
 class Progression < ApplicationRecord
-  belongs_to :user
+  belongs_to :context
   belongs_to :challenge
   belongs_to :exercise
   belongs_to :session_progression, touch: true, optional: true
