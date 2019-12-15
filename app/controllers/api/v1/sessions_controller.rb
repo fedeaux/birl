@@ -7,7 +7,12 @@ class Api::V1::SessionsController < Api::V1::ApiController
 
   def today
     @session = current_user.current_session
-    render 'show'
+
+    if @session
+      render 'show'
+    else
+      head 404
+    end
   end
 
   def show; end
