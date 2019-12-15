@@ -1,8 +1,8 @@
 class Api::V1::<%= controller_name %> < Api::V1::ApiController
-  before_action :set_<%= underscore_name %>, only: [:show, :update]
+  before_action :set_<%= underscore_name %>, only: %i[show update destroy]
 
   def index
-    @<%= plural_underscore_name %> = current_user.<%= plural_underscore_name %>
+    @<%= plural_underscore_name %> = current_context.<%= plural_underscore_name %>
   end
 
   def show
@@ -17,7 +17,7 @@ class Api::V1::<%= controller_name %> < Api::V1::ApiController
   end
 
   def create
-    @<%= underscore_name %> = current_user.<%= plural_underscore_name %>.new <%= underscore_name %>_params
+    @<%= underscore_name %> = current_context.<%= plural_underscore_name %>.new <%= underscore_name %>_params
     if @<%= underscore_name %>.save
       render 'show', status: :created
     else
@@ -25,10 +25,14 @@ class Api::V1::<%= controller_name %> < Api::V1::ApiController
     end
   end
 
+  def destroy
+    @<%= underscore_name %>.destroy
+  end
+
   private
 
   def set_<%= underscore_name %>
-    @<%= underscore_name %> = current_user.<%= plural_underscore_name %>.find(params[:id])
+    @<%= underscore_name %> = current_context.<%= plural_underscore_name %>.find(params[:id])
   end
 
   def <%= underscore_name %>_params

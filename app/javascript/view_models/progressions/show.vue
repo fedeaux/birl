@@ -9,7 +9,7 @@
                   :auto_add_new='!progression.done_today'
                   :progression_type='progression.progression_type')
 
-  shared-footer(v-if='current_session')
+  shared-footer(v-if='current_session && current_session.progressions')
     progressions-in-session(:current_progression_id='progression_id')
 </template>
 

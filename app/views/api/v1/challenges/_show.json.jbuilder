@@ -1,1 +1,1 @@
-json.extract! challenge, :id, :name, :description, :user_id
+json.extract! challenge, :id, :name, :description, :context_id

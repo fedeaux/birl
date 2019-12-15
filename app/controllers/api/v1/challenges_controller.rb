@@ -2,10 +2,11 @@ class Api::V1::ChallengesController < Api::V1::ApiController
   before_action :set_challenge, only: %i[show update destroy]
 
   def index
-    @challenges = current_user.challenges
+    @challenges = current_context.challenges
   end
 
-  def show; end
+  def show
+  end
 
   def update
     if @challenge.update(challenge_params)
@@ -16,7 +17,7 @@ class Api::V1::ChallengesController < Api::V1::ApiController
   end
 
   def create
-    @challenge = current_user.challenges.new challenge_params
+    @challenge = current_context.challenges.new challenge_params
     if @challenge.save
       render 'show', status: :created
     else
@@ -31,10 +32,10 @@ class Api::V1::ChallengesController < Api::V1::ApiController
   private
 
   def set_challenge
-    @challenge = current_user.challenges.find(params[:id])
+    @challenge = current_context.challenges.find(params[:id])
   end
 
   def challenge_params
-    params.require(:challenge).permit(:id, :name, :description, :user_id)
+    params.require(:challenge).permit(:id, :name, :description, :context_id)
   end
 end

@@ -4,11 +4,16 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :groups
-  has_many :exercises
-  has_many :challenges
-  has_many :progressions
-  has_many :trainings
+  has_many :contexts, dependent: :destroy
+  has_many :groups, dependent: :destroy
+  has_many :exercises, dependent: :destroy
+  has_many :challenges, dependent: :destroy
+  has_many :progressions, dependent: :destroy
+  has_many :trainings, dependent: :destroy
+
+  def context(slug)
+    contexts.find_by(slug: slug)
+  end
 
   def current_training
     trainings.first

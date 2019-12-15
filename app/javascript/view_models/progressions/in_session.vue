@@ -48,7 +48,7 @@ export default
         @prev_progression = null
         passed_current = false
 
-        return unless @current_session
+        return unless @current_session && @current_session.progressions
 
         for progression in @current_session.progressions
           if passed_current

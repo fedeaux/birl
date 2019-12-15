@@ -1,5 +1,5 @@
 import BaseModel from './base_model'
-import User from './user'
+import Context from './context'
 
 class Challenge extends BaseModel
   @collection = 'challenges'
@@ -11,8 +11,8 @@ class Challenge extends BaseModel
       id: {}
       name: {}
       description: {}
-      user: { type: User }
-      user_id: {}
+      context: { type: Context }
+      context_id: {}
     }
 
 export default Challenge

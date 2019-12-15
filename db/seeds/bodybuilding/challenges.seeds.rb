@@ -1,4 +1,4 @@
-after(:exercises) do
+after('bodybuilding:exercises') do
   User.find_each do |user|
     [
       {
@@ -34,9 +34,10 @@ after(:exercises) do
         description: 'Find a speed for 10min, increase speed and minutes one by one, up to 20min of maximum speed'
       }
     ].each do |challenge_attrs|
-      challenge = user.challenges.find_or_initialize_by(name: challenge_attrs[:name])
-      next if challenge.persisted?
+      context = user.context 'bodybuilding'
+      next unless context
 
+      challenge = context.challenges.find_or_initialize_by(name: challenge_attrs[:name])
       challenge.assign_attributes challenge_attrs
       challenge.save
     end

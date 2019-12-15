@@ -1,6 +1,4 @@
 class Group < ApplicationRecord
   belongs_to :user
-  has_many :exercises
+  has_many :exercises, dependent: :destroy
 end
-
-# NO-OVERRIDE

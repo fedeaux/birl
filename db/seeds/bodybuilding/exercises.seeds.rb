@@ -1,4 +1,4 @@
-after(:users) do
+after(:contexts) do
   return
 
   User.find_each do |user|

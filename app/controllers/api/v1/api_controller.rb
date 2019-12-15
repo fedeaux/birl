@@ -5,4 +5,8 @@ class Api::V1::ApiController < ApplicationController
   def delay
     # sleep 4
   end
+
+  def current_context
+    current_user.context 'bodybuilding'
+  end
 end
