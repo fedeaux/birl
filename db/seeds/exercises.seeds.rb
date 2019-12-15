@@ -1,4 +1,3 @@
-# coding: utf-8
 after(:users) do
   return
 
@@ -16,7 +15,7 @@ after(:users) do
           { name: 'Abdominal Barra Lateral' },
           { name: 'Abdominal Dragão Lateral' },
           { name: 'Obliquo Polia' },
-          { name: 'Abdominal Canivete' },
+          { name: 'Abdominal Canivete' }
         ]
       },
 
@@ -41,7 +40,7 @@ after(:users) do
           { name: 'Cross Over Meio' },
           { name: 'Cross Over Infra' },
           { name: 'Peck Deck' },
-          { name: 'Pull Over' },
+          { name: 'Pull Over' }
         ]
       },
 
@@ -54,14 +53,14 @@ after(:users) do
           { name: 'Elevação Lateral Polia' },
           { name: 'Elevação Lateral' },
           { name: 'Remada Alta' },
-          { name: 'Segundo Tempo' },
+          { name: 'Segundo Tempo' }
         ]
       },
 
       {
         group: 'Trapézio',
         exercises: [
-          { name: 'Trapézio Halter' },
+          { name: 'Trapézio Halter' }
         ]
       },
 
@@ -69,7 +68,7 @@ after(:users) do
         group: 'Lombar',
         exercises: [
           { name: 'Lombar Barra' },
-          { name: 'Lombar Apoio' },
+          { name: 'Lombar Apoio' }
         ]
       },
 
@@ -78,7 +77,7 @@ after(:users) do
         exercises: [
           { name: 'Panturrilha em Pé' },
           { name: 'Panturrilha Leg Press' },
-          { name: 'Panturrilha Sentado' },
+          { name: 'Panturrilha Sentado' }
         ]
       },
 
@@ -97,7 +96,7 @@ after(:users) do
           { name: 'Barras Híbridas' },
           { name: 'Barra Reta' },
           { name: 'Barra Aberta' },
-          { name: 'Barra Unilateral' },
+          { name: 'Barra Unilateral' }
         ]
       },
 
@@ -106,7 +105,7 @@ after(:users) do
         exercises: [
           { name: 'Rosca Concentrada' },
           { name: 'Rosca Scott' },
-          { name: 'Rosca Unilateral' },
+          { name: 'Rosca Unilateral' }
         ]
       },
 
@@ -117,7 +116,7 @@ after(:users) do
           { name: 'Apertador de Punho' },
           { name: 'Rotador de Punho' },
           { name: 'Potência 5' },
-          { name: 'Super Antebraço' },
+          { name: 'Super Antebraço' }
         ]
       },
 
@@ -150,7 +149,7 @@ after(:users) do
         exercises: [
           { name: 'Esteira', progression_type: 'treadmill' }
         ]
-      },
+      }
     ].each do |info|
       info[:exercises].each do |exercise_attrs|
         group = user.groups.where(name: info[:group]).first_or_create

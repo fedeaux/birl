@@ -1,5 +1,5 @@
 namespace :dev do
-  desc "TODO"
+  desc 'TODO'
   task rename_icons: :environment do
     Dir['app/assets/images/icons/*.png'].each do |icon_name|
       path = icon_name.split('/')[0..-2].join('/')

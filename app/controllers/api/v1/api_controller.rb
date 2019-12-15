@@ -3,6 +3,6 @@ class Api::V1::ApiController < ApplicationController
   before_action :delay
 
   def delay
-    #sleep 4
+    # sleep 4
   end
 end

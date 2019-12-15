@@ -1,12 +1,11 @@
 class Api::V1::SessionProgressionsController < Api::V1::ApiController
-  before_action :set_session_progression, only: [:show, :update]
+  before_action :set_session_progression, only: %i[show update]
 
   def index
     @session_progressions = current_user.session_progressions
   end
 
-  def show
-  end
+  def show; end
 
   def update
     if @session_progression.update(session_progression_params)

@@ -1,12 +1,11 @@
 class Api::V1::TrainingsController < Api::V1::ApiController
-  before_action :set_training, only: [:show, :update]
+  before_action :set_training, only: %i[show update]
 
   def index
     @trainings = current_user.trainings
   end
 
-  def show
-  end
+  def show; end
 
   def update
     if @training.update(training_params)

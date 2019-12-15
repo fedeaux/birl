@@ -1,5 +1,5 @@
 class Api::V1::EntriesController < Api::V1::ApiController
-  before_action :set_entry, only: [:show, :update, :destroy]
+  before_action :set_entry, only: %i[show update destroy]
 
   def index
     return unless params[:progression_id]

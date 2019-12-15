@@ -1,5 +1,5 @@
 class Api::V1::ProgressionsController < Api::V1::ApiController
-  before_action :set_progression, only: [:show, :update, :destroy]
+  before_action :set_progression, only: %i[show update destroy]
 
   def index
     @progressions = current_user.progressions
@@ -8,8 +8,7 @@ class Api::V1::ProgressionsController < Api::V1::ApiController
     @progressions = @progressions.where(exercise_id: params[:exercise_id])
   end
 
-  def show
-  end
+  def show; end
 
   def update
     if @progression.update(progression_params)
@@ -40,6 +39,6 @@ class Api::V1::ProgressionsController < Api::V1::ApiController
 
   def progression_params
     params.require(:progression).permit(:id, :name, :details, :challenge_id, :exercise_id, :last_entry_at)
-      .merge(user_id: current_user.id)
+          .merge(user_id: current_user.id)
   end
 end

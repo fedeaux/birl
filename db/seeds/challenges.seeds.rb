@@ -1,4 +1,3 @@
-# coding: utf-8
 after(:exercises) do
   User.find_each do |user|
     [
@@ -16,7 +15,7 @@ after(:exercises) do
       },
       {
         name: 'Profilático',
-        description:''
+        description: ''
       },
       {
         name: 'Destruição',
@@ -37,6 +36,7 @@ after(:exercises) do
     ].each do |challenge_attrs|
       challenge = user.challenges.find_or_initialize_by(name: challenge_attrs[:name])
       next if challenge.persisted?
+
       challenge.assign_attributes challenge_attrs
       challenge.save
     end

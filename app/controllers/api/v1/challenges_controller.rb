@@ -1,12 +1,11 @@
 class Api::V1::ChallengesController < Api::V1::ApiController
-  before_action :set_challenge, only: [:show, :update, :destroy]
+  before_action :set_challenge, only: %i[show update destroy]
 
   def index
     @challenges = current_user.challenges
   end
 
-  def show
-  end
+  def show; end
 
   def update
     if @challenge.update(challenge_params)

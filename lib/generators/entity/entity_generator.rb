@@ -6,29 +6,29 @@ class EntityGenerator < Rails::Generators::NamedBase
   include GeneratorsCore
   include Rails::Generators::ModelHelpers
 
-  argument :attributes, type: :array, default: [], banner: "field[:type][:index] field[:type][:index]"
+  argument :attributes, type: :array, default: [], banner: 'field[:type][:index] field[:type][:index]'
 
-  # def generate_model
-  #   generate 'model', ARGV.join(" ")
-  # end
+  def generate_model
+    generate 'model', ARGV.join(' ')
+  end
 
-  # def add_route
-  #   inject_into_file 'config/routes.rb', "      resources :#{plural_underscore_name}\n", after: "    namespace :v1 do\n"
-  # end
+  def add_route
+    inject_into_file 'config/routes.rb', "      resources :#{plural_underscore_name}\n", after: "    namespace :v1 do\n"
+  end
 
   def generate_controller
-    guarded_template "controller.rb", controller_file_name
+    guarded_template 'controller.rb', controller_file_name
   end
 
   def generate_responses
-    guarded_template "views/_show.json.jbuilder", response_file_name('_show')
-    guarded_template "views/show.json.jbuilder", response_file_name('show')
-    guarded_template "views/index.json.jbuilder", response_file_name('index')
+    guarded_template 'views/_show.json.jbuilder', response_file_name('_show')
+    guarded_template 'views/show.json.jbuilder', response_file_name('show')
+    guarded_template 'views/index.json.jbuilder', response_file_name('index')
   end
 
   def generate_coffeescripts
-    guarded_template "coffeescripts/model.coffee", "app/javascript/models/#{underscore_name}.coffee"
-    guarded_template "coffeescripts/resource.coffee", "app/javascript/resources/#{plural_underscore_name}_resource.coffee"
+    guarded_template 'coffeescripts/model.coffee', "app/javascript/models/#{underscore_name}.coffee"
+    guarded_template 'coffeescripts/resource.coffee', "app/javascript/resources/#{plural_underscore_name}_resource.coffee"
   end
 
   def generate_view_models
@@ -54,7 +54,7 @@ class EntityGenerator < Rails::Generators::NamedBase
   end
 
   def guarded_template(source, target)
-    return if (File.exists?(target) and File.readlines(target).last.strip == '# NO-OVERRIDE') or !template_exists?(source)
+    return if (File.exist?(target) && (File.readlines(target).last.strip == '# NO-OVERRIDE')) || !template_exists?(source)
 
     template source, target
   end
@@ -72,6 +72,7 @@ class EntityGenerator < Rails::Generators::NamedBase
 
   def attribute_front_model_list_item_type(attribute)
     return "{ type: #{attribute.name.camelize} }" if attribute.reference?
+
     '{}'
   end
 

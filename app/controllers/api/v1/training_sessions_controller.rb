@@ -3,8 +3,7 @@ class TrainingSessionsController < Api::V1::ApiController
     @training_sessions = TrainingSession.all
   end
 
-  def show
-  end
+  def show; end
 
   def update
     if @training_session.update(training_sessions_params)

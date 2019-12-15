@@ -1,12 +1,11 @@
 class Api::V1::ExercisesController < Api::V1::ApiController
-  before_action :set_exercise, only: [:show, :update]
+  before_action :set_exercise, only: %i[show update]
 
   def index
     @exercises = current_user.exercises
   end
 
-  def show
-  end
+  def show; end
 
   def update
     if @exercise.update(exercise_params)

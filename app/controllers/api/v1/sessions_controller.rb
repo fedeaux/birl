@@ -1,5 +1,5 @@
 class Api::V1::SessionsController < Api::V1::ApiController
-  before_action :set_session, only: [:show, :update]
+  before_action :set_session, only: %i[show update]
 
   def index
     @sessions = current_user.current_training.sessions.order(:weekday)

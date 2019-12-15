@@ -7,7 +7,7 @@ class TemplaterGenerator < Rails::Generators::NamedBase
 
   REPLACE_TABLE = [
     ['plural_entity_name', '<%= plural_entity_name %>']
-  ]
+  ].freeze
 
   def view_models
     view_models_list.each do |view_model_name|
@@ -20,7 +20,8 @@ class TemplaterGenerator < Rails::Generators::NamedBase
   def generate_template_from_rendered(view_model_name)
     file_name = view_model_file_name(view_model_name)
     template_file_name = "#{templates_path}/view_models/#{view_model_name}.vue"
-    return unless File.exists?(file_name)
+    return unless File.exist?(file_name)
+
     contents = File.read file_name
 
     %w[plural_entity_name entity_name plural_underscore_name underscore_name].each do |placeholder|

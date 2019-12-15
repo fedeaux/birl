@@ -23,7 +23,7 @@ class TrainingSeeder
       puts '------------------------------------------'
       puts "Training #{training.id}: #{training.name}"
       training.sessions.each do |session|
-        puts ""
+        puts ''
         puts " -- #{session.name} on #{session.weekday} -- "
         tp session.progressions, :id, :'exercise.name', :'challenge.name'
       end

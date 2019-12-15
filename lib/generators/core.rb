@@ -46,9 +46,7 @@ module GeneratorsCore
 
   def ensure_directory(file)
     dirname = File.dirname(file)
-    unless File.directory?(dirname)
-      FileUtils.mkdir_p(dirname)
-    end
+    FileUtils.mkdir_p(dirname) unless File.directory?(dirname)
   end
 
   def templates_path
@@ -56,6 +54,6 @@ module GeneratorsCore
   end
 
   def template_exists?(name)
-    File.exists? "#{templates_path}/#{name}"
+    File.exist? "#{templates_path}/#{name}"
   end
 end

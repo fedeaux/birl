@@ -4,7 +4,7 @@ class Entry < ApplicationRecord
   after_commit :update_progression_last_entry_at
 
   def copy_progression_details
-    return if self.variables
+    return if variables
 
     self.variables = progression.details
   end

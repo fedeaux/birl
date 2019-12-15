@@ -1,12 +1,11 @@
 class Api::V1::GroupsController < Api::V1::ApiController
-  before_action :set_group, only: [:show, :update]
+  before_action :set_group, only: %i[show update]
 
   def index
     @groups = current_user.groups
   end
 
-  def show
-  end
+  def show; end
 
   def update
     if @group.update(group_params)

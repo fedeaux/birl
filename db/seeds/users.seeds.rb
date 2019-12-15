@@ -11,10 +11,10 @@ errors = []
   next if user.persisted? && user.valid_password?(password)
 
   user.assign_attributes user_attributes.merge(
-                           password: password,
-                           password_confirmation: password,
-                           timezone: 'Brasilia'
-                         )
+    password: password,
+    password_confirmation: password,
+    timezone: 'Brasilia'
+  )
 
   if user.save
     print '.'
