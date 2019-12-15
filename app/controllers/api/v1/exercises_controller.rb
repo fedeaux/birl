@@ -1,11 +1,12 @@
 class Api::V1::ExercisesController < Api::V1::ApiController
-  before_action :set_exercise, only: %i[show update]
+  before_action :set_exercise, only: %i[show update destroy]
 
   def index
-    @exercises = current_user.exercises
+    @exercises = current_context.exercises
   end
 
-  def show; end
+  def show
+  end
 
   def update
     if @exercise.update(exercise_params)
@@ -16,7 +17,7 @@ class Api::V1::ExercisesController < Api::V1::ApiController
   end
 
   def create
-    @exercise = current_user.exercises.new exercise_params
+    @exercise = current_context.exercises.new exercise_params
     if @exercise.save
       render 'show', status: :created
     else
@@ -24,13 +25,17 @@ class Api::V1::ExercisesController < Api::V1::ApiController
     end
   end
 
+  def destroy
+    @exercise.destroy
+  end
+
   private
 
   def set_exercise
-    @exercise = current_user.exercises.find(params[:id])
+    @exercise = current_context.exercises.find(params[:id])
   end
 
   def exercise_params
-    params.require(:exercise).permit(:id, :name, :slug, :progression_type, :user_id, :group_id)
+    params.require(:exercise).permit(:id, :name, :slug, :progression_type, :context_id, :group_id)
   end
 end

@@ -1,6 +1,6 @@
 # TODO: Auto generate paths
 
-entities = ['groups', 'exercises', 'challenges', 'progressions', 'entries', 'trainings', 'sessions']
+entities = ['groups', 'exercises', 'challenges', 'progressions', 'entries', 'trainings', 'contexts', 'sessions']
 views = ['show', 'index', 'display', 'list', 'list/item', 'form', 'new', 'edit', 'select', 'manager']
 
 paths = [

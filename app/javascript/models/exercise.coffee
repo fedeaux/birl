@@ -1,5 +1,5 @@
 import BaseModel from './base_model'
-import User from './user'
+import Context from './context'
 import Group from './group'
 
 class Exercise extends BaseModel
@@ -13,8 +13,8 @@ class Exercise extends BaseModel
       name: {}
       slug: {}
       progression_type: {}
-      user: { type: User }
-      user_id: {}
+      context: { type: Context }
+      context_id: {}
       group: { type: Group }
       group_id: {}
     }

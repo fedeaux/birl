@@ -1,6 +1,4 @@
 after(:contexts) do
-  return
-
   User.find_each do |user|
     [
       {
@@ -152,12 +150,16 @@ after(:contexts) do
       }
     ].each do |info|
       info[:exercises].each do |exercise_attrs|
-        group = user.groups.where(name: info[:group]).first_or_create
+        context = user.context 'bodybuilding'
+        next unless context
+
+        # group = user.groups.where(name: info[:group]).first_or_create
+
         exercise_attrs = { progression_type: 'repetitions' }.merge(exercise_attrs)
 
         slug = exercise_attrs[:name].parameterize
-        exercise = user.exercises.find_or_initialize_by(slug: slug)
-        exercise.assign_attributes exercise_attrs.merge(group: group)
+        exercise = context.exercises.find_or_initialize_by(slug: slug)
+        exercise.assign_attributes exercise_attrs #.merge(group: group)
         exercise.save
       end
     end

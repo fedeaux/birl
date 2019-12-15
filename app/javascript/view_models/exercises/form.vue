@@ -15,6 +15,10 @@
         input(type='text' v-model='exercise.progression_type')
 
       .field
+        label Context
+        contexts-select(v-model='exercise.context_id')
+
+      .field
         label Group
         groups-select(v-model='exercise.group_id')
 

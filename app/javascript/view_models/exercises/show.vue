@@ -5,8 +5,8 @@
       router-link.entity-show-header-actions(:to='exercise.editPath()')
         i.edit.icon
 
-    .entity-show-subheader Progressions
-    progressions-manager(v-if='exercise_id' :context='{ exercise_id: exercise_id }' :allow_actions='true')
+  .entity-show-subheader Progressions
+  progressions-manager(v-if='exercise_id' :context='{ exercise_id: exercise_id }' :allow_actions='true')
 </template>
 
 <script lang="coffee">
