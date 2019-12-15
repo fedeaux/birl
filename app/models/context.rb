@@ -20,6 +20,8 @@ class Context < ApplicationRecord
   end
 
   def current_session
+    return current_training.sessions.first unless name == 'bodybuilding'
+
     being_performed_now_session = sessions_on_this_weekday.where('updated_at >= ?', 12.hours.ago).first
     return being_performed_now_session if being_performed_now_session
 
