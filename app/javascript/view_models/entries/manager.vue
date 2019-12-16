@@ -28,7 +28,6 @@ export default
       default: -> {}
 
     parent_entries: null
-    auto_add_new: false
     progression_type: null
 
   data: ->
@@ -47,8 +46,6 @@ export default
 
     entriesLoaded: (response) ->
       @entries = response.entries
-
-      return unless @auto_add_new
 
       @$nextTick ->
         @newEntry()

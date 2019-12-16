@@ -27,4 +27,7 @@ class Progression extends BaseModel
       progression_type: {}
     }
 
+  executePath: ->
+    "/#{@collection()}/#{@id}/execute"
+
 export default Progression

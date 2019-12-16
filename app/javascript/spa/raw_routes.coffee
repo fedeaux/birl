@@ -1,15 +1,19 @@
 # TODO: Auto generate paths
 
 routes = [
-    {
-      path: ''
-      view: 'contexts/choose'
-    },
-    {
-      path: 'today'
-      view: 'sessions/today'
-    }
-  ]
+  {
+    path: '/'
+    view: 'contexts/choose'
+  },
+  {
+    path: '/today'
+    view: 'sessions/today'
+  },
+  {
+    path: '/progressions/:id/execute'
+    view: 'progressions/execute'
+  }
+]
 
 add_rest = (routes, resource) ->
   routes.push

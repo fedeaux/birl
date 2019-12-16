@@ -8,8 +8,10 @@ paths = [
   'entity/list/empty'
   'entity/list/item/divider'
   'progressions/in_session'
+  'progressions/execute'
   'entries/form/repetitions_picker'
   'entries/form/treadmill_picker'
+  'entries/form/sets_picker'
   'contexts/choose'
 ]
 

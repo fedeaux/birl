@@ -3,8 +3,8 @@
   .entity-form.entries-form
     .ui.form
       .field
-        label Repetitions
-        component(v-model='entry.values' :is='picker_component_name')
+        label Values
+        entries-form-sets-picker(v-model='entry.values')
 
       .field
         label Observations
