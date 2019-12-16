@@ -13,7 +13,7 @@ class Entry extends BaseModel
       progression: { type: Progression }
       progression_id: {}
       values: {}
-      variables: {}
+      value: {}
       observations: {}
       created_at: { type: moment }
     }

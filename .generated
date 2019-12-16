@@ -1,22 +1,11 @@
 rails g entity context name slug color user:belongs_to meta:jsonb
 rails g entity challenge name description context:references
-rails g entity entry name progression:references values variables observations:text
+rails g entity entry name progression:references values value:jsonb observations:text
 rails g entity exercise name slug progression_type context:references group:references
 rails g entity group name context:references
 rails g entity progression name details context:references challenge:references exercise:references last_entry_at:datetime
 rails g entity session name training:belongs_to
 rails g entity session_progression session:belongs_to progression:belongs_to order:integer
 rails g entity training name context:references
-
-rails g entity user name email current_context:belongs_to -f
-rails g entity context name slug color user:belongs_to meta:jsonb -f
-rails g entity challenge name description context:references -f
-rails g entity entry name progression:references values variables observations:text -f
-rails g entity exercise name slug progression_type context:references group:references -f
-rails g entity group name context:references -f
-rails g entity progression name details context:references challenge:references exercise:references last_entry_at:datetime -f
-rails g entity session name training:belongs_to -f
-rails g entity session_progression session:belongs_to progression:belongs_to order:integer -f
-rails g entity training name context:references -f
 
 rails g templater entry
