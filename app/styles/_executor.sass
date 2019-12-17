@@ -1,0 +1,51 @@
+.executor
+  display: flex
+  align-items: center
+  justify-content: center
+  flex-direction: column
+  padding: $d4
+
+  &.executor-fullscreen
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    z-index: 2000
+
+  .executor-label
+    font-size: 30px
+    text-align: center
+    color: white
+
+  .executor-stop
+    font-size: 18px
+    text-align: center
+    color: white
+    opacity: 0.7
+    position: absolute
+    bottom: 20px
+
+  .executor-display
+    font-size: 150px
+    line-height: 150px
+    text-align: center
+    font-family: "Courier New", Courier, monospace
+
+    .executor-display-time
+      color: white !important
+
+  &.executor-countdown
+    background-color: green
+
+  &.executor-doit
+    background-color: orange
+
+  &.executor-rest
+    background-color: lightblue
+
+  &.executor-finished
+    .executor-stop
+      color: black
+      position: fixed
+      bottom: auto

@@ -4,7 +4,11 @@
     progressions-display(:progression='progression')
 
   entries-manager(:context='{ progression_id: progression_id }'
-                  :data_model='progression.entry_data_model')
+                  :data_model='progression.entry_data_model'
+                  ref="entries_manager")
+
+  mvp-executor(:entry='entry')
+  .ui.small.primary.fluid.button(@click='setExecutorEntry') Set Entry
 
   shared-footer(v-if='current_session && current_session.progressions')
     progressions-in-session(:current_progression_id='progression_id')
@@ -23,8 +27,12 @@ export default
     progression_id: null
     new_entry: null
     current_set: -1
+    entry: null
 
   methods:
+    setExecutorEntry: ->
+      @entry = @$refs.entries_manager.entries[0]
+
     loadProgression: ->
       @progressions_resource.get @progression_id, @progressionLoaded
 
