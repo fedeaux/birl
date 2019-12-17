@@ -52,13 +52,15 @@
 
       increase: (index, dimension) ->
         set = @sets[index]
-        set[dimension.name] = parseInt(set[dimension.name]) + 1
+        value = parseInt set[dimension.name]
+        set[dimension.name] = value and value + 1 or 1
         Vue.set @sets, index, set
         @changed()
 
       decrease: (index, dimension) ->
         set = @sets[index]
-        set[dimension.name] = parseInt(set[dimension.name]) - 1
+        value = parseInt set[dimension.name]
+        set[dimension.name] = value and value - 1 or 0
         Vue.set @sets, index, set
         @changed()
 

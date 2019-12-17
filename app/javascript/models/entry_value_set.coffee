@@ -1,4 +1,5 @@
 import BaseModel from './base_model'
+import EntryValueSetExecution from './entry_value_set_execution'
 
 class EntryValueSet extends BaseModel
   @collection = 'entry_value_sets'
@@ -7,15 +8,17 @@ class EntryValueSet extends BaseModel
 
   @attributes = ->
     {
-      execution: {}
-      sets: {}
+      execution: { type: EntryValueSetExecution }
+      mult: {}
+
       time: {}
-      seconds: {}
       weight: {}
       reps: {}
-      rest: {}
       speed: {}
       bpmm: {}
+
+      rest: {}
+      pause: {}
     }
 
   human: ->
@@ -32,7 +35,7 @@ class EntryValueSet extends BaseModel
       if @weight and @weight > 0
         str += "w#{@weight}kg"
 
-    return "[#{@sets} sets] #{str}" if @sets and @sets > 0
+    return "#{@mult}x(#{str})" if @mult and @mult > 0
     str
 
   human_rest: ->

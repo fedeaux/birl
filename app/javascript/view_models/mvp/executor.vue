@@ -3,8 +3,10 @@
   .executor-label
     template(v-if='state == "idle"' @click='start')
     template(v-else-if='state == "countdown"') Prepare...
-    template(v-else-if='state == "doit"') JUST DO IT
-    template(v-else-if='state == "rest"') Cooldown
+    template(v-else-if='state == "doit"')
+      | {{ doitDisplay() }}
+    template(v-else-if='state == "rest"')
+      | {{ restDisplay() }}
 
   .ui.green.message(v-if='state == "finished"') Boa!
 
@@ -30,6 +32,12 @@ export default
     fullscreen: false
 
   methods:
+    doitDisplay: ->
+      'JUST DO IT'
+
+    restDisplay: ->
+      'Cool down...'
+
     finish: ->
       clearInterval @timer
       @time = 0

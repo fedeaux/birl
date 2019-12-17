@@ -1,5 +1,16 @@
 class Entry < ApplicationRecord
-  VALUE_DIMENSIONS = %i[execution seconds weight reps rest speed bpmm]
+  VALUE_DIMENSIONS = %i[execution mult time weight reps speed bpmm rest pause]
+
+  # Explanation
+  # execution
+  # mult
+  # time
+  # weight
+  # reps
+  # speed
+  # bpmm
+  # rest
+  # pause
 
   belongs_to :progression, counter_cache: true, touch: true
   after_commit :update_progression_last_entry_at

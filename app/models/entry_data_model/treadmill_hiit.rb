@@ -4,6 +4,7 @@ module EntryDataModel
       { name: :sets, options: {} },
       { name: :speed, options: {} },
       { name: :time, options: {} },
+      { name: :pause, options: {} },
       { name: :rest, options: {} }
     ]
   end
