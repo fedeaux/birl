@@ -32,6 +32,8 @@ class Progression < ApplicationRecord
   end
 
   def entry_data_model
+    return challenge.entry_data_model if challenge
+
     {
       dimensions: [
         { name: :reps, options: {} },

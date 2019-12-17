@@ -8,4 +8,8 @@ namespace :dev do
       `mv #{icon_name} #{name}`
     end
   end
+
+  task test_data_models: :environment do
+    ap EntryDataModel::MaxRepetitions.new(reps: [2, 4, 7, 10, 12], rest: [90, 75, 60, 60]).entry_data_model
+  end
 end

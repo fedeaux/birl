@@ -8,6 +8,8 @@ class EntryValueSet extends BaseModel
   @attributes = ->
     {
       execution: {}
+      sets: {}
+      time: {}
       seconds: {}
       weight: {}
       reps: {}
@@ -21,16 +23,23 @@ class EntryValueSet extends BaseModel
     if @reps
       str += @reps
 
-      if @weight
+      if @weight and @weight > 0
         str += "x#{@weight}kg"
 
+    else if @time
+      str += @formattedTime @time
+
+      if @weight and @weight > 0
+        str += "w#{@weight}kg"
+
+    return "[#{@sets} sets] #{str}" if @sets and @sets > 0
     str
 
   human_rest: ->
     return false unless @rest
-    @time @rest
+    @formattedTime @rest
 
-  time: (seconds) ->
+  formattedTime: (seconds) ->
     return "#{seconds}s" if seconds < 60
 
     minutes = Math.floor(seconds / 6) / 10

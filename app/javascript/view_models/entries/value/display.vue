@@ -17,13 +17,11 @@
 
         for set in @value.sets
           if last_set
-            #if last_set.human_rest()
-            #  els.push { class: 'rest', text: " (#{last_set.human_rest()}) " }
-            #else
             els.push { class: 'rest', text: ' / ' }
 
           els.push { class: 'set', text: set.human() }
           last_set = set
+
         els
 
 </script>
