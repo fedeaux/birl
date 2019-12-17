@@ -18,7 +18,8 @@ class Api::V1::EntriesController < Api::V1::ApiController
   end
 
   def create
-    @entry = current_context.entries.new entry_params
+    @entry = Entry.new entry_params
+
     if @entry.save
       render 'show', status: :created
     else
@@ -33,10 +34,10 @@ class Api::V1::EntriesController < Api::V1::ApiController
   private
 
   def set_entry
-    @entry = current_context.entries.find(params[:id])
+    @entry = Entry.find(params[:id])
   end
 
   def entry_params
-    params.require(:entry).permit(:id, :name, :progression_id, :values, :value, :observations)
+    params.require(:entry).permit!
   end
 end

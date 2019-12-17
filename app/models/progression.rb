@@ -34,4 +34,14 @@ class Progression < ApplicationRecord
   def update_last_entry_at
     update last_entry_at: entries.maximum(:created_at)
   end
+
+  def entry_data_model
+    {
+      dimensions: [
+        { name: :reps, options: {} },
+        { name: :weight, options: {} },
+        { name: :rest, options: {} },
+      ]
+    }
+  end
 end

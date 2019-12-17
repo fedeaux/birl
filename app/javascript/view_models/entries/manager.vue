@@ -2,6 +2,7 @@
 .entity-manager.entries-manager.default-container
   .entity-manager-form(v-if='form_entry')
     entries-form(v-model='form_entry'
+                 :data_model='data_model'
                  @save='saveFormEntry()'
                  @cancel='clearFormEntry()')
 
@@ -27,6 +28,8 @@ export default
       default: -> {}
 
     parent_entries: null
+    data_model:
+      default: -> {}
 
   data: ->
     entries: null
@@ -44,9 +47,6 @@ export default
 
     entriesLoaded: (response) ->
       @entries = response.entries
-
-      @$nextTick ->
-        @newEntry()
 
     newEntry: ->
       if !@entries or @entries.length == 0

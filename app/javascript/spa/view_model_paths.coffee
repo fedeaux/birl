@@ -9,9 +9,9 @@ paths = [
   'entity/list/item/divider'
   'progressions/in_session'
   'progressions/execute'
-  'entries/form/repetitions_picker'
-  'entries/form/treadmill_picker'
-  'entries/form/sets_picker'
+  'entries/value/picker'
+  'entries/value/display'
+  'entries/value/sets_picker'
   'contexts/choose'
 ]
 

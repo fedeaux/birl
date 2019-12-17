@@ -24,7 +24,7 @@ class Progression extends BaseModel
       exercise_name: {}
       challenge_name: {}
       done_today: {}
-      progression_type: {}
+      entry_data_model: {}
     }
 
   executePath: ->

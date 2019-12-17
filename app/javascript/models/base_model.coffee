@@ -100,4 +100,7 @@ class BaseModel
   clone: ->
     new @constructor @serialize()
 
+  signature: ->
+    JSON.stringify @serialize()
+
 export default BaseModel

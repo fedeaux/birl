@@ -8,13 +8,15 @@
     text-align: center
     border-bottom: thin #eee solid
     padding: $d2
+    position: relative
 
     &:last-child
       border-bottom: none
 
     .sets-remover
-      position: relative
-      top: -3.4em
+      position: absolute
+      bottom: 4.4em
+      right: $d2
 
     .sets-picker-set-dimension
       display: inline-block
@@ -22,10 +24,11 @@
       margin-right: $d
 
       &.sets-picker-set-dimension-execution
-        width: 7em
+        display: block
+        width: 100%
 
         .circular.button
-          opacity: 0
+          display: none
 
       .sets-picker-set-dimension-name
         font-size: 10px
@@ -37,3 +40,11 @@
           text-align: center
           padding: $d2 0 !important
           width: 100%
+
+.entry-value-display
+  .entry-value-display-element
+    display: inline
+
+    &.rest
+      color: $light-text-gray
+      font-size: 0.7em

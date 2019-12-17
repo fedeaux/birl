@@ -1,12 +1,9 @@
 <template lang="pug">
 .entity-display(v-if="entry")
   .entity-display-main
-    | {{ entry.values }}
+    entries-value-display(:value='entry.value')
 
   .entity-display-detail
-    template(v-if='entry.variables')
-      |  {{ entry.variables }}
-      |  &middot;
     |  {{ entry.created_at.fromNow() }}
     template(v-if='entry.observations')
       |  &middot;
@@ -30,4 +27,5 @@
         event.preventDefault()
         event.stopPropagation()
         @$emit 'action', event
+
 </script>

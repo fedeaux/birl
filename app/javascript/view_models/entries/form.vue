@@ -3,8 +3,7 @@
   .entity-form.entries-form
     .ui.form
       .field
-        label Values
-        entries-form-sets-picker(v-model='entry.values')
+        entries-value-picker(v-model='entry.value' :data_model='data_model')
 
       .field
         label Observations
@@ -25,7 +24,7 @@ export default
 
   props:
     original_entry: null
-    progression_type: null
+    data_model: {}
 
   data: ->
     entry: null
@@ -37,11 +36,6 @@ export default
 
     cancel: ->
       @$emit 'cancel'
-
-  computed:
-    picker_component_name: ->
-      return 'input' unless @progression_type in ['repetitions', 'treadmill']
-      "entries-form-#{@progression_type}-picker"
 
   watch:
     original_entry:

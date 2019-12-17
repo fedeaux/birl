@@ -1,5 +1,6 @@
 import BaseModel from './base_model'
 import Progression from './progression'
+import EntryValue from './entry_value'
 
 class Entry extends BaseModel
   @collection = 'entries'
@@ -13,7 +14,7 @@ class Entry extends BaseModel
       progression: { type: Progression }
       progression_id: {}
       values: {}
-      value: {}
+      value: { type: EntryValue }
       observations: {}
       created_at: { type: moment }
     }

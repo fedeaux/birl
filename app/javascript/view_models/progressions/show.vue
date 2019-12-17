@@ -6,7 +6,7 @@
         i.edit.icon
 
   entries-manager(:context='{ progression_id: progression_id }'
-                  :progression_type='progression.progression_type')
+                  :data_model='progression.entry_data_model')
 
   shared-footer
     .ui.two.column.centered.grid
