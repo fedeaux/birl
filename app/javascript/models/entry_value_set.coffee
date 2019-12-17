@@ -48,4 +48,9 @@ class EntryValueSet extends BaseModel
     minutes = Math.floor(seconds / 6) / 10
     return "#{minutes}m"
 
+  numberOfExecutions: ->
+    return @execution.numberOfExecutions(@mult) if @execution
+    return parseInt(@mult) if @mult
+    1
+
 export default EntryValueSet

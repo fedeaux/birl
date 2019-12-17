@@ -28,7 +28,7 @@ export default
     state: 'idle'
     time: 0
     current_set_index: 0
-    current_set_set: 0
+    current_set_execution: 0
     fullscreen: false
 
   methods:
@@ -42,7 +42,7 @@ export default
       clearInterval @timer
       @time = 0
       @current_set_index = 0
-      @current_set_set = 0
+      @current_set_mult = 0
       @fullscreen = false
       @state = 'finished'
 
@@ -53,11 +53,13 @@ export default
     countdown: (time) ->
       @time = time
       @timer = setInterval @decreaseTimer, 1000
-      @fullscreen = true
+      @fullscreen = true # shouldBeFullScreen()
 
     start: ->
       @state = 'countdown'
-      @countdown 5
+      @current_set_index = 0
+      @current_set_execution = 1
+      @countdown 1
 
     decreaseTimer: ->
       @time -= 1
@@ -70,31 +72,47 @@ export default
     findNextState: ->
       if @state == 'countdown'
         @state = 'doit'
-        @countdown parseInt @entry.value.sets[@current_set_index].time
+        @countdown parseInt @current_set.time
 
       else if @state == 'doit'
+        # I was doing. There are three scenarios:
+        # 1. I need to "pause" and repeat this set, because I didnt do all "mult"s
+        # 2. I need to "rest" and go to the next set
+        # 3. All sets are over
+
         @state = 'rest'
-        sets = parseInt @entry.value.sets[@current_set_index].sets
 
-        another_set = sets and @current_set_set < sets
-
-        if @entry.value.sets[@current_set_index + 1] or another_set
+        if @current_set_execution < @current_set_target_executions
+          @countdown parseInt @current_set.pause
+        else if @entry.value.sets[@current_set_index + 1]
           @countdown parseInt @entry.value.sets[@current_set_index].rest
         else
           @finish()
 
       else if @state == 'rest'
-        @current_set_set += 1
-        sets = parseInt @entry.value.sets[@current_set_index].sets
-
-        if !sets or @current_set_set >= sets
-          @current_set_index += 1
-          @current_set_set = 0
+        # I was either paused or resting. There are two scenarios:
+        # 1. It is time for another repetition of this set
+        # 2. It is time to move to the next set
 
         @state = 'doit'
-        @countdown parseInt @entry.value.sets[@current_set_index].rest
+
+        if @current_set_execution < @current_set_target_executions
+          @current_set_execution += 1
+        else
+          @current_set_execution = 1
+          @current_set_index += 1
+
+        @countdown parseInt @current_set.time
 
   computed:
+    current_set: ->
+      return null unless @entry && @entry.value && @entry.value.sets
+      @entry.value.sets[@current_set_index]
+
+    current_set_target_executions: ->
+      return null unless @current_set
+      @current_set.numberOfExecutions()
+
     display_time: ->
       minutes = Math.floor(@time / 60)
       seconds = @time % 60
