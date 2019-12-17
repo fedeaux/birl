@@ -1,7 +1,7 @@
 <template lang="pug">
 .progressions-in-session.ui.three.column.grid
   .progressions-in-session-prev.column
-    router-link(v-if='prev_progression' :to='prev_progression.path()')
+    router-link(v-if='prev_progression' :to='prev_progression.executePath()')
       | &larr;
       | {{ prev_progression.exercise_name }}
 
@@ -11,7 +11,7 @@
       | {{ current_session.name }}
 
   .progressions-in-session-next.column
-    router-link(v-if='next_progression' :to='next_progression.path()')
+    router-link(v-if='next_progression' :to='next_progression.executePath()')
       | {{ next_progression.exercise_name }}
       | &rarr;
 
