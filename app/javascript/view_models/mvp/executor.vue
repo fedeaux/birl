@@ -66,8 +66,11 @@ export default
 
       else if @state == 'doit'
         @state = 'rest'
+        sets = parseInt @entry.value.sets[@current_set_index].sets
 
-        if @entry.value.sets[@current_set_index + 1]
+        another_set = sets and @current_set_set < sets
+
+        if @entry.value.sets[@current_set_index + 1] or another_set
           @countdown parseInt @entry.value.sets[@current_set_index].rest
         else
           @finish()
@@ -76,11 +79,9 @@ export default
         @current_set_set += 1
         sets = parseInt @entry.value.sets[@current_set_index].sets
 
-        if !sets or @current_set_set > sets
+        if !sets or @current_set_set >= sets
           @current_set_index += 1
           @current_set_set = 0
-        else
-          @current_set_set += 1
 
         @state = 'doit'
         @countdown parseInt @entry.value.sets[@current_set_index].rest
