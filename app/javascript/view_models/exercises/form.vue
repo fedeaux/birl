@@ -11,10 +11,6 @@
         input(type='text' v-model='exercise.slug')
 
       .field
-        label Progression Type
-        input(type='text' v-model='exercise.progression_type')
-
-      .field
         label Context
         contexts-select(v-model='exercise.context_id')
 

@@ -145,7 +145,7 @@ after(:contexts) do
       {
         group: 'Aeróbico',
         exercises: [
-          { name: 'Esteira', progression_type: 'treadmill' }
+          { name: 'Esteira' }
         ]
       }
     ].each do |info|
@@ -154,8 +154,6 @@ after(:contexts) do
         next unless context
 
         # group = user.groups.where(name: info[:group]).first_or_create
-
-        exercise_attrs = { progression_type: 'repetitions' }.merge(exercise_attrs)
 
         slug = exercise_attrs[:name].parameterize
         exercise = context.exercises.find_or_initialize_by(slug: slug)
