@@ -25,11 +25,19 @@ class Entry < ApplicationRecord
 
     sets = if sets.is_a? Hash
              sets.values
+           elsif sets.is_a? Array
+             sets
            else
              []
            end
 
     param['sets'] = sets
     super param
+  end
+
+  def prototype
+    copy = clone
+    copy.assign_attributes(created_at: nil, id: nil, updated_at: nil)
+    copy
   end
 end

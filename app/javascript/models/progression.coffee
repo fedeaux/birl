@@ -1,6 +1,7 @@
 import BaseModel from './base_model'
 import Context from './context'
 import Challenge from './challenge'
+import Entry from './entry'
 import Exercise from './exercise'
 
 class Progression extends BaseModel
@@ -25,6 +26,9 @@ class Progression extends BaseModel
       challenge_name: {}
       done_today: {}
       entry_data_model: {}
+      entries: { type: Entry }
+      new_entry: { type: Entry }
+      todays_entry: { type: Entry }
     }
 
   executePath: ->

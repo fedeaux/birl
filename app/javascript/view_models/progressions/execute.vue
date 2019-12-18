@@ -2,20 +2,38 @@
 .entity-show-wrapper.progressions-show-wrapper.default-container(v-if='progression')
   .entity-show.progressions-show
     progressions-display(:progression='progression')
+      router-link.entity-show-header-actions(:to='progression.path()')
+        i.eye.icon
 
-  entries-manager(:context='{ progression_id: progression_id }'
-                  :data_model='progression.entry_data_model'
-                  ref="entries_manager")
+  template(v-if='todays_entry && !editing_entry')
+    .ui.green.message Done!
 
-  mvp-executor(:entry='entry')
-  .ui.small.primary.fluid.button(@click='setExecutorEntry') Set Entry
+    entries-list-item(:entry='todays_entry')
+    .ui.fluid.buttons
+      .ui.primary.button(@click='doAnother()' v-if='new_entry && !new_entry.id')
+        | Do another
+      .ui.basic.button(@click='editTodaysEntry()')
+        | Edit
 
-  shared-footer(v-if='current_session && current_session.progressions')
+    mvp-executor(:entry='new_entry')
+
+  entries-form(v-model='new_entry'
+               v-if='editing_entry'
+               :data_model='progression.entry_data_model'
+               @save='saveFormEntry()'
+               @cancel='clearFormEntry()')
+
+  template(v-if='progression.entries.length > 0')
+    h3 Older Entries
+    entries-list(:entries='progression.entries')
+
+  shared-footer(v-if='show_shared_footer')
     progressions-in-session(:current_progression_id='progression_id')
 </template>
 
 <script lang="coffee">
 import ProgressionsResource from '../../resources/progressions_resource'
+import EntriesResource from '../../resources/entries_resource'
 import Entry from '../../models/entry'
 
 export default
@@ -26,27 +44,48 @@ export default
     progression: null
     progression_id: null
     new_entry: null
-    current_set: -1
-    entry: null
+    todays_entry: null
+    editing_entry: true
 
   methods:
-    setExecutorEntry: ->
-      @entry = @$refs.entries_manager.entries[0]
+    editTodaysEntry: ->
+      @new_entry = @todays_entry
+      @editing_entry = true
+
+    doAnother: ->
+      @editing_entry = true
 
     loadProgression: ->
-      @progressions_resource.get @progression_id, @progressionLoaded
+      @progressions_resource.execute @progression_id, @progressionLoaded
 
     progressionLoaded: (response) ->
       @progression = response.progression
+      @new_entry = @progression.new_entry
+      @todays_entry = @progression.todays_entry
+      @editing_entry = !@todays_entry
+
+    saveFormEntry: ->
+      @entries_resource.save @new_entry, @entrySaved
+
+    entrySaved: (data) ->
+      @new_entry = data.entry
+      @editing_entry = false
+      @todays_entry = @new_entry unless @todays_entry
+
+    clearFormEntry: ->
+      @editing_entry = false
+
+  computed:
+    show_shared_footer: ->
+      @current_session && @current_session.progressions &&
+        @progression_id in (p.id for p in @current_session.progressions)
 
   mounted: ->
+    @entries_resource = new EntriesResource
+
     if @parent_progression
       @progression = @parent_progression
       return
-
-    @progressions_resource = new ProgressionsResource
-    @progression_id = parseInt @$route.params.id
-    @loadProgression()
 
   watch:
     '$route.params.id':

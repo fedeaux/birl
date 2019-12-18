@@ -1,11 +1,17 @@
 class Api::V1::ProgressionsController < Api::V1::ApiController
-  before_action :set_progression, only: %i[show update destroy]
+  before_action :set_progression, only: %i[show update destroy execute]
 
   def index
     @progressions = current_context.progressions
     return unless params[:exercise_id]
 
     @progressions = @progressions.where(exercise_id: params[:exercise_id])
+  end
+
+  def execute
+    @entries = @progression.entries.order('created_at DESC').first(5)[1..-1]
+    @new_entry = EntryGenerator.new(@progression).new_entry
+    @todays_entry = @entries.last if @progression.done_today
   end
 
   def show

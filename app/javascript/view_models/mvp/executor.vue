@@ -1,5 +1,5 @@
 <template lang="pug">
-.executor(v-if='entry' :class='klass')
+.executor(v-if='entry && entry.value && entry.value.sets' :class='klass')
   mvp-executor-counter(:sets_count='entry.value.sets.length'
                        :current_set_target_executions='current_set_target_executions'
                        :current_set_index='current_set_index'
@@ -8,17 +8,23 @@
 
   )
 
-  .executor-label
+  .executor-label(:class='"executor-label-"+state')
     template(v-if='state == "idle"' @click='start')
     template(v-else-if='state == "countdown"') Prepare...
     template(v-else-if='state == "doit"')
-      | {{ doitDisplay() }}
+      | {{ doItDisplay() }}
     template(v-else-if='state == "rest"')
-      | {{ restDisplay() }}
+      | Cool down...
+      .executor-label-detail
+        | {{ restDisplay() }}
 
-  .ui.green.message(v-if='state == "finished"') Boa!
+    template(v-else-if='state == "finished"')
+     | Boa, campeão! KKK
 
-  .executor-display(v-else)
+     .ui.basic.green.button(@click='reset')
+       | Vamo pro próximo
+
+  .executor-display
     i.play.circle.outline.icon(v-if='state == "idle"' @click='start')
     .executor-display-time(v-else)
       | {{ display_time }}
@@ -48,29 +54,32 @@ export default
     current_set_index: 0
     current_set_execution: 0
     fullscreen: false
-    dev_tools: true
+    dev_tools: false
 
   methods:
-    doitDisplay: ->
-      'JUST DO IT'
+    doItDisplay: ->
+      options = {
+        current_set_index: @current_set_index
+        current_set_execution: @current_set_execution - 1
+      }
+
+      @entry.executorDisplay(options) || 'Just do it'
 
     restDisplay: ->
-      'Cool down...'
+      do_it_display = @doItDisplay()
+      return "Next: #{do_it_display}" if do_it_display
+      ''
 
     stop: ->
       clearInterval @timer
 
     finish: ->
+      @state = 'finished'
       clearInterval @timer
       @current_time = 0
 
     reset: ->
-      @finish()
-      @state = 'idle'
-      @fullscreen = false
-      @initial_time = 0
-      @current_set_index = 0
-      @current_set_execution = 0
+      # Object.assign @$data, @$options.data()
 
     countdown: (time) ->
       # console.log "#{@state} for #{time} seconds"

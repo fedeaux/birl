@@ -53,4 +53,8 @@ class EntryValueSet extends BaseModel
     return parseInt(@mult) if @mult
     1
 
+  executorDisplay: (options) ->
+    return @execution.executorDisplay(options) if @execution
+    false
+
 export default EntryValueSet

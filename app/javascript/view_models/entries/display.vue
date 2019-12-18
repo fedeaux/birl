@@ -4,7 +4,10 @@
     entries-value-display(:value='entry.value')
 
   .entity-display-detail
-    |  {{ entry.created_at.fromNow() }}
+    template(v-if='entry.created_at')
+      |  {{ entry.created_at.fromNow() }}
+    template(v-else)
+      |  not saved
     template(v-if='entry.observations')
       |  &middot;
       |  {{ entry.observations }}

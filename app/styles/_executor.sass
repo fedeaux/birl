@@ -17,6 +17,18 @@
     font-size: 30px
     text-align: center
     color: white
+    margin-bottom: 1em
+    line-height: 30px
+
+    &.executor-label-doit
+      font-size: 36px
+      font-weight: bold
+
+    .executor-label-detail
+      font-size: 24px
+      color: white
+      font-style: italic
+      opacity: 0.8
 
   .executor-stop
     font-size: 18px
@@ -45,10 +57,7 @@
     background-color: lightblue
 
   &.executor-finished
-    .executor-stop
-      color: black
-      position: fixed
-      bottom: auto
+    background-color: green
 
   .executor-counter
     position: absolute

@@ -11,4 +11,14 @@ class EntryValueSetExecution extends BaseModel
       values: {}
     }
 
+  numberOfExecutions: (set_mult) ->
+    return @values.length if @type == 'list'
+    set_mult
+
+  executorDisplay: (options) ->
+    if !isNaN(options.current_set_execution) && @type == 'list'
+      return @values[options.current_set_execution % @values.length]
+
+    false
+
 export default EntryValueSetExecution

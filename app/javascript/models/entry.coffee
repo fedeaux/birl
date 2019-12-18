@@ -19,4 +19,9 @@ class Entry extends BaseModel
       created_at: { type: moment }
     }
 
+  executorDisplay: (options) ->
+    return false unless @value
+
+    @value.executorDisplay options
+
 export default Entry
