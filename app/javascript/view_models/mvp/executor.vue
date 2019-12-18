@@ -1,5 +1,13 @@
 <template lang="pug">
 .executor(v-if='entry' :class='klass')
+  mvp-executor-counter(:sets_count='entry.value.sets.length'
+                       :current_set_target_executions='current_set_target_executions'
+                       :current_set_index='current_set_index'
+                       :current_set_execution='current_set_execution'
+                       ref='counter'
+
+  )
+
   .executor-label
     template(v-if='state == "idle"' @click='start')
     template(v-else-if='state == "countdown"') Prepare...
@@ -16,20 +24,31 @@
       | {{ display_time }}
 
   .executor-stop(@click='reset')
-    i.refresh.icon
+    i.ban.icon
+
+  .ui.two-buttons(v-if='dev_tools')
+    .ui.basic.button(@click='stop') Sthap
+    .ui.basic.button(@click='current_time = 1') FF
 </template>
 
 <script lang="coffee">
 
 export default
-  props: ['entry']
+  props:
+    entry:
+      required: true
+
+    timer_steps:
+      default: 1
 
   data: ->
     state: 'idle'
-    time: 0
+    current_time: 0
+    initial_time: 0
     current_set_index: 0
     current_set_execution: 0
     fullscreen: false
+    dev_tools: true
 
   methods:
     doitDisplay: ->
@@ -38,22 +57,31 @@ export default
     restDisplay: ->
       'Cool down...'
 
+    stop: ->
+      clearInterval @timer
+
     finish: ->
       clearInterval @timer
-      @time = 0
-      @current_set_index = 0
-      @current_set_mult = 0
-      @fullscreen = false
-      @state = 'finished'
+      @current_time = 0
 
     reset: ->
       @finish()
       @state = 'idle'
+      @fullscreen = false
+      @initial_time = 0
+      @current_set_index = 0
+      @current_set_execution = 0
 
     countdown: (time) ->
-      @time = time
-      @timer = setInterval @decreaseTimer, 1000
+      # console.log "#{@state} for #{time} seconds"
+      @current_time = time
+      @initial_time = time
+      @timer = setInterval @decreaseTimer, @timer_steps * 1000
       @fullscreen = true # shouldBeFullScreen()
+
+      @$nextTick =>
+        return unless @state == 'doit'
+        @$refs.counter.animate (@initial_time + 1) * 1000
 
     start: ->
       @state = 'countdown'
@@ -62,8 +90,8 @@ export default
       @countdown 1
 
     decreaseTimer: ->
-      @time -= 1
-      @timeout() if @time == -1
+      @current_time -= @timer_steps
+      @timeout() if @current_time == -1
 
     timeout: ->
       clearInterval @timer
@@ -83,9 +111,15 @@ export default
         @state = 'rest'
 
         if @current_set_execution < @current_set_target_executions
-          @countdown parseInt @current_set.pause
+          @countdown parseInt @current_set.pause || @current_set.rest
+          @current_set_execution += 1
         else if @entry.value.sets[@current_set_index + 1]
-          @countdown parseInt @entry.value.sets[@current_set_index].rest
+          @countdown parseInt @current_set.rest || @current_set.pause
+          @current_set_execution = 1
+          @current_set_index += 1
+
+          @$nextTick =>
+            @$refs.counter.reset()
         else
           @finish()
 
@@ -95,13 +129,6 @@ export default
         # 2. It is time to move to the next set
 
         @state = 'doit'
-
-        if @current_set_execution < @current_set_target_executions
-          @current_set_execution += 1
-        else
-          @current_set_execution = 1
-          @current_set_index += 1
-
         @countdown parseInt @current_set.time
 
   computed:
@@ -114,8 +141,9 @@ export default
       @current_set.numberOfExecutions()
 
     display_time: ->
-      minutes = Math.floor(@time / 60)
-      seconds = @time % 60
+      time = Math.ceil(@current_time)
+      minutes = Math.floor(time / 60)
+      seconds = time % 60
 
       minutes = "0#{minutes}" if minutes < 10
       seconds = "0#{seconds}" if seconds < 10

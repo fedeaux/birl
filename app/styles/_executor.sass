@@ -49,3 +49,90 @@
       color: black
       position: fixed
       bottom: auto
+
+  .executor-counter
+    position: absolute
+    top: $d4
+    width: 100%
+    padding: 0 $d4
+
+    .executor-counter-sets
+      text-align: center
+
+      label
+        display: block
+        color: white
+        text-align: center
+
+      .executor-counter-sets-set
+        border-radius: 99999px
+        height: $d6
+        width: $d6
+        line-height: $d6
+        text-align: center
+        vertical-align: middle
+        margin: 0 $d
+        display: inline-block
+        color: white
+
+        i, span
+          color: white !important
+          font-size: 18px
+
+        &.current
+          border: thin white solid
+
+          i
+            display: none
+
+          span
+            display: inline
+
+        &.done
+          i, span
+            display: none
+
+          .checkmark
+            display: inline
+
+        &.pending
+          i, span
+            display: none
+
+          .clock
+            display: inline
+
+
+    .executor-counter-executions
+      display: flex
+      height: $d + 1px
+      margin-bottom: $d4
+
+      .executor-counter-executions-execution
+        border-radius: 3px
+        height: 100%
+        margin: 0 1px
+        background-color: rgba(white, 0.6)
+        font-size: 0
+        position: relative
+        flex-grow: 1
+
+        .progress-bar
+          border-radius: 3px
+          background-color: white
+          height: 100%
+          position: absolute
+          top: 0
+          left: 0
+
+        &.pending
+          .progress-bar
+            width: 0
+
+        &.done
+          .progress-bar
+            width: 100%
+
+      .executor-counter-sets-set
+        &.done, &.pending
+          opacity: 0.7
