@@ -84,7 +84,15 @@ export default
       -1
 
     saveFormEntry: (custom_callback = false) ->
-      @entries_resource.save @form_entry, custom_callback || @entrySaved
+      if custom_callback
+        callback = (data) =>
+          @entrySaved(data)
+          custom_callback(data)
+
+        @entries_resource.save @form_entry, callback
+        return
+
+      @entries_resource.save @form_entry, @entrySaved
 
     addEntry: (entry) ->
       index = @entryIndex entry.id

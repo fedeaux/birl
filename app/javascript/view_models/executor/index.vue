@@ -9,7 +9,7 @@
                    ref='counter'
   )
 
-  .executor-label(:class='"executor-label-"+state')
+  .executor-label(:class='"executor-label-"+state' v-if='time_based || state == "finished"')
     template(v-if='state == "idle"' @click='start')
     template(v-else-if='state == "countdown"') Prepare...
     template(v-else-if='state == "doit" || state == "rest"')
@@ -33,9 +33,14 @@
           .ui.white.fluid.button(@click='done')
             | Vamo pro próximo
 
+  .executor-form
+    entries-value-sets-picker(v-model='entry' :data_model='data_model')
+
   .executor-clock(v-if='state != "finished" && state != "idle"')
-    .executor-clock-time
+    .executor-clock-time(v-if='time_based')
       | {{ display_time }}
+    .executor-clock-time(v-else)
+      i.white.arrow.alternate.circle.right.outline.icon(@click='timeout')
 
   .executor-actions
     i.backward.icon(@click='backward')
@@ -63,11 +68,11 @@ export default
 
   data: ->
     state: 'idle'
+    time_based: true
     current_time: 0
     initial_time: 0
     current_set_index: 0
     current_set_execution: 0
-    fullscreen: false
     dev_tools: false
     quick_end: false
 
@@ -93,10 +98,10 @@ export default
 
     countdown: (time) ->
       # console.log "#{@state} for #{time} seconds"
+      @time_based = true
       @current_time = time
       @initial_time = time
       @timer = setInterval @decreaseTimer, @timer_steps * 1000
-      @fullscreen = true # shouldBeFullScreen()
 
       @$nextTick =>
         return unless @state == 'doit' && @$refs.counter
@@ -106,7 +111,12 @@ export default
       @state = 'countdown'
       @current_set_index = 0
       @current_set_execution = 1
-      @countdown 1
+
+      @$nextTick =>
+        if @current_set.time
+          @countdown 5
+        else
+          @timeout()
 
     decreaseTimer: ->
       @current_time -= @timer_steps
@@ -127,9 +137,13 @@ export default
       @findNextState()
 
     findNextState: ->
-      if @state == 'countdown'
+      if @state == 'countdown' || @state == 'rest'
         @state = 'doit'
-        @countdown parseInt @current_set.time
+
+        if @current_set.time
+          @countdown parseInt @current_set.time
+        else
+          @time_based = false
 
       else if @state == 'doit'
         # I was doing. There are three scenarios:
@@ -152,15 +166,10 @@ export default
         else
           @finish()
 
-      else if @state == 'rest'
-        # I was either paused or resting. There are two scenarios:
-        # 1. It is time for another repetition of this set
-        # 2. It is time to move to the next set
-
-        @state = 'doit'
-        @countdown parseInt @current_set.time
-
   computed:
+    fullscreen: ->
+      @state != 'idle'
+
     current_set: ->
       return null unless @entry && @entry.value && @entry.value.sets
       @entry.value.sets[@current_set_index]
