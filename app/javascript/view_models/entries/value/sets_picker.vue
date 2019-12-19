@@ -1,7 +1,7 @@
 <template lang="pug">
 .sets-picker(v-if='data_model && data_model.dimensions')
   .sets-picker-set(v-for='(set, index) in sets' v-if='sets')
-    .sets-picker-set-dimension(v-for='dimension in data_model.dimensions' :class='classForDimension(dimension)')
+    .sets-picker-set-dimension(v-for='dimension in progressable_dimensions' :class='classForDimension(dimension)')
       .sets-picker-set-dimension-name {{ dimension.name }}
 
       .ui.icon.basic.small.circular.button(@click='increase(index, dimension)')
@@ -66,6 +66,10 @@
 
       classForDimension: (dimension) ->
         "sets-picker-set-dimension-#{dimension}"
+
+    computed:
+      progressable_dimensions: ->
+        dimension for dimension in @data_model.dimensions when dimension.name != 'execution'
 
     watch:
       value:

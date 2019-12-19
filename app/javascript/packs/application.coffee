@@ -5,10 +5,14 @@ window.jQuery = window.$
 window.moment = require 'moment'
 
 import Database from 'lib/database'
+import EntryGeneratorsMain from 'entry_generators/main'
 
 window.Global =
   events: new Vue
   db: new Database
+  egm: new EntryGeneratorsMain
+
+window.Global.egm.registerAll()
 
 require 'semantic-ui-sass'
 

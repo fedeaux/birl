@@ -10,7 +10,7 @@
 
 <script lang="coffee">
   export default
-    props: ['default_text', 'entry', 'set_index', 'set_execution']
+    props: ['default_text', 'entry', 'set_index', 'set_execution', 'data_model']
 
     computed:
       execution: ->
@@ -19,8 +19,16 @@
       custom_text: ->
         return null unless @execution
 
-        if @execution.type == 'list' && typeof(@set_execution) == 'number'
-          return @execution.values[@set_execution % @execution.values.length]
+        text = null
 
-        null
+        if @execution.type == 'list' && typeof(@set_execution) == 'number'
+          text = @execution.values[@set_execution % @execution.values.length]
+
+          if @data_model && @data_model.label
+            if _.isArray @data_model.label
+              return "#{@data_model.label[@set_index].value} #{text}"
+            else
+              return "#{@data_model.label.value} #{text}"
+
+        text
 </script>

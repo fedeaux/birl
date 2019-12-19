@@ -5,42 +5,42 @@
                    :current_set_target_executions='current_set_target_executions'
                    :current_set_index='current_set_index'
                    :current_set_execution='current_set_execution'
+                   :main_title='main_title'
                    ref='counter'
-
   )
 
   .executor-label(:class='"executor-label-"+state')
     template(v-if='state == "idle"' @click='start')
     template(v-else-if='state == "countdown"') Prepare...
-    template(v-else-if='state == "doit"')
+    template(v-else-if='state == "doit" || state == "rest"')
       executor-display(:entry='entry'
                        :set_index='current_set_index'
                        :set_execution='current_set_execution'
-                       default_text='Just do it')
+                       :data_model='data_model'
+                       :class='{ "executor-label-detail": state == "rest" }'
+                       :default_text='display_default_text')
 
-    template(v-else-if='state == "rest"')
-      | Cool down...
-
-      executor-display.executor-label-detail(:entry='entry'
-                                             :set_index='current_set_index'
-                                             :set_execution='current_set_execution')
-        | Next:&nbsp;
+        template(v-if='state == "rest"')
+          | Next:&nbsp;
 
     template(v-else-if='state == "finished"')
       | Boa, campeão! KKK
       br
       br
 
-      .ui.white.fluid.button(@click='reset')
-        | Vamo pro próximo
+      .ui.three.column.centered.grid
+        .column
+          .ui.white.fluid.button(@click='done')
+            | Vamo pro próximo
 
-  .executor-clock(v-if='state != "finished"')
-    i.play.circle.outline.icon(v-if='state == "idle"' @click='start')
-    .executor-clock-time(v-else)
+  .executor-clock(v-if='state != "finished" && state != "idle"')
+    .executor-clock-time
       | {{ display_time }}
 
-  .executor-stop(@click='reset')
-    i.ban.icon
+  .executor-actions
+    i.backward.icon(@click='backward')
+    i.ban.icon(@click='reset')
+    i.forward.icon(@click='forward')
 
   .ui.two-buttons(v-if='dev_tools')
     .ui.basic.button(@click='stop') Sthap
@@ -51,8 +51,12 @@
 
 export default
   props:
+    data_model: null
+
     entry:
       required: true
+
+    main_title: false
 
     timer_steps:
       default: 1
@@ -65,12 +69,16 @@ export default
     current_set_execution: 0
     fullscreen: false
     dev_tools: false
+    quick_end: false
 
   methods:
     restDisplay: ->
       do_it_display = @doItDisplay()
       return "Next: #{do_it_display}" if do_it_display
       ''
+
+    done: ->
+      @$emit 'done'
 
     stop: ->
       clearInterval @timer
@@ -91,7 +99,7 @@ export default
       @fullscreen = true # shouldBeFullScreen()
 
       @$nextTick =>
-        return unless @state == 'doit'
+        return unless @state == 'doit' && @$refs.counter
         @$refs.counter.animate (@initial_time + 1) * 1000
 
     start: ->
@@ -102,7 +110,17 @@ export default
 
     decreaseTimer: ->
       @current_time -= @timer_steps
+
+      if @current_time > 6 && @quick_end
+        @current_time = 4
+
       @timeout() if @current_time == -1
+
+    backward: ->
+      @current_time = @initial_time
+
+    forward: ->
+      @current_time = 2
 
     timeout: ->
       clearInterval @timer
@@ -160,6 +178,10 @@ export default
       seconds = "0#{seconds}" if seconds < 10
 
       "#{minutes}:#{seconds}"
+
+    display_default_text: ->
+      return 'Just do it' if @state == 'doit'
+      'Cooldown (:'
 
     klass: ->
       classes = ["executor-#{@state}"]

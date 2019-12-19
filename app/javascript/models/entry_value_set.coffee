@@ -33,9 +33,9 @@ class EntryValueSet extends BaseModel
       str += @formattedTime @time
 
       if @weight and @weight > 0
-        str += "w#{@weight}kg"
+        str += "#{@weight}kg"
 
-    return "#{@mult}x(#{str})" if @mult and @mult > 0
+    return "#{@mult}x(#{str})" if @mult and @mult > 1
     str
 
   human_rest: ->

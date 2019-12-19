@@ -1,11 +1,9 @@
 .executor
-  display: flex
-  align-items: center
-  justify-content: center
-  flex-direction: column
   padding: $d4
+  display: none
 
   &.executor-fullscreen
+    display: block
     position: absolute
     top: 0
     left: 0
@@ -14,10 +12,13 @@
     z-index: 2000
 
   .executor-label
+    position: absolute
     font-size: 30px
     text-align: center
     color: white
-    margin-bottom: 1em
+    bottom: 51%
+    left: 0
+    width: 100%
     line-height: 30px
 
     .executor-display
@@ -33,15 +34,24 @@
       font-style: italic
       opacity: 0.8
 
-  .executor-stop
-    font-size: 18px
-    text-align: center
+  .executor-actions
+    bottom: 20px
     color: white
+    font-size: 18px
+    left: 0
     opacity: 0.7
     position: absolute
-    bottom: 20px
+    text-align: center
+    width: 100%
+
+    i
+      margin: 0 $d2
 
   .executor-clock
+    position: absolute
+    top: 51%
+    left: 0
+    width: 100%
     font-size: 70px
     line-height: 70px
     text-align: center
@@ -67,9 +77,17 @@
     top: $d4
     width: 100%
     padding: 0 $d4
+    left: 0
+
+    .executor-counter-main-title
+      text-align: center
+      color: white
+      font-size: 20px
+      margin-bottom: $d4
 
     .executor-counter-sets
       text-align: center
+      margin-bottom: $d4
 
       label
         display: block
@@ -118,7 +136,6 @@
     .executor-counter-executions
       display: flex
       height: $d + 1px
-      margin-bottom: $d4
 
       .executor-counter-executions-execution
         border-radius: 3px

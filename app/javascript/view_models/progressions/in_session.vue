@@ -33,6 +33,10 @@ export default
     prev_progression: null
 
   methods:
+    navigateToNext: ->
+      return unless @next_progression
+      @$router.push @next_progression.executePath()
+
     finishSession: ->
       if @current_session
         @$router.push @current_session.path()

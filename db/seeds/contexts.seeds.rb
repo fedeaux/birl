@@ -12,6 +12,10 @@ after(:users) do
       {
         name: 'Music: Guitar',
         color: '#DB2828'
+      },
+      {
+        name: 'Music: Sing',
+        color: '#DB2828'
       }
     ].each do |context_attrs|
       slug = context_attrs[:name].parameterize

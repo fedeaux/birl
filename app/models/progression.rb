@@ -1,14 +1,14 @@
 class Progression < ApplicationRecord
   belongs_to :context
   belongs_to :challenge
-  belongs_to :exercise
-  belongs_to :session_progression, touch: true, optional: true
-  has_many :entries, dependent: :destroy
+  belongs_to :exercise, optional: true
+  has_many :session_progressions, dependent: :delete_all
+  has_many :entries, dependent: :delete_all
 
   before_save :ensure_name
 
   def ensure_name
-    self.name = "#{exercise.name} - #{challenge.name}"
+    self.name = [exercise&.name, challenge.name].reject(&:nil?).join ' - '
   end
 
   def exercise_name
@@ -31,7 +31,7 @@ class Progression < ApplicationRecord
     update last_entry_at: entries.maximum(:created_at)
   end
 
-  def entry_data_model
+  def base_entry_data_model
     return challenge.entry_data_model if challenge
 
     {
@@ -41,5 +41,9 @@ class Progression < ApplicationRecord
         { name: :rest, options: {} },
       ]
     }
+  end
+
+  def entry_data_model
+    base_entry_data_model.deep_merge override_entry_data_model
   end
 end

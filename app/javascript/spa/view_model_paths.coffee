@@ -9,6 +9,7 @@ paths = [
   'entity/list/item/divider'
   'progressions/in_session'
   'progressions/execute'
+  'entries/generator'
   'entries/value/picker'
   'entries/value/display'
   'entries/value/sets_picker'

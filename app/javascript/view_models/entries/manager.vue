@@ -1,13 +1,19 @@
 <template lang="pug">
 .entity-manager.entries-manager.default-container
+  entries-generator(:context='context'
+                    :data_model='data_model'
+                    :entries='entries'
+                    ref='entries_generator')
+
   .entity-manager-form(v-if='form_entry')
     entries-form(v-model='form_entry'
                  :data_model='data_model'
+                 :actions='actions.form'
                  @save='saveFormEntry()'
                  @cancel='clearFormEntry()')
 
   .entity-manager-list(v-else)
-    .entity-manager-list-header
+    .entity-manager-list-header(v-if='actions && actions.add')
       #new-entry-button.ui.primary.top.attached.fluid.small.icon.button(@click='newEntry')
         i.plus.icon
         |  Add
@@ -24,6 +30,18 @@ import Entry from '../../models/entry'
 
 export default
   props:
+    actions:
+      default: ->
+        {
+          add: true,
+          form: {
+            actions: {
+              save: true,
+              cancel: true
+            }
+          }
+        }
+
     context:
       default: -> {}
 
@@ -49,15 +67,13 @@ export default
       @entries = response.entries
 
     newEntry: ->
-      if !@entries or @entries.length == 0
-        @setFormEntry new Entry @context
-        return
+      @setFormEntry @$refs.entries_generator.generate()
 
-      last_entry = @entries[0]
-
-      @setFormEntry new Entry _.extend {}, @context, { values: last_entry.values }
+    populateFormEntry: ->
+      @setFormEntry @$refs.entries_generator.populate @form_entry
 
     setFormEntry: (@form_entry) ->
+      @form_entry
 
     clearFormEntry: ->
       @setFormEntry null
@@ -68,8 +84,8 @@ export default
 
       -1
 
-    saveFormEntry: ->
-      @entries_resource.save @form_entry, @entrySaved
+    saveFormEntry: (custom_callback = false) ->
+      @entries_resource.save @form_entry, custom_callback || @entrySaved
 
     addEntry: (entry) ->
       index = @entryIndex entry.id
@@ -96,7 +112,8 @@ export default
       @entries = @parent_entries
       return
 
-    @loadEntries()
+    unless @context
+      @loadEntries()
 
   watch:
     context:

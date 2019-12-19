@@ -5,41 +5,34 @@
       router-link.entity-show-header-actions(:to='progression.path()')
         i.eye.icon
 
-  template(v-if='!editing_entry')
-    template(v-if='todays_entry')
-      .ui.green.message Done!
+  entries-manager(:context='{ progression_id: progression_id }'
+                  :data_model='progression.entry_data_model'
+                  :actions='{ add: false, form: { actions: false } }'
+                  ref='entries_manager')
 
-      entries-list-item(:entry='todays_entry')
-      .ui.fluid.buttons
-        .ui.primary.button(@click='doAnother()' v-if='new_entry && !new_entry.id')
-          | Do another
-        .ui.basic.button(@click='editTodaysEntry()')
-          | Edit
+  executor-index(v-if='executable_entry'
+                 :data_model='progression.entry_data_model'
+                 :entry='executable_entry'
+                 :main_title='progression.name'
+                 @done='done'
+                 ref='executor')
 
-      executor-index(:entry='executable_entry')
+  shared-footer
+    .ui.primary.fluid.button(@click='prepare' v-if='state == "idle"')
+      | Prepare&nbsp;&nbsp;
 
-    .centered(v-else @click='doIt')
-      .ui.primary.large.button
-        | Do
+    .ui.primary.fluid.button(@click='execute' v-if='state == "preparing"')
+      | Execute&nbsp;&nbsp;
+      i.play.icon
 
-  entries-form(v-model='new_entry'
-               v-if='editing_entry'
-               :data_model='progression.entry_data_model'
-               @save='saveFormEntry()'
-               @cancel='clearFormEntry()')
-
-  template(v-if='progression.entries.length > 0')
-    h3 Older Entries
-    entries-list(:entries='progression.entries')
-
-  shared-footer(v-if='show_shared_footer')
-    progressions-in-session(:current_progression_id='progression_id')
+    hr
+    progressions-in-session(v-if='show_in_session'
+                            :current_progression_id='progression_id'
+                            ref='in_session')
 </template>
 
 <script lang="coffee">
 import ProgressionsResource from '../../resources/progressions_resource'
-import EntriesResource from '../../resources/entries_resource'
-import Entry from '../../models/entry'
 
 export default
   props:
@@ -48,66 +41,57 @@ export default
   data: ->
     progression: null
     progression_id: null
-    new_entry: null
-    todays_entry: null
-    editing_entry: true
+    executable_entry: null
+    state: 'idle'
 
   methods:
-    editTodaysEntry: ->
-      @new_entry = @todays_entry
-      @todays_entry = null
-      @editing_entry = true
+    reset: ->
+      @state = 'idle'
+      @progression = null
 
-    doAnother: ->
-      @editing_entry = true
+      @$nextTick =>
+        @progressions_resource ?= new ProgressionsResource
+        @progression_id = parseInt @$route.params.id
+        @loadProgression()
+
+    done: ->
+      @$refs.entries_manager.saveFormEntry @entrySaved
+
+    entrySaved: ->
+      unless @$refs.in_session && @$refs.in_session.navigateToNext()
+        @$refs.executor.reset()
+
+    prepare: ->
+      return unless @$refs.entries_manager
+      @state = 'preparing'
+      @$refs.entries_manager.newEntry()
+
+    execute: ->
+      @setExecutableEntry @$refs.entries_manager.populateFormEntry()
+
+      @$nextTick =>
+        @$refs.executor.start()
 
     loadProgression: ->
-      @progressions_resource.execute @progression_id, @progressionLoaded
+      @progressions_resource.get @progression_id, @progressionLoaded
 
     progressionLoaded: (response) ->
       @progression = response.progression
-      @new_entry = @progression.new_entry
-      @todays_entry = @progression.todays_entry
-      @editing_entry = !@todays_entry
 
-    saveFormEntry: ->
-      @entries_resource.save @new_entry, @entrySaved
-
-    entrySaved: (data) ->
-      @new_entry = data.entry
-      @editing_entry = false
-      @todays_entry = @new_entry unless @todays_entry
-
-    clearFormEntry: ->
-      @editing_entry = false
-
-      if @new_entry.isPersisted()
-        @today_entry = @new_entry
-
-    doIt: ->
-      @editing_entry = true
+    setExecutableEntry: (@executable_entry) ->
 
   computed:
-    show_shared_footer: ->
+    show_in_session: ->
       @current_session && @current_session.progressions &&
         @progression_id in (p.id for p in @current_session.progressions)
 
-    executable_entry: ->
-      return @todays_entry if @todays_entry
-      @new_entry
-
   mounted: ->
-    @entries_resource = new EntriesResource
-
     if @parent_progression
       @progression = @parent_progression
-      return
 
   watch:
     '$route.params.id':
       immediate: true
       handler: ->
-        @progressions_resource ?= new ProgressionsResource
-        @progression_id = parseInt @$route.params.id
-        @loadProgression()
+        @reset()
 </script>

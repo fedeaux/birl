@@ -1,10 +1,14 @@
 after('bodybuilding:exercises') do
+  challenge_ids = []
+
   User.find_each do |user|
+    context = user.context 'bodybuilding'
+    next unless context
+
     [
       {
         name: '5/4/3/2/1',
         description: '2-4 na primeira, 20-25 na quinta',
-        # entry_data_model: EntryDataModel::MaxRepetitions.new(reps_and_rests: [[2, 90], [4, 75], [7, 60], [10, 60], [12, 0]]).entry_data_model
       },
       {
         name: 'Resistência de Força',
@@ -47,15 +51,15 @@ after('bodybuilding:exercises') do
         data_model: EntryDataModel::Hiit
       }
     ].each do |challenge_attrs|
-      context = user.context 'bodybuilding'
-      next unless context
-
       challenge = context.challenges.find_or_initialize_by(name: challenge_attrs[:name])
 
       challenge_attrs[:entry_data_model] = (challenge_attrs[:data_model] || EntryDataModel::MaxRepetitions).new.entry_data_model
 
       challenge.assign_attributes challenge_attrs.except(:data_model)
       challenge.save
+      challenge_ids.push challenge.id
     end
+
+    context.challenges.where('id NOT IN (?)', challenge_ids).destroy_all
   end
 end

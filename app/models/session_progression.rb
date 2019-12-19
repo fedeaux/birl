@@ -1,4 +1,4 @@
 class SessionProgression < ApplicationRecord
-  belongs_to :session, touch: true
-  belongs_to :progression, touch: true
+  belongs_to :session
+  belongs_to :progression
 end

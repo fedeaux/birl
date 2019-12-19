@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_17_004022) do
+ActiveRecord::Schema.define(version: 2019_12_19_195743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 2019_12_17_004022) do
     t.datetime "updated_at", null: false
     t.integer "entries_count"
     t.bigint "context_id"
+    t.jsonb "override_entry_data_model", default: {}
     t.index ["challenge_id"], name: "index_progressions_on_challenge_id"
     t.index ["context_id"], name: "index_progressions_on_context_id"
     t.index ["exercise_id"], name: "index_progressions_on_exercise_id"

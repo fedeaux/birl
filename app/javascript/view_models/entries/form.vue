@@ -9,9 +9,9 @@
         label Observations
         input(type='text' v-model='entry.observations')
 
-      .field.ui.fluid.buttons
-        .ui.primary.button(@click='save()') Save
-        .ui.basic.button(@click='cancel()') Cancel
+      .field.ui.fluid.buttons(v-if='actions')
+        .ui.primary.button(@click='save()' v-if='actions.save') Save
+        .ui.basic.button(@click='cancel()' v-if='actions.cancel') Cancel
 </template>
 
 <script lang="coffee">
@@ -23,11 +23,19 @@ export default
     prop: 'original_entry'
 
   props:
+    actions:
+      default: ->
+        {
+          save: true,
+          cancel: true
+        }
+
     original_entry: null
     data_model: {}
 
   data: ->
     entry: null
+    last_value: null
 
   methods:
     save: ->
@@ -38,6 +46,15 @@ export default
       @$emit 'cancel'
 
   watch:
+    'entry.value':
+      deep: true
+      handler: ->
+        new_value = @entry.signature()
+
+        if new_value != @last_value
+          @last_value = new_value
+          @$emit 'input', @entry
+
     original_entry:
       immediate: true
       deep: true

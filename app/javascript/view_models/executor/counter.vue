@@ -1,7 +1,6 @@
 <template lang="pug">
 .executor-counter
-  .executor-counter-executions(v-if='current_set_target_executions > 1')
-    executor-progress-bar.executor-counter-executions-execution(v-for='index in current_set_target_executions' :klass='counterExecutionClass(index)' :ref='"progress_bar_"+index')
+  .executor-counter-main-title(v-if='main_title') {{ main_title }}
 
   .executor-counter-sets(v-if='sets_count > 1')
     .executor-counter-sets-set(v-for='index in counterSetsFillerBefore()')
@@ -11,11 +10,14 @@
       i.clock.icon
     .executor-counter-sets-set(v-for='index in counterSetsFillerAfter()')
 
+  .executor-counter-executions(v-if='current_set_target_executions > 1')
+    executor-progress-bar.executor-counter-executions-execution(v-for='index in current_set_target_executions' :klass='counterExecutionClass(index)' :ref='"progress_bar_"+index')
+
 </template>
 
 <script lang="coffee">
 export default
-  props: ['sets_count', 'current_set_target_executions', 'current_set_index', 'current_set_execution']
+  props: ['sets_count', 'current_set_target_executions', 'current_set_index', 'current_set_execution', 'main_title']
 
   methods:
     counterSetsFillerBefore: ->
