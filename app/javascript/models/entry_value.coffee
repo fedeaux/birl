@@ -12,10 +12,4 @@ class EntryValue extends BaseModel
       options: {}
     }
 
-  executorDisplay: (options) ->
-    unless isNaN options.current_set_index
-      return @sets[options.current_set_index].executorDisplay(options)
-
-    false
-
 export default EntryValue

@@ -5,17 +5,22 @@
       router-link.entity-show-header-actions(:to='progression.path()')
         i.eye.icon
 
-  template(v-if='todays_entry && !editing_entry')
-    .ui.green.message Done!
+  template(v-if='!editing_entry')
+    template(v-if='todays_entry')
+      .ui.green.message Done!
 
-    entries-list-item(:entry='todays_entry')
-    .ui.fluid.buttons
-      .ui.primary.button(@click='doAnother()' v-if='new_entry && !new_entry.id')
-        | Do another
-      .ui.basic.button(@click='editTodaysEntry()')
-        | Edit
+      entries-list-item(:entry='todays_entry')
+      .ui.fluid.buttons
+        .ui.primary.button(@click='doAnother()' v-if='new_entry && !new_entry.id')
+          | Do another
+        .ui.basic.button(@click='editTodaysEntry()')
+          | Edit
 
-    mvp-executor(:entry='new_entry')
+      executor-index(:entry='executable_entry')
+
+    .centered(v-else @click='doIt')
+      .ui.primary.large.button
+        | Do
 
   entries-form(v-model='new_entry'
                v-if='editing_entry'
@@ -50,6 +55,7 @@ export default
   methods:
     editTodaysEntry: ->
       @new_entry = @todays_entry
+      @todays_entry = null
       @editing_entry = true
 
     doAnother: ->
@@ -75,10 +81,20 @@ export default
     clearFormEntry: ->
       @editing_entry = false
 
+      if @new_entry.isPersisted()
+        @today_entry = @new_entry
+
+    doIt: ->
+      @editing_entry = true
+
   computed:
     show_shared_footer: ->
       @current_session && @current_session.progressions &&
         @progression_id in (p.id for p in @current_session.progressions)
+
+    executable_entry: ->
+      return @todays_entry if @todays_entry
+      @new_entry
 
   mounted: ->
     @entries_resource = new EntriesResource

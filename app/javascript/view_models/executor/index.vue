@@ -1,10 +1,11 @@
 <template lang="pug">
 .executor(v-if='entry && entry.value && entry.value.sets' :class='klass')
-  mvp-executor-counter(:sets_count='entry.value.sets.length'
-                       :current_set_target_executions='current_set_target_executions'
-                       :current_set_index='current_set_index'
-                       :current_set_execution='current_set_execution'
-                       ref='counter'
+  executor-counter(v-if='state != "finished"'
+                   :sets_count='entry.value.sets.length'
+                   :current_set_target_executions='current_set_target_executions'
+                   :current_set_index='current_set_index'
+                   :current_set_execution='current_set_execution'
+                   ref='counter'
 
   )
 
@@ -12,21 +13,30 @@
     template(v-if='state == "idle"' @click='start')
     template(v-else-if='state == "countdown"') Prepare...
     template(v-else-if='state == "doit"')
-      | {{ doItDisplay() }}
+      executor-display(:entry='entry'
+                       :set_index='current_set_index'
+                       :set_execution='current_set_execution'
+                       default_text='Just do it')
+
     template(v-else-if='state == "rest"')
       | Cool down...
-      .executor-label-detail
-        | {{ restDisplay() }}
+
+      executor-display.executor-label-detail(:entry='entry'
+                                             :set_index='current_set_index'
+                                             :set_execution='current_set_execution')
+        | Next:&nbsp;
 
     template(v-else-if='state == "finished"')
-     | Boa, campeão! KKK
+      | Boa, campeão! KKK
+      br
+      br
 
-     .ui.basic.green.button(@click='reset')
-       | Vamo pro próximo
+      .ui.white.fluid.button(@click='reset')
+        | Vamo pro próximo
 
-  .executor-display
+  .executor-clock(v-if='state != "finished"')
     i.play.circle.outline.icon(v-if='state == "idle"' @click='start')
-    .executor-display-time(v-else)
+    .executor-clock-time(v-else)
       | {{ display_time }}
 
   .executor-stop(@click='reset')
@@ -57,14 +67,6 @@ export default
     dev_tools: false
 
   methods:
-    doItDisplay: ->
-      options = {
-        current_set_index: @current_set_index
-        current_set_execution: @current_set_execution - 1
-      }
-
-      @entry.executorDisplay(options) || 'Just do it'
-
     restDisplay: ->
       do_it_display = @doItDisplay()
       return "Next: #{do_it_display}" if do_it_display
@@ -79,7 +81,7 @@ export default
       @current_time = 0
 
     reset: ->
-      # Object.assign @$data, @$options.data()
+      Object.assign @$data, @$options.data()
 
     countdown: (time) ->
       # console.log "#{@state} for #{time} seconds"

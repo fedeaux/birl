@@ -13,9 +13,10 @@ paths = [
   'entries/value/display'
   'entries/value/sets_picker'
   'contexts/choose'
-  'mvp/executor'
-  'mvp/executor/counter'
-  'mvp/executor/progress_bar'
+  'executor/index'
+  'executor/counter'
+  'executor/progress_bar'
+  'executor/display'
 ]
 
 for entity in entities

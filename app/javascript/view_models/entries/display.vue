@@ -11,6 +11,8 @@
     template(v-if='entry.observations')
       |  &middot;
       |  {{ entry.observations }}
+    |  &middot;
+    |  {{ entry.id }}
 
   .entity-display-actions(v-if='allow_actions' @click='action($event)')
     slot

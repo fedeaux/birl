@@ -1,7 +1,7 @@
 <template lang="pug">
 .executor-counter
   .executor-counter-executions(v-if='current_set_target_executions > 1')
-    mvp-executor-progress-bar.executor-counter-executions-execution(v-for='index in current_set_target_executions' :klass='counterExecutionClass(index)' :ref='"progress_bar_"+index')
+    executor-progress-bar.executor-counter-executions-execution(v-for='index in current_set_target_executions' :klass='counterExecutionClass(index)' :ref='"progress_bar_"+index')
 
   .executor-counter-sets(v-if='sets_count > 1')
     .executor-counter-sets-set(v-for='index in counterSetsFillerBefore()')

@@ -9,9 +9,14 @@ class Api::V1::ProgressionsController < Api::V1::ApiController
   end
 
   def execute
-    @entries = @progression.entries.order('created_at DESC').first(5)[1..-1]
+    entries = @progression.entries.order('created_at DESC').limit(5)
     @new_entry = EntryGenerator.new(@progression).new_entry
-    @todays_entry = @entries.last if @progression.done_today
+    if @progression.done_today
+      @todays_entry = entries.first
+      @entries = entries[1..-1]
+    else
+      @entries = entries
+    end
   end
 
   def show
