@@ -2,6 +2,7 @@
 .entity-edit.entry-edit.default-container
   entries-form(v-model='entry'
                v-if='entry'
+               :data_model='entry.data_model'
                @save='saveEntry()'
                @cancel='entryDone()')
 </template>

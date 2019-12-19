@@ -7,7 +7,9 @@ class Api::V1::EntriesController < Api::V1::ApiController
     @entries = Entry.where(progression_id: params[:progression_id]).order('created_at DESC')
   end
 
-  def show; end
+  def show
+    @data_model = @entry.progression.entry_data_model
+  end
 
   def update
     if @entry.update(entry_params)
