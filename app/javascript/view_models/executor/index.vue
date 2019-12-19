@@ -17,7 +17,7 @@
                        :set_index='current_set_index'
                        :set_execution='current_set_execution'
                        :data_model='data_model'
-                       :class='{ "executor-label-detail": state == "rest" }'
+                       :class='{ "executor-detail": state == "rest" }'
                        :default_text='display_default_text')
 
         template(v-if='state == "rest"')
@@ -33,11 +33,13 @@
           .ui.white.fluid.button(@click='done')
             | Vamo pro próximo
 
-  .executor-form
-    entries-value-sets-picker(v-model='entry' :data_model='data_model')
+  .executor-form(v-if='(state == "doit" || state == "rest") && !time_based')
+    .executor-detail(v-if='state == "rest"')
+      | After rest
+    entries-value-set-picker(v-model='current_set' :data_model='data_model' :in_execution='true')
 
   .executor-clock(v-if='state != "finished" && state != "idle"')
-    .executor-clock-time(v-if='time_based')
+    .executor-clock-time(v-if='time_based || state == "rest"')
       | {{ display_time }}
     .executor-clock-time(v-else)
       i.white.arrow.alternate.circle.right.outline.icon(@click='timeout')
@@ -68,7 +70,6 @@ export default
 
   data: ->
     state: 'idle'
-    time_based: true
     current_time: 0
     initial_time: 0
     current_set_index: 0
@@ -98,7 +99,6 @@ export default
 
     countdown: (time) ->
       # console.log "#{@state} for #{time} seconds"
-      @time_based = true
       @current_time = time
       @initial_time = time
       @timer = setInterval @decreaseTimer, @timer_steps * 1000
@@ -130,7 +130,7 @@ export default
       @current_time = @initial_time
 
     forward: ->
-      @current_time = 2
+      @timeout()
 
     timeout: ->
       clearInterval @timer
@@ -142,8 +142,6 @@ export default
 
         if @current_set.time
           @countdown parseInt @current_set.time
-        else
-          @time_based = false
 
       else if @state == 'doit'
         # I was doing. There are three scenarios:
@@ -167,12 +165,19 @@ export default
           @finish()
 
   computed:
+    time_based: ->
+      @current_set && @current_set.time
+
     fullscreen: ->
       @state != 'idle'
 
-    current_set: ->
-      return null unless @entry && @entry.value && @entry.value.sets
-      @entry.value.sets[@current_set_index]
+    current_set:
+      get: ->
+        return null unless @entry && @entry.value && @entry.value.sets
+        @entry.value.sets[@current_set_index]
+
+      set: (set) ->
+        @$emit 'entrySetUpdated', { index: @current_set_index, set: set }
 
     current_set_target_executions: ->
       return null unless @current_set

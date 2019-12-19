@@ -4,42 +4,45 @@
   .sets-adder
     margin-top: $d2
 
-  .sets-picker-set
-    text-align: center
-    border-bottom: thin #eee solid
-    padding: $d2
-    position: relative
+.sets-picker-set
+  text-align: center
+  border-bottom: thin #eee solid
+  padding: $d2
+  position: relative
 
-    &:last-child
-      border-bottom: none
+  &:last-child
+    border-bottom: none
 
-    .sets-remover
-      position: absolute
-      bottom: 4.4em
-      right: $d2
+  .sets-remover
+    position: absolute
+    bottom: 4.4em
+    right: $d2
 
-    .sets-picker-set-dimension
-      display: inline-block
-      width: 3em
-      margin-right: $d
+  .sets-picker-set-dimension
+    display: inline-block
+    width: 3em
+    margin-right: $d
 
-      &.sets-picker-set-dimension-execution
-        display: block
+    .circular.button
+      background-color: white !important
+
+    &.sets-picker-set-dimension-execution
+      display: block
+      width: 100%
+
+      .circular.button
+        display: none
+
+    .sets-picker-set-dimension-name
+      font-size: 10px
+
+    .ui.input
+      margin: $d 0
+
+      input
+        text-align: center
+        padding: $d2 0 !important
         width: 100%
-
-        .circular.button
-          display: none
-
-      .sets-picker-set-dimension-name
-        font-size: 10px
-
-      .ui.input
-        margin: $d 0
-
-        input
-          text-align: center
-          padding: $d2 0 !important
-          width: 100%
 
 .entry-value-display
   .entry-value-display-element

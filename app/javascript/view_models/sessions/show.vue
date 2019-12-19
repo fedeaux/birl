@@ -51,7 +51,7 @@ export default
       @setCurrentSession @session
       for progression in @session.progressions
         unless progression.done_today
-          @$router.push progression.path()
+          @$router.push progression.executePath()
           return
 
   mounted: ->

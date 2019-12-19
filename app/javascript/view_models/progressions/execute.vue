@@ -14,6 +14,7 @@
                  :data_model='progression.entry_data_model'
                  :entry='executable_entry'
                  :main_title='progression.name'
+                 @entrySetUpdated='entrySetUpdated'
                  @done='done'
                  ref='executor')
 
@@ -25,10 +26,10 @@
       | Execute&nbsp;&nbsp;
       i.play.icon
 
-    hr
-    progressions-in-session(v-if='show_in_session'
-                            :current_progression_id='progression_id'
-                            ref='in_session')
+    template(v-if='show_in_session')
+      hr
+      progressions-in-session(:current_progression_id='progression_id'
+                              ref='in_session')
 </template>
 
 <script lang="coffee">
@@ -56,6 +57,9 @@ export default
 
     done: ->
       @$refs.entries_manager.saveFormEntry @entrySaved
+
+    entrySetUpdated: (data) ->
+      @$refs.entries_manager.entrySetUpdated data
 
     entrySaved: ->
       unless @$refs.in_session && @$refs.in_session.navigateToNext()

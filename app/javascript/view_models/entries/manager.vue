@@ -27,6 +27,7 @@
 <script lang="coffee">
 import EntriesResource from '../../resources/entries_resource'
 import Entry from '../../models/entry'
+import EntryValueSet from '../../models/entry_value_set'
 
 export default
   props:
@@ -53,6 +54,9 @@ export default
     form_entry: null
 
   methods:
+    entrySetUpdated: (data) ->
+      Vue.set @form_entry.value.sets, data.index, new EntryValueSet data.set
+
     editEntry: (data) ->
       @setFormEntry data.entry
 

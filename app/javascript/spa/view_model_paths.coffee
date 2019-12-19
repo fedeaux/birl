@@ -13,6 +13,7 @@ paths = [
   'entries/value/picker'
   'entries/value/display'
   'entries/value/sets_picker'
+  'entries/value/set_picker'
   'contexts/choose'
   'executor/index'
   'executor/counter'

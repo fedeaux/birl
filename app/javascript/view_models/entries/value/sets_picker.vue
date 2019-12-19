@@ -1,20 +1,11 @@
 <template lang="pug">
 .sets-picker(v-if='data_model && data_model.dimensions')
-  .sets-picker-set(v-for='(set, index) in sets' v-if='sets')
-    .sets-picker-set-dimension(v-for='dimension in progressable_dimensions' :class='classForDimension(dimension)')
-      .sets-picker-set-dimension-name {{ dimension.name }}
-
-      .ui.icon.basic.small.circular.button(@click='increase(index, dimension)')
-        i.up.angle.icon
-
-      .ui.input
-        input(type='text' v-model='sets[index][dimension.name]' @input='changed')
-
-      .ui.icon.basic.small.circular.button(@click='decrease(index, dimension)')
-        i.down.angle.icon
-
-    .ui.icon.red.tiny.circular.button.sets-remover(@click='removeSet(index)')
-      i.minus.icon
+  entries-value-set-picker(v-if='sets'
+                           v-for='(set, index) in sets'
+                           v-model='sets[index]'
+                           :data_model='data_model'
+                           @remove='removeSet(index)'
+                           @input='changed()')
 
   .ui.icon.primary.small.circular.button.sets-adder(@click='addSet')
     i.plus.icon
@@ -49,27 +40,6 @@
       removeSet: (index) ->
         @sets.splice index, 1
         @changed()
-
-      increase: (index, dimension) ->
-        set = @sets[index]
-        value = parseInt set[dimension.name]
-        set[dimension.name] = value and value + 1 or 1
-        Vue.set @sets, index, set
-        @changed()
-
-      decrease: (index, dimension) ->
-        set = @sets[index]
-        value = parseInt set[dimension.name]
-        set[dimension.name] = value and value - 1 or 0
-        Vue.set @sets, index, set
-        @changed()
-
-      classForDimension: (dimension) ->
-        "sets-picker-set-dimension-#{dimension}"
-
-    computed:
-      progressable_dimensions: ->
-        dimension for dimension in @data_model.dimensions when dimension.name != 'execution'
 
     watch:
       value:

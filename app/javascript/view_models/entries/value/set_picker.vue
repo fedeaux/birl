@@ -1,24 +1,19 @@
 <template lang="pug">
-.sets-picker(v-if='data_model && data_model.dimensions')
-  entries-value-set-picker(v-model='sets[index]' v-for='(set, index) in sets' v-if='sets')
-  .sets-picker-set()
-    .sets-picker-set-dimension(v-for='dimension in progressable_dimensions' :class='classForDimension(dimension)')
-      .sets-picker-set-dimension-name {{ dimension.name }}
+.sets-picker-set
+  .sets-picker-set-dimension(v-for='dimension in progressable_dimensions' :class='classForDimension(dimension)')
+    .sets-picker-set-dimension-name {{ dimension.name }}
 
-      .ui.icon.basic.small.circular.button(@click='increase(index, dimension)')
-        i.up.angle.icon
+    .ui.icon.basic.small.circular.button(@click='increase(dimension)')
+      i.up.angle.icon
 
-      .ui.input
-        input(type='text' v-model='sets[index][dimension.name]' @input='changed')
+    .ui.input
+      input(type='text' v-model='set[dimension.name]' @input='changed')
 
-      .ui.icon.basic.small.circular.button(@click='decrease(index, dimension)')
-        i.down.angle.icon
+    .ui.icon.basic.small.circular.button(@click='decrease(dimension)')
+      i.down.angle.icon
 
-    .ui.icon.red.tiny.circular.button.sets-remover(@click='removeSet(index)')
-      i.minus.icon
-
-  .ui.icon.primary.small.circular.button.sets-adder(@click='addSet')
-    i.plus.icon
+  .ui.icon.red.tiny.circular.button.sets-remover(@click='removeSet()' v-if='!in_execution')
+    i.minus.icon
 </template>
 
 <script lang="coffee">
@@ -26,43 +21,26 @@
     props:
       data_model: {}
       value: null
+      in_execution: false
 
     data: ->
-      sets: null
+      set: null
 
     methods:
       changed: ->
-        @$emit 'input', @sets
+        @$emit 'input', @set
 
-      addSet: ->
-        @sets.push @newSet()
+      removeSet: ->
+        @$emit 'remove'
+
+      increase: (dimension) ->
+        value = parseInt @set[dimension.name]
+        Vue.set @set, dimension.name, value and value + 1 or 1
         @changed()
 
-      newSet: ->
-        return JSON.parse JSON.stringify @sets[@sets.length - 1] if @sets and @sets.length > 0
-        set = {}
-
-        for dimension in @data_model.dimensions
-          set[dimension.name] = 1
-
-        set
-
-      removeSet: (index) ->
-        @sets.splice index, 1
-        @changed()
-
-      increase: (index, dimension) ->
-        set = @sets[index]
-        value = parseInt set[dimension.name]
-        set[dimension.name] = value and value + 1 or 1
-        Vue.set @sets, index, set
-        @changed()
-
-      decrease: (index, dimension) ->
-        set = @sets[index]
-        value = parseInt set[dimension.name]
-        set[dimension.name] = value and value - 1 or 0
-        Vue.set @sets, index, set
+      decrease: (dimension) ->
+        value = parseInt @set[dimension.name]
+        Vue.set @set, dimension.name, value and value - 1 or 0
         @changed()
 
       classForDimension: (dimension) ->
@@ -70,14 +48,14 @@
 
     computed:
       progressable_dimensions: ->
-        dimension for dimension in @data_model.dimensions when dimension.name != 'execution'
+        dimension for dimension in @data_model.dimensions when dimension.name != 'execution' && (!@in_execution || dimension.name != 'mult')
 
     watch:
       value:
         immediate: true
         handler: ->
           if @value
-            @sets = JSON.parse JSON.stringify @value
+            @set = JSON.parse JSON.stringify @value
           else
-            @sets = []
+            @set = {}
 </script>
