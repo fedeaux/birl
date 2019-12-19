@@ -9,7 +9,6 @@ Rails.application.routes.draw do
       resources :entries
       resources :exercises
       resources :groups
-      get 'progressions/:id/execute' => 'progressions#execute'
       resources :progressions
       resources :session_progressions
       get 'sessions/todays' => 'sessions#today'

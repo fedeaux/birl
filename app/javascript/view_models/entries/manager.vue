@@ -19,7 +19,7 @@
         |  Add
 
     entries-list(:entries='entries'
-                 :allow_actions='true'
+                 :allow_actions='actions.list_actions'
                  @edit='editEntry($event)'
                  @destroy='destroyEntry($event)')
 </template>
@@ -33,12 +33,11 @@ export default
     actions:
       default: ->
         {
+          list_actions: true,
           add: true,
           form: {
-            actions: {
-              save: true,
-              cancel: true
-            }
+            save: true,
+            cancel: true
           }
         }
 

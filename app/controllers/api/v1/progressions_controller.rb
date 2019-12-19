@@ -8,19 +8,7 @@ class Api::V1::ProgressionsController < Api::V1::ApiController
     @progressions = @progressions.where(exercise_id: params[:exercise_id])
   end
 
-  def execute
-    entries = @progression.entries.order('created_at DESC').limit(5)
-    @new_entry = EntryGenerator.new(@progression).new_entry
-    if @progression.done_today
-      @todays_entry = entries.first
-      @entries = entries[1..-1]
-    else
-      @entries = entries
-    end
-  end
-
-  def show
-  end
+  def show; end
 
   def update
     if @progression.update(progression_params)
