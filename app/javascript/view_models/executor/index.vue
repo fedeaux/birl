@@ -53,9 +53,10 @@
     .executor-actions-right
       executor-audio-controls
 
-  .ui.two-buttons(v-if='dev_tools')
+  .ui.two-buttons.executor-dev-tools(v-if='dev_tools')
     .ui.basic.button(@click='stop') Sthap
     .ui.basic.button(@click='current_time = 1') FF
+    .ui.basic.button(@click='tick()') tick
 </template>
 
 <script lang="coffee">
@@ -79,7 +80,7 @@ export default
     pre_time: 3
     current_set_index: 0
     current_set_execution: 0
-    dev_tools: false
+    dev_tools: true
     quick_end: false
 
   methods:
@@ -90,6 +91,9 @@ export default
 
     done: ->
       @$emit 'done'
+
+    tick: ->
+      Global.player.play 'tick'
 
     stop: ->
       clearInterval @timer

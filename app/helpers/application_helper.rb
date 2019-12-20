@@ -13,8 +13,15 @@ module ApplicationHelper
         }
       end
 
+      config[:schemas][schema][:eventless] = schema_config[:eventless].map { |audio|
+        audio_path("schemas/#{schema}/#{audio}")
+      }
+
       config[:schemas][schema].delete :new_files
-      config[:schemas][schema][:image] = image_path("audio/#{schema}.png")
+
+      if File.exist? "app/assets/images/audio/#{schema}.png"
+        config[:schemas][schema][:image] = image_path("audio/#{schema}.png")
+      end
     end
 
     config.to_json

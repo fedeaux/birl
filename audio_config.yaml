@@ -1,10 +1,6 @@
 ---
 :schemas:
   :birl:
-    :new_files:
-    - 01.monstro.mp3
-    - 06.vem.mp3
-    - '08.vai.mp3'
     :events:
       :rest_finished:
       - 02.bora_caralho.mp3
@@ -21,3 +17,19 @@
       - 13.aqui_nos_controi_fibra.mp3
       - 14.nao_e_agua_com_musculo.mp3
       - 15.e_37_anos.mp3
+    :image:
+    :eventless: []
+    :new_files:
+    - 01.monstro.mp3
+    - 06.vem.mp3
+    - '08.vai.mp3'
+  :default:
+    :events:
+      :rest_finished:
+      - blop.mp3
+      :doit_finished:
+      - beep-ping.mp3
+    :image:
+    :eventless:
+    - tick.mp3
+    :new_files: []

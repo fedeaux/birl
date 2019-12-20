@@ -18,6 +18,10 @@ class Player
           @audios[schema][name] = new Audio(audio)
           @events[schema][event].push name
 
+      for audio in config.eventless
+        name = @namelize audio
+        @audios[schema][name] = new Audio(audio)
+
   schemas: ->
     Object.keys @audios
 
@@ -37,9 +41,7 @@ class Player
 
   play: (name, schema) ->
     schema ?= @schema
-    return unless schema && @audios[schema] && @audios[schema][name]
-
-    @audios[schema][name].play()
+    (@audios[schema] && @audios[schema][name] || @audios['default'][name])?.play()
 
   image: (schema) ->
     @images[schema]
@@ -56,6 +58,6 @@ class Player
 
   namelize: (path) ->
     parts = path.split('/')
-    return parts[parts.length - 1].split('.')[1].split('-')[0]
+    return parts[parts.length - 1].replace(/^\d+\./, '').split('-')[0]
 
 export default Player

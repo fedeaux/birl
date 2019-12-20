@@ -35,14 +35,14 @@ namespace :dev do
 
     Dir['app/assets/audios/schemas/*'].each do |schema|
       schema_name = schema.split('/').last.to_sym
-      config[:schemas][schema_name] ||= { events: nil, image: nil }
+      config[:schemas][schema_name] ||= { events: nil, image: nil, eventless: [] }
       config[:schemas][schema_name][:events] ||= events.map { |e| [e, []] }.to_h
-      current = config[:schemas][schema_name][:events].values.flatten.uniq
+      current = (config[:schemas][schema_name][:events].values + config[:schemas][schema_name][:eventless]).flatten.uniq
       new_files = []
 
       Dir["#{schema}/*.mp3"].each do |file_path|
         file_name = file_path.split('/').last
-        next unless file_name =~ /\d+\./
+        next if file_name.start_with? 'ignore.'
         next if current.include? file_name
 
         new_files.push file_name

@@ -3,7 +3,7 @@
   .executor-counter-main-title(v-if='main_title') {{ main_title }}
 
   .executor-counter-sets(v-if='sets_count > 1')
-    .executor-counter-sets-set(v-for='index in counterSetsFillerBefore()')
+    .executor-counter-sets-set(v-for='index in counterSetsFillerBefore()' :key='index')
     .executor-counter-sets-set(v-for='index in sets_count' :class='counterSetClass(index - 1)')
       i.checkmark.icon
       span {{ index }}
@@ -11,7 +11,7 @@
     .executor-counter-sets-set(v-for='index in counterSetsFillerAfter()')
 
   .executor-counter-executions(v-if='current_set_target_executions > 1')
-    executor-progress-bar.executor-counter-executions-execution(v-for='index in current_set_target_executions' :klass='counterExecutionClass(index)' :ref='"progress_bar_"+index')
+    executor-progress-bar.executor-counter-executions-execution(v-for='index in current_set_target_executions' :klass='counterExecutionClass(index)' :ref='"progress_bar_"+index' :key='current_set_index+"-"+index')
 
 </template>
 
