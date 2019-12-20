@@ -1,4 +1,4 @@
-require 'listen'
+# require 'listen'
 
 class Bambamzer
   def initialize
@@ -38,4 +38,4 @@ class Bambamzer
   end
 end
 
-Bambamzer.new
+# Bambamzer.new
