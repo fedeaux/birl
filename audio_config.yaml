@@ -1,0 +1,23 @@
+---
+:schemas:
+  :birl:
+    :new_files:
+    - 01.monstro.mp3
+    - 06.vem.mp3
+    - '08.vai.mp3'
+    :events:
+      :rest_finished:
+      - 02.bora_caralho.mp3
+      - 03.ce_que_ve_essa_porra.mp3
+      - 04.bora_cumpadi.mp3
+      - 05.ajuda_o_maluco.mp3
+      - 10.porra.mp3
+      :doit_finished:
+      - 07.e_verao_o_ano_todo.mp3
+      - '09.ta_comigo_porra.mp3'
+      - 10.porra.mp3
+      - 11.eita_porra.mp3
+      - 12.ta_saindo_da_jaula.mp3
+      - 13.aqui_nos_controi_fibra.mp3
+      - 14.nao_e_agua_com_musculo.mp3
+      - 15.e_37_anos.mp3

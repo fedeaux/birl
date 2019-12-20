@@ -27,6 +27,42 @@ namespace :dev do
       entry.save
     end
   end
+
+  task audio_config: :environment do
+    config_file_name = "audio_config.yaml"
+    config = File.exist?(config_file_name) ? YAML.load_file(config_file_name).deep_symbolize_keys : { schemas: {} }
+    events = [:rest_finished, :doit_finished]
+
+    Dir['app/assets/audios/schemas/*'].each do |schema|
+      schema_name = schema.split('/').last.to_sym
+      config[:schemas][schema_name] ||= { events: nil, image: nil }
+      config[:schemas][schema_name][:events] ||= events.map { |e| [e, []] }.to_h
+      current = config[:schemas][schema_name][:events].values.flatten.uniq
+      new_files = []
+
+      Dir["#{schema}/*.mp3"].each do |file_path|
+        file_name = file_path.split('/').last
+        next unless file_name =~ /\d+\./
+        next if current.include? file_name
+
+        new_files.push file_name
+      end
+
+      all = (current + new_files).uniq.sort
+
+      events.each do |event|
+        next if config[:schemas][schema_name][:events][event].any?
+
+        config[:schemas][schema_name][:events][event] = all.clone
+      end
+
+      config[:schemas][schema_name][:new_files] = new_files.clone if new_files.any?
+    end
+
+    File.open(config_file_name, 'w') do |f|
+      f.write config.to_yaml
+    end
+  end
 end
 
 # Rename 'sets' to 'mult'

@@ -31,24 +31,29 @@ after('bodybuilding:exercises') do
         description: '6 séries. Primeira mais pesada, 30 na segunda. Falling star: 4 30 25 21 18 15'
       },
       {
-        name: 'HIIT 40s/20s',
-        description: 'Find a speed for 10 sprints, increase speed and sprints one by one, up to 20 sprints of maximum speed',
-        data_model: EntryDataModel::TreadmillHiit
-      },
-      {
-        name: 'Constant',
-        description: 'Find a speed for 10min, increase speed and minutes one by one, up to 20min of maximum speed',
+        name: 'Constante',
+        description: 'Encontre uma velocidade que aguente 5min e vá subindo o tempo e a velocidade',
         data_model: EntryDataModel::TreadmillHiit
       },
       {
         name: 'Isometria',
-        description: 'Stay still in position for some time',
+        description: '',
         data_model: EntryDataModel::Isometry
       },
       {
         name: 'HIIT (leve)',
         description: '',
         data_model: EntryDataModel::Hiit
+      },
+      {
+        name: 'HIIT sem peso',
+        description: '',
+        data_model: EntryDataModel::WeightlessHiit
+      },
+      {
+        name: 'Movimento',
+        description: '',
+        data_model: EntryDataModel::RawTime
       }
     ].each do |challenge_attrs|
       challenge = context.challenges.find_or_initialize_by(name: challenge_attrs[:name])

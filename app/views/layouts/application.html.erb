@@ -17,9 +17,12 @@
     <%= yield %>
 
     <% if current_user %>
-      <script type="text/json" id="server-json">
-       <%= raw render template: 'api/v1/users/show', locals: { '@user': current_user }, formats: :json %>
-      </script>
+        <script type="text/json" id="server-json">
+         {
+             "user": <%= raw render template: 'api/v1/users/show', locals: { '@user': current_user }, formats: :json %>,
+             "audio": <%= audio_config_json.html_safe %>
+         }
+        </script>
     <% end %>
   </body>
 </html>

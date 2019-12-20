@@ -1,0 +1,15 @@
+01.monstro                  3.09    4.09
+02.bora_caralho             5       5.9
+03.ce_que_ve_essa_porra     5.91    7.1
+04.bora_cumpadi             7.18    8.5
+05.ajuda_o_maluco           8.5    10.5
+06.vem                     10.5    11.1
+07.e_verao_o_ano_todo      11.25   12.55
+08.vai                     16.13   16.50
+09.ta_comigo_porra         21.8    23.3
+10.porra                   27.00   28
+11.eita_porra              28.00   30.00
+12.ta_saindo_da_jaula      30.5    33.20
+13.aqui_nos_controi_fibra  35.1    37.05
+14.nao_e_agua_com_musculo  38.5    40.6
+15.e_37_anos               46.8    49.1

@@ -12,10 +12,14 @@ export default
     setCurrentUser: (user) ->
       @$store.commit type: 'setCurrentUser', current_user: user
 
-    updateContext: (context_id = null) ->
-      @current_user.current_context_id = context_id
+    updateContext: (context = null) ->
+      @current_user.current_context_id = context and context.id
       user = new User JSON.parse JSON.stringify @current_user
       @profile_resource.update user, @contextUpdated
+
+      return unless context?.name == 'Bodybuilding'
+
+      Global.player.play 'porra', 'birl'
 
     contextUpdated: (response) ->
       @setCurrentUser response.user
@@ -26,7 +30,7 @@ export default
         @$router.push '/'
 
     setInitialUser: ->
-      @setCurrentUser new User JSON.parse($('#server-json').text()).user
+      @setCurrentUser new User Global.server.user.user
 
   computed:
     current_context: ->

@@ -5,6 +5,7 @@ window.jQuery = window.$
 window.moment = require 'moment'
 
 import Database from 'lib/database'
+import Player from 'lib/player'
 import EntryGeneratorsMain from 'entry_generators/main'
 
 window.Global =
@@ -94,6 +95,9 @@ for view_model_path in view_model_paths.paths
 
 $ ->
   if $('#birl-spa-container').length > 0
+    Global.server = JSON.parse $('#server-json').text()
+    Global.player = new Player Global.server.audio
+
     router = new VueRouter routes: routes, mode: 'history'
 
     new Vue(

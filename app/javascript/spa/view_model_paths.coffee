@@ -19,6 +19,7 @@ paths = [
   'executor/counter'
   'executor/progress_bar'
   'executor/display'
+  'executor/audio_controls'
 ]
 
 for entity in entities

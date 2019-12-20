@@ -24,6 +24,7 @@ class Progression extends BaseModel
       entries_count: {}
       exercise_name: {}
       challenge_name: {}
+      challenge_description: {}
       done_today: {}
       entry_data_model: {}
       entries: { type: Entry }

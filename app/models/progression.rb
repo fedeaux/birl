@@ -7,6 +7,8 @@ class Progression < ApplicationRecord
 
   before_save :ensure_name
 
+  delegate :name, :description, to: :challenge, prefix: :challenge
+
   def ensure_name
     self.name = [exercise&.name, challenge.name].reject(&:nil?).join ' - '
   end
@@ -15,12 +17,6 @@ class Progression < ApplicationRecord
     return nil unless name
 
     name.split('-').first.strip
-  end
-
-  def challenge_name
-    return nil unless name
-
-    name.split('-').last.strip
   end
 
   def done_today

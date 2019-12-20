@@ -12,6 +12,10 @@ routes = [
   {
     path: '/progressions/:id/execute'
     view: 'progressions/execute'
+  },
+  {
+    path: '/audios'
+    view: 'audios/index'
   }
 ]
 

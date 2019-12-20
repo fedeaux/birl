@@ -45,9 +45,13 @@
       i.white.arrow.alternate.circle.right.outline.icon(@click='timeout')
 
   .executor-actions
-    i.backward.icon(@click='backward')
-    i.ban.icon(@click='reset')
-    i.forward.icon(@click='forward')
+    .executor-actions-center
+      i.backward.icon(@click='backward')
+      i.ban.icon(@click='reset')
+      i.forward.icon(@click='forward')
+
+    .executor-actions-right
+      executor-audio-controls
 
   .ui.two-buttons(v-if='dev_tools')
     .ui.basic.button(@click='stop') Sthap
@@ -72,6 +76,7 @@ export default
     state: 'idle'
     current_time: 0
     initial_time: 0
+    pre_time: 3
     current_set_index: 0
     current_set_execution: 0
     dev_tools: false
@@ -114,7 +119,7 @@ export default
 
       @$nextTick =>
         if @current_set.time
-          @countdown 5
+          @countdown @pre_time
         else
           @timeout()
 
@@ -125,6 +130,13 @@ export default
         @current_time = 4
 
       @timeout() if @current_time == -1
+      @almostThere() if @current_time == @pre_time
+
+    almostThere: ->
+      return unless Global.player.schema
+      state = @state
+      state = 'rest' if @state == 'countdown'
+      Global.player.event "#{state}_finished"
 
     backward: ->
       @current_time = @initial_time

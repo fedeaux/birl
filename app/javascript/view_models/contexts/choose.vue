@@ -1,6 +1,6 @@
 <template lang="pug">
 .entity-index.contexts-choose.default-container
-  .choose-context-button-wrapper(v-for='context in contexts' @click='updateContext(context.id)')
+  .choose-context-button-wrapper(v-for='context in contexts' @click='updateContext(context)')
     .ui.fluid.huge.button(:style='context.backgroundColor()')
       | {{ context.name }}
 </template>

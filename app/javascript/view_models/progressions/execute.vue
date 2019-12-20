@@ -5,6 +5,9 @@
       router-link.entity-show-header-actions(:to='progression.path()')
         i.eye.icon
 
+  .progressions-show-challenge-description(v-if='progression.challenge_description')
+    | {{ progression.challenge_description }}
+
   entries-manager(:context='{ progression_id: progression_id }'
                   :data_model='progression.entry_data_model'
                   :actions='{ add: false, form: { actions: false } }'
@@ -22,7 +25,7 @@
     .ui.primary.fluid.button(@click='prepare' v-if='state == "idle"')
       | Prepare&nbsp;&nbsp;
 
-    .ui.primary.fluid.button(@click='execute' v-if='state == "preparing"')
+    .ui.primary.fluid.button(@click='execute' v-if='state == "preparing"' :class='{ "disabled": !executable }')
       | Execute&nbsp;&nbsp;
       i.play.icon
 
@@ -71,6 +74,7 @@ export default
       @$refs.entries_manager.newEntry()
 
     execute: ->
+      return unless @executable
       @setExecutableEntry @$refs.entries_manager.populateFormEntry()
 
       @$nextTick =>
@@ -85,6 +89,9 @@ export default
     setExecutableEntry: (@executable_entry) ->
 
   computed:
+    executable: ->
+      @state == 'preparing' && @$refs.entries_manager.form_entry.value.sets.length > 0
+
     show_in_session: ->
       @current_session && @current_session.progressions &&
         @progression_id in (p.id for p in @current_session.progressions)

@@ -35,18 +35,16 @@ class TrainingSeeder
     training.sessions.destroy_all
 
     session = nil
-    order = 0
 
     worksheet.rows.transpose.each do |row|
       row.each do |col|
         if col.present?
           if session
             progression = ensure_progression col
-            SessionProgression.where(progression_id: progression.id, session_id: session.id, order: order).first_or_create
-            order += 1
+            ensure_session_progression progression, session, @order
+            @order += 1
           else
-            session = create_session col
-            order = 0
+            session = ensure_session col
           end
         else
           session = nil
@@ -55,7 +53,7 @@ class TrainingSeeder
     end
   end
 
-  def create_session(signature)
+  def ensure_session(signature)
     parts = signature.split('-').map(&:strip)
     name = parts[0]
     weekday = Date.strptime(parts[1], '%A').wday
@@ -63,7 +61,23 @@ class TrainingSeeder
     session = Session.where(training_id: training.id, name: name).first_or_create
     session.update(weekday: weekday)
     @created_session_ids.push session.id
+    @order = ensure_everyday_progressions session
     session
+  end
+
+  def ensure_everyday_progressions(session)
+    # smells like teen coding
+    ['Respiração Rápida - HIIT sem peso',
+     'Espiração com Pressão - HIIT sem peso',
+     'Bananeira - Movimento'].each_with_index do |signature, index|
+      progression = ensure_progression signature
+      ensure_session_progression progression, session, index
+    end.count
+  end
+
+  def ensure_session_progression(progression, session, order)
+    sp = SessionProgression.where(progression_id: progression.id, session_id: session.id).first_or_create
+    sp.update(order: order)
   end
 
   def ensure_progression(signature)
