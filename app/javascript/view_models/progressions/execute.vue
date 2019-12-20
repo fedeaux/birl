@@ -72,6 +72,7 @@ export default
       return unless @$refs.entries_manager
       @state = 'preparing'
       @$refs.entries_manager.newEntry()
+      # @execute()
 
     execute: ->
       return unless @executable
@@ -85,6 +86,7 @@ export default
 
     progressionLoaded: (response) ->
       @progression = response.progression
+      # setTimeout @prepare, 1000
 
     setExecutableEntry: (@executable_entry) ->
 

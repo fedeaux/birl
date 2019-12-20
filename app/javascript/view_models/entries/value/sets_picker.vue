@@ -3,6 +3,7 @@
   entries-value-set-picker(v-if='sets'
                            v-for='(set, index) in sets'
                            v-model='sets[index]'
+                           :key='index'
                            :data_model='data_model'
                            @remove='removeSet(index)'
                            @input='changed()')

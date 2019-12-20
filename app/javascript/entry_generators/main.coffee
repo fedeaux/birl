@@ -1,4 +1,5 @@
 import SingDrillsCycle from './sing_drills_cycle'
+import BasicCromatisms from './basic_cromatisms'
 
 class EntryGeneratorsMain
   constructor: ->
@@ -12,5 +13,6 @@ class EntryGeneratorsMain
 
   registerAll: ->
     @register 'sing_drills_cycle', SingDrillsCycle
+    @register 'basic_cromatisms', BasicCromatisms
 
 export default EntryGeneratorsMain

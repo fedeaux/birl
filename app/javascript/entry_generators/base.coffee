@@ -6,6 +6,9 @@ class Base
     @lister = new Lister
 
   executionFromList: (list, count) ->
-    new EntryValueSetExecution type: 'list', values: @lister.list(list, count)
+    @executionFromArray @lister.list list, count
+
+  executionFromArray: (array) ->
+    new EntryValueSetExecution type: 'list', values: array
 
 export default Base

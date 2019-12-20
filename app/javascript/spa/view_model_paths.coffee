@@ -15,11 +15,12 @@ paths = [
   'entries/value/sets_picker'
   'entries/value/set_picker'
   'contexts/choose'
-  'executor/index'
-  'executor/counter'
-  'executor/progress_bar'
-  'executor/display'
   'executor/audio_controls'
+  'executor/counter'
+  'executor/display'
+  'executor/index'
+  'executor/metronome'
+  'executor/progress_bar'
 ]
 
 for entity in entities

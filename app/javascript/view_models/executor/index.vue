@@ -9,40 +9,43 @@
                    ref='counter'
   )
 
-  .executor-label(:class='"executor-label-"+state' v-if='time_based || state == "finished"')
-    template(v-if='state == "idle"' @click='start')
-    template(v-else-if='state == "countdown"') Prepare...
-    template(v-else-if='state == "doit" || state == "rest"')
-      executor-display(:entry='entry'
-                       :set_index='current_set_index'
-                       :set_execution='current_set_execution'
-                       :data_model='data_model'
-                       :class='{ "executor-detail": state == "rest" }'
-                       :default_text='display_default_text')
+  .executor-components
+    .executor-label(:class='"executor-label-"+state')
+      template(v-if='state == "idle"' @click='start')
+      template(v-else-if='state == "countdown"') Prepare...
+      template(v-else-if='state == "doit" || state == "rest"')
+        executor-display(:entry='entry'
+                         :set_index='current_set_index'
+                         :set_execution='current_set_execution'
+                         :data_model='data_model'
+                         :class='{ "executor-detail": state == "rest" }'
+                         :default_text='display_default_text')
 
-        template(v-if='state == "rest"')
-          | Next:&nbsp;
+          template(v-if='state == "rest"')
+            | Next:&nbsp;
 
-    template(v-else-if='state == "finished"')
-      | Boa, campeão! KKK
-      br
-      br
+      template(v-else-if='state == "finished"')
+        | Boa, campeão! KKK
+        br
+        br
 
-      .ui.three.column.centered.grid
-        .column
-          .ui.white.fluid.button(@click='done')
-            | Vamo pro próximo
+        .ui.three.column.centered.grid
+          .column
+            .ui.white.fluid.button(@click='done')
+              | Vamo pro próximo
 
-  .executor-form(v-if='(state == "doit" || state == "rest") && !time_based')
-    .executor-detail(v-if='state == "rest"')
-      | After rest
-    entries-value-set-picker(v-model='current_set' :data_model='data_model' :in_execution='true')
+    executor-metronome(v-if='bpm && state == "doit"' :bpm='bpm')
 
-  .executor-clock(v-if='state != "finished" && state != "idle"')
-    .executor-clock-time(v-if='time_based || state == "rest"')
-      | {{ display_time }}
-    .executor-clock-time(v-else)
-      i.white.arrow.alternate.circle.right.outline.icon(@click='timeout')
+    .executor-form(v-if='(state == "doit" || state == "rest") && editable_set')
+      .executor-detail(v-if='state == "rest"')
+        | After rest
+      entries-value-set-picker(v-model='current_set' :data_model='data_model' :in_execution='true')
+
+    .executor-clock(v-if='state != "finished" && state != "idle"')
+      .executor-clock-time(v-if='time_based || state == "rest"')
+        | {{ display_time }}
+      .executor-clock-next(v-else)
+        i.white.arrow.alternate.circle.right.outline.icon(@click='timeout')
 
   .executor-actions
     .executor-actions-center
@@ -54,7 +57,7 @@
       executor-audio-controls
 
   .ui.two-buttons.executor-dev-tools(v-if='dev_tools')
-    .ui.basic.button(@click='stop') Sthap
+    .ui.basic.button(@click='stopTimer') Sthap
     .ui.basic.button(@click='current_time = 1') FF
     .ui.basic.button(@click='tick()') tick
 </template>
@@ -80,7 +83,7 @@ export default
     pre_time: 3
     current_set_index: 0
     current_set_execution: 0
-    dev_tools: true
+    dev_tools: false
     quick_end: false
 
   methods:
@@ -92,15 +95,12 @@ export default
     done: ->
       @$emit 'done'
 
-    tick: ->
-      Global.player.play 'tick'
-
-    stop: ->
+    stopTimer: ->
       clearInterval @timer
 
     finish: ->
       @state = 'finished'
-      clearInterval @timer
+      @stopTimer()
       @current_time = 0
 
     reset: ->
@@ -149,7 +149,7 @@ export default
       @timeout()
 
     timeout: ->
-      clearInterval @timer
+      @stopTimer()
       @findNextState()
 
     findNextState: ->
@@ -181,6 +181,14 @@ export default
           @finish()
 
   computed:
+    bpm: ->
+      return null unless @current_set
+      return @current_set.bpm if @current_set.bpm
+      Math.floor(@current_set.bpmm * @entry.value.global.bpm) if @current_set.bpmm
+
+    editable_set: ->
+      !@time_based
+
     time_based: ->
       @current_set && @current_set.time
 
@@ -219,5 +227,6 @@ export default
       classes.join ' '
 
   beforeDestroy: ->
-    clearInterval @timer
+    @stopTimer()
+
 </script>

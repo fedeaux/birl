@@ -1,5 +1,6 @@
 <template lang="pug">
 .entries-value-picker
+  entries-value-set-picker(v-model='inner_value.global' :data_model='data_model' :global='true' @input='changed')
   entries-value-sets-picker(v-model='inner_value.sets' :data_model='data_model' @input='changed')
 </template>
 

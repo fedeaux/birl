@@ -10,6 +10,10 @@
   padding: $d2
   position: relative
 
+  &.sets-picker-set-global
+    .sets-picker-set-dimension-name
+      font-weight: bold
+
   &:last-child
     border-bottom: none
 
@@ -32,6 +36,10 @@
 
       .circular.button
         display: none
+
+    &.sets-picker-set-dimension-uneditable
+      .circular.button
+        opacity: 0
 
     .sets-picker-set-dimension-name
       font-size: 10px

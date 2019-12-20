@@ -3,6 +3,9 @@ class Lister
     @musical_intervals = ['2m', '2M', '3m', '3M', '4J', '4#', '5J', '6m', '6M', '7m', '7M', '8J']
     @musical_notes = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#']
     @vocal_regions = ['edge lows', 'lows', 'transition', 'highs','edge highs']
+    @cromatisms_warmup = ['1234', '2341', '3412', '4123']
+    @cromatisms_hard = ['1342', '2431', '3124', '4213']
+    @cromatisms_regular = ['1243', '2134', '1324', '2413', '1423', '2314']
 
   item: (list) ->
     n = @[list].length

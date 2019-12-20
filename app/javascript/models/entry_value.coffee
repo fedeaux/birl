@@ -8,6 +8,7 @@ class EntryValue extends BaseModel
 
   @attributes = ->
     {
+      global: { type: EntryValueSet }
       sets: { type: EntryValueSet }
       options: {}
     }

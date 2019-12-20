@@ -11,22 +11,75 @@
     bottom: 0
     z-index: 2000
 
-  .executor-form
+  .executor-components
+    display: flex
+    flex-direction: column
+    justify-content: center
     position: absolute
-    bottom: 51%
+    top: 0
     left: 0
+    right: 0
+    bottom: 0
+
+    .executor-form, .executor-clock, .executor-label, .executor-metronome
+      margin: $d2 0
+
+  .executor-metronome
+    width: 100%
+    text-align: center
+    color: white
+
+    .executor-metronome-animation
+      background-repeat: no-repeat
+      background-size: contain
+      height: 120px
+      width: 120px
+      margin: auto
+      position: relative
+
+      .executor-metronome-animation-label
+        bottom: $d
+        color: black
+        font-size: 14px
+        position: absolute
+        text-align: center
+        width: 100%
+        font-family: "Courier New", Courier, monospace
+        font-weight: bold
+
+      &.left
+        background-image: url('/metronome/left.png')
+
+      &.right
+        background-image: url('/metronome/right.png')
+
+    .executor-metronome-actions
+      margin-top: $d
+
+      .executor-metronome-action
+        font-size: 24px
+        color: white
+        display: inline-block
+        height: $d8
+        line-height: $d8
+        width: $d8
+        text-align: center
+        vertical-align: center
+        opacity: 0.8
+
+  .executor-form
     width: 100%
 
     .executor-detail
       text-align: center
 
+    .sets-picker-set
+      padding: 0
+
   .executor-label
-    position: absolute
     font-size: 30px
     text-align: center
     color: white
-    bottom: 51%
-    left: 0
     width: 100%
     line-height: 30px
 
@@ -73,17 +126,20 @@
       opacity: 0.7
 
   .executor-clock
-    position: absolute
-    top: 51%
-    left: 0
     width: 100%
-    font-size: 70px
-    line-height: 70px
-    text-align: center
     font-family: "Courier New", Courier, monospace
 
     .executor-clock-time
       color: white !important
+      font-size: 70px
+      line-height: 70px
+      text-align: center
+
+    .executor-clock-next
+      color: white !important
+      font-size: 40px
+      line-height: 40px
+      text-align: center
 
   &.executor-countdown
     background-color: green

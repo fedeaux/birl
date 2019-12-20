@@ -15,6 +15,7 @@ class EntryValueSet extends BaseModel
       weight: {}
       reps: {}
       speed: {}
+      bpm: {}
       bpmm: {}
 
       rest: {}
