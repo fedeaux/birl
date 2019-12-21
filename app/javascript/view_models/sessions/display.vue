@@ -8,10 +8,10 @@
       i.checkmark.small.icon
 
   .entity-display-detail
-    | {{ session.human_weekday }}
+    //- BrainDamage: Details Start
     template(v-if='session.last_entry_at')
-      |  &middot;
       |  {{ session.last_entry_at.fromNow() }}
+    //- BrainDamage: Details End
 
   .entity-display-actions(v-if='allow_actions' @click='action($event)')
     slot
@@ -32,7 +32,9 @@
         event.stopPropagation()
         @$emit 'action', event
 
-   computed:
-     klass: ->
-       return 'text-green' if @session.done_today
+    # BrainDamage: Other Start
+    computed:
+      klass: ->
+        return 'text-green' if @session.done_today
+    # BrainDamage: Other End
 </script>

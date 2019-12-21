@@ -5,6 +5,7 @@
       router-link.entity-show-header-actions(:to='session.editPath()')
         i.edit.icon
 
+  //- BrainDamage: Body Start
   .default-container(v-if='session.done_today')
     br
     .ui.green.message
@@ -28,6 +29,7 @@
           | Start
         | &nbsp;
         i.play.icon
+  //- BrainDamage: Body End
 </template>
 
 <script lang="coffee">
@@ -49,19 +51,25 @@ export default
     sessionLoaded: (response) ->
       @session = response.session
 
+    # BrainDamage: Methods Start
     executeNextProgression: ->
       @setCurrentSession @session
       for progression in @session.progressions
         unless progression.done_today
           @$router.push progression.executePath()
           return
+    # BrainDamage: Methods End
 
   mounted: ->
-    if @parent_session
-      @session = @parent_session
-      return
+    @session = @parent_session if @parent_session
+    # BrainDamage: Mounted Start
+    # BrainDamage: Mounted End
 
-    @sessions_resource = new SessionsResource
-    @session_id = @$route.params.id
-    @loadSession()
+  watch:
+    '$route.params.id':
+      immediate: true
+      handler: ->
+        @sessions_resource ?= new SessionsResource
+        @session_id = parseInt @$route.params.id
+        @loadSession()
 </script>
