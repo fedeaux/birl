@@ -11,9 +11,6 @@ import EntryGeneratorsMain from 'entry_generators/main'
 window.Global =
   events: new Vue
   db: new Database
-  egm: new EntryGeneratorsMain
-
-window.Global.egm.registerAll()
 
 require 'semantic-ui-sass'
 
@@ -97,6 +94,8 @@ $ ->
   if $('#birl-spa-container').length > 0
     Global.server = JSON.parse $('#server-json').text()
     Global.player = new Player Global.server.audio
+    Global.egm = new EntryGeneratorsMain
+    Global.egm.registerAll()
 
     router = new VueRouter routes: routes, mode: 'history'
 

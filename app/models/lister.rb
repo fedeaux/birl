@@ -1,7 +1,8 @@
 class Lister < ApplicationRecord
   def values=(param)
     param = {} unless param.is_a? Hash
-    items = param['items']
+    param.deep_symbolize_keys
+    items = param[:items]
 
     items = if items.is_a? Hash
              items.values
@@ -11,8 +12,7 @@ class Lister < ApplicationRecord
              []
            end
 
-    param['items'] = items.map(&:strip).reject(&:blank?)
-
+    param[:items] = items.map(&:strip).reject(&:blank?)
     super param
   end
 end

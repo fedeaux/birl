@@ -1,6 +1,8 @@
 <template lang="pug">
 .entity-new.lister-new.default-container
-  h1 New Lister
+  .entity-display
+    .entity-display-main New Lister
+
   listers-form(v-model='lister'
                @save='saveLister'
                @cancel='back')

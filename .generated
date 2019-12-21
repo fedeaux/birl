@@ -2,6 +2,7 @@ rails g entity context name slug color user:belongs_to meta:jsonb
 rails g entity challenge name description context:references
 rails g entity entry name progression:references values value:jsonb observations:text
 rails g entity exercise name slug context:references group:references
+rails g entity lister name values:jsonb
 rails g entity group name context:references
 rails g entity progression name details context:references challenge:references exercise:references last_entry_at:datetime
 rails g entity session name training:belongs_to

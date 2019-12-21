@@ -2,7 +2,7 @@ class Api::V1::ListersController < Api::V1::ApiController
   before_action :set_lister, only: %i[show update destroy]
 
   def index
-    @listers = Lister.all
+    @listers = Lister.all.order :name
   end
 
   def show

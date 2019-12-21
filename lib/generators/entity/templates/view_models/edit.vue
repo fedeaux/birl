@@ -1,5 +1,8 @@
 <template lang="pug">
 .entity-edit.<%= underscore_name %>-edit.default-container
+  .entity-display
+    .entity-display-main Edit <%= human_name %>
+
   <%= plural_underscore_name %>-form(v-model='<%= underscore_name %>'
   <%= plural_underscore_name_as_spaces %>      v-if='<%= underscore_name %>'
   <%= plural_underscore_name_as_spaces %>      @save='save<%= entity_name %>()'

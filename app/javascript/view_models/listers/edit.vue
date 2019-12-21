@@ -1,5 +1,8 @@
 <template lang="pug">
 .entity-edit.lister-edit.default-container
+  .entity-display
+    .entity-display-main Edit Lister
+
   listers-form(v-model='lister'
                v-if='lister'
                @save='saveLister()'

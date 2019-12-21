@@ -26,4 +26,8 @@ module ApplicationHelper
 
     config.to_json
   end
+
+  def lists_json
+    Lister.all.to_json
+  end
 end

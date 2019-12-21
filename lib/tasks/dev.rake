@@ -28,6 +28,15 @@ namespace :dev do
     end
   end
 
+  task force_regen_all: :environment do
+    File.readlines('.generated').each do |line|
+      next unless line.start_with? 'rails g entity'
+
+      puts line
+      `#{line} -f`
+    end
+  end
+
   task audio_config: :environment do
     config_file_name = "audio_config.yaml"
     config = File.exist?(config_file_name) ? YAML.load_file(config_file_name).deep_symbolize_keys : { schemas: {} }

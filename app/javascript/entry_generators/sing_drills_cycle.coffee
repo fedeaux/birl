@@ -11,7 +11,7 @@ class SingDrillsCycle extends Base
 
   firstSet: ->
     @new_entry.value.sets[0] ||= new EntryValueSet(mult: 3, time: 40, pause: 15, rest: 30)
-    @new_entry.value.sets[0].execution = @executionFromList('musical_intervals', @new_entry.value.sets[0].mult)
+    @new_entry.value.sets[0].execution = @executionFromList('Musical Intervals', @new_entry.value.sets[0].mult)
 
   secondSet: ->
     @new_entry.value.sets[1] ||= new EntryValueSet(mult: 12, time: 5, pause: 3, rest: 30)
@@ -19,6 +19,6 @@ class SingDrillsCycle extends Base
 
   thirdSet: ->
     @new_entry.value.sets[2] ||= new EntryValueSet(mult: 1, time: 60, rest: 30)
-    @new_entry.value.sets[2].execution = @executionFromList('vocal_regions', @new_entry.value.sets[2].mult)
+    @new_entry.value.sets[2].execution = @executionFromList('Vocal Regions', @new_entry.value.sets[2].mult)
 
 export default SingDrillsCycle
