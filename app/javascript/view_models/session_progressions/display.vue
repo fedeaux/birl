@@ -25,6 +25,7 @@
         event.preventDefault()
         event.stopPropagation()
         @$emit 'action', event
+
     # BrainDamage: Other Start
     # BrainDamage: Other End
 </script>
