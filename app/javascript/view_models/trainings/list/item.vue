@@ -6,32 +6,28 @@
         .entity-list-item-confirming-destroy-message Are you sure?
 
       .column
-        .ui.red.fluid.button(@click='$emit("destroy")') Destroy
+        .ui.red.fluid.button(@click='$emit("destroy")') Yes
 
       .column
-        .ui.basic.fluid.button(@click='cancelDestroy()') Cancel
+        .ui.basic.fluid.button(@click='cancelDestroy()') No
 
   .entity-list-item-actions(v-if='!confirming_destroy && showing_actions')
     .ui.four.column.grid
       .column(@click='$emit("edit")')
         router-link.ui.basic.fluid.green.icon.button(:to='training.path()')
           i.eye.icon
-          |  View
 
       .column(@click='$emit("edit")')
         .ui.basic.fluid.blue.icon.button
           i.edit.icon
-          |  Edit
 
       .column(@click='confirmDestroy')
         .ui.basic.fluid.red.icon.button
           i.trash.icon
-          |  Destroy
 
       .column(@click='hideActions()')
         .ui.basic.fluid.icon.button
           i.cancel.icon
-          |  Cancel
 
   router-link.entity-list-item.training-list-item(v-if='!confirming_destroy && !showing_actions'
                                                   :to='training.path()')
