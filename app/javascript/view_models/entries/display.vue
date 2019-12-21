@@ -4,6 +4,7 @@
     entries-value-display(:value='entry.value')
 
   .entity-display-detail
+    //- BrainDamage: Details Start
     template(v-if='entry.created_at')
       |  {{ entry.created_at.fromNow() }}
     template(v-else)
@@ -13,6 +14,7 @@
       |  {{ entry.observations }}
     |  &middot;
     |  {{ entry.id }}
+    //- BrainDamage: Details End
 
   .entity-display-actions(v-if='allow_actions' @click='action($event)')
     slot
@@ -33,4 +35,6 @@
         event.stopPropagation()
         @$emit 'action', event
 
+    # BrainDamage: Other Start
+    # BrainDamage: Other End
 </script>

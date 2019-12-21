@@ -34,10 +34,10 @@
           |  Cancel
 
   router-link.entity-list-item.entry-list-item(v-if='!confirming_destroy && !showing_actions'
-                                                 :to='entry.path()')
+                                               :to='entry.path()')
     entries-display(:entry='entry'
-                     :allow_actions='allow_actions'
-                     @action='showActions')
+                    :allow_actions='allow_actions'
+                    @action='showActions')
       i.ellipsis.vertical.icon
 
   entity-list-item-divider

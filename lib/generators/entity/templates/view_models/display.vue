@@ -24,5 +24,6 @@
         event.preventDefault()
         event.stopPropagation()
         @$emit 'action', event
+
 <%= sub_template('Other', '#', 4) %>
 </script>

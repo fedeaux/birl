@@ -4,6 +4,9 @@
     entries-display(:entry='entry')
       router-link.entity-show-header-actions(:to='entry.editPath()')
         i.edit.icon
+
+  //- BrainDamage: Body Start
+  //- BrainDamage: Body End
 </template>
 
 <script lang="coffee">
@@ -24,12 +27,19 @@ export default
     entryLoaded: (response) ->
       @entry = response.entry
 
-  mounted: ->
-    if @parent_entry
-      @entry = @parent_entry
-      return
+    # BrainDamage: Methods Start
+    # BrainDamage: Methods End
 
-    @entries_resource = new EntriesResource
-    @entry_id = @$route.params.id
-    @loadEntry()
+  mounted: ->
+    @entry = @parent_entry if @parent_entry
+    # BrainDamage: Mounted Start
+    # BrainDamage: Mounted End
+
+  watch:
+    '$route.params.id':
+      immediate: true
+      handler: ->
+        @entries_resource ?= new EntriesResource
+        @entry_id = parseInt @$route.params.id
+        @loadEntry()
 </script>
