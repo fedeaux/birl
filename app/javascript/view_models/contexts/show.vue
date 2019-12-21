@@ -4,6 +4,9 @@
     contexts-display(:context='context')
       router-link.entity-show-header-actions(:to='context.editPath()')
         i.edit.icon
+
+  //- BrainDamage: Body Start
+  //- BrainDamage: Body End
 </template>
 
 <script lang="coffee">
@@ -24,12 +27,19 @@ export default
     contextLoaded: (response) ->
       @context = response.context
 
-  mounted: ->
-    if @parent_context
-      @context = @parent_context
-      return
+    # BrainDamage: Methods Start
+    # BrainDamage: Methods End
 
-    @contexts_resource = new ContextsResource
-    @context_id = @$route.params.id
-    @loadContext()
+  mounted: ->
+    @context = @parent_context if @parent_context
+    # BrainDamage: Mounted Start
+    # BrainDamage: Mounted End
+
+  watch:
+    '$route.params.id':
+      immediate: true
+      handler: ->
+        @contexts_resource ?= new ContextsResource
+        @context_id = parseInt @$route.params.id
+        @loadContext()
 </script>

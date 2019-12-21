@@ -14,6 +14,9 @@
         label Color
         input(type='text' v-model='context.color')
 
+      .field
+        label Meta
+
       .field.ui.fluid.buttons
         .ui.primary.button(@click='save()') Save
         .ui.basic.button(@click='cancel()') Cancel
