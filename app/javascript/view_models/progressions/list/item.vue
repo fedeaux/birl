@@ -34,10 +34,10 @@
           |  Cancel
 
   router-link.entity-list-item.progression-list-item(v-if='!confirming_destroy && !showing_actions'
-                                                 :to='progression.path()')
+                                                     :to='progression.path()')
     progressions-display(:progression='progression'
-                     :allow_actions='allow_actions'
-                     @action='showActions')
+                         :allow_actions='allow_actions'
+                         @action='showActions')
       i.ellipsis.vertical.icon
 
   entity-list-item-divider

@@ -4,9 +4,7 @@
     | {{ <%= underscore_name %>.name }}
 
   .entity-display-detail
-    | detail1
-    | &middot;
-    | detail2
+<%= sub_template('Details', '//-', 4) %>
 
   .entity-display-actions(v-if='allow_actions' @click='action($event)')
     slot
@@ -26,4 +24,5 @@
         event.preventDefault()
         event.stopPropagation()
         @$emit 'action', event
+<%= sub_template('Other', '#', 4) %>
 </script>

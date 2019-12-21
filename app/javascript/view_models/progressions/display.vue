@@ -8,6 +8,7 @@
       i.checkmark.small.icon
 
   .entity-display-detail
+    //- BrainDamage: Details Start
     | {{ progression.challenge_name }}
 
     template(v-if='progression.details')
@@ -21,6 +22,7 @@
     template(v-if='progression.last_entry_at')
       |  &middot;
       |  {{ progression.last_entry_at.fromNow() }}
+    //- BrainDamage: Details End
 
   .entity-display-actions(v-if='allow_actions' @click='action($event)')
     slot
@@ -41,7 +43,11 @@
         event.stopPropagation()
         @$emit 'action', event
 
+   # BrainDamage: Other Start
    computed:
      klass: ->
        return 'text-green' if @progression.done_today
+   # BrainDamage: Other End
 </script>
+
+BrainDamage: NO-OVERRIDE

@@ -4,6 +4,8 @@
     <%= plural_underscore_name %>-display(:<%= underscore_name %>='<%= underscore_name %>')
       router-link.entity-show-header-actions(:to='<%= underscore_name %>.editPath()')
         i.edit.icon
+
+<%= sub_template('Body', '//-') %>
 </template>
 
 <script lang="coffee">
@@ -24,12 +26,17 @@ export default
     <%= underscore_name %>Loaded: (response) ->
       @<%= underscore_name %> = response.<%= underscore_name %>
 
-  mounted: ->
-    if @parent_<%= underscore_name %>
-      @<%= underscore_name %> = @parent_<%= underscore_name %>
-      return
+<%= sub_template('Methods', '#', 4) %>
 
-    @<%= plural_underscore_name %>_resource = new <%= plural_entity_name %>Resource
-    @<%= underscore_name %>_id = @$route.params.id
-    @load<%= entity_name %>()
+  mounted: ->
+    @<%= underscore_name %> = @parent_<%= underscore_name %> if @parent_<%= underscore_name %>
+<%= sub_template('Mounted', '#', 4) %>
+
+  watch:
+    '$route.params.id':
+      immediate: true
+      handler: ->
+        @<%= plural_underscore_name %>_resource ?= new <%= plural_entity_name %>Resource
+        @<%= underscore_name %>_id = parseInt @$route.params.id
+        @load<%= entity_name %>()
 </script>
