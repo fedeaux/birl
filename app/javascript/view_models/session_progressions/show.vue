@@ -4,6 +4,9 @@
     session_progressions-display(:session_progression='session_progression')
       router-link.entity-show-header-actions(:to='session_progression.editPath()')
         i.edit.icon
+
+  //- BrainDamage: Body Start
+  //- BrainDamage: Body End
 </template>
 
 <script lang="coffee">
@@ -24,12 +27,19 @@ export default
     session_progressionLoaded: (response) ->
       @session_progression = response.session_progression
 
-  mounted: ->
-    if @parent_session_progression
-      @session_progression = @parent_session_progression
-      return
+    # BrainDamage: Methods Start
+    # BrainDamage: Methods End
 
-    @session_progressions_resource = new SessionProgressionsResource
-    @session_progression_id = @$route.params.id
-    @loadSessionProgression()
+  mounted: ->
+    @session_progression = @parent_session_progression if @parent_session_progression
+    # BrainDamage: Mounted Start
+    # BrainDamage: Mounted End
+
+  watch:
+    '$route.params.id':
+      immediate: true
+      handler: ->
+        @session_progressions_resource ?= new SessionProgressionsResource
+        @session_progression_id = parseInt @$route.params.id
+        @loadSessionProgression()
 </script>

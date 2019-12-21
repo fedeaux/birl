@@ -2,7 +2,7 @@ class Api::V1::ProgressionsController < Api::V1::ApiController
   before_action :set_progression, only: %i[show update destroy execute]
 
   def index
-    @progressions = current_context.progressions
+    @progressions = current_context.progressions.order(:name)
     return unless params[:exercise_id]
 
     @progressions = @progressions.where(exercise_id: params[:exercise_id])

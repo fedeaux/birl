@@ -11,6 +11,7 @@
       | Completed! Good work :)
     br
 
+  .muted-text These are the session progressions, not the progressions themselves
   session-progressions-manager(:context='{ session_id: session.id }'
                                :parent_session_progressions='session.session_progressions')
 

@@ -3,10 +3,10 @@
   .entity-form.<%= plural_dash_name %>-form
     .ui.form
 <%- attributes.each do |attribute| -%>
-<%-   if attribute.name != 'user' && [:string, :interger, :text, :references, :belongs_to, :jsonb].include?(attribute.type) -%>
+<%-   if attribute.name != 'user' && [:string, :integer, :text, :references, :belongs_to, :jsonb].include?(attribute.type) -%>
       .field
         label <%= attribute.name.titleize %>
-<%-     if [:string, :interger, :text].include? attribute.type -%>
+<%-     if [:string, :integer, :text].include? attribute.type -%>
         input(type='text' v-model='<%= underscore_name %>.<%= attribute.name %>')
 <%-     elsif [:references, :belongs_to].include? attribute.type -%>
         <%= attribute.name.pluralize %>-select(v-model='<%= underscore_name %>.<%= attribute.name %>_id')

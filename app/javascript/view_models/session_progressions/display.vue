@@ -4,7 +4,8 @@
     | {{ session_progression.name }}
 
   .entity-display-detail
-    | This is the Session Progression, not the progression
+    //- BrainDamage: Details Start
+    //- BrainDamage: Details End
 
   .entity-display-actions(v-if='allow_actions' @click='action($event)')
     slot
@@ -24,4 +25,6 @@
         event.preventDefault()
         event.stopPropagation()
         @$emit 'action', event
+    # BrainDamage: Other Start
+    # BrainDamage: Other End
 </script>

@@ -10,6 +10,10 @@
         label Progression
         progressions-select(v-model='session_progression.progression_id')
 
+      .field
+        label Order
+        input(type='text' v-model='session_progression.order')
+
       .field.ui.fluid.buttons
         .ui.primary.button(@click='save()') Save
         .ui.basic.button(@click='cancel()') Cancel
