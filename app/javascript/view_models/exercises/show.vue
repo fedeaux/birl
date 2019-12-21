@@ -5,8 +5,9 @@
       router-link.entity-show-header-actions(:to='exercise.editPath()')
         i.edit.icon
 
-  .entity-show-subheader Progressions
+  //- BrainDamage: Body Start
   progressions-manager(v-if='exercise_id' :context='{ exercise_id: exercise_id }' :allow_actions='true')
+  //- BrainDamage: Body End
 </template>
 
 <script lang="coffee">
@@ -27,12 +28,19 @@ export default
     exerciseLoaded: (response) ->
       @exercise = response.exercise
 
-  mounted: ->
-    if @parent_exercise
-      @exercise = @parent_exercise
-      return
+    # BrainDamage: Methods Start
+    # BrainDamage: Methods End
 
-    @exercises_resource = new ExercisesResource
-    @exercise_id = @$route.params.id
-    @loadExercise()
+  mounted: ->
+    @exercise = @parent_exercise if @parent_exercise
+    # BrainDamage: Mounted Start
+    # BrainDamage: Mounted End
+
+  watch:
+    '$route.params.id':
+      immediate: true
+      handler: ->
+        @exercises_resource ?= new ExercisesResource
+        @exercise_id = parseInt @$route.params.id
+        @loadExercise()
 </script>
