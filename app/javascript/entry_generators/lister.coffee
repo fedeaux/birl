@@ -25,7 +25,7 @@ class Lister
   r: (n, offset = 0) ->
     offset + Math.floor Math.random() * n
 
-  kyokushin_both_legs: (args) ->
+  both_sides: (args) ->
     result = []
     for kick in @list args[0], args[1]
       result.push "Right #{kick}"

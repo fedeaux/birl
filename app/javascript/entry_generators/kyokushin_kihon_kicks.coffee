@@ -18,7 +18,7 @@ class KyokushinKihonKicks extends Base
     if @lister.r(2) == 0
       kicks = @lister.list 'kyokushin_kicks_stretch', 2
     else
-      kicks = @lister.list 'kyokushin_both_legs', [ 'kyokushin_kicks_stretch_one_leg', 1 ]
+      kicks = @lister.list 'both_sides', [ 'kyokushin_kicks_stretch_one_leg', 1 ]
 
     kicks.push secondary_kicks.pop()
     @new_entry.value.sets[1].execution ||=  @executionFromArray kicks

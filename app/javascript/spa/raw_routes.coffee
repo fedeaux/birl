@@ -21,6 +21,10 @@ routes = [
 
 add_rest = (routes, resource) ->
   routes.push
+    path: "/#{resource}/new"
+    view: "#{resource}/new"
+
+  routes.push
     path: "/#{resource}"
     view: "#{resource}/index"
 
@@ -29,14 +33,10 @@ add_rest = (routes, resource) ->
     view: "#{resource}/show"
 
   routes.push
-    path: "/#{resource}/new"
-    view: "#{resource}/new"
-
-  routes.push
     path: "/#{resource}/:id/edit"
     view: "#{resource}/edit"
 
-for resource in ['exercises', 'challenges', 'progressions', 'entries', 'trainings', 'sessions', 'contexts']
+for resource in ['exercises', 'challenges', 'progressions', 'entries', 'trainings', 'sessions', 'contexts', 'listers']
   add_rest routes, resource
 
 export default { routes }

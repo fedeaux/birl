@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_19_195743) do
+ActiveRecord::Schema.define(version: 2019_12_21_195145) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,13 @@ ActiveRecord::Schema.define(version: 2019_12_19_195743) do
     t.datetime "updated_at", null: false
     t.bigint "context_id"
     t.index ["context_id"], name: "index_groups_on_context_id"
+  end
+
+  create_table "listers", force: :cascade do |t|
+    t.string "name"
+    t.jsonb "values", default: {"items"=>[]}
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "progressions", force: :cascade do |t|
