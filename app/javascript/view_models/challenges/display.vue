@@ -5,7 +5,7 @@
 
   .entity-display-detail
     //- BrainDamage: Details Start
-    | {{ challenge.description }
+    | {{ challenge.description }}
     //- BrainDamage: Details End
 
   .entity-display-actions(v-if='allow_actions' @click='action($event)')
