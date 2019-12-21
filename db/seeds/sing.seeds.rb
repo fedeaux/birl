@@ -14,14 +14,12 @@ after(:contexts) do
                          name: :sing_drills_cycle
                        },
 
-                       label:
-                         [
-                           { value: 'Sing' },
-                           { value: 'Sustain Note' },
-                           { value: 'Vocalises' }
-                         ]
-                     }
-                    )
+                       label: [
+                         { value: 'Sing' },
+                         { value: 'Sustain Note' },
+                         { value: 'Vocalises' }
+                       ]
+                     })
 
   SessionProgression.where(progression_id: progression.id, session_id: session.id, order: 0).first_or_create
 end

@@ -134,7 +134,7 @@ export default
         @current_time = 4
 
       @timeout() if @current_time == -1
-      @almostThere() if @current_time == @pre_time
+      @almostThere() if @current_time == @pre_time - 1
 
     almostThere: ->
       return unless Global.player.schema

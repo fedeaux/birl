@@ -8,6 +8,7 @@ class TrainingSeeder
       seed_training_from_worksheet worksheet
     end
 
+    special_progressions
     cleanup_stale
     check
   end
@@ -93,6 +94,17 @@ class TrainingSeeder
     puts "-> Failed to create progression #{parts[0]}: #{progression.errors.messages}" unless progression.persisted?
 
     progression
+  end
+
+  def special_progressions
+    chutes_kyokushin = Progression.find_by(name: 'Chutes Kyokushin - HIIT (leve)')
+    return unless chutes_kyokushin
+
+    chutes_kyokushin.update(override_entry_data_model: {
+                              generator: {
+                                name: :kyokushin_kihon_kicks
+                              }
+                            })
   end
 
   def user

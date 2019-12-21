@@ -22,7 +22,7 @@
         text = null
 
         if @execution.type == 'list' && typeof(@set_execution) == 'number'
-          text = @execution.values[@set_execution % @execution.values.length]
+          text = @execution.values[(@set_execution - 1) % @execution.values.length]
 
           if @data_model && @data_model.label
             if _.isArray @data_model.label
