@@ -1,17 +1,21 @@
 <template lang="pug">
-.entity-show-wrapper.challenges-show-wrapper.default-container
-  .entity-show.challenges-show(v-if='challenge')
-    h1.entity-show-header
-      | {{ challenge.name }}
+.entity-show-wrapper.challenges-show-wrapper.default-container(v-if='challenge')
+  .entity-show.challenges-show
+    challenges-display(:challenge='challenge')
+      router-link.entity-show-header-actions(:to='challenge.editPath()')
+        i.edit.icon
 
-    .centered
-      | {{ challenge.description }}
+  //- BrainDamage: Body Start
+  //- BrainDamage: Body End
 </template>
 
 <script lang="coffee">
 import ChallengesResource from '../../resources/challenges_resource'
 
 export default
+  props:
+    parent_challenge: null
+
   data: ->
     challenge: null
     challenge_id: null
@@ -23,10 +27,19 @@ export default
     challengeLoaded: (response) ->
       @challenge = response.challenge
 
-  mounted: ->
-    @challenges_resource = new ChallengesResource
-    @challenge_id = @$route.params.id
-    @loadChallenge()
-</script>
+    # BrainDamage: Methods Start
+    # BrainDamage: Methods End
 
-# NO-OVERRIDE
+  mounted: ->
+    @challenge = @parent_challenge if @parent_challenge
+    # BrainDamage: Mounted Start
+    # BrainDamage: Mounted End
+
+  watch:
+    '$route.params.id':
+      immediate: true
+      handler: ->
+        @challenges_resource ?= new ChallengesResource
+        @challenge_id = parseInt @$route.params.id
+        @loadChallenge()
+</script>
