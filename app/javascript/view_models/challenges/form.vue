@@ -14,6 +14,10 @@
         label Context
         contexts-select(v-model='challenge.context_id')
 
+      .field
+        label Data Model
+        challenges-data-models-picker(v-model='challenge.entry_data_model')
+
       .field.ui.fluid.buttons
         .ui.primary.button(@click='save()') Save
         .ui.basic.button(@click='cancel()') Cancel

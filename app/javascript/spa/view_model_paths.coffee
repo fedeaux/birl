@@ -4,6 +4,8 @@ entities = ['groups', 'exercises', 'challenges', 'progressions', 'entries', 'tra
 views = ['show', 'index', 'display', 'list', 'list/item', 'form', 'new', 'edit', 'select', 'manager']
 
 paths = [
+  'challenges/data_models/picker'
+  'challenges/data_models/picker_item'
   'contexts/choose'
   'entity/list/empty'
   'entity/list/item/divider'

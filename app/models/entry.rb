@@ -1,5 +1,5 @@
 class Entry < ApplicationRecord
-  VALUE_DIMENSIONS = %i[execution mult time weight reps speed bpmm rest pause]
+  VALUE_DIMENSIONS = %i[execution mult time weight reps speed bpm bpmm rest pause]
 
   # Explanation
   # execution

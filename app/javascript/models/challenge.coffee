@@ -13,6 +13,7 @@ class Challenge extends BaseModel
       description: {}
       context: { type: Context }
       context_id: {}
+      entry_data_model: {}
     }
 
 export default Challenge

@@ -30,4 +30,10 @@ module ApplicationHelper
   def lists_json
     Lister.all.to_json
   end
+
+  def entry_data_model_data_json
+    {
+      dimensions: []
+    }.to_json
+  end
 end

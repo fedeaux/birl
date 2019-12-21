@@ -54,8 +54,10 @@ export default
     context_id:
       immediate: true
       handler: ->
-        return unless @context_id
-        @selected_context_id = parseInt @context_id
+        if @context_id
+          @selected_context_id = parseInt @context_id
+        else if @current_context
+          @selected_context_id = @current_context.id
 
   mounted: ->
     @contexts_resource = new ContextsResource
