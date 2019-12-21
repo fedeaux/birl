@@ -4,6 +4,9 @@
     trainings-display(:training='training')
       router-link.entity-show-header-actions(:to='training.editPath()')
         i.edit.icon
+
+  //- BrainDamage: Body Start
+  //- BrainDamage: Body End
 </template>
 
 <script lang="coffee">
@@ -24,12 +27,19 @@ export default
     trainingLoaded: (response) ->
       @training = response.training
 
-  mounted: ->
-    if @parent_training
-      @training = @parent_training
-      return
+    # BrainDamage: Methods Start
+    # BrainDamage: Methods End
 
-    @trainings_resource = new TrainingsResource
-    @training_id = @$route.params.id
-    @loadTraining()
+  mounted: ->
+    @training = @parent_training if @parent_training
+    # BrainDamage: Mounted Start
+    # BrainDamage: Mounted End
+
+  watch:
+    '$route.params.id':
+      immediate: true
+      handler: ->
+        @trainings_resource ?= new TrainingsResource
+        @training_id = parseInt @$route.params.id
+        @loadTraining()
 </script>

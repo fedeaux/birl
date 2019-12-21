@@ -34,10 +34,10 @@
           |  Cancel
 
   router-link.entity-list-item.training-list-item(v-if='!confirming_destroy && !showing_actions'
-                                                 :to='training.path()')
+                                                  :to='training.path()')
     trainings-display(:training='training'
-                     :allow_actions='allow_actions'
-                     @action='showActions')
+                      :allow_actions='allow_actions'
+                      @action='showActions')
       i.ellipsis.vertical.icon
 
   entity-list-item-divider
