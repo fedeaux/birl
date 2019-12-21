@@ -1,5 +1,5 @@
 <template lang="pug">
-.entity-list-item-wrapper.session_progression-list-item-wrapper
+.entity-list-item-wrapper.session-progression-list-item-wrapper
   .entity-list-item-confirming-destroy(v-if='confirming_destroy && !showing_actions')
     .ui.four.column.grid
       .column
@@ -33,11 +33,11 @@
           i.cancel.icon
           |  Cancel
 
-  router-link.entity-list-item.session_progression-list-item(v-if='!confirming_destroy && !showing_actions'
-                                                 :to='session_progression.path()')
-    session_progressions-display(:session_progression='session_progression'
-                     :allow_actions='allow_actions'
-                     @action='showActions')
+  router-link.entity-list-item.session-progression-list-item(v-if='!confirming_destroy && !showing_actions'
+                                                             :to='session_progression.path()')
+    session-progressions-display(:session_progression='session_progression'
+                                 :allow_actions='allow_actions'
+                                 @action='showActions')
       i.ellipsis.vertical.icon
 
   entity-list-item-divider

@@ -1,6 +1,6 @@
 <template lang="pug">
-.entity-new.session_progression-new.default-container
-  session_progressions-form
+.entity-new.session-progression-new.default-container
+  session-progressions-form
 </template>
 
 <script lang="coffee">

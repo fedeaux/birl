@@ -1,6 +1,6 @@
 <template lang="pug">
-.entity-index.<%= plural_underscore_name %>-index.default-container
-  <%= plural_underscore_name %>-manager(:<%= plural_underscore_name %>='<%= plural_underscore_name %>')
+.entity-index.<%= plural_dash_name %>-index.default-container
+  <%= plural_dash_name %>-manager(:<%= plural_underscore_name %>='<%= plural_underscore_name %>')
 </template>
 
 <script lang="coffee">
@@ -12,9 +12,9 @@ export default
 
   methods:
     load<%= plural_entity_name %>: ->
-      @<%= plural_underscore_name %>_resource.index @<%= plural_underscore_name %>Loaded
+      @<%= plural_underscore_name %>_resource.index @<%= plural_lowercase_entity_name %>Loaded
 
-    <%= plural_underscore_name %>Loaded: (response) ->
+    <%= plural_lowercase_entity_name %>Loaded: (response) ->
       @<%= plural_underscore_name %> = response.<%= plural_underscore_name %>
 
   mounted: ->

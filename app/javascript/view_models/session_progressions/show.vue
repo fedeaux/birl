@@ -1,6 +1,6 @@
 <template lang="pug">
-.entity-show-wrapper.session_progressions-show-wrapper.default-container(v-if='session_progression')
-  .entity-show.session_progressions-show
+.entity-show-wrapper.session-progressions-show-wrapper.default-container(v-if='session_progression')
+  .entity-show.session-progressions-show
     session_progressions-display(:session_progression='session_progression')
       router-link.entity-show-header-actions(:to='session_progression.editPath()')
         i.edit.icon

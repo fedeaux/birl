@@ -3,7 +3,7 @@
                :loading='loading'
                :search='true'
                :selection='true'
-               placeholder='<%= entity_name %>'
+               placeholder='<%= human_name %>'
                v-model='selected_<%= underscore_name %>_id')
 </template>
 
@@ -23,19 +23,19 @@ export default
 
   methods:
     load<%= plural_entity_name %>: ->
-      @<%= plural_underscore_name %>_resource.index @<%= plural_underscore_name %>Loaded
+      @<%= plural_underscore_name %>_resource.index @<%= plural_lowercase_entity_name %>Loaded
 
-    <%= plural_underscore_name %>Loaded: (response) ->
+    <%= plural_lowercase_entity_name %>Loaded: (response) ->
       @<%= plural_underscore_name %> = response.<%= plural_underscore_name %>
 
-    <%= underscore_name %>Index: (<%= underscore_name %>_id) ->
+    <%= lowercase_entity_name %>Index: (<%= underscore_name %>_id) ->
       for index, <%= underscore_name %> of @<%= plural_underscore_name %>
         return index if <%= underscore_name %>.id == <%= underscore_name %>_id
 
       -1
 
     get<%= entity_name %>: (<%= underscore_name %>_id) ->
-      index = @<%= underscore_name %>Index <%= underscore_name %>_id
+      index = @<%= lowercase_entity_name %>Index <%= underscore_name %>_id
       return null if index == -1
       @<%= plural_underscore_name %>[index]
 

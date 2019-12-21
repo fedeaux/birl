@@ -1,6 +1,6 @@
 <template lang="pug">
-.entity-form-wrapper.<%= plural_underscore_name %>-form-wrapper.default-container(v-if='<%= underscore_name %>')
-  .entity-form.<%= plural_underscore_name %>-form
+.entity-form-wrapper.<%= plural_dash_name %>-form-wrapper.default-container(v-if='<%= underscore_name %>')
+  .entity-form.<%= plural_dash_name %>-form
     .ui.form
 <%- attributes.each do |attribute| -%>
 <%-   if attribute.name != 'user' && [:string, :interger, :text, :references, :belongs_to, :jsonb].include?(attribute.type) -%>

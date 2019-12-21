@@ -1,6 +1,6 @@
 <template lang="pug">
-.entity-list.session_progression-list.default-container
-  session_progressions-list-item(v-for='session_progression in session_progressions'
+.entity-list.session-progression-list.default-container
+  session-progressions-list-item(v-for='session_progression in session_progressions'
                                  v-if='session_progressions'
                                  :session_progression='session_progression'
                                  :allow_actions='allow_actions'

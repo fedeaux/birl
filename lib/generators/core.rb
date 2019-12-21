@@ -1,26 +1,52 @@
 module GeneratorsCore
+  # some_entity
   def underscore_name
     singular_name.underscore
   end
 
+  # some-entity
+  def dash_name
+    underscore_name.gsub '_', '-'
+  end
+
+  # SomeEntity
   def entity_name
     singular_name.camelcase
   end
 
+  # someEntity
   def lowercase_entity_name
     singular_name.camelize(:lower)
   end
 
+  # Some Entity
+  def human_name
+    underscore_name.gsub('_', ' ').titleize
+  end
+
+  # some_entities
   def plural_underscore_name
     name.underscore.pluralize
   end
 
+  # some-entities
+  def plural_dash_name
+    plural_underscore_name.gsub '_', '-'
+  end
+
+  # SomeEntities
   def plural_entity_name
     name.camelcase.pluralize
   end
 
-  def lowercase_plural_entity_name
+  # someEntities
+  def plural_lowercase_entity_name
     name.camelcase(:lower).pluralize
+  end
+
+  # Some Entity
+  def plural_human_name
+    plural_underscore_name.gsub('_', ' ').titleize
   end
 
   def controller_file_name

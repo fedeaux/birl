@@ -1,6 +1,6 @@
 <template lang="pug">
-.entity-form-wrapper.session_progressions-form-wrapper.default-container(v-if='session_progression')
-  .entity-form.session_progressions-form
+.entity-form-wrapper.session-progressions-form-wrapper.default-container(v-if='session_progression')
+  .entity-form.session-progressions-form
     .ui.form
       .field
         label Session

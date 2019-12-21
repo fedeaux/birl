@@ -1,17 +1,17 @@
 <template lang="pug">
-.entity-manager.session_progressions-manager.default-container
+.entity-manager.session-progressions-manager.default-container
   .entity-manager-form(v-if='form_session_progression')
-    session_progressions-form(v-model='form_session_progression'
+    session-progressions-form(v-model='form_session_progression'
                               @save='saveFormSessionProgression()'
                               @cancel='clearFormSessionProgression()')
 
   .entity-manager-list(v-else)
     .entity-manager-list-header
-      #new-session_progression-button.ui.primary.top.attached.fluid.small.icon.button(@click='newSessionProgression')
+      #new-session-progression-button.ui.primary.top.attached.fluid.small.icon.button(@click='newSessionProgression')
         i.plus.icon
         |  Add
 
-    session_progressions-list(:session_progressions='session_progressions'
+    session-progressions-list(:session_progressions='session_progressions'
                               :allow_actions='true'
                               @edit='editSessionProgression($event)'
                               @destroy='destroySessionProgression($event)')
@@ -40,7 +40,7 @@ export default
       @session_progressions_resource.destroy data.session_progression, @sessionProgressionRemoved
 
     loadSessionProgressions: ->
-      @session_progressions_resource.index @session_progressionsLoaded, @context
+      @session_progressions_resource.index @sessionProgressionsLoaded, @context
 
     sessionProgressionsLoaded: (response) ->
       @session_progressions = response.session_progressions
@@ -76,7 +76,7 @@ export default
       @clearFormSessionProgression()
 
     sessionProgressionRemoved: (data) ->
-      index = @session_progressionIndex data.session_progression.id
+      index = @sessionProgressionIndex data.session_progression.id
       return if index == -1
       @session_progressions.splice index, 1
 

@@ -6,13 +6,16 @@ class Api::V1::SessionsController < Api::V1::ApiController
   end
 
   def today
-    @session = current_context.current_session
+    @sessions = current_context.current_training.sessions
+    render 'index'
+    # TODO
+    # @session = current_context.current_session
 
-    if @session
-      render 'show'
-    else
-      head 404
-    end
+    # if @session
+    #   render 'show'
+    # else
+    #   head 404
+    # end
   end
 
   def show; end

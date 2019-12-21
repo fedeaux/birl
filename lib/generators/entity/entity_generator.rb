@@ -82,9 +82,13 @@ class EntityGenerator < Rails::Generators::NamedBase
     end.join "\n"
   end
 
+  def spaces(count)
+    ' ' * count
+  end
+
   def method_missing(name, *args, &block)
     name = name.to_s
-    super(name, args, block) unless name.end_with? '_as_spaces'
-    ' ' * send(name.gsub('_as_spaces', '')).length
+    super(name.to_sym, args, block) unless name.end_with? '_as_spaces'
+    spaces send(name.gsub('_as_spaces', '')).length
   end
 end

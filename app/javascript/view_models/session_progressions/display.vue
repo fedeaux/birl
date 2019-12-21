@@ -4,9 +4,7 @@
     | {{ session_progression.name }}
 
   .entity-display-detail
-    | detail1
-    | &middot;
-    | detail2
+    | This is the Session Progression, not the progression
 
   .entity-display-actions(v-if='allow_actions' @click='action($event)')
     slot

@@ -11,7 +11,8 @@
       | Completed! Good work :)
     br
 
-  progressions-manager(:parent_progressions='session.progressions')
+  session-progressions-manager(:context='{ session_id: session.id }'
+                               :parent_session_progressions='session.session_progressions')
 
   shared-footer
     .ui.two.buttons

@@ -1,20 +1,20 @@
 <template lang="pug">
-.entity-manager.<%= plural_underscore_name %>-manager.default-container
+.entity-manager.<%= plural_dash_name %>-manager.default-container
   .entity-manager-form(v-if='form_<%= underscore_name %>')
-    <%= plural_underscore_name %>-form(v-model='form_<%= underscore_name %>'
-    <%= plural_underscore_name_as_spaces %>      @save='saveForm<%= entity_name %>()'
-    <%= plural_underscore_name_as_spaces %>      @cancel='clearForm<%= entity_name %>()')
+    <%= plural_dash_name %>-form(v-model='form_<%= underscore_name %>'
+    <%= plural_dash_name_as_spaces %>      @save='saveForm<%= entity_name %>()'
+    <%= plural_dash_name_as_spaces %>      @cancel='clearForm<%= entity_name %>()')
 
   .entity-manager-list(v-else)
     .entity-manager-list-header
-      #new-<%= underscore_name %>-button.ui.primary.top.attached.fluid.small.icon.button(@click='new<%= entity_name %>')
+      #new-<%= dash_name %>-button.ui.primary.top.attached.fluid.small.icon.button(@click='new<%= entity_name %>')
         i.plus.icon
         |  Add
 
-    <%= plural_underscore_name %>-list(:<%= plural_underscore_name %>='<%= plural_underscore_name %>'
-    <%= plural_underscore_name_as_spaces %>      :allow_actions='true'
-    <%= plural_underscore_name_as_spaces %>      @edit='edit<%= entity_name %>($event)'
-    <%= plural_underscore_name_as_spaces %>      @destroy='destroy<%= entity_name %>($event)')
+    <%= plural_dash_name %>-list(:<%= plural_underscore_name %>='<%= plural_underscore_name %>'
+    <%= plural_dash_name_as_spaces %>      :allow_actions='true'
+    <%= plural_dash_name_as_spaces %>      @edit='edit<%= entity_name %>($event)'
+    <%= plural_dash_name_as_spaces %>      @destroy='destroy<%= entity_name %>($event)')
 </template>
 
 <script lang="coffee">
@@ -40,9 +40,9 @@ export default
       @<%= plural_underscore_name %>_resource.destroy data.<%= underscore_name %>, @<%= lowercase_entity_name %>Removed
 
     load<%= plural_entity_name %>: ->
-      @<%= plural_underscore_name %>_resource.index @<%= plural_underscore_name %>Loaded, @context
+      @<%= plural_underscore_name %>_resource.index @<%= plural_lowercase_entity_name %>Loaded, @context
 
-    <%= lowercase_plural_entity_name %>Loaded: (response) ->
+    <%= plural_lowercase_entity_name %>Loaded: (response) ->
       @<%= plural_underscore_name %> = response.<%= plural_underscore_name %>
 
     new<%= entity_name %>: ->
@@ -76,7 +76,7 @@ export default
       @clearForm<%= entity_name %>()
 
     <%= lowercase_entity_name %>Removed: (data) ->
-      index = @<%= underscore_name %>Index data.<%= underscore_name %>.id
+      index = @<%= lowercase_entity_name %>Index data.<%= underscore_name %>.id
       return if index == -1
       @<%= plural_underscore_name %>.splice index, 1
 

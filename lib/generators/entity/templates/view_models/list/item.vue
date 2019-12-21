@@ -1,5 +1,5 @@
 <template lang="pug">
-.entity-list-item-wrapper.<%= underscore_name %>-list-item-wrapper
+.entity-list-item-wrapper.<%= dash_name %>-list-item-wrapper
   .entity-list-item-confirming-destroy(v-if='confirming_destroy && !showing_actions')
     .ui.four.column.grid
       .column
@@ -33,11 +33,11 @@
           i.cancel.icon
           |  Cancel
 
-  router-link.entity-list-item.<%= underscore_name %>-list-item(v-if='!confirming_destroy && !showing_actions'
-                                                 :to='<%= underscore_name %>.path()')
-    <%= plural_underscore_name %>-display(:<%= underscore_name %>='<%= underscore_name %>'
-                     :allow_actions='allow_actions'
-                     @action='showActions')
+  router-link.entity-list-item.<%= dash_name %>-list-item(v-if='!confirming_destroy && !showing_actions'
+                               <%= dash_name_as_spaces %><%= spaces(11) %>:to='<%= underscore_name %>.path()')
+    <%= plural_dash_name %>-display(:<%= underscore_name %>='<%= underscore_name %>'
+    <%= plural_dash_name_as_spaces %><%= spaces(9) %>:allow_actions='allow_actions'
+    <%= plural_dash_name_as_spaces %><%= spaces(9) %>@action='showActions')
       i.ellipsis.vertical.icon
 
   entity-list-item-divider

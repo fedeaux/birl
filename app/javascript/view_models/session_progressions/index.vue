@@ -1,6 +1,6 @@
 <template lang="pug">
-.entity-index.session_progressions-index.default-container
-  session_progressions-manager(:session_progressions='session_progressions')
+.entity-index.session-progressions-index.default-container
+  session-progressions-manager(:session_progressions='session_progressions')
 </template>
 
 <script lang="coffee">
@@ -12,9 +12,9 @@ export default
 
   methods:
     loadSessionProgressions: ->
-      @session_progressions_resource.index @session_progressionsLoaded
+      @session_progressions_resource.index @sessionProgressionsLoaded
 
-    session_progressionsLoaded: (response) ->
+    sessionProgressionsLoaded: (response) ->
       @session_progressions = response.session_progressions
 
   mounted: ->

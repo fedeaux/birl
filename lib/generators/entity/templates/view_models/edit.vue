@@ -19,13 +19,13 @@ export default
     load<%= entity_name %>: ->
       @<%= plural_underscore_name %>_resource.get @<%= underscore_name %>_id, @<%= underscore_name %>Loaded
 
-    <%= underscore_name %>Loaded: (response) ->
+    <%= lowercase_entity_name %>Loaded: (response) ->
       @<%= underscore_name %> = response.<%= underscore_name %>
 
     save<%= entity_name %>: ->
-      @<%= plural_underscore_name %>_resource.save @<%= underscore_name %>, @<%= underscore_name %>Done
+      @<%= plural_underscore_name %>_resource.save @<%= underscore_name %>, @<%= lowercase_entity_name %>Done
 
-    <%= underscore_name %>Done: ->
+    <%= lowercase_entity_name %>Done: ->
       @$router.push @<%= underscore_name %>.path()
 
   computed:

@@ -19,13 +19,13 @@ export default
     loadSessionProgression: ->
       @session_progressions_resource.get @session_progression_id, @session_progressionLoaded
 
-    session_progressionLoaded: (response) ->
+    sessionProgressionLoaded: (response) ->
       @session_progression = response.session_progression
 
     saveSessionProgression: ->
-      @session_progressions_resource.save @session_progression, @session_progressionDone
+      @session_progressions_resource.save @session_progression, @sessionProgressionDone
 
-    session_progressionDone: ->
+    sessionProgressionDone: ->
       @$router.push @session_progression.path()
 
   computed:

@@ -1,32 +1,31 @@
 <template lang="pug">
-.entity-edit.session-edit.default-container(v-if='session')
-  sessions-show(:parent_session='session' @forceReload='forceReload' :force_reloadable='true')
+.entity-edit.session-edit.default-container(v-if='sessions')
+  sessions-manager(:sessions='sessions')
 
   .default-container
     .ui.two.column.centered.grid
 </template>
 
 <script lang="coffee">
-import Session from '../../models/session'
 import SessionsResource from '../../resources/sessions_resource'
 
 export default
   data: ->
-    session: null
+    sessions: null
 
   methods:
-    loadSession: ->
-      @sessions_resource.todays @sessionLoaded
+    loadSessions: ->
+      @sessions_resource.todays @sessionsLoaded
 
-    sessionLoaded: (response) ->
-      @session = response.session
-      @setCurrentSession @session
+    sessionsLoaded: (response) ->
+      @sessions = response.sessions
+      # @setCurrentSession @session
 
     forceReload: ->
       localStorage.clear()
-      @loadSession()
+      @loadSessions()
 
   mounted: ->
     @sessions_resource = new SessionsResource
-    @loadSession()
+    @loadSessions()
 </script>

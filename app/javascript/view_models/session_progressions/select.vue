@@ -3,7 +3,7 @@
                :loading='loading'
                :search='true'
                :selection='true'
-               placeholder='SessionProgression'
+               placeholder='Session Progression'
                v-model='selected_session_progression_id')
 </template>
 
@@ -23,19 +23,19 @@ export default
 
   methods:
     loadSessionProgressions: ->
-      @session_progressions_resource.index @session_progressionsLoaded
+      @session_progressions_resource.index @sessionProgressionsLoaded
 
-    session_progressionsLoaded: (response) ->
+    sessionProgressionsLoaded: (response) ->
       @session_progressions = response.session_progressions
 
-    session_progressionIndex: (session_progression_id) ->
+    sessionProgressionIndex: (session_progression_id) ->
       for index, session_progression of @session_progressions
         return index if session_progression.id == session_progression_id
 
       -1
 
     getSessionProgression: (session_progression_id) ->
-      index = @session_progressionIndex session_progression_id
+      index = @sessionProgressionIndex session_progression_id
       return null if index == -1
       @session_progressions[index]
 

@@ -10,6 +10,7 @@ class SessionProgression extends BaseModel
   @attributes = ->
     {
       id: {}
+      name: {}
       session: { type: Session }
       session_id: {}
       progression: { type: Progression }

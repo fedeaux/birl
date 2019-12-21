@@ -5,7 +5,7 @@
       router-link.entity-show-header-actions(:to='progression.editPath()')
         i.edit.icon
 
-  entries-manager(:context='{ progression_id: progression_id }'
+  entries-manager(:context='{ progression_id: progression.id }'
                   :data_model='progression.entry_data_model')
 
   shared-footer
