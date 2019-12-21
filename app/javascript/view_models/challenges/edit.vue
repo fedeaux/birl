@@ -1,5 +1,8 @@
 <template lang="pug">
 .entity-edit.challenge-edit.default-container
+  .entity-display
+    .entity-display-main Edit Challenge
+
   challenges-form(v-model='challenge'
                   v-if='challenge'
                   @save='saveChallenge()'

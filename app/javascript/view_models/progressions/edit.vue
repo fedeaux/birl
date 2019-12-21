@@ -1,5 +1,8 @@
 <template lang="pug">
 .entity-edit.progression-edit.default-container
+  .entity-display
+    .entity-display-main Edit Progression
+
   progressions-form(v-model='progression'
                     v-if='progression'
                     @save='saveProgression()'

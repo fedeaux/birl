@@ -1,5 +1,8 @@
 <template lang="pug">
 .entity-edit.group-edit.default-container
+  .entity-display
+    .entity-display-main Edit Group
+
   groups-form(v-model='group'
               v-if='group'
               @save='saveGroup()'

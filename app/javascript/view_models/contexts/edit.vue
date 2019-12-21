@@ -1,5 +1,8 @@
 <template lang="pug">
 .entity-edit.context-edit.default-container
+  .entity-display
+    .entity-display-main Edit Context
+
   contexts-form(v-model='context'
                 v-if='context'
                 @save='saveContext()'

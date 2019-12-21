@@ -29,12 +29,18 @@ namespace :dev do
   end
 
   task force_regen_all: :environment do
+    threads = []
+
     File.readlines('.generated').each do |line|
       next unless line.start_with? 'rails g entity'
 
-      puts line
-      `#{line} -f`
+      threads << Thread.new do
+        puts line
+        `#{line.strip} -f`
+      end
     end
+
+    threads.each(&:join)
   end
 
   task audio_config: :environment do

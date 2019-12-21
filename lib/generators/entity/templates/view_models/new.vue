@@ -4,8 +4,8 @@
     .entity-display-main New <%= human_name %>
 
   <%= plural_dash_name %>-form(v-model='<%= underscore_name %>'
-               @save='save<%= entity_name %>'
-               @cancel='back')
+  <%= plural_dash_name_as_spaces %>      @save='save<%= entity_name %>'
+  <%= plural_dash_name_as_spaces %>      @cancel='back')
 </template>
 
 <script lang="coffee">

@@ -1,5 +1,8 @@
 <template lang="pug">
 .entity-edit.entry-edit.default-container
+  .entity-display
+    .entity-display-main Edit Entry
+
   entries-form(v-model='entry'
                v-if='entry'
                :data_model='entry.data_model'

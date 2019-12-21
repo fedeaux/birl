@@ -1,5 +1,8 @@
 <template lang="pug">
 .entity-edit.session-edit.default-container
+  .entity-display
+    .entity-display-main Edit Session
+
   sessions-form(v-model='session'
                 v-if='session'
                 @save='saveSession()'

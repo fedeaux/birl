@@ -1,5 +1,8 @@
 <template lang="pug">
 .entity-edit.training-edit.default-container
+  .entity-display
+    .entity-display-main Edit Training
+
   trainings-form(v-model='training'
                  v-if='training'
                  @save='saveTraining()'

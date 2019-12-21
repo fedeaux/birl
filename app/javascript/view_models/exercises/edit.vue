@@ -1,5 +1,8 @@
 <template lang="pug">
 .entity-edit.exercise-edit.default-container
+  .entity-display
+    .entity-display-main Edit Exercise
+
   exercises-form(v-model='exercise'
                  v-if='exercise'
                  @save='saveExercise()'

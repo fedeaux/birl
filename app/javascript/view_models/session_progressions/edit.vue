@@ -1,5 +1,8 @@
 <template lang="pug">
 .entity-edit.session_progression-edit.default-container
+  .entity-display
+    .entity-display-main Edit Session Progression
+
   session_progressions-form(v-model='session_progression'
                             v-if='session_progression'
                             @save='saveSessionProgression()'
