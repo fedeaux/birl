@@ -24,8 +24,9 @@
              "lists": <%= lists_json.html_safe %>,
              "entry_data_model": <%= entry_data_model_data_json.html_safe %>,
              "links": {
-               "logoff": "<%= destroy_user_session_path %>"
-             }
+               "logoff": "<%= destroy_user_session_url %>"
+             },
+             "base_url": "<%= ENV['BASE_URL'] %>"
          }
         </script>
     <% end %>

@@ -10,7 +10,7 @@
     router-link.item(to='/progressions') Progressions
     router-link.item(to='/sessions') Sessions
     router-link.item(to='/listers') Lists
-    a.item(@click='logoff') Logoff
+    //- a.item(@click='logoff') Logoff
 
     a.item(@click='updateContext(null)' v-if='current_context') Leave {{ current_context.name }}
 

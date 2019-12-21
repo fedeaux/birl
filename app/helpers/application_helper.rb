@@ -9,18 +9,18 @@ module ApplicationHelper
         next if event == :new_files
 
         config[:schemas][schema][:events][event] = schema_config[:events][event].map { |audio|
-          audio_path("schemas/#{schema}/#{audio}")
+          audio_url("schemas/#{schema}/#{audio}")
         }
       end
 
       config[:schemas][schema][:eventless] = schema_config[:eventless].map { |audio|
-        audio_path("schemas/#{schema}/#{audio}")
+        audio_url("schemas/#{schema}/#{audio}")
       }
 
       config[:schemas][schema].delete :new_files
 
       if File.exist? "app/assets/images/audio/#{schema}.png"
-        config[:schemas][schema][:image] = image_path("audio/#{schema}.png")
+        config[:schemas][schema][:image] = image_url("audio/#{schema}.png")
       end
     end
 
