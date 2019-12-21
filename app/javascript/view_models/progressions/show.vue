@@ -5,6 +5,7 @@
       router-link.entity-show-header-actions(:to='progression.editPath()')
         i.edit.icon
 
+//- BrainDamage: Body Start
   entries-manager(:context='{ progression_id: progression.id }'
                   :data_model='progression.entry_data_model')
 
@@ -15,6 +16,7 @@
          | Execute
          | &nbsp;
          i.play.icon
+//- BrainDamage: Body End
 </template>
 
 <script lang="coffee">
@@ -43,6 +45,11 @@ export default
     @progressions_resource = new ProgressionsResource
     @progression_id = parseInt @$route.params.id
     @loadProgression()
+
+# BrainDamage: Methods Start
+  sua: ->
+    'mae'
+# BrainDamage: Methods End
 
   watch:
     '$route.params.id':
