@@ -67,12 +67,14 @@ class TrainingSeeder
 
   def ensure_everyday_progressions(session)
     # smells like teen coding
-    ['Respiração Rápida - HIIT sem peso',
-     'Espiração com Pressão - HIIT sem peso',
-     'Bananeira - Movimento'].each_with_index do |signature, index|
-      progression = ensure_progression signature
-      ensure_session_progression progression, session, index
-    end.count
+    return 0
+
+    # ['Respiração Rápida - HIIT sem peso',
+    #  'Espiração com Pressão - HIIT sem peso',
+    #  'Bananeira - Movimento'].each_with_index do |signature, index|
+    #   progression = ensure_progression signature
+    #   ensure_session_progression progression, session, index
+    # end.count
   end
 
   def ensure_session_progression(progression, session, order)
