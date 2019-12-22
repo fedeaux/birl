@@ -6,10 +6,6 @@
         label Name
         input(type='text' v-model='session.name')
 
-      .field
-        label Training
-        trainings-select(v-model='session.training_id')
-
       .field.ui.fluid.buttons
         .ui.primary.button(@click='save()') Save
         .ui.basic.button(@click='cancel()') Cancel
