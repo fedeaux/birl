@@ -1,1 +1,1 @@
-json.extract! session_progression, :id, :name, :training_id, :progression_id, :order
+json.extract! session, :id, :name, :training_id, :weekday

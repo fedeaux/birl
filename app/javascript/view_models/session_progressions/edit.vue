@@ -3,10 +3,10 @@
   .entity-display
     .entity-display-main Edit Session Progression
 
-  session_progressions-form(v-model='session_progression'
+  session-progressions-form(v-model='session_progression'
                             v-if='session_progression'
                             @save='saveSessionProgression()'
-                            @cancel='session_progressionDone()')
+                            @cancel='sessionProgressionDone()')
 </template>
 
 <script lang="coffee">
@@ -20,7 +20,7 @@ export default
 
   methods:
     loadSessionProgression: ->
-      @session_progressions_resource.get @session_progression_id, @session_progressionLoaded
+      @session_progressions_resource.get @session_progression_id, @sessionProgressionLoaded
 
     sessionProgressionLoaded: (response) ->
       @session_progression = response.session_progression

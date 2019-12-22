@@ -26,23 +26,23 @@ class EntityGenerator < Rails::Generators::NamedBase
   #   guarded_template 'controller.rb', controller_file_name
   # end
 
-  def generate_responses
-    # guarded_template 'views/_fields.json.jbuilder', response_file_name('_fields')
-    guarded_template 'views/_show.json.jbuilder', response_file_name('_show')
-    # guarded_template 'views/show.json.jbuilder', response_file_name('show')
-    # guarded_template 'views/index.json.jbuilder', response_file_name('index')
-  end
+  # def generate_responses
+  #   guarded_template 'views/_fields.json.jbuilder', response_file_name('_fields')
+  #   guarded_template 'views/_show.json.jbuilder', response_file_name('_show')
+  #   guarded_template 'views/show.json.jbuilder', response_file_name('show')
+  #   guarded_template 'views/index.json.jbuilder', response_file_name('index')
+  # end
 
   # def generate_coffeescripts
   #   guarded_template 'coffeescripts/model.coffee', "app/javascript/models/#{underscore_name}.coffee"
   #   guarded_template 'coffeescripts/resource.coffee', "app/javascript/resources/#{plural_underscore_name}_resource.coffee"
   # end
 
-  # def generate_view_models
-  #   view_models_list.each do |view_model_name|
-  #     guarded_template "view_models/#{view_model_name}.vue", view_model_file_name(view_model_name)
-  #   end
-  # end
+  def generate_view_models
+    view_models_list.each do |view_model_name|
+      guarded_template "view_models/#{view_model_name}.vue", view_model_file_name(view_model_name)
+    end
+  end
 
   private
 

@@ -11,7 +11,7 @@
   //- BrainDamage: Body End
 
   h3 Session
-  session-list-item(:progression='session')
+  sessions-list-item(:session='session')
   //- BrainDamage: Body End
 </template>
 

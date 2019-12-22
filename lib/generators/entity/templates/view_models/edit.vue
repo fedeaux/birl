@@ -3,10 +3,10 @@
   .entity-display
     .entity-display-main Edit <%= human_name %>
 
-  <%= plural_underscore_name %>-form(v-model='<%= underscore_name %>'
-  <%= plural_underscore_name_as_spaces %>      v-if='<%= underscore_name %>'
-  <%= plural_underscore_name_as_spaces %>      @save='save<%= entity_name %>()'
-  <%= plural_underscore_name_as_spaces %>      @cancel='<%= underscore_name %>Done()')
+  <%= plural_dash_name %>-form(v-model='<%= underscore_name %>'
+  <%= plural_dash_name_as_spaces %>      v-if='<%= underscore_name %>'
+  <%= plural_dash_name_as_spaces %>      @save='save<%= entity_name %>()'
+  <%= plural_dash_name_as_spaces %>      @cancel='<%= lowercase_entity_name %>Done()')
 </template>
 
 <script lang="coffee">
@@ -20,7 +20,7 @@ export default
 
   methods:
     load<%= entity_name %>: ->
-      @<%= plural_underscore_name %>_resource.get @<%= underscore_name %>_id, @<%= underscore_name %>Loaded
+      @<%= plural_underscore_name %>_resource.get @<%= underscore_name %>_id, @<%= lowercase_entity_name %>Loaded
 
     <%= lowercase_entity_name %>Loaded: (response) ->
       @<%= underscore_name %> = response.<%= underscore_name %>
