@@ -2,7 +2,7 @@ class Api::V1::ExercisesController < Api::V1::ApiController
   before_action :set_exercise, only: %i[show update destroy]
 
   def index
-    @exercises = current_context.exercises
+    @exercises = current_context.exercises.order(:name)
   end
 
   def show

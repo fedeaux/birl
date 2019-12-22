@@ -33,7 +33,7 @@ class Progression < ApplicationRecord
     {
       dimensions: [
         { name: :reps, options: {} },
-        { name: :weight, options: {} },
+        { name: :load, options: {} },
         { name: :rest, options: {} },
       ]
     }

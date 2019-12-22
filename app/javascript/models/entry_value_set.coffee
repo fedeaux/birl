@@ -12,7 +12,7 @@ class EntryValueSet extends BaseModel
       mult: {}
 
       time: {}
-      weight: {}
+      load: {}
       reps: {}
       speed: {}
       bpm: {}
@@ -27,14 +27,14 @@ class EntryValueSet extends BaseModel
     if @reps
       str += @reps
 
-      if @weight and @weight > 0
-        str += "x#{@weight}kg"
+      if @load and @load > 0
+        str += "x#{@load}kg"
 
     else if @time
       str += @formattedTime @time
 
-      if @weight and @weight > 0
-        str += "#{@weight}kg"
+      if @load and @load > 0
+        str += "#{@load}kg"
 
     return "#{@mult}x(#{str})" if @mult and @mult > 1
     str

@@ -3,7 +3,7 @@ module EntryDataModel
     DEFAULT_DIMENSIONS = [
       { name: :mult, options: {} },
       { name: :time, options: {} },
-      { name: :weight, options: {} },
+      { name: :load, options: {} },
       { name: :pause, options: {} },
       { name: :rest, options: {} }
     ]

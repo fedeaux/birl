@@ -15,15 +15,19 @@ namespace :dev do
 
   task update_entries_data_model: :environment do
     Entry.all.each do |entry|
-      next unless entry.value.is_a?(Hash) && entry.value['sets'] && entry.value['sets'].is_a?(Array)
+      entry.value = { sets: [] } unless entry.value.is_a?(Hash) && entry.value[:sets].is_a?(Array)
+      value = entry.value
 
-      entry.value['sets'].each do |set|
-        if set['seconds']
-          ap entry
-          break
+      value[:sets] = value[:sets].map do |set|
+        if set[:weight]
+          set[:load] = set[:weight]
+          set.delete(:weight)
         end
+
+        set
       end
 
+      entry.value = value
       entry.save
     end
   end

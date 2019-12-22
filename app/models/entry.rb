@@ -1,11 +1,11 @@
 class Entry < ApplicationRecord
-  VALUE_DIMENSIONS = %i[execution mult time weight reps speed bpm bpmm rest pause]
+  VALUE_DIMENSIONS = %i[execution mult time load reps speed bpm bpmm rest pause]
 
   # Explanation
   # execution
   # mult
   # time
-  # weight
+  # load
   # reps
   # speed
   # bpmm
@@ -21,7 +21,9 @@ class Entry < ApplicationRecord
 
   def value=(param)
     param = {} unless param.is_a? Hash
-    sets = param['sets']
+    param = param.to_h.deep_symbolize_keys
+
+    sets = param[:sets]
 
     sets = if sets.is_a? Hash
              sets.values
@@ -31,8 +33,12 @@ class Entry < ApplicationRecord
              []
            end
 
-    param['sets'] = sets
+    param[:sets] = sets
     super param
+  end
+
+  def value
+    (super || { sets: []}).deep_symbolize_keys
   end
 
   def prototype
