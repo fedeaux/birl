@@ -9,7 +9,7 @@
     .entity-manager-list-header
       #new-<%= dash_name %>-button.ui.primary.top.attached.fluid.small.icon.button(@click='new<%= entity_name %>')
         i.plus.icon
-        |  Add
+        |  Add <%= human_name %>
 
     <%= plural_dash_name %>-list(:<%= plural_underscore_name %>='<%= plural_underscore_name %>'
     <%= plural_dash_name_as_spaces %>      :allow_actions='true'

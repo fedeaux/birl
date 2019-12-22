@@ -9,7 +9,7 @@
     .entity-manager-list-header
       #new-lister-button.ui.primary.top.attached.fluid.small.icon.button(@click='newLister')
         i.plus.icon
-        |  Add
+        |  Add Lister
 
     listers-list(:listers='listers'
                  :allow_actions='true'

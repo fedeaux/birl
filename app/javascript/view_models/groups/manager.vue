@@ -9,7 +9,7 @@
     .entity-manager-list-header
       #new-group-button.ui.primary.top.attached.fluid.small.icon.button(@click='newGroup')
         i.plus.icon
-        |  Add
+        |  Add Group
 
     groups-list(:groups='groups'
                 :allow_actions='true'

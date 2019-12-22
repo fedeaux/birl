@@ -16,7 +16,7 @@
     .entity-manager-list-header(v-if='actions && actions.add')
       #new-entry-button.ui.primary.top.attached.fluid.small.icon.button(@click='newEntry')
         i.plus.icon
-        |  Add
+        |  Add Entry
 
     entries-list(:entries='entries'
                  :allow_actions='actions.list_actions'

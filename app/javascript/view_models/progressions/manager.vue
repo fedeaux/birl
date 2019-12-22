@@ -9,7 +9,7 @@
     .entity-manager-list-header
       #new-progression-button.ui.primary.top.attached.fluid.small.icon.button(@click='newProgression')
         i.plus.icon
-        |  Add
+        |  Add Progression
 
     progressions-list(:progressions='progressions'
                       :allow_actions='true'

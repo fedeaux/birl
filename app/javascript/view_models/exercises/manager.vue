@@ -9,7 +9,7 @@
     .entity-manager-list-header
       #new-exercise-button.ui.primary.top.attached.fluid.small.icon.button(@click='newExercise')
         i.plus.icon
-        |  Add
+        |  Add Exercise
 
     exercises-list(:exercises='exercises'
                    :allow_actions='true'

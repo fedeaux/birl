@@ -9,7 +9,7 @@
     .entity-manager-list-header
       #new-challenge-button.ui.primary.top.attached.fluid.small.icon.button(@click='newChallenge')
         i.plus.icon
-        |  Add
+        |  Add Challenge
 
     challenges-list(:challenges='challenges'
                     :allow_actions='true'

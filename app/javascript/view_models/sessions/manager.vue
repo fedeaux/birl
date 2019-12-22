@@ -9,7 +9,7 @@
     .entity-manager-list-header
       #new-session-button.ui.primary.top.attached.fluid.small.icon.button(@click='newSession')
         i.plus.icon
-        |  Add
+        |  Add Session
 
     sessions-list(:sessions='sessions'
                   :allow_actions='true'

@@ -9,7 +9,7 @@
     .entity-manager-list-header
       #new-training-button.ui.primary.top.attached.fluid.small.icon.button(@click='newTraining')
         i.plus.icon
-        |  Add
+        |  Add Training
 
     trainings-list(:trainings='trainings'
                    :allow_actions='true'

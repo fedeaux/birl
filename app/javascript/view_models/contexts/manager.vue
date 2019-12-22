@@ -9,7 +9,7 @@
     .entity-manager-list-header
       #new-context-button.ui.primary.top.attached.fluid.small.icon.button(@click='newContext')
         i.plus.icon
-        |  Add
+        |  Add Context
 
     contexts-list(:contexts='contexts'
                   :allow_actions='true'

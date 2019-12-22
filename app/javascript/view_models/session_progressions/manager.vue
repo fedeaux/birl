@@ -9,7 +9,7 @@
     .entity-manager-list-header
       #new-session-progression-button.ui.primary.top.attached.fluid.small.icon.button(@click='newSessionProgression')
         i.plus.icon
-        |  Add
+        |  Add Session Progression
 
     session-progressions-list(:session_progressions='session_progressions'
                               :allow_actions='true'
