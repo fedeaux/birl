@@ -2,21 +2,13 @@ after(:users) do
   User.find_each do |user|
     [
       {
-        name: 'Meditation',
-        color: '#A333C8'
-      },
-      {
         name: 'Bodybuilding',
         color: '#016936'
       },
       {
-        name: 'Music: Guitar',
+        name: 'Music',
         color: '#DB2828'
       },
-      {
-        name: 'Music: Sing',
-        color: '#DB2828'
-      }
     ].each do |context_attrs|
       slug = context_attrs[:name].parameterize
       context = user.contexts.find_or_initialize_by(slug: slug)

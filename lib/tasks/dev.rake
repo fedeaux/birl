@@ -1,5 +1,11 @@
 namespace :dev do
-  desc 'TODO'
+  task deployed: :environment do
+    %w[db:migrate db:seed db:seed:bodybuilding dev:update_entries_data_model].each do |name|
+      Rake::Task[name].reenable
+      Rake::Task[name].invoke
+    end
+  end
+
   task rename_icons: :environment do
     Dir['app/assets/images/icons/*.png'].each do |icon_name|
       path = icon_name.split('/')[0..-2].join('/')
