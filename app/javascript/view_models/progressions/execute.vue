@@ -8,7 +8,7 @@
   .progressions-show-challenge-description(v-if='progression.challenge_description')
     | {{ progression.challenge_description }}
 
-  entries-manager(:context='{ progression_id: progression_id }'
+  entries-manager(:context='entries_context'
                   :data_model='progression.entry_data_model'
                   :actions='{ add: false, form: { actions: false } }'
                   ref='entries_manager')
@@ -22,12 +22,14 @@
                  ref='executor')
 
   shared-footer
-    .ui.primary.fluid.button(@click='prepare' v-if='state == "idle"')
-      | Prepare&nbsp;&nbsp;
+    .ui.two.column.centered.grid
+      .column
+        .ui.primary.fluid.button(@click='prepare' v-if='state == "idle"')
+          | Prepare&nbsp;&nbsp;
 
-    .ui.primary.fluid.button(@click='execute' v-if='state == "preparing"' :class='{ "disabled": !executable }')
-      | Execute&nbsp;&nbsp;
-      i.play.icon
+        .ui.primary.fluid.button(@click='execute' v-if='state == "preparing"' :class='{ "disabled": !executable }')
+          | Execute&nbsp;&nbsp;
+          i.play.icon
 
     template(v-if='show_in_session')
       hr
@@ -97,6 +99,9 @@ export default
     show_in_session: ->
       @current_session && @current_session.progressions &&
         @progression_id in (p.id for p in @current_session.progressions)
+
+    entries_context: ->
+      { progression_id: @progression.id }
 
   mounted: ->
     if @parent_progression

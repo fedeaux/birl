@@ -17,18 +17,15 @@
                                :parent_session_progressions='session.session_progressions')
 
   shared-footer
-    .ui.two.buttons
-      .ui.fluid.basic.icon.button(@click='$emit("forceReload")' v-if='force_reloadable')
-        i.refresh.icon
-        |  Force Reload
-
-      .ui.fluid.primary.icon.button(@click='executeNextProgression' v-if='!session.done_today')
-        template(v-if='session.started_today')
-          | Continue
-        template(v-else)
-          | Start
-        | &nbsp;
-        i.play.icon
+    .ui.two.column.centered.grid
+      .column
+        .ui.fluid.primary.icon.button(@click='executeNextProgression' v-if='!session.done_today')
+          template(v-if='session.started_today')
+            | Continue
+          template(v-else)
+            | Start
+          | &nbsp;
+          i.play.icon
   //- BrainDamage: Body End
 </template>
 
@@ -38,7 +35,6 @@ import SessionsResource from '../../resources/sessions_resource'
 export default
   props:
     parent_session: null
-    force_reloadable: false
 
   data: ->
     session: null

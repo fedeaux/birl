@@ -18,6 +18,8 @@
 </template>
 
 <script lang="coffee">
+  import EntryValueSet from '../../../models/entry_value_set'
+
   export default
     props:
       data_model: {}
@@ -37,14 +39,12 @@
 
       increase: (dimension) ->
         return if dimension.options.uneditable
-        value = parseInt @set[dimension.name]
-        Vue.set @set, dimension.name, value and value + 1 or 1
+        Vue.set @set, dimension.name, EntryValueSet.increase dimension.name, @set[dimension.name]
         @changed()
 
       decrease: (dimension) ->
         return if dimension.options.uneditable
-        value = parseInt @set[dimension.name]
-        Vue.set @set, dimension.name, value and value - 1 or 0
+        Vue.set @set, dimension.name, EntryValueSet.decrease dimension.name, @set[dimension.name]
         @changed()
 
       classForDimension: (dimension) ->

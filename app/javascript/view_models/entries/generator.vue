@@ -12,7 +12,7 @@ export default
   methods:
     newEntry: ->
       if !@entries or @entries.length == 0
-        return new Entry _.extend {}, @context, { value: { sets: [] } }
+        return Entry.fromDataModelAndContext @context, @data_model
 
       last_entry = @entries[0]
       new Entry _.extend {}, @context, { value: last_entry.value }

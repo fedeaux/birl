@@ -13,6 +13,8 @@
 </template>
 
 <script lang="coffee">
+  import EntryValueSet from '../../../models/entry_value_set'
+
   export default
     props:
       data_model: {}
@@ -31,12 +33,7 @@
 
       newSet: ->
         return JSON.parse JSON.stringify @sets[@sets.length - 1] if @sets and @sets.length > 0
-        set = {}
-
-        for dimension in @data_model.dimensions
-          set[dimension.name] = 1
-
-        set
+        EntryValueSet.fromDataModel @data_model
 
       removeSet: (index) ->
         @sets.splice index, 1

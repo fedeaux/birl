@@ -22,6 +22,43 @@ class EntryValueSet extends BaseModel
       pause: {}
     }
 
+  @fromDataModel = (data_model) ->
+    set = new EntryValueSet
+    for dimension in data_model.dimensions
+      set[dimension.name] = @defaults[dimension.name] or 1
+
+    set
+
+  @increase = (dimension_name, current_value) ->
+    value = parseFloat current_value
+
+    if dimension_name != 'speed'
+      value and value + 1 or 1
+    else
+      (value and value * 10 + 1 or 10)/10
+
+  @decrease = (dimension_name, current_value) ->
+    value = parseFloat current_value
+    if dimension_name != 'speed'
+      value and value - 1 or 1
+    else
+      (value and value * 10 - 1 or 10)/10
+
+  @defaults =
+    {
+      mult: 3
+
+      time: 30
+      load: '0'
+      reps: 5
+      speed: 8
+      bpm: 75
+      bpmm: 1
+
+      rest: 60
+      pause: 20
+    }
+
   human: ->
     str = ''
     if @reps

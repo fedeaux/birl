@@ -13,7 +13,7 @@
     .ui.two.column.centered.grid
       .column
        router-link.ui.primary.icon.fluid.button(:to='progression.executePath()')
-         | Execute
+         | Go to Executor
          | &nbsp;
          i.play.icon
   //- BrainDamage: Body End
