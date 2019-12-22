@@ -11,10 +11,6 @@
         input(type='text' v-model='progression.details')
 
       .field
-        label Context
-        contexts-select(v-model='progression.context_id')
-
-      .field
         label Challenge
         challenges-select(v-model='progression.challenge_id')
 

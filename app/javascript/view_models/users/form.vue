@@ -10,10 +10,6 @@
         label Email
         input(type='text' v-model='user.email')
 
-      .field
-        label Current Context
-        current_contexts-select(v-model='user.current_context_id')
-
       .field.ui.fluid.buttons
         .ui.primary.button(@click='save()') Save
         .ui.basic.button(@click='cancel()') Cancel

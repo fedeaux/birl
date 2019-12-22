@@ -10,14 +10,6 @@
         label Slug
         input(type='text' v-model='exercise.slug')
 
-      .field
-        label Context
-        contexts-select(v-model='exercise.context_id')
-
-      .field
-        label Group
-        groups-select(v-model='exercise.group_id')
-
       .field.ui.fluid.buttons
         .ui.primary.button(@click='save()') Save
         .ui.basic.button(@click='cancel()') Cancel

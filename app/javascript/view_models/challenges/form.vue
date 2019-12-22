@@ -11,10 +11,6 @@
         input(type='text' v-model='challenge.description')
 
       .field
-        label Context
-        contexts-select(v-model='challenge.context_id')
-
-      .field
         label Data Model
         challenges-data-models-picker(v-model='challenge.entry_data_model')
 

@@ -9,7 +9,7 @@
 <%-     if [:string, :integer, :text].include? attribute.type -%>
         input(type='text' v-model='<%= underscore_name %>.<%= attribute.name %>')
 <%-     elsif [:references, :belongs_to].include? attribute.type -%>
-        <%= attribute.name.pluralize %>-select(v-model='<%= underscore_name %>.<%= attribute.name %>_id')
+        <%= attribute.name.pluralize.gsub('_', '-') %>-select(v-model='<%= underscore_name %>.<%= attribute.name %>_id')
 <%- end -%>
 
 <%- end -%>
