@@ -64,7 +64,5 @@ after('bodybuilding:exercises') do
       challenge.save
       challenge_ids.push challenge.id
     end
-
-    context.challenges.where('id NOT IN (?)', challenge_ids).destroy_all
   end
 end

@@ -40,24 +40,32 @@ class Lister
     "#{note}#{@r(3, 2)}" for note in @list('musical_notes', count)
 
   all: (list) ->
-    @lists[list].clone()
+    JSON.parse JSON.stringify @lists[list]
+
+  shuffled: (list) ->
+    all = @all list
+    return all unless all.length >= 2
+
+    for index in [all.length - 1..1]
+      new_index = Math.floor Math.random() * (index + 1)
+      while new_index == index
+        new_index = Math.floor Math.random() * (index + 1)
+
+      [all[index], all[new_index]] = [all[new_index], all[index]]
+
+    all
 
   list: (list, count) ->
     return @[list](count) unless _.isArray @lists[list]
     return @all(list) unless count
 
+    all = @shuffled list
     result = []
 
-    allow_dups = @lists[list].length < count
-
-    for x in [1..count]
-      loop
-        item = @item list
-
-        if allow_dups || !(item in result)
-          result.push item
-          break
+    for index in [0..count - 1]
+      result.push all[index % all.length]
 
     result
 
+window.Lister = Lister
 export default Lister

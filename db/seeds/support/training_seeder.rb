@@ -105,6 +105,16 @@ class TrainingSeeder
                                 name: :kyokushin_kihon_kicks
                               }
                             })
+
+    movimentos_legais = Progression.find_by(name: 'Movimentos Legais - Movimento')
+    return unless movimentos_legais
+
+    movimentos_legais.update(override_entry_data_model: {
+                               generator: {
+                                 name: :abstract_list,
+                                 params: { list: 'Cool Moves' }
+                               }
+                             })
   end
 
   def user
