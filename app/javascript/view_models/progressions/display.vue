@@ -7,21 +7,8 @@
       | &nbsp;
       i.checkmark.small.icon
 
-  .entity-display-detail
+  .entity-display-detail(v-html='details')
     //- BrainDamage: Details Start
-    | {{ progression.challenge_name }}
-
-    template(v-if='progression.details')
-      |  &middot;
-      |  {{ progression.details }}
-    |  &middot;
-    template(v-if='progression.entries_count > 0')
-      |  {{ progression.entries_count }} entries
-    template(v-else)
-      |  Never trained
-    template(v-if='progression.last_entry_at')
-      |  &middot;
-      |  {{ progression.last_entry_at.fromNow() }}
     //- BrainDamage: Details End
 
   .entity-display-actions(v-if='allow_actions' @click='action($event)')
@@ -47,6 +34,25 @@
    computed:
      klass: ->
        return 'text-green' if @progression.done_today
+
+     details: ->
+       els = []
+
+       if @progression.challenge_name != @progression.name
+         els.push @progression.challenge_name
+
+       if @progression.details
+         els.push @progression.details
+
+       if @progression.entries_count > 0
+         els.push @progression.entries_count
+       else
+         els.push 'Never trained'
+
+       if @progression.last_entry_at
+         els.push @progression.last_entry_at.fromNow()
+
+       els.join ' &middot; '
    # BrainDamage: Other End
 </script>
 

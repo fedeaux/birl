@@ -1,1 +1,1 @@
-json.extract! lister, :id, :name, :values
+json.partial! 'api/v1/listers/fields', lister: lister

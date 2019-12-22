@@ -1,1 +1,1 @@
-json.extract! <%= underscore_name %>, :id, <%= attributes_as_symbol_list %>
+json.partial! 'api/v1/<%= plural_underscore_name %>/fields', <%= underscore_name %>: <%= underscore_name %>

@@ -15,6 +15,13 @@ namespace :dev do
     end
   end
 
+  task rename_files: :environment do
+    Dir['app/views/api/v1/*/_show.json.jbuilder'].each do |file|
+      new_file = file.gsub('show', 'fields')
+      `mv #{file} #{new_file}`
+    end
+  end
+
   task test_data_models: :environment do
     ap EntryDataModel::MaxRepetitions.new(reps: [2, 4, 7, 10, 12], rest: [90, 75, 60, 60]).entry_data_model
   end

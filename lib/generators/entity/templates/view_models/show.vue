@@ -1,7 +1,7 @@
 <template lang="pug">
 .entity-show-wrapper.<%= plural_dash_name %>-show-wrapper.default-container(v-if='<%= underscore_name %>')
   .entity-show.<%= plural_dash_name %>-show
-    <%= plural_underscore_name %>-display(:<%= underscore_name %>='<%= underscore_name %>')
+    <%= plural_dash_name %>-display(:<%= underscore_name %>='<%= underscore_name %>')
       router-link.entity-show-header-actions(:to='<%= underscore_name %>.editPath()')
         i.edit.icon
 
@@ -21,9 +21,9 @@ export default
 
   methods:
     load<%= entity_name %>: ->
-      @<%= plural_underscore_name %>_resource.get @<%= underscore_name %>_id, @<%= underscore_name %>Loaded
+      @<%= plural_underscore_name %>_resource.get @<%= underscore_name %>_id, @<%= lowercase_entity_name %>Loaded
 
-    <%= underscore_name %>Loaded: (response) ->
+    <%= lowercase_entity_name %>Loaded: (response) ->
       @<%= underscore_name %> = response.<%= underscore_name %>
 
 <%= sub_template('Methods', '#', 4) %>

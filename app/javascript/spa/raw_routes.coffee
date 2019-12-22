@@ -36,7 +36,7 @@ add_rest = (routes, resource) ->
     path: "/#{resource}/:id/edit"
     view: "#{resource}/edit"
 
-for resource in ['exercises', 'challenges', 'progressions', 'entries', 'trainings', 'sessions', 'contexts', 'listers']
+for resource in ['exercises', 'challenges', 'progressions', 'entries', 'trainings', 'sessions', 'contexts', 'listers', 'session_progressions']
   add_rest routes, resource
 
 export default { routes }

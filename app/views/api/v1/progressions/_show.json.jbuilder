@@ -1,1 +1,1 @@
-json.extract! progression, :id, :name, :details, :context_id, :challenge_id, :exercise_id, :last_entry_at, :entries_count, :exercise_name, :challenge_name, :challenge_description, :done_today, :entry_data_model
+json.partial! 'api/v1/progressions/fields', progression: progression

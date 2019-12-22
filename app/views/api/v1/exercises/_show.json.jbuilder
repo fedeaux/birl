@@ -1,1 +1,1 @@
-json.extract! exercise, :id, :name, :slug, :context_id, :group_id
+json.partial! 'api/v1/exercises/fields', exercise: exercise

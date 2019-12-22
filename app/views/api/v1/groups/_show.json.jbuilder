@@ -1,1 +1,1 @@
-json.extract! group, :id, :name, :context_id
+json.partial! 'api/v1/groups/fields', group: group

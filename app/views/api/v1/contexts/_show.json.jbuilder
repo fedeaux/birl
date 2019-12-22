@@ -1,1 +1,1 @@
-json.extract! context, :id, :name, :slug, :color, :user_id, :meta
+json.partial! 'api/v1/contexts/fields', context: context

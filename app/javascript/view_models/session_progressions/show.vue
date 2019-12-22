@@ -1,11 +1,17 @@
 <template lang="pug">
 .entity-show-wrapper.session-progressions-show-wrapper.default-container(v-if='session_progression')
   .entity-show.session-progressions-show
-    session_progressions-display(:session_progression='session_progression')
+    session-progressions-display(:session_progression='session_progression')
       router-link.entity-show-header-actions(:to='session_progression.editPath()')
         i.edit.icon
 
   //- BrainDamage: Body Start
+  h3 Progression
+  progressions-list-item(:progression='progression')
+  //- BrainDamage: Body End
+
+  h3 Session
+  session-list-item(:progression='session')
   //- BrainDamage: Body End
 </template>
 
@@ -22,9 +28,9 @@ export default
 
   methods:
     loadSessionProgression: ->
-      @session_progressions_resource.get @session_progression_id, @session_progressionLoaded
+      @session_progressions_resource.get @session_progression_id, @sessionProgressionLoaded
 
-    session_progressionLoaded: (response) ->
+    sessionProgressionLoaded: (response) ->
       @session_progression = response.session_progression
 
     # BrainDamage: Methods Start
@@ -34,6 +40,13 @@ export default
     @session_progression = @parent_session_progression if @parent_session_progression
     # BrainDamage: Mounted Start
     # BrainDamage: Mounted End
+
+  computed:
+    progression: ->
+      @session_progression.progression
+
+    session: ->
+      @session_progression.session
 
   watch:
     '$route.params.id':

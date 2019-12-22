@@ -1,1 +1,1 @@
-json.extract! challenge, :id, :name, :description, :entry_data_model, :context_id
+json.partial! 'api/v1/challenges/fields', challenge: challenge

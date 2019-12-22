@@ -1,1 +1,1 @@
-json.extract! training, :id, :name, :context_id
+json.partial! 'api/v1/trainings/fields', training: training
