@@ -8,5 +8,6 @@ rails g entity progression name details context:references challenge:references 
 rails g entity session name training:belongs_to
 rails g entity session_progression session:belongs_to progression:belongs_to order:integer
 rails g entity training name context:references
+rails g entity vocabulary es pt_br en comment kind meta:jsonb
 
 rails g templater session_progression

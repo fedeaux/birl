@@ -7,7 +7,14 @@ after(:users) do
       },
       {
         name: 'Music',
-        color: '#DB2828'
+        color: '#db2828'
+      },
+      {
+        name: 'Espanol',
+        color: '#fbbd08',
+        meta: {
+          root: 'vocabularier'
+        }
       }
     ].each do |context_attrs|
       slug = context_attrs[:name].parameterize

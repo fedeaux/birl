@@ -28,7 +28,7 @@ export default
       @setCurrentUser response.user
 
       if @current_context
-        @$router.push 'today'
+        @$router.push @current_context.meta and @current_context.meta.root or 'today'
       else
         @$router.push '/'
 

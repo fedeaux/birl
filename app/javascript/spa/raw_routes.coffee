@@ -16,6 +16,10 @@ routes = [
   {
     path: '/audios'
     view: 'audios/index'
+  },
+  {
+    path: '/vocabularier'
+    view: 'vocabularier/index'
   }
 ]
 
@@ -36,7 +40,7 @@ add_rest = (routes, resource) ->
     path: "/#{resource}/:id/edit"
     view: "#{resource}/edit"
 
-for resource in ['exercises', 'challenges', 'progressions', 'entries', 'trainings', 'sessions', 'contexts', 'listers', 'session_progressions']
+for resource in ['exercises', 'challenges', 'progressions', 'entries', 'trainings', 'sessions', 'contexts', 'listers', 'session_progressions', 'vocabularies']
   add_rest routes, resource
 
 export default { routes }
