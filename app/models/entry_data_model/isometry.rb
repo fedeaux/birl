@@ -6,6 +6,6 @@ module EntryDataModel
       { name: :load, options: {} },
       { name: :pause, options: {} },
       { name: :rest, options: {} }
-    ]
+    ].freeze
   end
 end

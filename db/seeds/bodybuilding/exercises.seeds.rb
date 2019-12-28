@@ -157,7 +157,7 @@ after(:contexts) do
 
         slug = exercise_attrs[:name].parameterize
         exercise = context.exercises.find_or_initialize_by(slug: slug)
-        exercise.assign_attributes exercise_attrs #.merge(group: group)
+        exercise.assign_attributes exercise_attrs # .merge(group: group)
         exercise.save
       end
     end

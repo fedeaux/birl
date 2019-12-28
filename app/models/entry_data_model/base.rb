@@ -2,7 +2,7 @@ module EntryDataModel
   class Base
     GLOBAL_DIMENSIONS = false
 
-    def initialize(options = {})
+    def initialize(_options = {})
       @entry_data_model = {
         dimensions: self.class::DEFAULT_DIMENSIONS.clone
       }
@@ -10,8 +10,6 @@ module EntryDataModel
       @entry_data_model[:global_dimensions] = self.class::GLOBAL_DIMENSIONS.clone if self.class::GLOBAL_DIMENSIONS
     end
 
-    def entry_data_model
-      @entry_data_model
-    end
+    attr_reader :entry_data_model
   end
 end

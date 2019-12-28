@@ -61,9 +61,9 @@ namespace :dev do
   end
 
   task audio_config: :environment do
-    config_file_name = "audio_config.yaml"
+    config_file_name = 'audio_config.yaml'
     config = File.exist?(config_file_name) ? YAML.load_file(config_file_name).deep_symbolize_keys : { schemas: {} }
-    events = [:rest_finished, :doit_finished]
+    events = %i[rest_finished doit_finished]
 
     Dir['app/assets/audios/schemas/*'].each do |schema|
       schema_name = schema.split('/').last.to_sym

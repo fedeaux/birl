@@ -1,5 +1,5 @@
 class Entry < ApplicationRecord
-  VALUE_DIMENSIONS = %i[execution mult time load reps speed bpm bpmm rest pause]
+  VALUE_DIMENSIONS = %i[execution mult time load reps speed bpm bpmm rest pause].freeze
 
   # Explanation
   # execution
@@ -38,7 +38,7 @@ class Entry < ApplicationRecord
   end
 
   def value
-    (super || { sets: []}).deep_symbolize_keys
+    (super || { sets: [] }).deep_symbolize_keys
   end
 
   def prototype

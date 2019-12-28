@@ -5,6 +5,6 @@ module EntryDataModel
       { name: :bpm, options: {} },
       { name: :pause, options: {} },
       { name: :rest, options: {} }
-    ]
+    ].freeze
   end
 end

@@ -5,11 +5,11 @@ class Lister < ApplicationRecord
     items = param[:items]
 
     items = if items.is_a? Hash
-             items.values
-           elsif items.is_a? Array
-             items
-           else
-             []
+              items.values
+            elsif items.is_a? Array
+              items
+            else
+              []
            end
 
     param[:items] = items.map(&:strip).reject(&:blank?)

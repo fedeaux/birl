@@ -5,8 +5,7 @@ class Api::V1::ChallengesController < Api::V1::ApiController
     @challenges = current_context.challenges
   end
 
-  def show
-  end
+  def show; end
 
   def update
     if @challenge.update(challenge_params)

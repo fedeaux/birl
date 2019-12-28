@@ -1,12 +1,11 @@
 class Api::V1::ContextsController < Api::V1::ApiController
-  before_action :set_context, only: [:show, :update]
+  before_action :set_context, only: %i[show update]
 
   def index
     @contexts = current_user.contexts
   end
 
-  def show
-  end
+  def show; end
 
   def update
     if @context.update(context_params)

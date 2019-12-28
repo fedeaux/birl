@@ -3,7 +3,7 @@
 class Bambamzer
   def initialize
     @files = {}
-    listener = Listen.to('.') do |modified, added, removed|
+    listener = Listen.to('.') do |modified, _added, _removed|
       read unless modified.select { |name| name.split('/').last.strip == 'bambamzer.txt' }.empty?
     end
 
@@ -13,7 +13,7 @@ class Bambamzer
   end
 
   def read
-    File.read('bambamzer.txt').split("\n").map(&:strip).reject{ |line| line.length == 0 }.each do |line|
+    File.read('bambamzer.txt').split("\n").map(&:strip).reject(&:empty?).each do |line|
       parts = line.split(/\s+/).map(&:strip)
 
       last = @files[parts.first]
@@ -34,7 +34,7 @@ class Bambamzer
     cmd = "ffmpeg -ss #{start} -t #{duration} -i bambam.mp3 -acodec copy #{name}.mp3"
     puts cmd
     `#{cmd}`
-    #`ffplay #{name}.mp3`
+    # `ffplay #{name}.mp3`
   end
 end
 

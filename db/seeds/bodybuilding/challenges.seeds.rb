@@ -8,7 +8,7 @@ after('bodybuilding:exercises') do
     [
       {
         name: '5/4/3/2/1',
-        description: '2-4 na primeira, 20-25 na quinta',
+        description: '2-4 na primeira, 20-25 na quinta'
       },
       {
         name: 'Resistência de Força',

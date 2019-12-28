@@ -61,7 +61,7 @@ class EntityGenerator < Rails::Generators::NamedBase
   end
 
   def sub_template_contents(name)
-    contents = (@sub_templates[name] || "")
+    contents = (@sub_templates[name] || '')
     contents.empty? ? contents : "#{contents}\n"
   end
 
@@ -73,12 +73,12 @@ class EntityGenerator < Rails::Generators::NamedBase
     if File.exist?(target)
       return if (File.readlines(target).last.strip == 'BrainDamage: NO-OVERRIDE') || !template_exists?(source)
 
-      regex = /(\/\/-|#)\sBrainDamage\:\s(?<name>\w+)\sStart/
+      regex = %r{(//-|#)\sBrainDamage\:\s(?<name>\w+)\sStart}
       str = File.read target
 
       str.scan(regex).each do |name|
         name = name.first
-        regex = /(\/\/-|#)\sBrainDamage\:\s#{name}\sStart\n(?<contents>.*)\s+(\/\/-|#)\s+BrainDamage\:\s#{name}\sEnd/m
+        regex = %r{(//-|#)\sBrainDamage\:\s#{name}\sStart\n(?<contents>.*)\s+(//-|#)\s+BrainDamage\:\s#{name}\sEnd}m
 
         ass = str.match(regex)
         next unless ass

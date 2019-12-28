@@ -7,8 +7,7 @@ class Api::V1::SessionProgressionsController < Api::V1::ApiController
     @session_progressions = SessionProgression.where(session_id: params[:session_id]).order(:order)
   end
 
-  def show
-  end
+  def show; end
 
   def update
     if @session_progression.update(session_progression_params)

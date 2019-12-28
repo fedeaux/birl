@@ -5,8 +5,7 @@ class Api::V1::ListersController < Api::V1::ApiController
     @listers = Lister.all.order :name
   end
 
-  def show
-  end
+  def show; end
 
   def update
     if @lister.update(lister_params)

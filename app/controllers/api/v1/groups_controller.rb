@@ -5,8 +5,7 @@ class Api::V1::GroupsController < Api::V1::ApiController
     @groups = current_context.groups
   end
 
-  def show
-  end
+  def show; end
 
   def update
     if @group.update(group_params)

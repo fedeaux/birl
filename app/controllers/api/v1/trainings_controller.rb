@@ -5,8 +5,7 @@ class Api::V1::TrainingsController < Api::V1::ApiController
     @trainings = current_context.trainings
   end
 
-  def show
-  end
+  def show; end
 
   def update
     if @training.update(training_params)

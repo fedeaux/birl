@@ -5,8 +5,7 @@ class Api::V1::ExercisesController < Api::V1::ApiController
     @exercises = current_context.exercises.order(:name)
   end
 
-  def show
-  end
+  def show; end
 
   def update
     if @exercise.update(exercise_params)

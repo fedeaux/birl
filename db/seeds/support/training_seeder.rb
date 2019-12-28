@@ -66,9 +66,9 @@ class TrainingSeeder
     session
   end
 
-  def ensure_everyday_progressions(session)
+  def ensure_everyday_progressions(_session)
     # smells like teen coding
-    return 0
+    0
 
     # ['Respiração Rápida - HIIT sem peso',
     #  'Espiração com Pressão - HIIT sem peso',
