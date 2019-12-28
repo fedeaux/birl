@@ -8,7 +8,7 @@ module EntryDataModel
     ]
 
     GLOBAL_DIMENSIONS = [
-      { name: :bpm, options: {}}
+      { name: :bpm, options: {} }
     ]
   end
 end

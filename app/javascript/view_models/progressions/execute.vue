@@ -18,6 +18,7 @@
                  :entry='executable_entry'
                  :main_title='progression.name'
                  @entrySetUpdated='entrySetUpdated'
+                 @entryAddSet='entryAddSet'
                  @done='done'
                  ref='executor')
 
@@ -65,6 +66,9 @@ export default
 
     entrySetUpdated: (data) ->
       @$refs.entries_manager.entrySetUpdated data
+
+    entryAddSet: ->
+      @$refs.entries_manager.entryAddSet()
 
     entrySaved: ->
       unless @$refs.in_session && @$refs.in_session.navigateToNext()

@@ -4,7 +4,7 @@ class Api::V1::SessionProgressionsController < Api::V1::ApiController
   def index
     return unless params[:session_id]
 
-    @session_progressions = SessionProgression.where(session_id: params[:session_id])
+    @session_progressions = SessionProgression.where(session_id: params[:session_id]).order(:order)
   end
 
   def show

@@ -14,6 +14,7 @@
 
 <script lang="coffee">
   import EntryValueSet from '../../../models/entry_value_set'
+  import EntryValue from '../../../models/entry_value'
 
   export default
     props:
@@ -28,12 +29,8 @@
         @$emit 'input', @sets
 
       addSet: ->
-        @sets.push @newSet()
+        @sets.push EntryValue.newSet @sets, @data_model
         @changed()
-
-      newSet: ->
-        return JSON.parse JSON.stringify @sets[@sets.length - 1] if @sets and @sets.length > 0
-        EntryValueSet.fromDataModel @data_model
 
       removeSet: (index) ->
         @sets.splice index, 1

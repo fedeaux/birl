@@ -13,4 +13,11 @@ class EntryValue extends BaseModel
       options: {}
     }
 
+  @newSet: (sets, data_model) ->
+    return new EntryValueSet JSON.parse JSON.stringify sets[sets.length - 1] if sets and sets.length > 0
+    EntryValueSet.fromDataModel data_model
+
+  newSet: (data_model) ->
+    @constructor.newSet @sets, data_model
+
 export default EntryValue

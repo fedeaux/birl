@@ -57,6 +57,9 @@ export default
     entrySetUpdated: (data) ->
       Vue.set @form_entry.value.sets, data.index, new EntryValueSet data.set
 
+    entryAddSet: ->
+      @form_entry.value.sets.push @form_entry.value.newSet @data_model
+
     editEntry: (data) ->
       @setFormEntry data.entry
 

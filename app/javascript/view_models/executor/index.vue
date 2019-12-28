@@ -32,7 +32,10 @@
         .ui.three.column.centered.grid
           .column
             .ui.white.fluid.button(@click='done')
-              | Vamo pro próximo
+              | Próximo
+          .column
+            .ui.white.fluid.button(@click='addSet')
+              | Quero mais
 
     executor-metronome(v-if='bpm && state == "doit"' :bpm='bpm')
 
@@ -87,6 +90,11 @@ export default
     quick_end: false
 
   methods:
+    addSet: ->
+      @$emit 'entryAddSet'
+      @state = 'doit'
+      @findNextState()
+
     restDisplay: ->
       do_it_display = @doItDisplay()
       return "Next: #{do_it_display}" if do_it_display
@@ -170,6 +178,7 @@ export default
         if @current_set_execution < @current_set_target_executions
           @countdown parseInt @current_set.pause || @current_set.rest
           @current_set_execution += 1
+
         else if @entry.value.sets[@current_set_index + 1]
           @countdown parseInt @current_set.rest || @current_set.pause
           @current_set_execution = 1
@@ -177,6 +186,7 @@ export default
 
           @$nextTick =>
             @$refs.counter.reset()
+
         else
           @finish()
 
