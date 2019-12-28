@@ -27,8 +27,7 @@ class VocabularySeeder
     end
   end
 
-  def ensure_categories(line)
-  end
+  def ensure_categories(line); end
 
   def set_from_and_to(line)
     @lang_from, @lang_to = line.split('=>').map(&:strip)
