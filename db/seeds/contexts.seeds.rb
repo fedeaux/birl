@@ -10,7 +10,7 @@ after(:users) do
         color: '#db2828'
       },
       {
-        name: 'Espanol',
+        name: 'Español',
         color: '#fbbd08',
         meta: {
           root: 'questioner'
