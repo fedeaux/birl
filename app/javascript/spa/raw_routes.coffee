@@ -18,8 +18,8 @@ routes = [
     view: 'audios/index'
   },
   {
-    path: '/vocabularier'
-    view: 'vocabularier/index'
+    path: '/questioner'
+    view: 'questioner/index'
   }
 ]
 

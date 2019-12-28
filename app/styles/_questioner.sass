@@ -1,0 +1,61 @@
+.questioner
+  padding: $d2
+
+  &.questioner-fullscreen
+    display: block
+    position: absolute
+    position: absolute
+    background-color: white
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    z-index: 2000
+
+  .questioner-components
+    display: flex
+    flex-direction: column
+    justify-content: center
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    padding: $d2
+
+    .questioner-form, .questioner-label
+      margin: $d2 0
+
+  .questioner-item-wrapper
+    .questioner-item
+      .questioner-item-label
+        color: $light-text-gray
+        text-align: center
+
+      .questioner-item-display
+        font-size: 2em
+        display: flex
+        margin-bottom: $d4
+
+      .questioner-item-display-label
+        flex-grow: 1
+
+        .question, .answer
+          padding: $d2
+          font-weight: bold
+
+      .questioner-item-display-text
+        flex-grow: 4
+
+        .question, .answer
+          padding: $d2
+
+    .questioner-item-actions
+      width: 60%
+      margin: 0 auto
+      border-top: thin $lightest-gray solid
+      padding-top: $d4
+
+      .edit-delete-buttons
+        width: 60%
+        margin: 0 auto

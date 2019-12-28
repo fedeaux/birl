@@ -13,7 +13,7 @@ after(:users) do
         name: 'Espanol',
         color: '#fbbd08',
         meta: {
-          root: 'vocabularier'
+          root: 'questioner'
         }
       }
     ].each do |context_attrs|

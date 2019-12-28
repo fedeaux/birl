@@ -24,7 +24,7 @@ paths = [
   'progressions/execute'
   'progressions/in_session'
   'shared/footer'
-  'vocabularier/item'
+  'questioner/item'
 ]
 
 for entity in entities
