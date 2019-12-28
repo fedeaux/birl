@@ -5,8 +5,15 @@ class Vocabulary < ApplicationRecord
     groups = []
     chosen = []
 
-    if params[:priority] == 'unprioritized'
+    if params[:priority] == 'all'
+      groups << { limit: limit }
+
+    elsif params[:priority] == 'unprioritized'
       groups << { priority: nil, limit: limit }
+
+    elsif params[:priority] == 'high_n_medium'
+      groups << { priority: 2, limit: limit * 2 / 3 }
+      groups << { priority: 1, limit: limit - (limit * 2 / 3) }
 
     elsif params[:priority] == 'default'
       groups << { priority: 2, limit: limit * 2 / 3 }

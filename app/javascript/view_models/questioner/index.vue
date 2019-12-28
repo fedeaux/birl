@@ -51,7 +51,8 @@
                     @wrong='wrong'
                     @edit='edit'
                     @destroy='destroy'
-                    @back='back')
+                    @back='back'
+                    @updatePriority='updatePriority')
 
   .questioner-actions(v-if='fullscreen')
     .questioner-actions-center
@@ -73,7 +74,7 @@ export default
     form_vocabulary: null
     kinds: Global.vocabularies.kinds
     selected_kinds: []
-    priority: 'default'
+    priority: 'all'
 
   methods:
     start: ->
@@ -114,6 +115,10 @@ export default
 
     clearFormVocabulary: ->
       @setFormVocabulary null
+
+    updatePriority: (data) ->
+      @current_vocabulary.priority = data.priority
+      @vocabularies_resource.save @current_vocabulary, @vocabularySaved
 
     saveFormVocabulary: ->
       @vocabularies_resource.save @form_vocabulary, @vocabularySaved
@@ -164,6 +169,8 @@ export default
 
     priorities_as_options: ->
       [
+        { key: 'all', value: 'all', text: 'all' }
+        { key: 'high_n_medium', value: 'high_n_medium', text: 'high & medium' }
         { key: 'default', value: 'default', text: 'default' }
         { key: 'unprioritized', value: 'unprioritized', text: 'unprioritized' }
         { key: 'high', value: 2, text: 'high' }

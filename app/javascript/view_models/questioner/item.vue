@@ -13,10 +13,15 @@
 
   template(v-else)
     .questioner-item
+      .ui.two.small.basic.buttons.questioner-item-prioritizer
+        .ui.red.button(v-if='vocabulary.priority != 2' @click='$emit("updatePriority", { priority: 2 })') high
+        .ui.orange.button(v-if='vocabulary.priority != 1' @click='$emit("updatePriority", { priority: 1 })') medium
+        .ui.green.button(v-if='vocabulary.priority != 0' @click='$emit("updatePriority", { priority: 0 })') low
+
       .questioner-item-label
-       | {{ vocabulary.kind }}
-       | &nbsp;&middot;&nbsp;
-       | {{ vocabulary.id }}
+        | {{ vocabulary.kind }}
+        | &nbsp;&middot;&nbsp;
+        | {{ vocabulary.id }}
 
       .questioner-item-display
         .questioner-item-display-label
