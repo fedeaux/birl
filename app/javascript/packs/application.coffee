@@ -11,6 +11,8 @@ import EntryGeneratorsMain from 'entry_generators/main'
 window.Global =
   events: new Vue
   db: new Database
+  vocabularies:
+    kinds: ["adjective", "adverb", "noun", "preposition", "verb", "number", "phrase"]
 
 require 'semantic-ui-sass'
 

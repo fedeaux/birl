@@ -1,14 +1,5 @@
 <template lang="pug">
 .questioner(:class='klass')
-  //- questioner-counter(v-if='state != "finished"'
-  //-                  :sets_count='entry.value.sets.length'
-  //-                  :current_set_target_executions='current_set_target_executions'
-  //-                  :current_set_index='current_set_index'
-  //-                  :current_set_execution='current_set_execution'
-  //-                  :main_title='main_title'
-  //-                  ref='counter'
-  //- )
-
   .ui.form(v-if='state == "preparing"')
     .field
       label Count
@@ -23,6 +14,13 @@
                    :selection='true'
                    placeholder='Direction'
                    v-model='direction')
+
+    .field
+      label Kinds
+      .questioner-kind-picker
+        template(v-for='kind in kinds')
+          .ui.yellow.label(v-if='isSelected(kind)' @click='toogleSelectedKind(kind)') {{ kind }}
+          .ui.basic.label(v-else @click='toogleSelectedKind(kind)') {{ kind }}
 
     br
     br
@@ -48,10 +46,9 @@
                     @destroy='destroy'
                     @back='back')
 
-  .ui.two-buttons.questioner-dev-tools(v-if='dev_tools')
-    .ui.basic.button(@click='stopTimer') Sthap
-    .ui.basic.button(@click='current_time = 1') FF
-    .ui.basic.button(@click='tick()') tick
+  .questioner-actions
+    .questioner-actions-center
+      i.ban.icon(@click='reset')
 </template>
 
 <script lang="coffee">
@@ -61,13 +58,14 @@ import VocabulariesResource from '../../resources/vocabularies_resource'
 export default
   data: ->
     state: 'preparing'
-    count: 20
+    count: 50
     direction: 'es => pt_br'
     current_vocabulary_index: 0
-    dev_tools: false
     vocabularies: null
     show_answer: false
     form_vocabulary: null
+    kinds: Global.vocabularies.kinds
+    selected_kinds: []
 
   methods:
     start: ->
@@ -124,11 +122,26 @@ export default
       @vocabularies = response.vocabularies
       @state = 'playing'
 
+    reset: ->
+      @state = 'preparing'
+
+    isSelected: (kind) ->
+      @selected_kinds.indexOf(kind) != -1
+
+    toogleSelectedKind: (kind) ->
+      index = @selected_kinds.indexOf kind
+
+      if index != -1
+        @selected_kinds.splice index, 1
+      else
+        @selected_kinds.push kind
+
   computed:
     options: ->
       {
         limit: @count,
-        random: true
+        random: true,
+        kinds: @selected_kinds
       }
 
     current_vocabulary: ->
@@ -151,8 +164,6 @@ export default
 
   created: ->
     @vocabularies_resource = new VocabulariesResource
-
-    @$nextTick =>
-      @start()
+    @selected_kinds = JSON.parse JSON.stringify @kinds
 
 </script>

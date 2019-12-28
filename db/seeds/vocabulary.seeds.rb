@@ -1,12 +1,14 @@
 require_relative './support/vocabulary_seeder.rb'
 
 after(:contexts) do
-  Vocabulary.destroy_all
+  # Very Dangerous Seed!!!!!!!!
 
-  Dir['db/seeds/vocabularies/*'].each do |file|
-    kind = file.split('/').last
-    contents = File.read file
+  # Vocabulary.destroy_all
 
-    VocabularySeeder.new(kind, contents).seed
-  end
+  # Dir['db/seeds/vocabularies/*'].each do |file|
+  #   kind = file.split('/').last
+  #   contents = File.read file
+
+  #   VocabularySeeder.new(kind, contents).seed
+  # end
 end

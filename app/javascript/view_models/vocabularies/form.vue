@@ -43,7 +43,6 @@ export default
 
   data: ->
     vocabulary: null
-    kinds: ["adjective", "adverb", "noun", "preposition", "verb", "phrase"]
 
   methods:
     save: ->
@@ -55,7 +54,7 @@ export default
 
   computed:
     kinds_as_options: ->
-      { key: kind, value: kind, text: kind } for kind in @kinds
+      { key: kind, value: kind, text: kind } for kind in Global.vocabularies.kinds
 
   watch:
     original_vocabulary:
