@@ -14,6 +14,7 @@ class Vocabulary extends BaseModel
       en: {}
       comment: {}
       kind: {}
+      priority: {}
       meta: {}
     }
 

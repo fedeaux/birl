@@ -16,6 +16,13 @@
                    v-model='direction')
 
     .field
+      label Priority
+      sui-dropdown(:options='priorities_as_options'
+                   :selection='true'
+                   placeholder='Priority'
+                   v-model='priority')
+
+    .field
       label Kinds
       .questioner-kind-picker
         template(v-for='kind in kinds')
@@ -66,6 +73,7 @@ export default
     form_vocabulary: null
     kinds: Global.vocabularies.kinds
     selected_kinds: []
+    priority: 'default'
 
   methods:
     start: ->
@@ -153,6 +161,15 @@ export default
 
     directions_as_options: ->
       { key: count, value: count, text: count } for count in ['es => pt_br', 'pt_br => es']
+
+    priorities_as_options: ->
+      [
+        { key: 'default', value: 'default', text: 'default' }
+        { key: 'unprioritized', value: 'unprioritized', text: 'unprioritized' }
+        { key: 'high', value: 2, text: 'high' }
+        { key: 'medium', value: 1, text: 'medium' }
+        { key: 'low', value: 0, text: 'low' }
+      ]
 
     fullscreen: ->
       @state != 'preparing'

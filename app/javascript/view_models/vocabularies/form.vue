@@ -23,6 +23,13 @@
                      v-model='vocabulary.kind')
 
       .field
+        label Priority
+        sui-dropdown(:options='priorities_as_options'
+                     :selection='true'
+                     placeholder='Priority'
+                     v-model='vocabulary.priority')
+
+      .field
         label Meta
 
       .field.ui.fluid.buttons
@@ -55,6 +62,14 @@ export default
   computed:
     kinds_as_options: ->
       { key: kind, value: kind, text: kind } for kind in Global.vocabularies.kinds
+
+    priorities_as_options: ->
+      [
+        { key: 'unprioritized', value: null, text: 'unprioritized' }
+        { key: 'high', value: 2, text: 'high' }
+        { key: 'medium', value: 1, text: 'medium' }
+        { key: 'low', value: 0, text: 'low' }
+      ]
 
   watch:
     original_vocabulary:
