@@ -34,6 +34,12 @@
             template(v-else)
               | ?
 
+        .questioner-item-display-doublecheck
+          .question
+            i.question.circle.outline.icon(@click='doubleCheckQuestion')
+          .answer
+            i.question.circle.outline.icon(@click='doubleCheckAnswer')
+
     .questioner-item-actions
       template(v-if='show_answer')
         .right-wrong-buttons
@@ -45,15 +51,12 @@
               i.checkmark.icon
 
         .edit-delete-buttons
-          .ui.three.small.buttons
+          .ui.two.small.buttons
             .ui.basic.fluid.blue.icon.button(@click='$emit("edit")')
               i.edit.icon
 
             .ui.basic.fluid.red.icon.button(@click='confirmDestroy')
               i.trash.icon
-
-            .ui.basic.fluid.green.icon.button(@click='doubleCheck')
-              i.question.circle.outline.icon
 
       template(v-else)
         .right-wrong-buttons
@@ -85,9 +88,21 @@ export default
     cancelDestroy: ->
       @confirming_destroy = false
 
-    doubleCheck: ->
-      query = "#{@vocabulary.pt_br} em espanhol".replace ' ', '+'
-      window.open "https://www.google.com/search?q=#{query}"
+    openGoogleTranslateUrl: (from, to, text) ->
+      text = text.split('/')[0]
+      window.open "https://translate.google.com/#view=home&op=translate&sl=#{from}&tl=#{to}&text=#{text}"
+
+    doubleCheckQuestion: ->
+      if @direction == 'es => pt_br'
+        @openGoogleTranslateUrl 'es', 'pt', @vocabulary.es
+      else
+        @openGoogleTranslateUrl 'pt', 'es', @vocabulary.pt_br
+
+    doubleCheckAnswer: ->
+      if @direction == 'es => pt_br'
+        @openGoogleTranslateUrl 'pt', 'es', @vocabulary.pt_br
+      else
+        @openGoogleTranslateUrl 'es', 'pt', @vocabulary.es
 
   computed:
     displays: ->

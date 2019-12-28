@@ -53,7 +53,7 @@
                     @destroy='destroy'
                     @back='back')
 
-  .questioner-actions
+  .questioner-actions(v-if='fullscreen')
     .questioner-actions-center
       i.ban.icon(@click='reset')
 </template>

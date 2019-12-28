@@ -37,18 +37,37 @@
         display: flex
         margin-bottom: $d4
 
-      .questioner-item-display-label
-        flex-grow: 1
-
         .question, .answer
           padding: $d2
+          flex-grow: 1
+
+      .questioner-item-display-label
+        flex-grow: 1
+        display: flex
+        align-items: center
+        justify-content: center
+        flex-direction: column
+
+        .question, .answer
           font-weight: bold
 
       .questioner-item-display-text
         flex-grow: 4
+        display: flex
+        align-items: center
+        justify-content: center
+        flex-direction: column
 
-        .question, .answer
-          padding: $d2
+      .questioner-item-display-doublecheck
+        font-size: 0.7em
+        flex-grow: 1
+        display: flex
+        align-items: center
+        justify-content: center
+        flex-direction: column
+
+        i
+          color: $light-text-gray
 
     .questioner-item-actions
       width: 60%
