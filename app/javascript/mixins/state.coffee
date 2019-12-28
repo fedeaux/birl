@@ -3,11 +3,14 @@ import User from '../models/user'
 
 export default
   methods:
-    setCurrentSession: (session) ->
-      @$store.commit type: 'setCurrentSession', current_session: session
+    setAudioSchema: (audio_schema) ->
+      @$store.commit type: 'setAudioSchema', audio_schema: audio_schema
 
     setCurrentContext: (context) ->
       @$store.commit type: 'setCurrentContext', current_context: context
+
+    setCurrentSession: (session) ->
+      @$store.commit type: 'setCurrentSession', current_session: session
 
     setCurrentUser: (user) ->
       @$store.commit type: 'setCurrentUser', current_user: user
@@ -19,7 +22,7 @@ export default
 
       return unless context?.name == 'Bodybuilding'
 
-      Global.player.play 'porra', 'birl'
+      Global.player.event 'doit_finished', 'birl'
 
     contextUpdated: (response) ->
       @setCurrentUser response.user
@@ -33,6 +36,9 @@ export default
       @setCurrentUser new User Global.server.user.user
 
   computed:
+    audio_schema: ->
+      @$store.state.audio_schema
+
     current_context: ->
       @$store.state.current_context
 

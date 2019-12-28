@@ -3,7 +3,7 @@ module EntryDataModel
     DEFAULT_DIMENSIONS = [
       { name: :execution, options: {} },
       { name: :mult, options: {} },
-      { name: :time, options: {} },
+      { name: :reps, options: {} },
       { name: :pause, options: {} },
       { name: :rest, options: {} }
     ].freeze

@@ -12,7 +12,7 @@ class Api::V1::EntriesController < Api::V1::ApiController
   end
 
   def update
-    if @entry.update(entry_params)
+    if @entry.update entry_params.except :data_model
       render 'show', status: :ok
     else
       render 'show', status: :unprocessable_entuty

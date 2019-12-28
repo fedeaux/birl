@@ -26,12 +26,18 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 store = new Vuex.Store(
   state:
+    audio_schema: null
     current_context: null
     current_session: null
     current_user: null
     global_loading: false
 
   mutations:
+    setAudioSchema: (state, data) ->
+      state.audio_schema = data.audio_schema
+      Global.db.set 'audio_schema', state.audio_schema
+      Global.player.setSchema data.audio_schema
+
     setCurrentContext: (state, data) ->
       state.current_context = data.current_context
 
@@ -59,7 +65,11 @@ store = new Vuex.Store(
       state.global_loading = data.loading
 
   actions:
-    loadCurrentSession: (context) ->
+    setInitialState: (context) ->
+      # Set audio schema
+      context.commit 'setAudioSchema', audio_schema: Global.db.get 'audio_schema'
+
+      # Load current session
       session_attributes = Global.db.get 'current_session'
       if session_attributes
         context.commit 'setCurrentSession', current_session: new Session session_attributes
@@ -105,6 +115,6 @@ $ ->
       render: (h) => h App,
 
       created: ->
-        @$store.dispatch 'loadCurrentSession'
+        @$store.dispatch 'setInitialState'
         $(document).ajaxStart(@load).ajaxComplete(@loaded)
     ).$mount '#birl-spa-container'

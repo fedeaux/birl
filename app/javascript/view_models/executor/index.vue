@@ -12,14 +12,16 @@
   .executor-components
     .executor-label(:class='"executor-label-"+state')
       template(v-if='state == "idle"' @click='start')
-      template(v-else-if='state == "countdown"') Prepare...
-      template(v-else-if='state == "doit" || state == "rest"')
+      template(v-else-if='state == "doit" || state == "rest" || state == "countdown"')
         executor-display(:entry='entry'
                          :set_index='current_set_index'
                          :set_execution='current_set_execution'
                          :data_model='data_model'
-                         :class='{ "executor-detail": state == "rest" }'
+                         :class='{ "executor-detail": state == "rest" || state == "countdown" }'
                          :default_text='display_default_text')
+
+          template(v-if='state == "countdown"')
+            | First:&nbsp;
 
           template(v-if='state == "rest"')
             | Next:&nbsp;
@@ -142,10 +144,10 @@ export default
         @current_time = 4
 
       @timeout() if @current_time == -1
-      @almostThere() if @current_time == @pre_time - 1
+      @almostThere() if @current_time == 1
 
     almostThere: ->
-      return unless Global.player.schema
+      return unless @audio_schema
       state = @state
       state = 'rest' if @state == 'countdown'
       Global.player.event "#{state}_finished"
@@ -174,6 +176,9 @@ export default
         # 3. All sets are over
 
         @state = 'rest'
+
+        console.log '@current_set_execution', @current_set_execution
+        console.log '@current_set_target_executions', @current_set_target_executions
 
         if @current_set_execution < @current_set_target_executions
           @countdown parseInt @current_set.pause || @current_set.rest
@@ -229,6 +234,7 @@ export default
 
     display_default_text: ->
       return 'Just do it' if @state == 'doit'
+      return 'Prepare...' if @state == 'countdown'
       'Cooldown (:'
 
     klass: ->

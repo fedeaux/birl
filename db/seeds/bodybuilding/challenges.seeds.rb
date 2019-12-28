@@ -53,7 +53,7 @@ after('bodybuilding:exercises') do
       {
         name: 'Movimento',
         description: '',
-        data_model: EntryDataModel::RawTime
+        data_model: EntryDataModel::Technique
       }
     ].each do |challenge_attrs|
       challenge = context.challenges.find_or_initialize_by(name: challenge_attrs[:name])
