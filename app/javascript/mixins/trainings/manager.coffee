@@ -42,6 +42,7 @@ export default
       @setFormTraining new Training final_params
 
     setFormTraining: (@form_training) ->
+      @form_training
 
     clearFormTraining: ->
       @setFormTraining null

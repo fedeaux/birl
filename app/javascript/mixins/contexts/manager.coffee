@@ -42,6 +42,7 @@ export default
       @setFormContext new Context final_params
 
     setFormContext: (@form_context) ->
+      @form_context
 
     clearFormContext: ->
       @setFormContext null

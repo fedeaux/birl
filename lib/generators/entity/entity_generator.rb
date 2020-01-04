@@ -44,11 +44,11 @@ class EntityGenerator < Rails::Generators::NamedBase
     end
   end
 
-  # def generate_view_models
-  #   view_models_list.each do |view_model_name|
-  #     guarded_template "view_models/#{view_model_name}.vue", view_model_file_name(view_model_name)
-  #   end
-  # end
+  def generate_view_models
+    view_models_list.each do |view_model_name|
+      guarded_template "view_models/#{view_model_name}.vue", view_model_file_name(view_model_name)
+    end
+  end
 
   private
 

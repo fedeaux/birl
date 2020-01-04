@@ -42,6 +42,7 @@ export default
       @setFormEntry new Entry final_params
 
     setFormEntry: (@form_entry) ->
+      @form_entry
 
     clearFormEntry: ->
       @setFormEntry null

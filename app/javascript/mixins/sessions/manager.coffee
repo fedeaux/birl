@@ -42,6 +42,7 @@ export default
       @setFormSession new Session final_params
 
     setFormSession: (@form_session) ->
+      @form_session
 
     clearFormSession: ->
       @setFormSession null

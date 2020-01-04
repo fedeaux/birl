@@ -42,6 +42,7 @@ export default
       @setFormVocabulary new Vocabulary final_params
 
     setFormVocabulary: (@form_vocabulary) ->
+      @form_vocabulary
 
     clearFormVocabulary: ->
       @setFormVocabulary null

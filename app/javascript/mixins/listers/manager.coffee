@@ -42,6 +42,7 @@ export default
       @setFormLister new Lister final_params
 
     setFormLister: (@form_lister) ->
+      @form_lister
 
     clearFormLister: ->
       @setFormLister null

@@ -42,6 +42,7 @@ export default
       @setFormExercise new Exercise final_params
 
     setFormExercise: (@form_exercise) ->
+      @form_exercise
 
     clearFormExercise: ->
       @setFormExercise null

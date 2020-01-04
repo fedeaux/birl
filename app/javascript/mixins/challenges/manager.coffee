@@ -42,6 +42,7 @@ export default
       @setFormChallenge new Challenge final_params
 
     setFormChallenge: (@form_challenge) ->
+      @form_challenge
 
     clearFormChallenge: ->
       @setFormChallenge null

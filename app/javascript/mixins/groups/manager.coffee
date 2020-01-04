@@ -42,6 +42,7 @@ export default
       @setFormGroup new Group final_params
 
     setFormGroup: (@form_group) ->
+      @form_group
 
     clearFormGroup: ->
       @setFormGroup null

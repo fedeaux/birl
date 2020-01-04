@@ -42,6 +42,7 @@ export default
       @setFormProgression new Progression final_params
 
     setFormProgression: (@form_progression) ->
+      @form_progression
 
     clearFormProgression: ->
       @setFormProgression null
