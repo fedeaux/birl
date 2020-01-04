@@ -100,6 +100,8 @@ namespace :dev do
   end
 
   task :deploy_cordova do
+    `gphm`
+
     file = 'cordova/www/index.html'
 
     `curl http://birlapp.herokuapp.com > #{file}`
@@ -122,6 +124,7 @@ namespace :dev do
     `cd cordova/ && cordova build android`
 
     session = GoogleDrive::Session.from_config('google_config.json')
+    session.upload_from_file(apk, 'birl.apk', convert: false)
   end
 end
 

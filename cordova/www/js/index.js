@@ -19,7 +19,7 @@
 var app = {
     // Application Constructor
     initialize: function() {
-        alert('cordova');
+        alert('cordoveja');
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
     },
 
@@ -28,9 +28,9 @@ var app = {
     // Bind any cordova events here. Common events are:
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
-        alert('sua mãe');
-        alert(Global);
+        alert('nossa mãe');
         alert(window);
+        alert(window.Global);
     },
 };
 
