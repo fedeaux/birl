@@ -1,43 +1,42 @@
 <template lang="pug">
+  shared-modal(v-if='form_exercise' title='New Exercise')
+    exercises-form(v-model='form_exercise'
+                   @save='saveFormExercise()'
+                   @cancel='clearFormExercise()')
+
   sui-dropdown(:options='exercises_as_options'
                :loading='loading'
                :search='true'
                :selection='true'
+               :allowAdditions='allow_additions'
                placeholder='Exercise'
+               v-else
                v-model='selected_exercise_id')
+
 </template>
 
 <script lang="coffee">
-import ExercisesResource from '../../resources/exercises_resource'
+import ExercisesManagerMixin from '../../mixins/exercises/manager'
 
 export default
+  mixins: [ExercisesManagerMixin]
+
   model:
     prop: 'exercise_id'
 
   props:
     exercise_id: null
+    allow_additions: true
 
   data: ->
-    exercises: null
     selected_exercise_id: null
 
   methods:
-    loadExercises: ->
-      @exercises_resource.index @exercisesLoaded
+    exerciseAdded: (index, exercise) ->
+      @selectExercise exercise
 
-    exercisesLoaded: (response) ->
-      @exercises = response.exercises
-
-    exerciseIndex: (exercise_id) ->
-      for index, exercise of @exercises
-        return index if exercise.id == exercise_id
-
-      -1
-
-    getExercise: (exercise_id) ->
-      index = @exerciseIndex exercise_id
-      return null if index == -1
-      @exercises[index]
+    selectExercise: (exercise) ->
+      @selected_exercise_id = parseInt exercise.id
 
   computed:
     loading: ->
@@ -49,16 +48,18 @@ export default
 
   watch:
     selected_exercise_id: ->
-      @$emit 'input', @selected_exercise_id
+      selected_exercise_id = parseInt @selected_exercise_id
+
+      unless isNaN selected_exercise_id
+        @$emit 'input', selected_exercise_id
+        return
+
+      @newExercise name: @selected_exercise_id
 
     exercise_id:
       immediate: true
       handler: ->
         return unless @exercise_id
         @selected_exercise_id = parseInt @exercise_id
-
-  mounted: ->
-    @exercises_resource = new ExercisesResource
-    @loadExercises()
 
 </script>

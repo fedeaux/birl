@@ -19,9 +19,9 @@ export default
 
   methods:
     saveExercise: ->
-      @exercises_resource.save @exercise, @saved
+      @exercises_resource.save @exercise, @exerciseSaved
 
-    saved: (data) ->
+    exerciseSaved: (data) ->
       @$router.push data.exercise.path()
 
     back: ->

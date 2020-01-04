@@ -16,7 +16,7 @@
 
       .field
         label Exercise
-        exercises-select(v-model='progression.exercise_id')
+        exercises-select(v-model='progression.exercise_id' :allow_additions='true')
 
       .field.ui.fluid.buttons
         .ui.primary.button(@click='save()') Save

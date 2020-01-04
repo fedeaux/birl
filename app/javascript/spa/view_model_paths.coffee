@@ -24,6 +24,7 @@ paths = [
   'progressions/execute'
   'progressions/in_session'
   'shared/footer'
+  'shared/modal'
   'questioner/item'
 ]
 
