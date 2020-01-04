@@ -1,43 +1,42 @@
 <template lang="pug">
+  shared-modal(v-if='form_<%= underscore_name %>' title='New <%= human_name %>')
+    <%= plural_dash_name %>-form(v-model='form_<%= underscore_name %>'
+    <%= plural_dash_name_as_spaces %>      @save='saveForm<%= entity_name %>()'
+    <%= plural_dash_name_as_spaces %>      @cancel='clearForm<%= entity_name %>()')
+
   sui-dropdown(:options='<%= plural_underscore_name %>_as_options'
                :loading='loading'
                :search='true'
                :selection='true'
+               :allowAdditions='allow_additions'
                placeholder='<%= human_name %>'
+               v-else
                v-model='selected_<%= underscore_name %>_id')
+
 </template>
 
 <script lang="coffee">
-import <%= plural_entity_name %>Resource from '../../resources/<%= plural_underscore_name %>_resource'
+import <%= plural_entity_name %>ManagerMixin from '../../mixins/<%= plural_underscore_name %>/manager'
 
 export default
+  mixins: [<%= plural_entity_name %>ManagerMixin]
+
   model:
     prop: '<%= underscore_name %>_id'
 
   props:
     <%= underscore_name %>_id: null
+    allow_additions: true
 
   data: ->
-    <%= plural_underscore_name %>: null
     selected_<%= underscore_name %>_id: null
 
   methods:
-    load<%= plural_entity_name %>: ->
-      @<%= plural_underscore_name %>_resource.index @<%= plural_lowercase_entity_name %>Loaded
+    <%= lowercase_entity_name %>Added: (index, <%= lowercase_entity_name %>) ->
+      @select<%= entity_name %> <%= underscore_name %>
 
-    <%= plural_lowercase_entity_name %>Loaded: (response) ->
-      @<%= plural_underscore_name %> = response.<%= plural_underscore_name %>
-
-    <%= lowercase_entity_name %>Index: (<%= underscore_name %>_id) ->
-      for index, <%= underscore_name %> of @<%= plural_underscore_name %>
-        return index if <%= underscore_name %>.id == <%= underscore_name %>_id
-
-      -1
-
-    get<%= entity_name %>: (<%= underscore_name %>_id) ->
-      index = @<%= lowercase_entity_name %>Index <%= underscore_name %>_id
-      return null if index == -1
-      @<%= plural_underscore_name %>[index]
+    select<%= entity_name %>: (<%= underscore_name %>) ->
+      @selected_<%= underscore_name %>_id = parseInt <%= underscore_name %>.id
 
   computed:
     loading: ->
@@ -49,16 +48,18 @@ export default
 
   watch:
     selected_<%= underscore_name %>_id: ->
-      @$emit 'input', @selected_<%= underscore_name %>_id
+      selected_<%= underscore_name %>_id = parseInt @selected_<%= underscore_name %>_id
+
+      unless isNaN selected_<%= underscore_name %>_id
+        @$emit 'input', selected_<%= underscore_name %>_id
+        return
+
+      @new<%= entity_name %> name: @selected_<%= underscore_name %>_id
 
     <%= underscore_name %>_id:
       immediate: true
       handler: ->
         return unless @<%= underscore_name %>_id
         @selected_<%= underscore_name %>_id = parseInt @<%= underscore_name %>_id
-
-  mounted: ->
-    @<%= plural_underscore_name %>_resource = new <%= plural_entity_name %>Resource
-    @load<%= plural_entity_name %>()
 
 </script>
