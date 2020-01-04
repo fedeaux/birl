@@ -100,21 +100,42 @@ namespace :dev do
   end
 
   task :deploy_cordova do
-    `gphm`
+    index_file = 'cordova/www/index.html'
+    downloaded_index = "#{index_file}.downloaded"
+    scripts_to_add = '<script src="cordova.js" type="text/javascript"></script><script src="js/index.js" type="text/javascript"></script>'
 
-    file = 'cordova/www/index.html'
+    `git push heroku master`
+    `curl http://birlapp.herokuapp.com > #{downloaded_index}`
 
-    `curl http://birlapp.herokuapp.com > #{file}`
+    lines = File.readlines downloaded_index
+    added_scripts = false
+    script_regex = /script src="([^\"]+)"/
 
-    index = File.read file
+    index = lines.map do |line|
+      if line =~ script_regex
+        puts "Script line #{line}"
+        path = line.scan(script_regex)[0][0]
 
-    index.gsub!('href="/packs', 'href="http://birlapp.herokuapp.com/packs')
-    index.gsub!('src="/packs', 'src="http://birlapp.herokuapp.com/packs')
+        if path[0] == '/'
+          url = "http://birlapp.herokuapp.com#{path}"
+          name = path.split('-').first.split('/').last+'.js'
 
-    # index.gsub!('href="http://birlapp.herokuapp.com/packs', 'href="/packs')
-    # index.gsub!('src="http://birlapp.herokuapp.com/packs', 'src="/packs')
+          `curl #{url} > cordova/www/js/#{name}`
 
-    File.open(file, 'w') do |f|
+          line.gsub! path, "js/#{name}"
+        end
+
+        unless added_scripts
+          line += scripts_to_add
+          added_scripts = true
+        end
+      else
+      end
+
+      line
+    end.join ""
+
+    File.open(index_file, 'w') do |f|
       f.write(index)
     end
 

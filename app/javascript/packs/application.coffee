@@ -121,10 +121,8 @@ Global.initialize = ->
         $(document).ajaxStart(@load).ajaxComplete(@loaded)
     ).$mount '#birl-spa-container'
 
-alert location.protocol
-
-if location.protocol == 'file:'
-  alert 'cordova!!!'
-else
-  $ Global.initialize
-  alert 'web!!!'
+# if location.protocol == 'file:'
+#   alert 'cordova!!!'
+# else
+#   $ Global.initialize
+#   alert 'web!!!'

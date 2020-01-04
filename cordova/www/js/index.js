@@ -19,7 +19,6 @@
 var app = {
     // Application Constructor
     initialize: function() {
-        alert('cordoveja');
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
     },
 
@@ -31,6 +30,8 @@ var app = {
         alert('nossa mãe');
         alert(window);
         alert(window.Global);
+        alert(location);
+        alert(location.protocol);
     },
 };
 
