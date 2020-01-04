@@ -65,9 +65,13 @@ module GeneratorsCore
     "#{plural_entity_name}Controller"
   end
 
+  def mixins_list
+    %w[manager]
+  end
+
   def view_models_list
-    %w[show index list list/item new edit form manager display]
-    %w[select]
+    %w[show index list list/item new edit form manager display select]
+    %w[select manager]
   end
 
   def ensure_directory(file)

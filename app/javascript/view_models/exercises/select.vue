@@ -25,8 +25,11 @@ export default
     prop: 'exercise_id'
 
   props:
-    exercise_id: null
-    allow_additions: true
+    exercise_id:
+      default: null
+
+    allow_additions:
+      default: true
 
   data: ->
     selected_exercise_id: null

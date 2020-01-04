@@ -1,5 +1,8 @@
 <template lang="pug">
 .entity-manager.exercises-manager.default-container
+  //- BrainDamage: ManagerHead Start
+  //- BrainDamage: ManagerHead End
+
   .entity-manager-form(v-if='form_exercise')
     exercises-form(v-model='form_exercise'
                    @save='saveFormExercise()'
@@ -22,4 +25,8 @@ import ExercisesManagerMixin from '../../mixins/exercises/manager'
 
 export default
   mixins: [ExercisesManagerMixin]
+
+  # BrainDamage: Other Start
+  # BrainDamage: Other End
+
 </script>

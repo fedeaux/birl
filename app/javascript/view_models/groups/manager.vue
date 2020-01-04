@@ -1,5 +1,8 @@
 <template lang="pug">
 .entity-manager.groups-manager.default-container
+  //- BrainDamage: ManagerHead Start
+  //- BrainDamage: ManagerHead End
+
   .entity-manager-form(v-if='form_group')
     groups-form(v-model='form_group'
                 @save='saveFormGroup()'
@@ -18,74 +21,12 @@
 </template>
 
 <script lang="coffee">
-import GroupsResource from '../../resources/groups_resource'
-import Group from '../../models/group'
+import GroupsManagerMixin from '../../mixins/groups/manager'
 
 export default
-  props:
-    context:
-      default: -> {}
+  mixins: [GroupsManagerMixin]
 
-    parent_groups: null
+  # BrainDamage: Other Start
+  # BrainDamage: Other End
 
-  data: ->
-    groups: null
-    form_group: null
-
-  methods:
-    editGroup: (data) ->
-      @setFormGroup data.group
-
-    destroyGroup: (data) ->
-      @groups_resource.destroy data.group, @groupRemoved
-
-    loadGroups: ->
-      @groups_resource.index @groupsLoaded, @context
-
-    groupsLoaded: (response) ->
-      @groups = response.groups
-
-    newGroup: ->
-      @setFormGroup new Group @context
-
-    setFormGroup: (@form_group) ->
-
-    clearFormGroup: ->
-      @setFormGroup null
-
-    groupIndex: (group_id) ->
-      for index, group of @groups
-        return index if group.id == group_id
-
-      -1
-
-    saveFormGroup: ->
-      @groups_resource.save @form_group, @groupSaved
-
-    addGroup: (group) ->
-      index = @groupIndex group.id
-
-      if index == -1
-        @groups.push group
-        return
-
-      Vue.set @groups, index, group
-
-    groupSaved: (data) ->
-      @addGroup data.group
-      @clearFormGroup()
-
-    groupRemoved: (data) ->
-      index = @groupIndex data.group.id
-      return if index == -1
-      @groups.splice index, 1
-
-  mounted: ->
-    @groups_resource = new GroupsResource
-
-    if @parent_groups
-      @groups = @parent_groups
-      return
-
-    @loadGroups()
 </script>

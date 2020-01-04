@@ -1,43 +1,45 @@
 <template lang="pug">
+  shared-modal(v-if='form_progression' title='New Progression')
+    progressions-form(v-model='form_progression'
+                   @save='saveFormProgression()'
+                   @cancel='clearFormProgression()')
+
   sui-dropdown(:options='progressions_as_options'
                :loading='loading'
                :search='true'
                :selection='true'
+               :allowAdditions='allow_additions'
                placeholder='Progression'
+               v-else
                v-model='selected_progression_id')
+
 </template>
 
 <script lang="coffee">
-import ProgressionsResource from '../../resources/progressions_resource'
+import ProgressionsManagerMixin from '../../mixins/progressions/manager'
 
 export default
+  mixins: [ProgressionsManagerMixin]
+
   model:
     prop: 'progression_id'
 
   props:
-    progression_id: null
+    progression_id:
+      default: null
+
+    allow_additions:
+      default: true
 
   data: ->
-    progressions: null
     selected_progression_id: null
 
   methods:
-    loadProgressions: ->
-      @progressions_resource.index @progressionsLoaded
+    progressionAdded: (index, progression) ->
+      @selectProgression progression
 
-    progressionsLoaded: (response) ->
-      @progressions = response.progressions
-
-    progressionIndex: (progression_id) ->
-      for index, progression of @progressions
-        return index if progression.id == progression_id
-
-      -1
-
-    getProgression: (progression_id) ->
-      index = @progressionIndex progression_id
-      return null if index == -1
-      @progressions[index]
+    selectProgression: (progression) ->
+      @selected_progression_id = parseInt progression.id
 
   computed:
     loading: ->
@@ -49,16 +51,18 @@ export default
 
   watch:
     selected_progression_id: ->
-      @$emit 'input', @selected_progression_id
+      selected_progression_id = parseInt @selected_progression_id
+
+      unless isNaN selected_progression_id
+        @$emit 'input', selected_progression_id
+        return
+
+      @newProgression name: @selected_progression_id
 
     progression_id:
       immediate: true
       handler: ->
         return unless @progression_id
         @selected_progression_id = parseInt @progression_id
-
-  mounted: ->
-    @progressions_resource = new ProgressionsResource
-    @loadProgressions()
 
 </script>

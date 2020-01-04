@@ -52,7 +52,15 @@ export default
 
       -1
 
-    saveFormExercise: ->
+    saveFormExercise: (custom_callback = false) ->
+      if custom_callback
+        callback = (data) =>
+          @exerciseSaved(data)
+          custom_callback(data)
+
+        @exercises_resource.save @form_exercise, callback
+        return
+
       @exercises_resource.save @form_exercise, @exerciseSaved
 
     addExercise: (exercise) ->
@@ -83,4 +91,12 @@ export default
       @exercises = @parent_exercises
       return
 
-    @loadExercises()
+    unless @context
+      @loadExercises()
+
+  watch:
+    context:
+      immediate: true
+      handler: ->
+        @exercises_resource ?= new ExercisesResource
+        @loadExercises()

@@ -1,8 +1,8 @@
 <template lang="pug">
   shared-modal(v-if='form_<%= underscore_name %>' title='New <%= human_name %>')
     <%= plural_dash_name %>-form(v-model='form_<%= underscore_name %>'
-    <%= plural_dash_name_as_spaces %>      @save='saveForm<%= entity_name %>()'
-    <%= plural_dash_name_as_spaces %>      @cancel='clearForm<%= entity_name %>()')
+                   @save='saveForm<%= entity_name %>()'
+                   @cancel='clearForm<%= entity_name %>()')
 
   sui-dropdown(:options='<%= plural_underscore_name %>_as_options'
                :loading='loading'
@@ -25,8 +25,11 @@ export default
     prop: '<%= underscore_name %>_id'
 
   props:
-    <%= underscore_name %>_id: null
-    allow_additions: true
+    <%= underscore_name %>_id:
+      default: null
+
+    allow_additions:
+      default: true
 
   data: ->
     selected_<%= underscore_name %>_id: null

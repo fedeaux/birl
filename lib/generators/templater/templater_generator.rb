@@ -5,9 +5,25 @@ class TemplaterGenerator < Rails::Generators::NamedBase
   source_root File.expand_path('templates', __dir__)
   include GeneratorsCore
 
-  def view_models
+  def reverse_coffeescripts
+    mixins_list.each do |mixin_name|
+      file_name = "app/javascript/mixins/#{plural_underscore_name}/#{mixin_name}.coffee"
+      template_file_name = "#{templates_path}/mixins/#{mixin_name}.coffee"
+
+      generate_template_from_rendered file_name, template_file_name
+    end
+
+    # guarded_template 'coffeescripts/mixins/manager.coffee', "app/javascript/mixins/#{plural_underscore_name}/manager.coffee"
+
+    # view_models_list.each do |view_model_name|
+    # end
+  end
+
+  def reverse_view_models
     view_models_list.each do |view_model_name|
-      generate_template_from_rendered view_model_name
+      file_name = view_model_file_name(view_model_name)
+      template_file_name = "#{templates_path}/view_models/#{view_model_name}.vue"
+      generate_template_from_rendered file_name, template_file_name
     end
   end
 
@@ -22,9 +38,9 @@ class TemplaterGenerator < Rails::Generators::NamedBase
     this_line
   end
 
-  def generate_template_from_rendered(view_model_name)
-    file_name = view_model_file_name(view_model_name)
-    template_file_name = "#{templates_path}/view_models/#{view_model_name}.vue"
+  def generate_template_from_rendered(file_name, template_file_name)
+    puts "file_name: #{file_name}, template_file_name: #{template_file_name}"
+
     return unless File.exist?(file_name)
 
     lines = File.readlines file_name
@@ -51,9 +67,6 @@ class TemplaterGenerator < Rails::Generators::NamedBase
           elsif /[[:upper:]]/.match last_char
             placeholder = placeholder.gsub('underscore_name', '') + 'lowercase_entity_name'
           end
-
-          puts "Found a #{placeholder} (#{value}) at #{line}"
-          puts "  last char is #{last_char}"
         end
 
         line.gsub! value, "<%= #{placeholder} %>"

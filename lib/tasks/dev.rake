@@ -22,10 +22,12 @@ namespace :dev do
     end
   end
 
+  # rake dev:test_data_models
   task test_data_models: :environment do
     ap EntryDataModel::MaxRepetitions.new(reps: [2, 4, 7, 10, 12], rest: [90, 75, 60, 60]).entry_data_model
   end
 
+  # rake dev:update_entries_data_model
   task update_entries_data_model: :environment do
     Entry.all.each do |entry|
       entry.value = { sets: [] } unless entry.value.is_a?(Hash) && entry.value[:sets].is_a?(Array)
@@ -45,6 +47,7 @@ namespace :dev do
     end
   end
 
+  # rake dev:force_regen_all
   task force_regen_all: :environment do
     threads = []
 

@@ -1,5 +1,8 @@
 <template lang="pug">
 .entity-manager.challenges-manager.default-container
+  //- BrainDamage: ManagerHead Start
+  //- BrainDamage: ManagerHead End
+
   .entity-manager-form(v-if='form_challenge')
     challenges-form(v-model='form_challenge'
                     @save='saveFormChallenge()'
@@ -18,74 +21,12 @@
 </template>
 
 <script lang="coffee">
-import ChallengesResource from '../../resources/challenges_resource'
-import Challenge from '../../models/challenge'
+import ChallengesManagerMixin from '../../mixins/challenges/manager'
 
 export default
-  props:
-    context:
-      default: -> {}
+  mixins: [ChallengesManagerMixin]
 
-    parent_challenges: null
+  # BrainDamage: Other Start
+  # BrainDamage: Other End
 
-  data: ->
-    challenges: null
-    form_challenge: null
-
-  methods:
-    editChallenge: (data) ->
-      @setFormChallenge data.challenge
-
-    destroyChallenge: (data) ->
-      @challenges_resource.destroy data.challenge, @challengeRemoved
-
-    loadChallenges: ->
-      @challenges_resource.index @challengesLoaded, @context
-
-    challengesLoaded: (response) ->
-      @challenges = response.challenges
-
-    newChallenge: ->
-      @setFormChallenge new Challenge @context
-
-    setFormChallenge: (@form_challenge) ->
-
-    clearFormChallenge: ->
-      @setFormChallenge null
-
-    challengeIndex: (challenge_id) ->
-      for index, challenge of @challenges
-        return index if challenge.id == challenge_id
-
-      -1
-
-    saveFormChallenge: ->
-      @challenges_resource.save @form_challenge, @challengeSaved
-
-    addChallenge: (challenge) ->
-      index = @challengeIndex challenge.id
-
-      if index == -1
-        @challenges.push challenge
-        return
-
-      Vue.set @challenges, index, challenge
-
-    challengeSaved: (data) ->
-      @addChallenge data.challenge
-      @clearFormChallenge()
-
-    challengeRemoved: (data) ->
-      index = @challengeIndex data.challenge.id
-      return if index == -1
-      @challenges.splice index, 1
-
-  mounted: ->
-    @challenges_resource = new ChallengesResource
-
-    if @parent_challenges
-      @challenges = @parent_challenges
-      return
-
-    @loadChallenges()
 </script>

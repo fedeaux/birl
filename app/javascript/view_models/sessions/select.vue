@@ -1,43 +1,45 @@
 <template lang="pug">
+  shared-modal(v-if='form_session' title='New Session')
+    sessions-form(v-model='form_session'
+                   @save='saveFormSession()'
+                   @cancel='clearFormSession()')
+
   sui-dropdown(:options='sessions_as_options'
                :loading='loading'
                :search='true'
                :selection='true'
+               :allowAdditions='allow_additions'
                placeholder='Session'
+               v-else
                v-model='selected_session_id')
+
 </template>
 
 <script lang="coffee">
-import SessionsResource from '../../resources/sessions_resource'
+import SessionsManagerMixin from '../../mixins/sessions/manager'
 
 export default
+  mixins: [SessionsManagerMixin]
+
   model:
     prop: 'session_id'
 
   props:
-    session_id: null
+    session_id:
+      default: null
+
+    allow_additions:
+      default: true
 
   data: ->
-    sessions: null
     selected_session_id: null
 
   methods:
-    loadSessions: ->
-      @sessions_resource.index @sessionsLoaded
+    sessionAdded: (index, session) ->
+      @selectSession session
 
-    sessionsLoaded: (response) ->
-      @sessions = response.sessions
-
-    sessionIndex: (session_id) ->
-      for index, session of @sessions
-        return index if session.id == session_id
-
-      -1
-
-    getSession: (session_id) ->
-      index = @sessionIndex session_id
-      return null if index == -1
-      @sessions[index]
+    selectSession: (session) ->
+      @selected_session_id = parseInt session.id
 
   computed:
     loading: ->
@@ -49,16 +51,18 @@ export default
 
   watch:
     selected_session_id: ->
-      @$emit 'input', @selected_session_id
+      selected_session_id = parseInt @selected_session_id
+
+      unless isNaN selected_session_id
+        @$emit 'input', selected_session_id
+        return
+
+      @newSession name: @selected_session_id
 
     session_id:
       immediate: true
       handler: ->
         return unless @session_id
         @selected_session_id = parseInt @session_id
-
-  mounted: ->
-    @sessions_resource = new SessionsResource
-    @loadSessions()
 
 </script>

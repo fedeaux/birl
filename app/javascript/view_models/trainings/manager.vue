@@ -1,5 +1,8 @@
 <template lang="pug">
 .entity-manager.trainings-manager.default-container
+  //- BrainDamage: ManagerHead Start
+  //- BrainDamage: ManagerHead End
+
   .entity-manager-form(v-if='form_training')
     trainings-form(v-model='form_training'
                    @save='saveFormTraining()'
@@ -18,74 +21,12 @@
 </template>
 
 <script lang="coffee">
-import TrainingsResource from '../../resources/trainings_resource'
-import Training from '../../models/training'
+import TrainingsManagerMixin from '../../mixins/trainings/manager'
 
 export default
-  props:
-    context:
-      default: -> {}
+  mixins: [TrainingsManagerMixin]
 
-    parent_trainings: null
+  # BrainDamage: Other Start
+  # BrainDamage: Other End
 
-  data: ->
-    trainings: null
-    form_training: null
-
-  methods:
-    editTraining: (data) ->
-      @setFormTraining data.training
-
-    destroyTraining: (data) ->
-      @trainings_resource.destroy data.training, @trainingRemoved
-
-    loadTrainings: ->
-      @trainings_resource.index @trainingsLoaded, @context
-
-    trainingsLoaded: (response) ->
-      @trainings = response.trainings
-
-    newTraining: ->
-      @setFormTraining new Training @context
-
-    setFormTraining: (@form_training) ->
-
-    clearFormTraining: ->
-      @setFormTraining null
-
-    trainingIndex: (training_id) ->
-      for index, training of @trainings
-        return index if training.id == training_id
-
-      -1
-
-    saveFormTraining: ->
-      @trainings_resource.save @form_training, @trainingSaved
-
-    addTraining: (training) ->
-      index = @trainingIndex training.id
-
-      if index == -1
-        @trainings.push training
-        return
-
-      Vue.set @trainings, index, training
-
-    trainingSaved: (data) ->
-      @addTraining data.training
-      @clearFormTraining()
-
-    trainingRemoved: (data) ->
-      index = @trainingIndex data.training.id
-      return if index == -1
-      @trainings.splice index, 1
-
-  mounted: ->
-    @trainings_resource = new TrainingsResource
-
-    if @parent_trainings
-      @trainings = @parent_trainings
-      return
-
-    @loadTrainings()
 </script>

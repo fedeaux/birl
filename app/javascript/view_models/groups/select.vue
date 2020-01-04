@@ -1,43 +1,45 @@
 <template lang="pug">
+  shared-modal(v-if='form_group' title='New Group')
+    groups-form(v-model='form_group'
+                   @save='saveFormGroup()'
+                   @cancel='clearFormGroup()')
+
   sui-dropdown(:options='groups_as_options'
                :loading='loading'
                :search='true'
                :selection='true'
+               :allowAdditions='allow_additions'
                placeholder='Group'
+               v-else
                v-model='selected_group_id')
+
 </template>
 
 <script lang="coffee">
-import GroupsResource from '../../resources/groups_resource'
+import GroupsManagerMixin from '../../mixins/groups/manager'
 
 export default
+  mixins: [GroupsManagerMixin]
+
   model:
     prop: 'group_id'
 
   props:
-    group_id: null
+    group_id:
+      default: null
+
+    allow_additions:
+      default: true
 
   data: ->
-    groups: null
     selected_group_id: null
 
   methods:
-    loadGroups: ->
-      @groups_resource.index @groupsLoaded
+    groupAdded: (index, group) ->
+      @selectGroup group
 
-    groupsLoaded: (response) ->
-      @groups = response.groups
-
-    groupIndex: (group_id) ->
-      for index, group of @groups
-        return index if group.id == group_id
-
-      -1
-
-    getGroup: (group_id) ->
-      index = @groupIndex group_id
-      return null if index == -1
-      @groups[index]
+    selectGroup: (group) ->
+      @selected_group_id = parseInt group.id
 
   computed:
     loading: ->
@@ -49,16 +51,18 @@ export default
 
   watch:
     selected_group_id: ->
-      @$emit 'input', @selected_group_id
+      selected_group_id = parseInt @selected_group_id
+
+      unless isNaN selected_group_id
+        @$emit 'input', selected_group_id
+        return
+
+      @newGroup name: @selected_group_id
 
     group_id:
       immediate: true
       handler: ->
         return unless @group_id
         @selected_group_id = parseInt @group_id
-
-  mounted: ->
-    @groups_resource = new GroupsResource
-    @loadGroups()
 
 </script>

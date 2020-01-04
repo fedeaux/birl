@@ -29,7 +29,8 @@ class Api::V1::SessionsController < Api::V1::ApiController
   end
 
   def create
-    @session = current_context.current_training.new session_params
+    @session = current_context.current_training.sessions.new session_params
+
     if @session.save
       render 'show', status: :created
     else
