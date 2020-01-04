@@ -102,7 +102,7 @@ for view_model_path in view_model_paths.paths
 # for name, filter of Filters
 #   Vue.filter name, filter
 
-$ ->
+Global.initialize = ->
   if $('#birl-spa-container').length > 0
     Global.server = JSON.parse $('#server-json').text()
     Global.player = new Player Global.server.audio
@@ -120,3 +120,10 @@ $ ->
         @$store.dispatch 'setInitialState'
         $(document).ajaxStart(@load).ajaxComplete(@loaded)
     ).$mount '#birl-spa-container'
+
+alert location.protocol
+
+if location.protocol == 'file:'
+  alert 'cordova!!!'
+else
+  alert 'web!!!'
