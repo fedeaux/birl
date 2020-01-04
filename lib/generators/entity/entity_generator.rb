@@ -10,8 +10,6 @@ class EntityGenerator < Rails::Generators::NamedBase
 
   def initialize(a, b, c)
     super(a, b, c)
-
-    @sub_templates = {}
   end
 
   # def generate_model
@@ -76,6 +74,8 @@ class EntityGenerator < Rails::Generators::NamedBase
   end
 
   def guarded_template(source, target)
+    @sub_templates = {}
+
     if File.exist?(target)
       return if (File.readlines(target).last.strip == 'BrainDamage: NO-OVERRIDE') || !template_exists?(source)
 
