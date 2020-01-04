@@ -126,4 +126,5 @@ alert location.protocol
 if location.protocol == 'file:'
   alert 'cordova!!!'
 else
+  $ Global.initialize
   alert 'web!!!'

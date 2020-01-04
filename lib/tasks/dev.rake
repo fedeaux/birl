@@ -98,6 +98,31 @@ namespace :dev do
       f.write config.to_yaml
     end
   end
+
+  task :deploy_cordova do
+    file = 'cordova/www/index.html'
+
+    `curl http://birlapp.herokuapp.com > #{file}`
+
+    index = File.read file
+
+    index.gsub!('href="/packs', 'href="http://birlapp.herokuapp.com/packs')
+    index.gsub!('src="/packs', 'src="http://birlapp.herokuapp.com/packs')
+
+    # index.gsub!('href="http://birlapp.herokuapp.com/packs', 'href="/packs')
+    # index.gsub!('src="http://birlapp.herokuapp.com/packs', 'src="/packs')
+
+    File.open(file, 'w') do |f|
+      f.write(index)
+    end
+
+    apk = '/Users/fedorius/Work/my/birl/web/cordova/platforms/android/app/build/outputs/apk/debug/app-debug.apk'
+    `rm #{apk}`
+
+    `cd cordova/ && cordova build android`
+
+    session = GoogleDrive::Session.from_config('google_config.json')
+  end
 end
 
 # Rename 'sets' to 'mult'
