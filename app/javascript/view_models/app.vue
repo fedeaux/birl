@@ -21,6 +21,7 @@
 
     template(v-else)
       router-link.item(to='/contexts') Contexts
+      router-link.item(to='/tags') Tags
       router-link.item(to='/') Choose
 
     //- a.item(@click='logoff') Logoff
