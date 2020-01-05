@@ -108,7 +108,7 @@ namespace :dev do
     base_url = 'http://birlapp.herokuapp.com'
 
     `git push heroku master`
-    `curl #{base_url} > #{downloaded_index}`
+    # `curl #{base_url} > #{downloaded_index}`
 
     lines = File.readlines downloaded_index
     added_scripts = false
@@ -124,7 +124,7 @@ namespace :dev do
           url = "#{base_url}#{path}"
           name = path.split('-').first.split('/').last+'.js'
 
-          `curl #{url} > cordova/www/js/#{name}`
+          # `curl #{url} > cordova/www/js/#{name}`
 
           line.gsub! path, "js/#{name}"
         end
@@ -134,16 +134,16 @@ namespace :dev do
           added_scripts = true
         end
       elsif line =~ style_regex
-        puts "Style line #{line}"
+        # puts "Style line #{line}"
         path = line.scan(style_regex)[0][0]
 
         if path[0] == '/'
           url = "#{base_url}#{path}"
-          name = path.split('-').first.split('/').last+'.css'
+          name = asset_to_filename path
 
-          puts "  name: #{name}"
+          # puts "  name: #{name}"
 
-          `curl #{url} > cordova/www/css/#{name}.downloaded`
+          # `curl #{url} > cordova/www/css/#{name}.downloaded`
 
           File.open("cordova/www/css/#{name}", 'w') do |f|
             f.write download_assets File.readlines "cordova/www/css/#{name}.downloaded"
@@ -171,8 +171,42 @@ namespace :dev do
 end
 
 def download_assets(css_lines)
-  css_lines.select do |line| line.index('url(') end.map do |line| line.match(/url\(([^)]+)/) end
-  css_lines.join "\n"
+  css_lines.map do |line|
+    ms = line.match(/url\(([^)]+)/)
+
+    if ms && ms[1]
+      url = ms[1].gsub('"', '')
+
+      unless url.index('data:')
+        path = ''
+        file_name = ''
+
+        if url.index('node_modules')
+          path = 'node_modules' + url.split('node_modules').last
+          file_name = "cordova/www/assets#{url.split('node_modules').last}"
+        else
+          path = 'public' + url
+          file_name = "cordova/www/assets/#{path}"
+          puts "url: #{url}"
+          byebug
+        end
+
+
+        `mkdir -p #{file_name.split('/')[0..-2].join('/')}`
+        `cp #{path} #{file_name}`
+        line.gsub! url, file_name.split('www').last
+      end
+    end
+
+    line
+  end.join "\n"
+end
+
+def asset_to_filename(path)
+  extension = path.split('.').last
+  base_file_name = path.split('-').first.split('/').last
+
+  "#{base_file_name}.#{extension}"
 end
 
 # Rename 'sets' to 'mult'
