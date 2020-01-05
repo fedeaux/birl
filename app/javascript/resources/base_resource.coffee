@@ -6,10 +6,6 @@ class BaseResource
       type: 'get'
       data: params
       success: @collectionClosure(success)
-      complete: (a, b, c) ->
-        console.log a
-        console.log b
-        console.log c
 
   get: (id, success) ->
     model = @model()

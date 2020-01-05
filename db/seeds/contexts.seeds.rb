@@ -15,7 +15,14 @@ after(:users) do
         meta: {
           root: 'questioner'
         }
-      }
+      },
+      {
+        name: 'My Mind',
+        color: '#00b5ad',
+        meta: {
+          root: 'ideas'
+        }
+      },
     ].each do |context_attrs|
       slug = context_attrs[:name].parameterize
       context = user.contexts.find_or_initialize_by(slug: slug)
