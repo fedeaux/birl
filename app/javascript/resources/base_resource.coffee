@@ -6,6 +6,10 @@ class BaseResource
       type: 'get'
       data: params
       success: @collectionClosure(success)
+      complete: (a, b, c) ->
+        console.log a
+        console.log b
+        console.log c
 
   get: (id, success) ->
     model = @model()
@@ -85,6 +89,7 @@ class BaseResource
     @constructor.model()
 
   path2url: (path) ->
+    alert "#{Global.server.base_url}/api/v1#{path}"
     "#{Global.server.base_url}/api/v1#{path}"
 
 export default BaseResource

@@ -105,10 +105,10 @@ namespace :dev do
     scripts_to_add = ['', '<script src="cordova.js" type="text/javascript"></script>', '<script src="js/index.js" type="text/javascript"></script>']
 
     base_url = 'http://localhost:3000'
-    base_url = 'http://birlapp.herokuapp.com'
+    # base_url = 'http://birlapp.herokuapp.com'
 
     `git push heroku master`
-    # `curl #{base_url} > #{downloaded_index}`
+    `curl #{base_url} > #{downloaded_index}`
 
     lines = File.readlines downloaded_index
     added_scripts = false
@@ -124,7 +124,7 @@ namespace :dev do
           url = "#{base_url}#{path}"
           name = path.split('-').first.split('/').last+'.js'
 
-          # `curl #{url} > cordova/www/js/#{name}`
+          `curl #{url} > cordova/www/js/#{name}`
 
           line.gsub! path, "js/#{name}"
         end
@@ -141,12 +141,10 @@ namespace :dev do
           url = "#{base_url}#{path}"
           name = asset_to_filename path
 
-          # puts "  name: #{name}"
-
-          # `curl #{url} > cordova/www/css/#{name}.downloaded`
+          `curl #{url} > cordova/www/css/#{name}.downloaded`
 
           File.open("cordova/www/css/#{name}", 'w') do |f|
-            f.write download_assets File.readlines "cordova/www/css/#{name}.downloaded"
+            f.write download_assets File.readlines("cordova/www/css/#{name}.downloaded"), base_url
           end
 
           line.gsub! path, "css/#{name}"
@@ -170,31 +168,35 @@ namespace :dev do
   end
 end
 
-def download_assets(css_lines)
+def download_assets(css_lines, base_url)
   css_lines.map do |line|
-    ms = line.match(/url\(([^)]+)/)
+    line.split('url').each do |part|
+      ms = part.match(/^\(([^)]+)/)
 
-    if ms && ms[1]
-      url = ms[1].gsub('"', '')
+      if ms && ms[1]
+        url = ms[1].gsub('"', '')
 
-      unless url.index('data:')
-        path = ''
-        file_name = ''
+        unless url.index('data:')
+          path = ''
+          file_name = ''
 
-        if url.index('node_modules')
-          path = 'node_modules' + url.split('node_modules').last
-          file_name = "cordova/www/assets#{url.split('node_modules').last}"
-        else
-          path = 'public' + url
-          file_name = "cordova/www/assets/#{path}"
-          puts "url: #{url}"
-          byebug
+          if url.index('node_modules')
+            file_name = "cordova/www/assets#{url.split('node_modules').last}"
+          else
+            path = 'public' + url
+            file_name = "cordova/www/assets/#{path}"
+          end
+
+          puts "url #{url}"
+
+          `mkdir -p #{file_name.split('/')[0..-2].join('/')}`
+          puts "curl #{base_url}#{url} > #{file_name}"
+          `curl #{base_url}#{url} > #{file_name}`
+
+          puts "gsub #{url} with #{file_name.split('www').last}"
+
+          line.gsub! url, file_name.split('www').last
         end
-
-
-        `mkdir -p #{file_name.split('/')[0..-2].join('/')}`
-        `cp #{path} #{file_name}`
-        line.gsub! url, file_name.split('www').last
       end
     end
 
