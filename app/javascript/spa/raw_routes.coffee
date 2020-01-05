@@ -20,6 +20,10 @@ routes = [
   {
     path: '/questioner'
     view: 'questioner/index'
+  },
+  {
+    path: '/tools'
+    view: 'tools/index'
   }
 ]
 

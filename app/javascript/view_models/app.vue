@@ -29,6 +29,9 @@
     .header-button#back-button(@click='back()')
       i.angle.left.icon
 
+    router-link.header-button#tools-toggle(to='tools')
+      i.wrench.icon
+
     .header-button#side-menu-toggle(@click='toggleMenu($event)')
       i.bars.icon
 

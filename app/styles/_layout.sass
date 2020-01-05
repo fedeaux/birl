@@ -1,4 +1,5 @@
 $header-height: 54px
+$header-buttom-dim: $header-height - $d2
 
 html, body
   height: 100%
@@ -36,8 +37,9 @@ hr
     .header-button
       border-radius: $d
       display: inline-block
-      height: $header-height - $d2
-      line-height: $header-height - $d2
+      height: $header-buttom-dim
+      line-height: $header-buttom-dim
+      width: $header-buttom-dim
       padding: $d
       position: absolute
       top: $d
@@ -51,6 +53,9 @@ hr
 
       &:active
         background-color: rgba(black, 0.1)
+
+    #tools-toggle
+      right: $d2 + $header-buttom-dim
 
     #side-menu-toggle
       right: $d
