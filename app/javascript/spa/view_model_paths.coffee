@@ -28,6 +28,7 @@ paths = [
   'shared/modal'
   'tags/hierarchy'
   'tags/hierarchy/item'
+  'tags/tag'
 ]
 
 for entity in entities

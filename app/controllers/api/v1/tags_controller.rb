@@ -36,6 +36,6 @@ class Api::V1::TagsController < Api::V1::ApiController
   end
 
   def tag_params
-    params.require(:tag).permit(:id, :name, :color, :background_color, :parent_id, :meta)
+    params.require(:tag).permit!
   end
 end

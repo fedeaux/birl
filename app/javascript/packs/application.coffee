@@ -99,6 +99,9 @@ for view_model_path in view_model_paths.paths
   for component_name in (view_model_aliases[main_component_name] or []).concat [main_component_name]
     Vue.component component_name, component
 
+import { Chrome } from 'vue-color'
+Vue.component 'color-picker', Chrome
+
 # for name, filter of Filters
 #   Vue.filter name, filter
 

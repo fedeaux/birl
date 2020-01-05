@@ -1,5 +1,5 @@
 import BaseModel from './base_model'
-import User from './user'
+import Color from './color'
 
 class Tag extends BaseModel
   @collection = 'tags'
@@ -10,11 +10,21 @@ class Tag extends BaseModel
     {
       id: {}
       name: {}
-      color: {}
-      background_color: {}
+      color: { type: Color }
+      background_color: { type: Color }
       meta: {}
       parent_id: {}
       children: { type: Tag }
+    }
+
+  @serializableAttributes = ->
+    {
+      id: {}
+      name: {}
+      color: { type: Color }
+      background_color: { type: Color }
+      meta: {}
+      parent_id: {}
     }
 
 export default Tag

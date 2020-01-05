@@ -42,6 +42,9 @@ export default
     newTag: (params = {}) ->
       final_params = JSON.parse JSON.stringify @context
 
+      final_params.color = {}
+      final_params.background_color = {}
+
       for key, value of params
         final_params[key] = value
 

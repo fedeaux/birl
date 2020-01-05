@@ -1,5 +1,7 @@
 <template lang="pug">
 .entity-form-wrapper.tags-form-wrapper.default-container(v-if='tag')
+  tags-tag(:tag='tag')
+
   .entity-form.tags-form
     .ui.form
       .field
@@ -8,11 +10,11 @@
 
       .field
         label Color
-        input(type='text' v-model='tag.color')
+        color-picker(v-model='tag.color')
 
       .field
         label Background Color
-        input(type='text' v-model='tag.background_color')
+        color-picker(v-model='tag.background_color')
 
       .field.ui.fluid.buttons
         .ui.primary.button(@click='save()') Save
