@@ -105,7 +105,7 @@ namespace :dev do
     scripts_to_add = ['', '<script src="cordova.js" type="text/javascript"></script>', '<script src="js/index.js" type="text/javascript"></script>']
 
     base_url = 'http://localhost:3000'
-    # base_url = 'http://birlapp.herokuapp.com'
+    base_url = 'http://birlapp.herokuapp.com'
 
     `git push heroku master`
     `curl #{base_url} > #{downloaded_index}`
@@ -187,15 +187,12 @@ def download_assets(css_lines, base_url)
             file_name = "cordova/www/assets/#{path}"
           end
 
-          puts "url #{url}"
+          # puts "url #{url}"
 
           `mkdir -p #{file_name.split('/')[0..-2].join('/')}`
-          puts "curl #{base_url}#{url} > #{file_name}"
           `curl #{base_url}#{url} > #{file_name}`
 
-          puts "gsub #{url} with #{file_name.split('www').last}"
-
-          line.gsub! url, file_name.split('www').last
+          line.gsub! url, '../' + file_name.split('www/').last
         end
       end
     end

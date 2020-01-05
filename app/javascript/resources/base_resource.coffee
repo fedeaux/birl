@@ -89,7 +89,6 @@ class BaseResource
     @constructor.model()
 
   path2url: (path) ->
-    alert "#{Global.server.base_url}/api/v1#{path}"
     "#{Global.server.base_url}/api/v1#{path}"
 
 export default BaseResource
