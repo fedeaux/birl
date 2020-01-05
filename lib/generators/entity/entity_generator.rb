@@ -12,29 +12,29 @@ class EntityGenerator < Rails::Generators::NamedBase
     super(a, b, c)
   end
 
-  # def generate_model
-  #   generate 'model', ARGV.join(' ')
-  # end
+  def generate_model
+    generate 'model', ARGV.join(' ')
+  end
 
-  # def add_route
-  #   inject_into_file 'config/routes.rb', "      resources :#{plural_underscore_name}\n", after: "    namespace :v1 do\n"
-  # end
+  def add_route
+    inject_into_file 'config/routes.rb', "      resources :#{plural_underscore_name}\n", after: "    namespace :v1 do\n"
+  end
 
-  # def generate_controller
-  #   guarded_template 'controller.rb', controller_file_name
-  # end
+  def generate_controller
+    guarded_template 'controller.rb', controller_file_name
+  end
 
-  # def generate_responses
-  #   guarded_template 'views/_fields.json.jbuilder', response_file_name('_fields')
-  #   guarded_template 'views/_show.json.jbuilder', response_file_name('_show')
-  #   guarded_template 'views/show.json.jbuilder', response_file_name('show')
-  #   guarded_template 'views/index.json.jbuilder', response_file_name('index')
-  # end
+  def generate_responses
+    guarded_template 'views/_fields.json.jbuilder', response_file_name('_fields')
+    guarded_template 'views/_show.json.jbuilder', response_file_name('_show')
+    guarded_template 'views/show.json.jbuilder', response_file_name('show')
+    guarded_template 'views/index.json.jbuilder', response_file_name('index')
+  end
 
-  # def generate_coffeescripts
-  #   guarded_template 'coffeescripts/model.coffee', "app/javascript/models/#{underscore_name}.coffee"
-  #   guarded_template 'coffeescripts/resource.coffee', "app/javascript/resources/#{plural_underscore_name}_resource.coffee"
-  # end
+  def generate_coffeescripts
+    guarded_template 'coffeescripts/model.coffee', "app/javascript/models/#{underscore_name}.coffee"
+    guarded_template 'coffeescripts/resource.coffee', "app/javascript/resources/#{plural_underscore_name}_resource.coffee"
+  end
 
   def generate_mixins
     mixins_list.each do |mixin_name|

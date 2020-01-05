@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :contexts
+  has_many :tags
   belongs_to :current_context, class_name: 'Context', optional: true
 
   def context(slug)

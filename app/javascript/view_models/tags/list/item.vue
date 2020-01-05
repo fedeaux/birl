@@ -1,5 +1,5 @@
 <template lang="pug">
-.entity-list-item-wrapper.challenge-list-item-wrapper
+.entity-list-item-wrapper.tag-list-item-wrapper
   .entity-list-item-confirming-destroy(v-if='confirming_destroy && !showing_actions')
     .ui.four.column.grid
       .column
@@ -13,8 +13,8 @@
 
   .entity-list-item-actions(v-if='!confirming_destroy && showing_actions')
     .ui.four.column.grid
-      .column(@click='$emit("edit")')
-        router-link.ui.basic.fluid.green.icon.button(:to='challenge.path()')
+      .column
+        router-link.ui.basic.fluid.green.icon.button(:to='tag.path()')
           i.eye.icon
 
       .column(@click='$emit("edit")')
@@ -29,11 +29,11 @@
         .ui.basic.fluid.icon.button
           i.cancel.icon
 
-  router-link.entity-list-item.challenge-list-item(v-if='!confirming_destroy && !showing_actions'
-                                                   :to='challenge.path()')
-    challenges-display(:challenge='challenge'
-                       :allow_actions='allow_actions'
-                       @action='showActions')
+  router-link.entity-list-item.tag-list-item(v-if='!confirming_destroy && !showing_actions'
+                                             :to='tag.path()')
+    tags-display(:tag='tag'
+                 :allow_actions='allow_actions'
+                 @action='showActions')
       i.ellipsis.vertical.icon
 
   entity-list-item-divider
@@ -42,16 +42,16 @@
 <script lang="coffee">
 
 export default
+  data: ->
+    showing_actions: false
+    confirming_destroy: false
+
   props:
-    challenge:
+    tag:
       required: true
 
     allow_actions:
       default: false
-
-  data: ->
-    showing_actions: false
-    confirming_destroy: false
 
   methods:
     confirmDestroy: ->

@@ -1,6 +1,6 @@
 # TODO: Auto generate paths
 
-entities = ['groups', 'exercises', 'challenges', 'progressions', 'entries', 'trainings', 'contexts', 'sessions', 'session_progressions', 'listers', 'vocabularies']
+entities = ['groups', 'exercises', 'challenges', 'progressions', 'entries', 'trainings', 'contexts', 'sessions', 'session_progressions', 'listers', 'vocabularies', 'tags']
 views = ['show', 'index', 'display', 'list', 'list/item', 'form', 'new', 'edit', 'select', 'manager']
 
 paths = [
@@ -23,9 +23,11 @@ paths = [
   'listers/value/picker'
   'progressions/execute'
   'progressions/in_session'
+  'questioner/item'
   'shared/footer'
   'shared/modal'
-  'questioner/item'
+  'tags/hierarchy'
+  'tags/hierarchy/item'
 ]
 
 for entity in entities
