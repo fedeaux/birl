@@ -102,14 +102,18 @@ namespace :dev do
   task :deploy_cordova do
     index_file = 'cordova/www/index.html'
     downloaded_index = "#{index_file}.downloaded"
-    scripts_to_add = '<script src="cordova.js" type="text/javascript"></script><script src="js/index.js" type="text/javascript"></script>'
+    scripts_to_add = ['', '<script src="cordova.js" type="text/javascript"></script>', '<script src="js/index.js" type="text/javascript"></script>']
+
+    base_url = 'http://localhost:3000'
+    base_url = 'http://birlapp.herokuapp.com'
 
     `git push heroku master`
-    `curl http://birlapp.herokuapp.com > #{downloaded_index}`
+    `curl #{base_url} > #{downloaded_index}`
 
     lines = File.readlines downloaded_index
     added_scripts = false
     script_regex = /script src="([^\"]+)"/
+    style_regex = /link rel="stylesheet" media="screen" href="([^\"]+)"/
 
     index = lines.map do |line|
       if line =~ script_regex
@@ -117,7 +121,7 @@ namespace :dev do
         path = line.scan(script_regex)[0][0]
 
         if path[0] == '/'
-          url = "http://birlapp.herokuapp.com#{path}"
+          url = "#{base_url}#{path}"
           name = path.split('-').first.split('/').last+'.js'
 
           `curl #{url} > cordova/www/js/#{name}`
@@ -126,10 +130,27 @@ namespace :dev do
         end
 
         unless added_scripts
-          line += scripts_to_add
+          line += scripts_to_add.join("\n    ")
           added_scripts = true
         end
-      else
+      elsif line =~ style_regex
+        puts "Style line #{line}"
+        path = line.scan(style_regex)[0][0]
+
+        if path[0] == '/'
+          url = "#{base_url}#{path}"
+          name = path.split('-').first.split('/').last+'.css'
+
+          puts "  name: #{name}"
+
+          `curl #{url} > cordova/www/css/#{name}.downloaded`
+
+          File.open("cordova/www/css/#{name}", 'w') do |f|
+            f.write download_assets File.readlines "cordova/www/css/#{name}.downloaded"
+          end
+
+          line.gsub! path, "css/#{name}"
+        end
       end
 
       line
@@ -147,6 +168,11 @@ namespace :dev do
     session = GoogleDrive::Session.from_config('google_config.json')
     session.upload_from_file(apk, 'birl.apk', convert: false)
   end
+end
+
+def download_assets(css_lines)
+  css_lines.select do |line| line.index('url(') end.map do |line| line.match(/url\(([^)]+)/) end
+  css_lines.join "\n"
 end
 
 # Rename 'sets' to 'mult'

@@ -27,11 +27,7 @@ var app = {
     // Bind any cordova events here. Common events are:
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
-        alert('nossa mãe');
-        alert(window);
-        alert(window.Global);
-        alert(location);
-        alert(location.protocol);
+        window.Global.initialize();
     },
 };
 
