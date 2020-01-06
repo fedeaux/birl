@@ -28,6 +28,12 @@ export default
       @session_progressions_resource.destroy data.session_progression, @sessionProgressionRemoved
 
     loadSessionProgressions: ->
+      @session_progressions_resource ?= new SessionProgressionsResource
+
+      if @parent_session_progressions
+        @sessionProgressionsLoaded session_progressions: @parent_session_progressions
+        return
+
       @session_progressions_resource.index @sessionProgressionsLoaded, @context
 
     sessionProgressionsLoaded: (response) ->
@@ -85,19 +91,8 @@ export default
       return if index == -1
       @session_progressions.splice index, 1
 
-  mounted: ->
-    @session_progressions_resource = new SessionProgressionsResource
-
-    if @parent_session_progressions
-      @session_progressions = @parent_session_progressions
-      return
-
-    unless @context
-      @loadSessionProgressions()
-
   watch:
     context:
       immediate: true
       handler: ->
-        @session_progressions_resource ?= new SessionProgressionsResource
         @loadSessionProgressions()

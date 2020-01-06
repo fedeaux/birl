@@ -28,6 +28,12 @@ export default
       @sessions_resource.destroy data.session, @sessionRemoved
 
     loadSessions: ->
+      @sessions_resource ?= new SessionsResource
+
+      if @parent_sessions
+        @sessionsLoaded sessions: @parent_sessions
+        return
+
       @sessions_resource.index @sessionsLoaded, @context
 
     sessionsLoaded: (response) ->
@@ -85,19 +91,8 @@ export default
       return if index == -1
       @sessions.splice index, 1
 
-  mounted: ->
-    @sessions_resource = new SessionsResource
-
-    if @parent_sessions
-      @sessions = @parent_sessions
-      return
-
-    unless @context
-      @loadSessions()
-
   watch:
     context:
       immediate: true
       handler: ->
-        @sessions_resource ?= new SessionsResource
         @loadSessions()

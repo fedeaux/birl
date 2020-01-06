@@ -1,6 +1,6 @@
 <template lang="pug">
 .entity-index.listers-index.default-container
-  listers-manager(:listers='listers')
+  listers-manager(:parent_listers='listers')
 </template>
 
 <script lang="coffee">

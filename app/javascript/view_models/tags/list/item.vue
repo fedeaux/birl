@@ -42,16 +42,16 @@
 <script lang="coffee">
 
 export default
-  data: ->
-    showing_actions: false
-    confirming_destroy: false
-
   props:
     tag:
       required: true
 
     allow_actions:
       default: false
+
+  data: ->
+    showing_actions: false
+    confirming_destroy: false
 
   methods:
     confirmDestroy: ->

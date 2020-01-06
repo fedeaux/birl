@@ -1,6 +1,6 @@
 <template lang="pug">
 .entity-index.memes-index.default-container
-  memes-manager(:memes='memes')
+  memes-manager(:parent_memes='memes')
 </template>
 
 <script lang="coffee">

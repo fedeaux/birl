@@ -28,6 +28,12 @@ export default
       @entries_resource.destroy data.entry, @entryRemoved
 
     loadEntries: ->
+      @entries_resource ?= new EntriesResource
+
+      if @parent_entries
+        @entriesLoaded entries: @parent_entries
+        return
+
       @entries_resource.index @entriesLoaded, @context
 
     entriesLoaded: (response) ->
@@ -85,19 +91,8 @@ export default
       return if index == -1
       @entries.splice index, 1
 
-  mounted: ->
-    @entries_resource = new EntriesResource
-
-    if @parent_entries
-      @entries = @parent_entries
-      return
-
-    unless @context
-      @loadEntries()
-
   watch:
     context:
       immediate: true
       handler: ->
-        @entries_resource ?= new EntriesResource
         @loadEntries()

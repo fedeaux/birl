@@ -13,7 +13,7 @@
 
   .entity-list-item-actions(v-if='!confirming_destroy && showing_actions')
     .ui.four.column.grid
-      .column(@click='$emit("edit")')
+      .column
         router-link.ui.basic.fluid.green.icon.button(:to='challenge.path()')
           i.eye.icon
 

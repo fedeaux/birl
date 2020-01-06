@@ -1,6 +1,6 @@
 <template lang="pug">
 .entity-index.entries-index.default-container
-  entries-manager(:entries='entries')
+  entries-manager(:parent_entries='entries')
 </template>
 
 <script lang="coffee">

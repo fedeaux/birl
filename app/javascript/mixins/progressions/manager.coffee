@@ -28,6 +28,12 @@ export default
       @progressions_resource.destroy data.progression, @progressionRemoved
 
     loadProgressions: ->
+      @progressions_resource ?= new ProgressionsResource
+
+      if @parent_progressions
+        @progressionsLoaded progressions: @parent_progressions
+        return
+
       @progressions_resource.index @progressionsLoaded, @context
 
     progressionsLoaded: (response) ->
@@ -85,19 +91,8 @@ export default
       return if index == -1
       @progressions.splice index, 1
 
-  mounted: ->
-    @progressions_resource = new ProgressionsResource
-
-    if @parent_progressions
-      @progressions = @parent_progressions
-      return
-
-    unless @context
-      @loadProgressions()
-
   watch:
     context:
       immediate: true
       handler: ->
-        @progressions_resource ?= new ProgressionsResource
         @loadProgressions()

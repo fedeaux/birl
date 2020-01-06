@@ -28,6 +28,12 @@ export default
       @trainings_resource.destroy data.training, @trainingRemoved
 
     loadTrainings: ->
+      @trainings_resource ?= new TrainingsResource
+
+      if @parent_trainings
+        @trainingsLoaded trainings: @parent_trainings
+        return
+
       @trainings_resource.index @trainingsLoaded, @context
 
     trainingsLoaded: (response) ->
@@ -85,19 +91,8 @@ export default
       return if index == -1
       @trainings.splice index, 1
 
-  mounted: ->
-    @trainings_resource = new TrainingsResource
-
-    if @parent_trainings
-      @trainings = @parent_trainings
-      return
-
-    unless @context
-      @loadTrainings()
-
   watch:
     context:
       immediate: true
       handler: ->
-        @trainings_resource ?= new TrainingsResource
         @loadTrainings()

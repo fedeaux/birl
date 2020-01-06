@@ -28,6 +28,12 @@ export default
       @exercises_resource.destroy data.exercise, @exerciseRemoved
 
     loadExercises: ->
+      @exercises_resource ?= new ExercisesResource
+
+      if @parent_exercises
+        @exercisesLoaded exercises: @parent_exercises
+        return
+
       @exercises_resource.index @exercisesLoaded, @context
 
     exercisesLoaded: (response) ->
@@ -85,19 +91,8 @@ export default
       return if index == -1
       @exercises.splice index, 1
 
-  mounted: ->
-    @exercises_resource = new ExercisesResource
-
-    if @parent_exercises
-      @exercises = @parent_exercises
-      return
-
-    unless @context
-      @loadExercises()
-
   watch:
     context:
       immediate: true
       handler: ->
-        @exercises_resource ?= new ExercisesResource
         @loadExercises()

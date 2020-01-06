@@ -28,6 +28,12 @@ export default
       @memes_resource.destroy data.meme, @memeRemoved
 
     loadMemes: ->
+      @memes_resource ?= new MemesResource
+
+      if @parent_memes
+        @memesLoaded memes: @parent_memes
+        return
+
       @memes_resource.index @memesLoaded, @context
 
     memesLoaded: (response) ->
@@ -85,19 +91,8 @@ export default
       return if index == -1
       @memes.splice index, 1
 
-  mounted: ->
-    @memes_resource = new MemesResource
-
-    if @parent_memes
-      @memes = @parent_memes
-      return
-
-    unless @context
-      @loadMemes()
-
   watch:
     context:
       immediate: true
       handler: ->
-        @memes_resource ?= new MemesResource
         @loadMemes()

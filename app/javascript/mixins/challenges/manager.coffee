@@ -28,6 +28,12 @@ export default
       @challenges_resource.destroy data.challenge, @challengeRemoved
 
     loadChallenges: ->
+      @challenges_resource ?= new ChallengesResource
+
+      if @parent_challenges
+        @challengesLoaded challenges: @parent_challenges
+        return
+
       @challenges_resource.index @challengesLoaded, @context
 
     challengesLoaded: (response) ->
@@ -85,19 +91,8 @@ export default
       return if index == -1
       @challenges.splice index, 1
 
-  mounted: ->
-    @challenges_resource = new ChallengesResource
-
-    if @parent_challenges
-      @challenges = @parent_challenges
-      return
-
-    unless @context
-      @loadChallenges()
-
   watch:
     context:
       immediate: true
       handler: ->
-        @challenges_resource ?= new ChallengesResource
         @loadChallenges()

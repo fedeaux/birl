@@ -28,6 +28,12 @@ export default
       @contexts_resource.destroy data.context, @contextRemoved
 
     loadContexts: ->
+      @contexts_resource ?= new ContextsResource
+
+      if @parent_contexts
+        @contextsLoaded contexts: @parent_contexts
+        return
+
       @contexts_resource.index @contextsLoaded, @context
 
     contextsLoaded: (response) ->
@@ -85,19 +91,8 @@ export default
       return if index == -1
       @contexts.splice index, 1
 
-  mounted: ->
-    @contexts_resource = new ContextsResource
-
-    if @parent_contexts
-      @contexts = @parent_contexts
-      return
-
-    unless @context
-      @loadContexts()
-
   watch:
     context:
       immediate: true
       handler: ->
-        @contexts_resource ?= new ContextsResource
         @loadContexts()

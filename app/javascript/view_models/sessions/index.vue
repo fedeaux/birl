@@ -1,6 +1,6 @@
 <template lang="pug">
 .entity-index.sessions-index.default-container
-  sessions-manager(:sessions='sessions')
+  sessions-manager(:parent_sessions='sessions')
 </template>
 
 <script lang="coffee">

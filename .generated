@@ -1,15 +1,15 @@
-rails g entity context name slug color user:belongs_to meta:jsonb
 rails g entity challenge name description context:references
+rails g entity context name slug color user:belongs_to meta:jsonb
 rails g entity entry name progression:references values value:jsonb observations:text
 rails g entity exercise name slug context:references group:references
-rails g entity lister name values:jsonb
 rails g entity group name context:references
+rails g entity lister name values:jsonb
+rails g entity meme type done_at:datetime user:belongs_to contents:jsonb
 rails g entity progression name details context:references challenge:references exercise:references last_entry_at:datetime
 rails g entity session name training:belongs_to
 rails g entity session_progression session:belongs_to progression:belongs_to order:integer
+rails g entity tag name color background_color user:belongs_to meta:jsonb
 rails g entity training name context:references
 rails g entity vocabulary es pt_br en comment kind priority:integer meta:jsonb
-
-rails g entity tag name color background_color user:belongs_to meta:jsonb
 
 rails g templater session_progression

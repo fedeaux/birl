@@ -1,6 +1,6 @@
 <template lang="pug">
 .entity-index.contexts-index.default-container
-  contexts-manager(:contexts='contexts')
+  contexts-manager(:parent_contexts='contexts')
 </template>
 
 <script lang="coffee">

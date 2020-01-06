@@ -28,6 +28,12 @@ export default
       @<%= plural_underscore_name %>_resource.destroy data.<%= underscore_name %>, @<%= lowercase_entity_name %>Removed
 
     load<%= plural_entity_name %>: ->
+      @<%= plural_underscore_name %>_resource ?= new <%= plural_entity_name %>Resource
+
+      if @parent_<%= plural_underscore_name %>
+        @<%= plural_lowercase_entity_name %>Loaded <%= plural_underscore_name %>: @parent_<%= plural_underscore_name %>
+        return
+
       @<%= plural_underscore_name %>_resource.index @<%= plural_lowercase_entity_name %>Loaded, @context
 
     <%= plural_lowercase_entity_name %>Loaded: (response) ->
@@ -85,19 +91,8 @@ export default
       return if index == -1
       @<%= plural_underscore_name %>.splice index, 1
 
-  mounted: ->
-    @<%= plural_underscore_name %>_resource = new <%= plural_entity_name %>Resource
-
-    if @parent_<%= plural_underscore_name %>
-      @<%= plural_underscore_name %> = @parent_<%= plural_underscore_name %>
-      return
-
-    unless @context
-      @load<%= plural_entity_name %>()
-
   watch:
     context:
       immediate: true
       handler: ->
-        @<%= plural_underscore_name %>_resource ?= new <%= plural_entity_name %>Resource
         @load<%= plural_entity_name %>()

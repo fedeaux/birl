@@ -28,6 +28,12 @@ export default
       @vocabularies_resource.destroy data.vocabulary, @vocabularyRemoved
 
     loadVocabularies: ->
+      @vocabularies_resource ?= new VocabulariesResource
+
+      if @parent_vocabularies
+        @vocabulariesLoaded vocabularies: @parent_vocabularies
+        return
+
       @vocabularies_resource.index @vocabulariesLoaded, @context
 
     vocabulariesLoaded: (response) ->
@@ -85,19 +91,8 @@ export default
       return if index == -1
       @vocabularies.splice index, 1
 
-  mounted: ->
-    @vocabularies_resource = new VocabulariesResource
-
-    if @parent_vocabularies
-      @vocabularies = @parent_vocabularies
-      return
-
-    unless @context
-      @loadVocabularies()
-
   watch:
     context:
       immediate: true
       handler: ->
-        @vocabularies_resource ?= new VocabulariesResource
         @loadVocabularies()

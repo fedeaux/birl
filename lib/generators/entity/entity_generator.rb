@@ -8,10 +8,6 @@ class EntityGenerator < Rails::Generators::NamedBase
 
   argument :attributes, type: :array, default: [], banner: 'field[:type][:index] field[:type][:index]'
 
-  def initialize(a, b, c)
-    super(a, b, c)
-  end
-
   def generate_model
     generate 'model', ARGV.join(' ')
   end

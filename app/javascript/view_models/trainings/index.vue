@@ -1,6 +1,6 @@
 <template lang="pug">
 .entity-index.trainings-index.default-container
-  trainings-manager(:trainings='trainings')
+  trainings-manager(:parent_trainings='trainings')
 </template>
 
 <script lang="coffee">

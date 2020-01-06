@@ -13,7 +13,7 @@
 
   .entity-list-item-actions(v-if='!confirming_destroy && showing_actions')
     .ui.four.column.grid
-      .column(@click='$emit("edit")')
+      .column
         router-link.ui.basic.fluid.green.icon.button(:to='group.path()')
           i.eye.icon
 
@@ -42,16 +42,16 @@
 <script lang="coffee">
 
 export default
-  data: ->
-    showing_actions: false
-    confirming_destroy: false
-
   props:
     group:
       required: true
 
     allow_actions:
       default: false
+
+  data: ->
+    showing_actions: false
+    confirming_destroy: false
 
   methods:
     confirmDestroy: ->

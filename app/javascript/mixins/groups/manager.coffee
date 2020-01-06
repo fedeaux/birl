@@ -28,6 +28,12 @@ export default
       @groups_resource.destroy data.group, @groupRemoved
 
     loadGroups: ->
+      @groups_resource ?= new GroupsResource
+
+      if @parent_groups
+        @groupsLoaded groups: @parent_groups
+        return
+
       @groups_resource.index @groupsLoaded, @context
 
     groupsLoaded: (response) ->
@@ -85,19 +91,8 @@ export default
       return if index == -1
       @groups.splice index, 1
 
-  mounted: ->
-    @groups_resource = new GroupsResource
-
-    if @parent_groups
-      @groups = @parent_groups
-      return
-
-    unless @context
-      @loadGroups()
-
   watch:
     context:
       immediate: true
       handler: ->
-        @groups_resource ?= new GroupsResource
         @loadGroups()

@@ -21,7 +21,7 @@ export default
       return null if index == -1
       @tags[index]
 
-    editTag: (data, a) ->
+    editTag: (data) ->
       @setFormTag data.tag
 
     destroyTag: (data) ->
@@ -42,8 +42,8 @@ export default
     newTag: (params = {}) ->
       final_params = JSON.parse JSON.stringify @context
 
-      final_params.color = {}
-      final_params.background_color = {}
+      params.background_color = {}
+      params.color = {}
 
       for key, value of params
         final_params[key] = value

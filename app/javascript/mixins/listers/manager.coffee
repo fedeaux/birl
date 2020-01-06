@@ -28,6 +28,12 @@ export default
       @listers_resource.destroy data.lister, @listerRemoved
 
     loadListers: ->
+      @listers_resource ?= new ListersResource
+
+      if @parent_listers
+        @listersLoaded listers: @parent_listers
+        return
+
       @listers_resource.index @listersLoaded, @context
 
     listersLoaded: (response) ->
@@ -85,19 +91,8 @@ export default
       return if index == -1
       @listers.splice index, 1
 
-  mounted: ->
-    @listers_resource = new ListersResource
-
-    if @parent_listers
-      @listers = @parent_listers
-      return
-
-    unless @context
-      @loadListers()
-
   watch:
     context:
       immediate: true
       handler: ->
-        @listers_resource ?= new ListersResource
         @loadListers()
