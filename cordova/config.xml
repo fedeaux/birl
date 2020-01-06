@@ -21,6 +21,11 @@
     <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
       <application android:usesCleartextTraffic="true" />
     </edit-config>
+    <icon src="res/icons/logo_hdpi.png" density="hdpi" />
+    <icon src="res/icons/logo_mdpi.png" density="mdpi" />
+    <icon src="res/icons/logo_xhdpi.png" density="xhdpi" />
+    <icon src="res/icons/logo_xxhdpi.png" density="xxhdpi" />
+    <icon src="res/icons/logo_xxxhdpi.png" density="xxxhdpi" />
   </platform>
   <platform name="ios">
     <allow-intent href="itms:*" />

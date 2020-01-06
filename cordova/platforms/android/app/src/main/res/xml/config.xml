@@ -26,5 +26,10 @@
     <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
         <application android:usesCleartextTraffic="true" />
     </edit-config>
+    <icon density="hdpi" src="res/icons/logo_hdpi.png" />
+    <icon density="mdpi" src="res/icons/logo_mdpi.png" />
+    <icon density="xhdpi" src="res/icons/logo_xhdpi.png" />
+    <icon density="xxhdpi" src="res/icons/logo_xxhdpi.png" />
+    <icon density="xxxhdpi" src="res/icons/logo_xxxhdpi.png" />
     <preference name="loglevel" value="DEBUG" />
 </widget>
