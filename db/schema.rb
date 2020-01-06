@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_05_164658) do
+ActiveRecord::Schema.define(version: 2020_01_06_204416) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,16 @@ ActiveRecord::Schema.define(version: 2020_01_05_164658) do
     t.jsonb "values", default: {"items"=>[]}
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "memes", force: :cascade do |t|
+    t.string "type"
+    t.datetime "done_at"
+    t.bigint "user_id"
+    t.jsonb "contents", default: {}
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_memes_on_user_id"
   end
 
   create_table "progressions", force: :cascade do |t|
@@ -164,6 +174,7 @@ ActiveRecord::Schema.define(version: 2020_01_05_164658) do
   add_foreign_key "contexts", "users"
   add_foreign_key "entries", "progressions"
   add_foreign_key "exercises", "groups"
+  add_foreign_key "memes", "users"
   add_foreign_key "progressions", "challenges"
   add_foreign_key "progressions", "exercises"
   add_foreign_key "session_progressions", "progressions"
