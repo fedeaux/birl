@@ -14,6 +14,7 @@ class Meme extends BaseModel
       type: {}
       contents: { type: MemeContents }
       tags: { type: Tag }
+      tag_id: {}
     }
 
 export default Meme

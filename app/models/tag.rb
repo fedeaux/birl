@@ -7,6 +7,9 @@ class Tag < ApplicationRecord
   before_save :ensure_colors
   has_many :tag_taggables, dependent: :destroy
   has_many :taggables, through: :taggables
+
+  has_many :memes, through: :tag_taggables, source: :taggable, source_type: "Meme"
+
   default_scope ->{ order(:fullname) }
 
   def color=(value)

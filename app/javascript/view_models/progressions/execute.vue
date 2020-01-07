@@ -85,7 +85,6 @@ export default
       @setExecutableEntry @$refs.entries_manager.populateFormEntry()
 
       @$nextTick =>
-        console.log 'q', @$refs
         @$refs.executor.start()
 
     loadProgression: ->

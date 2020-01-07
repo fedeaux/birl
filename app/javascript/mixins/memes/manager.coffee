@@ -40,13 +40,16 @@ export default
     memesLoaded: (response) ->
       @memes = response.memes
 
-    newMeme: (params = {}) ->
+    buildMeme: (params = {}) ->
       final_params = JSON.parse JSON.stringify @context
 
       for key, value of params
         final_params[key] = value
 
-      @setFormMeme new Meme final_params
+      new Meme final_params
+
+    newMeme: (params = {}) ->
+      @setFormMeme @buildMeme params
 
     setFormMeme: (@form_meme) ->
       @form_meme

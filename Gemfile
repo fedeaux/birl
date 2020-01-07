@@ -39,6 +39,8 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'listen'
   gem 'rspec-rails'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

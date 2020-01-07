@@ -41,7 +41,7 @@ export default
 
     createMemeFromTitle: ->
       return unless @meme_contents_title.length > 0
-      @createMeme (new Meme contents: { title: @meme_contents_title }, type: @meme_type), @customMemeSaved
+      @createMeme (@buildMeme contents: { title: @meme_contents_title }, type: @meme_type), @customMemeSaved
 
     customMemeSaved: ->
       @meme_contents_title = ''

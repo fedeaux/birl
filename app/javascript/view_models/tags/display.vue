@@ -4,7 +4,7 @@
     i.caret.down.icon(v-if='state == "open"' @click='$emit("toogleState")')
     i.caret.right.icon(v-else-if='state === "closed"' @click='$emit("toogleState")')
     i.blank.icon(v-else)
-    tags-tag(:tag='tag')
+    tags-tag(:tag='tag' display='fullname')
 
   .entity-display-detail
     //- BrainDamage: Details Start

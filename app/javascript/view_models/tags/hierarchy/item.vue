@@ -11,23 +11,21 @@
       .column
         .ui.basic.fluid.button(@click='cancelDestroy()') No
 
-  .entity-list-item-actions(v-if='!confirming_destroy && showing_actions')
-    .ui.four.column.grid
-      .column
-        .ui.basic.fluid.green.icon.button(@click='newChild')
-          i.add.icon
+  .action-menu(v-if='!confirming_destroy && showing_actions')
+    router-link.action-menu-item(:to='tag.path()')
+       i.eye.green.icon
 
-      .column(@click='edit')
-        .ui.basic.fluid.blue.icon.button
-          i.edit.icon
+    .action-menu-item(@click='newChild')
+      i.add.purple.icon
 
-      .column(@click='confirmDestroy')
-        .ui.basic.fluid.red.icon.button
-          i.trash.icon
+    .action-menu-item(@click='edit')
+       i.edit.blue.icon
 
-      .column(@click='hideActions()')
-        .ui.basic.fluid.icon.button
-          i.cancel.icon
+    .action-menu-item(@click='confirmDestroy')
+       i.trash.red.icon
+
+    .action-menu-item(@click='hideActions()')
+       i.cancel.icon
 
   .tags-hierarchy-item
     tags-display(v-if='!confirming_destroy && !showing_actions' :tag='tag' :state='state' @toogleState='toogleState' @action='showActions')
