@@ -16,4 +16,12 @@ class Tag < ApplicationRecord
     self.parents_names = ancestors.map(&:name)
     self.fullname = (parents_names + [name]).join ':'
   end
+
+  def copy_colors_to_descendants
+    colors = attributes.slice('color', 'background_color')
+
+    descendants.each do |tag|
+      tag.update colors
+    end
+  end
 end
