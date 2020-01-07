@@ -63,9 +63,6 @@ export default
 
       -1
 
-    saveFormMeme: (custom_callback = false) ->
-      @saveMeme @form_meme, custom_callback
-
     saveMeme: (meme, custom_callback = false) ->
       if custom_callback
         callback = (data) =>
@@ -77,8 +74,11 @@ export default
 
       @memes_resource.save meme, @memeSaved
 
+    saveFormMeme: (custom_callback = false) ->
+      @saveMeme @form_meme, custom_callback
+
     createMeme: (attributes, custom_callback = false) ->
-      @saveMeme new Meme(attributes), custom_callback
+      @saveMeme @buildMeme(attributes), custom_callback
 
     addMeme: (meme) ->
       index = @memeIndex meme.id

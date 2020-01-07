@@ -11,6 +11,7 @@ export default
   data: ->
     <%= plural_underscore_name %>: null
     form_<%= underscore_name %>: null
+    add_new: 'before'
 
   methods:
     <%= lowercase_entity_name %>Added: (index, <%= lowercase_entity_name %>) ->
@@ -39,13 +40,16 @@ export default
     <%= plural_lowercase_entity_name %>Loaded: (response) ->
       @<%= plural_underscore_name %> = response.<%= plural_underscore_name %>
 
-    new<%= entity_name %>: (params = {}) ->
+    build<%= entity_name %>: (params = {}) ->
       final_params = JSON.parse JSON.stringify @context
 
       for key, value of params
         final_params[key] = value
 
-      @setForm<%= entity_name %> new <%= entity_name %> final_params
+      new <%= entity_name %> final_params
+
+    new<%= entity_name %>: (params = {}) ->
+      @setForm<%= entity_name %> @build<%= entity_name %> params
 
     setForm<%= entity_name %>: (@form_<%= underscore_name %>) ->
       @form_<%= underscore_name %>
@@ -59,23 +63,33 @@ export default
 
       -1
 
-    saveForm<%= entity_name %>: (custom_callback = false) ->
+    save<%= entity_name %>: (<%= underscore_name %>, custom_callback = false) ->
       if custom_callback
         callback = (data) =>
           @<%= lowercase_entity_name %>Saved(data)
           custom_callback(data)
 
-        @<%= plural_underscore_name %>_resource.save @form_<%= underscore_name %>, callback
+        @<%= plural_underscore_name %>_resource.save <%= underscore_name %>, callback
         return
 
-      @<%= plural_underscore_name %>_resource.save @form_<%= underscore_name %>, @<%= lowercase_entity_name %>Saved
+      @<%= plural_underscore_name %>_resource.save <%= underscore_name %>, @<%= lowercase_entity_name %>Saved
+
+    saveForm<%= entity_name %>: (custom_callback = false) ->
+      @save<%= entity_name %> @form_<%= underscore_name %>, custom_callback
+
+    create<%= entity_name %>: (attributes, custom_callback = false) ->
+      @save<%= entity_name %> @build<%= entity_name %>(attributes), custom_callback
 
     add<%= entity_name %>: (<%= underscore_name %>) ->
       index = @<%= lowercase_entity_name %>Index <%= underscore_name %>.id
 
       if index == -1
-        @<%= plural_underscore_name %>.unshift <%= underscore_name %>
-        index = 0
+        if @add_new == 'before'
+          @<%= plural_underscore_name %>.unshift <%= underscore_name %>
+          index = 0
+        else
+          @<%= plural_underscore_name %>.push <%= underscore_name %>
+          index = @<%= plural_underscore_name %>.length - 1
 
       else
         Vue.set @<%= plural_underscore_name %>, index, <%= underscore_name %>
