@@ -54,8 +54,11 @@ hr
       &:active
         background-color: rgba(black, 0.1)
 
-    #tools-toggle
-      right: $d2 + $header-buttom-dim
+    #contexts-toggle
+      right: $d2 + 2 * $header-buttom-dim
+
+    #memes-toggle
+      right: $d + $header-buttom-dim
 
     #side-menu-toggle
       right: $d
@@ -83,3 +86,19 @@ hr
   .default-container, .slim-container
     .default-container, .slim-container
       padding: 0
+
+#fullscreen
+  display: block
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  z-index: 2000
+  background-color: white
+
+  .fullscreen-close
+    position: absolute
+    top: $d2
+    right: $d
+    color: $light-text-gray

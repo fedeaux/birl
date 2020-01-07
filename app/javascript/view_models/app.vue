@@ -1,5 +1,14 @@
 <template lang="pug">
 #birl-spa-container(@click='hideMenu()')
+  #fullscreen(v-if='show_memes || choose_context')
+    i.cancel.icon.fullscreen-close(@click='show_memes = false; choose_context = false')
+    memes-index(v-if='show_memes')
+
+    template(v-if='choose_context')
+      br
+      br
+      contexts-choose
+
   sui-dimmer(:active='global_loading' inverted)
     sui-loader.massive
 
@@ -24,6 +33,7 @@
       router-link.item(to='/') Choose
 
     router-link.item(to='/tags') Tags
+    router-link.item(to='/') Memes
 
     //- a.item(@click='logoff') Logoff
 
@@ -31,11 +41,14 @@
     .header-button#back-button(@click='back()')
       i.angle.left.icon
 
-    router-link.header-button#tools-toggle(to='tools')
-      i.wrench.icon
+    .header-button#contexts-toggle(@click='choose_context = !choose_context')
+      i.bars.icon
+
+    .header-button#memes-toggle(@click='show_memes = !show_memes')
+      i.sticky.note.outline.icon
 
     .header-button#side-menu-toggle(@click='toggleMenu($event)')
-      i.bars.icon
+      i.ellipsis.vertical.icon
 
   #contents-wrapper
     #contents
@@ -47,6 +60,8 @@
 export default
   data: ->
     show_menu: false
+    show_memes: false
+    choose_context: false
 
   methods:
     logoff: ->
@@ -58,7 +73,7 @@ export default
 
     toggleMenu: (e) ->
       @show_menu = !@show_menu
-      e.stopPropagation() if $(e.target).is 'i.bars.icon, #side-menu-toggle'
+      e.stopPropagation() if $(e.target).is 'i.ellipsis.vertical.icon, #side-menu-toggle'
 
     hideMenu: ->
       @show_menu = false
@@ -68,5 +83,9 @@ export default
 
   created: ->
     @setInitialUser()
+
+  watch:
+    current_context: ->
+      @choose_context = false
 
 </script>
