@@ -30,5 +30,7 @@ module Birl2
       g.javascripts     false
       g.helper          false
     end
+
+    config.autoload_paths += ["#{config.root}/app/models/memes"]
   end
 end

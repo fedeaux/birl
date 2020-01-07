@@ -15,7 +15,7 @@ import Meme from '../../models/meme'
 
 export default
   data: ->
-    meme: new Meme
+    meme: new Meme(contents: { title: '', type: '' })
 
   methods:
     saveMeme: ->

@@ -11,6 +11,7 @@ export default
   data: ->
     memes: null
     form_meme: null
+    add_new: 'before'
 
   methods:
     memeAdded: (index, meme) ->
@@ -60,22 +61,32 @@ export default
       -1
 
     saveFormMeme: (custom_callback = false) ->
+      @saveMeme @form_meme, custom_callback
+
+    saveMeme: (meme, custom_callback = false) ->
       if custom_callback
         callback = (data) =>
           @memeSaved(data)
           custom_callback(data)
 
-        @memes_resource.save @form_meme, callback
+        @memes_resource.save meme, callback
         return
 
-      @memes_resource.save @form_meme, @memeSaved
+      @memes_resource.save meme, @memeSaved
+
+    createMeme: (attributes, custom_callback = false) ->
+      @saveMeme new Meme(attributes), custom_callback
 
     addMeme: (meme) ->
       index = @memeIndex meme.id
 
       if index == -1
-        @memes.unshift meme
-        index = 0
+        if @add_new == 'before'
+          @memes.unshift meme
+          index = 0
+        else
+          @memes.push meme
+          index = @memes.length - 1
 
       else
         Vue.set @memes, index, meme

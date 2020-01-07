@@ -3,11 +3,14 @@
   .entity-form.memes-form
     .ui.form
       .field
-        label Type
-        input(type='text' v-model='meme.type')
+        textarea(v-model='meme.contents.title')
 
       .field
-        label Contents
+        label Type
+        sui-dropdown(placeholder="Type"
+                     selection
+                     :options="types_as_options"
+                     v-model="meme.type")
 
       .field.ui.fluid.buttons
         .ui.primary.button(@click='save()') Save
@@ -35,6 +38,13 @@ export default
 
     cancel: ->
       @$emit 'cancel'
+
+  computed:
+    types_as_options: ->
+      [
+        { text: 'Note', value: 'Note', key: 'Note' }
+        { text: 'Todo', value: 'Todo', key: 'Todo' }
+      ]
 
   watch:
     original_meme:
