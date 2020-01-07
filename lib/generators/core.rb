@@ -66,11 +66,11 @@ module GeneratorsCore
   end
 
   def mixins_list
-    %w[manager]
+    @config['generate']['mixins'].keys
   end
 
   def view_models_list
-    %w[show index list list/item new edit form manager display select]
+    @config['generate']['view_models'].keys
   end
 
   def ensure_directory(file)

@@ -8,7 +8,14 @@ class EntityGenerator < Rails::Generators::NamedBase
 
   argument :attributes, type: :array, default: [], banner: 'field[:type][:index] field[:type][:index]'
 
+  def initialize(a, b, c)
+    super a, b, c
+    @config = YAML::load_file 'brain-damage.yml'
+  end
+
   def generate_model
+    return unless generate_model?
+
     generate 'model', ARGV.join(' ')
   end
 
@@ -17,10 +24,14 @@ class EntityGenerator < Rails::Generators::NamedBase
   end
 
   def generate_controller
+    return unless generate_controller?
+
     guarded_template 'controller.rb', controller_file_name
   end
 
   def generate_responses
+    return unless generate_responses?
+
     guarded_template 'views/_fields.json.jbuilder', response_file_name('_fields')
     guarded_template 'views/_show.json.jbuilder', response_file_name('_show')
     guarded_template 'views/show.json.jbuilder', response_file_name('show')
@@ -28,17 +39,23 @@ class EntityGenerator < Rails::Generators::NamedBase
   end
 
   def generate_coffeescripts
+    return unless generate_coffeescripts?
+
     guarded_template 'coffeescripts/model.coffee', "app/javascript/models/#{underscore_name}.coffee"
     guarded_template 'coffeescripts/resource.coffee', "app/javascript/resources/#{plural_underscore_name}_resource.coffee"
   end
 
   def generate_mixins
+    return unless generate_mixins?
+
     mixins_list.each do |mixin_name|
       guarded_template "mixins/#{mixin_name}.coffee", "app/javascript/mixins/#{plural_underscore_name}/#{mixin_name}.coffee"
     end
   end
 
   def generate_view_models
+    return unless generate_view_models?
+
     view_models_list.each do |view_model_name|
       guarded_template "view_models/#{view_model_name}.vue", view_model_file_name(view_model_name)
     end
@@ -125,7 +142,14 @@ class EntityGenerator < Rails::Generators::NamedBase
 
   def method_missing(name, *args, &block)
     name = name.to_s
-    super(name.to_sym, args, block) unless name.end_with? '_as_spaces'
-    spaces send(name.gsub('_as_spaces', '')).length
+
+    if name.end_with? '_as_spaces'
+      spaces send(name.gsub('_as_spaces', '')).length
+    elsif name =~ /generate_\w+\?/
+      generatable = name.gsub('generate_', '').gsub('?', '')
+      @config['generate'].has_key? generatable
+    else
+      super(name.to_sym, args, block)
+    end
   end
 end
