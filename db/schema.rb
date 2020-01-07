@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_06_204416) do
+ActiveRecord::Schema.define(version: 2020_01_07_115841) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -118,6 +118,16 @@ ActiveRecord::Schema.define(version: 2020_01_06_204416) do
     t.index ["training_id"], name: "index_sessions_on_training_id"
   end
 
+  create_table "tag_taggables", force: :cascade do |t|
+    t.string "taggable_type"
+    t.bigint "taggable_id"
+    t.bigint "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tag_id"], name: "index_tag_taggables_on_tag_id"
+    t.index ["taggable_type", "taggable_id"], name: "index_tag_taggables_on_taggable_type_and_taggable_id"
+  end
+
   create_table "tags", force: :cascade do |t|
     t.string "name"
     t.bigint "user_id"
@@ -127,6 +137,8 @@ ActiveRecord::Schema.define(version: 2020_01_06_204416) do
     t.string "ancestry"
     t.jsonb "color", default: {}
     t.jsonb "background_color", default: {}
+    t.jsonb "parents_names", default: []
+    t.string "fullname"
     t.index ["ancestry"], name: "index_tags_on_ancestry"
     t.index ["user_id"], name: "index_tags_on_user_id"
   end
@@ -180,6 +192,7 @@ ActiveRecord::Schema.define(version: 2020_01_06_204416) do
   add_foreign_key "session_progressions", "progressions"
   add_foreign_key "session_progressions", "sessions"
   add_foreign_key "sessions", "trainings"
+  add_foreign_key "tag_taggables", "tags"
   add_foreign_key "tags", "users"
   add_foreign_key "users", "contexts", column: "current_context_id"
 end

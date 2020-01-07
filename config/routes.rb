@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      resources :tag_taggables
       resources :memes
+      get 'tags/hierarchy' => 'tags#hierarchy'
       resources :tags
       resources :vocabularies
       resources :listers

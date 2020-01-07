@@ -12,6 +12,10 @@
                      :options="types_as_options"
                      v-model="meme.type")
 
+      .field(v-if='meme.isPersisted()')
+        label Tags
+        tag-taggables-picker(v-model='meme.tags')
+
       .field.ui.fluid.buttons
         .ui.primary.button(@click='save()') Save
         .ui.basic.button(@click='cancel()') Cancel

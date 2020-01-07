@@ -3,7 +3,7 @@
   <head>
     <title>Birl App</title>
     <meta name="csrf-param" content="authenticity_token" />
-<meta name="csrf-token" content="pyzNU0+gDr8WUbQAMsBxXW0KnTC0odFbl7dmkpADjgi/MxhzWxvYWjqCCISoG/kBNo+jk3Qv76G7pdsP9NSqFA==" />
+<meta name="csrf-token" content="jMpiuAmCi6O7SOgOYbZgfzg6YGbwbxrZ7k4OJ2GACw0LuIPYX4QyH9239S4QvequALhjQiCofqaLzR0O6DNdVw==" />
     
 
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"> -->
@@ -11,7 +11,7 @@
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
 
-    <script src="/packs/application-2b8606fc0b62d89f6470.js"></script>
+    <script src="/packs/application-46362919485883f70f19.js"></script>
     <link rel="stylesheet" media="screen" href="/packs/semantic_ui-48c2cc49fd942502d74930b602d032cf.css" />
 <link rel="stylesheet" media="screen" href="/packs/theme-143e5180d50069a2eac4ef7ec2422da9.css" />
     <link rel="manifest" href="/manifest.json" />
@@ -24,7 +24,7 @@
 
         <script type="text/json" id="server-json">
          {
-             "user": {"user":{"id":3,"email":"phec06@gmail.com","current_context_id":5,"current_context":{"id":5,"name":"Music","slug":"music","color":"#db2828","user_id":3,"meta":null}}},
+             "user": {"user":{"id":3,"email":"phec06@gmail.com","current_context_id":null}},
              "audio": {"schemas":{"birl":{"events":{"rest_finished":["http://birlapp.herokuapp.com/assets/schemas/birl/02.bora_caralho-e9b3fcfc089da5cb01e23c812c96f3c538e406bffb46e22aaea5956a84b1ae8f.mp3","http://birlapp.herokuapp.com/assets/schemas/birl/03.ce_que_ve_essa_porra-d5857206f9a55076eebffa42b900602a4afec2bf4df50653202dbfb985ea3f7f.mp3","http://birlapp.herokuapp.com/assets/schemas/birl/04.bora_cumpadi-69e0cac368334f125651bd3bb43028ee076dad2e629f65eb31c496b932b10948.mp3","http://birlapp.herokuapp.com/assets/schemas/birl/05.ajuda_o_maluco-0033bbb5d523a8b72fd3d0e0f583164f2d90f08349161fcc8720e35d8b64e038.mp3","http://birlapp.herokuapp.com/assets/schemas/birl/10.porra-ccbcd06853b6da83f92a89097fdbb5fd6cb95da8979596e20a421ebb47240f83.mp3"],"doit_finished":["http://birlapp.herokuapp.com/assets/schemas/birl/07.e_verao_o_ano_todo-b63241def1894c9cccc7c9bbb82d8ef1ec42f197122fd89ef5eb2d5f81979152.mp3","http://birlapp.herokuapp.com/assets/schemas/birl/09.ta_comigo_porra-d7a38ef5896f1b552644110dd5416f1f3fe73e001ebfc28689f645978d61111b.mp3","http://birlapp.herokuapp.com/assets/schemas/birl/10.porra-ccbcd06853b6da83f92a89097fdbb5fd6cb95da8979596e20a421ebb47240f83.mp3","http://birlapp.herokuapp.com/assets/schemas/birl/11.eita_porra-cbfee412bc9aeea716222715ca93741dc42869edbc92bec23e87275cbe2e81ed.mp3","http://birlapp.herokuapp.com/assets/schemas/birl/12.ta_saindo_da_jaula-4d89a3731efd6cc62f13ebe45d88afe1aa5d80853e28eb44c73c580c15ef677e.mp3","http://birlapp.herokuapp.com/assets/schemas/birl/13.aqui_nos_controi_fibra-9afec0ab92906c371f90482e87651b6d169749aea0f01675d9e76ed1702281b9.mp3","http://birlapp.herokuapp.com/assets/schemas/birl/14.nao_e_agua_com_musculo-f65a8ce81b73be5d8a8c694fbc3ea155b373463ec9af590085f1d99f8e0e0879.mp3","http://birlapp.herokuapp.com/assets/schemas/birl/15.e_37_anos-0570877aa707c5d5f5a18e602d7fedc316ad4773091c4a77ded7134f90f09eac.mp3"]},"image":"http://birlapp.herokuapp.com/assets/audio/birl-702a7b0e081d32199bf5391d76f6eae37304084cf9f6f77bb588ca9c4dc7acf2.png","eventless":[]},"default":{"events":{"rest_finished":["http://birlapp.herokuapp.com/assets/schemas/default/blop-abd654a8166d2b6f943fc64404eea5eb58cceffe8bcded73560b243c28532f16.mp3"],"doit_finished":["http://birlapp.herokuapp.com/assets/schemas/default/beep-ping-6ba55d0470741d4441a001e482f99264cbb3f4a43e4e98c958334839ee81ab0d.mp3"]},"image":null,"eventless":["http://birlapp.herokuapp.com/assets/schemas/default/tick-a7ceb880d9140d5f448b9fa0fa04ead8f24cbc24d7b1d5d93ff9909c895ed0d8.mp3"]}}},
              "lists": [{"id":1,"name":"Cool Moves","values":{"items":["Bananeira","Estrela","Levantar Bananeira","Macaquinho"]},"created_at":"2019-12-21T23:44:21.088Z","updated_at":"2019-12-21T23:44:21.088Z"},{"id":2,"name":"Musical Intervals","values":{"items":["2m","2M","3m","3M","4J","4#","5J","6m","6M","7m","7M","8J"]},"created_at":"2019-12-21T23:44:21.094Z","updated_at":"2019-12-21T23:44:21.094Z"},{"id":3,"name":"Vocal Regions","values":{"items":["edge lows","lows","transition","highs","edge highs"]},"created_at":"2019-12-21T23:44:21.099Z","updated_at":"2019-12-21T23:44:21.099Z"}],
              "entry_data_model": {"dimensions":[]},

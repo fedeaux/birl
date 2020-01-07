@@ -69,8 +69,8 @@ class BaseResource
       success response if success
 
   # Helpers
-  collectionUrl: ->
-    @path2url "/#{@collection()}.json"
+  collectionUrl: (path = '') ->
+    @path2url "/#{@collection()}#{path}.json"
 
   memberUrl: (member, path = '') ->
     @path2url "#{member.path()}#{path}.json"

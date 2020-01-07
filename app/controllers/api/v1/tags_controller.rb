@@ -2,6 +2,10 @@ class Api::V1::TagsController < Api::V1::ApiController
   before_action :set_tag, only: %i[show update destroy]
 
   def index
+    @tags = current_user.tags
+  end
+
+  def hierarchy
     @tags = current_user.tags.roots
   end
 

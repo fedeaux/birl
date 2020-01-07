@@ -6,6 +6,7 @@
         i.edit.icon
 
   //- BrainDamage: Body Start
+  tags-tags(:tags='meme.tags')
   //- BrainDamage: Body End
 </template>
 

@@ -24,7 +24,7 @@ class EntityGenerator < Rails::Generators::NamedBase
   end
 
   def generate_controller
-    return unless generate_controller?
+    return unless generate_controllers?
 
     guarded_template 'controller.rb', controller_file_name
   end

@@ -5,8 +5,8 @@
       sui-checkbox
     | {{ text }}
 
-  .entity-display-detail
     //- BrainDamage: Details Start
+    tags-tags(:tags='meme.tags')
     //- BrainDamage: Details End
 
   .entity-display-actions(v-if='allow_actions' @click='action($event)')

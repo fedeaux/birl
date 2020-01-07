@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :contexts
   has_many :memes
   has_many :tags
+  has_many :tag_taggables, through: :tags
 
   def context(slug)
     contexts.find_by(slug: slug)

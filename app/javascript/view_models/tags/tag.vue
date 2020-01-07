@@ -1,11 +1,15 @@
 <template lang="pug">
 .tags-tag(v-if="tag" :style='style')
-  | {{ tag.name }}
+  | {{ tag[display] }}
+  slot
 </template>
 
 <script lang="coffee">
   export default
     props:
+      display:
+        default: 'name'
+
       tag:
         required: true
 

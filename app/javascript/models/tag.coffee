@@ -10,6 +10,7 @@ class Tag extends BaseModel
     {
       id: {}
       name: {}
+      fullname: {}
       color: { type: Color }
       background_color: { type: Color }
       meta: {}

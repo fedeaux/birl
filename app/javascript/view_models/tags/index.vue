@@ -14,7 +14,7 @@ export default
 
   methods:
     loadTags: ->
-      @tags_resource.index @tagsLoaded
+      @tags_resource.hierarchy @tagsLoaded
 
     tagsLoaded: (response) ->
       @tags = response.tags

@@ -27,6 +27,8 @@ paths = [
   'tags/hierarchy'
   'tags/hierarchy/item'
   'tags/tag'
+  'tags/tags'
+  'tag_taggables/picker'
 
   'executor/audio_controls'
   'executor/counter'
