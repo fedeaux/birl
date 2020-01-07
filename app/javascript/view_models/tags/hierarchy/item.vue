@@ -78,7 +78,8 @@ export default
       Global.events.$emit 'Tags::Hierarchy::Destroy', tag: @tag
 
     newChild: ->
-      Global.events.$emit 'Tags::Hierarchy::New', tag_attributes: { parent_id: @tag.id }
+      attributes = { parent_id: @tag.id, color: @tag.color, background_color: @tag.background_color }
+      Global.events.$emit 'Tags::Hierarchy::New', tag_attributes: attributes
 
   computed:
     has_children: ->
