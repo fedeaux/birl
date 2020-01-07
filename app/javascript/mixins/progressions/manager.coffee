@@ -11,6 +11,7 @@ export default
   data: ->
     progressions: null
     form_progression: null
+    add_new: 'before'
 
   methods:
     progressionAdded: (index, progression) ->
@@ -39,13 +40,16 @@ export default
     progressionsLoaded: (response) ->
       @progressions = response.progressions
 
-    newProgression: (params = {}) ->
+    buildProgression: (params = {}) ->
       final_params = JSON.parse JSON.stringify @context
 
       for key, value of params
         final_params[key] = value
 
-      @setFormProgression new Progression final_params
+      new Progression final_params
+
+    newProgression: (params = {}) ->
+      @setFormProgression @buildProgression params
 
     setFormProgression: (@form_progression) ->
       @form_progression
@@ -59,23 +63,33 @@ export default
 
       -1
 
-    saveFormProgression: (custom_callback = false) ->
+    saveProgression: (progression, custom_callback = false) ->
       if custom_callback
         callback = (data) =>
           @progressionSaved(data)
           custom_callback(data)
 
-        @progressions_resource.save @form_progression, callback
+        @progressions_resource.save progression, callback
         return
 
-      @progressions_resource.save @form_progression, @progressionSaved
+      @progressions_resource.save progression, @progressionSaved
+
+    saveFormProgression: (custom_callback = false) ->
+      @saveProgression @form_progression, custom_callback
+
+    createProgression: (attributes, custom_callback = false) ->
+      @saveProgression @buildProgression(attributes), custom_callback
 
     addProgression: (progression) ->
       index = @progressionIndex progression.id
 
       if index == -1
-        @progressions.unshift progression
-        index = 0
+        if @add_new == 'before'
+          @progressions.unshift progression
+          index = 0
+        else
+          @progressions.push progression
+          index = @progressions.length - 1
 
       else
         Vue.set @progressions, index, progression

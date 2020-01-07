@@ -11,6 +11,7 @@ export default
   data: ->
     vocabularies: null
     form_vocabulary: null
+    add_new: 'before'
 
   methods:
     vocabularyAdded: (index, vocabulary) ->
@@ -39,13 +40,16 @@ export default
     vocabulariesLoaded: (response) ->
       @vocabularies = response.vocabularies
 
-    newVocabulary: (params = {}) ->
+    buildVocabulary: (params = {}) ->
       final_params = JSON.parse JSON.stringify @context
 
       for key, value of params
         final_params[key] = value
 
-      @setFormVocabulary new Vocabulary final_params
+      new Vocabulary final_params
+
+    newVocabulary: (params = {}) ->
+      @setFormVocabulary @buildVocabulary params
 
     setFormVocabulary: (@form_vocabulary) ->
       @form_vocabulary
@@ -59,23 +63,33 @@ export default
 
       -1
 
-    saveFormVocabulary: (custom_callback = false) ->
+    saveVocabulary: (vocabulary, custom_callback = false) ->
       if custom_callback
         callback = (data) =>
           @vocabularySaved(data)
           custom_callback(data)
 
-        @vocabularies_resource.save @form_vocabulary, callback
+        @vocabularies_resource.save vocabulary, callback
         return
 
-      @vocabularies_resource.save @form_vocabulary, @vocabularySaved
+      @vocabularies_resource.save vocabulary, @vocabularySaved
+
+    saveFormVocabulary: (custom_callback = false) ->
+      @saveVocabulary @form_vocabulary, custom_callback
+
+    createVocabulary: (attributes, custom_callback = false) ->
+      @saveVocabulary @buildVocabulary(attributes), custom_callback
 
     addVocabulary: (vocabulary) ->
       index = @vocabularyIndex vocabulary.id
 
       if index == -1
-        @vocabularies.unshift vocabulary
-        index = 0
+        if @add_new == 'before'
+          @vocabularies.unshift vocabulary
+          index = 0
+        else
+          @vocabularies.push vocabulary
+          index = @vocabularies.length - 1
 
       else
         Vue.set @vocabularies, index, vocabulary

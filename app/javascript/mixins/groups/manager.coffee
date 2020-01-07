@@ -11,6 +11,7 @@ export default
   data: ->
     groups: null
     form_group: null
+    add_new: 'before'
 
   methods:
     groupAdded: (index, group) ->
@@ -39,13 +40,16 @@ export default
     groupsLoaded: (response) ->
       @groups = response.groups
 
-    newGroup: (params = {}) ->
+    buildGroup: (params = {}) ->
       final_params = JSON.parse JSON.stringify @context
 
       for key, value of params
         final_params[key] = value
 
-      @setFormGroup new Group final_params
+      new Group final_params
+
+    newGroup: (params = {}) ->
+      @setFormGroup @buildGroup params
 
     setFormGroup: (@form_group) ->
       @form_group
@@ -59,23 +63,33 @@ export default
 
       -1
 
-    saveFormGroup: (custom_callback = false) ->
+    saveGroup: (group, custom_callback = false) ->
       if custom_callback
         callback = (data) =>
           @groupSaved(data)
           custom_callback(data)
 
-        @groups_resource.save @form_group, callback
+        @groups_resource.save group, callback
         return
 
-      @groups_resource.save @form_group, @groupSaved
+      @groups_resource.save group, @groupSaved
+
+    saveFormGroup: (custom_callback = false) ->
+      @saveGroup @form_group, custom_callback
+
+    createGroup: (attributes, custom_callback = false) ->
+      @saveGroup @buildGroup(attributes), custom_callback
 
     addGroup: (group) ->
       index = @groupIndex group.id
 
       if index == -1
-        @groups.unshift group
-        index = 0
+        if @add_new == 'before'
+          @groups.unshift group
+          index = 0
+        else
+          @groups.push group
+          index = @groups.length - 1
 
       else
         Vue.set @groups, index, group

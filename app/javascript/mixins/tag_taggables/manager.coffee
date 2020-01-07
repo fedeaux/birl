@@ -11,6 +11,7 @@ export default
   data: ->
     tag_taggables: null
     form_tag_taggable: null
+    add_new: 'before'
 
   methods:
     tagTaggableAdded: (index, tagTaggable) ->
@@ -39,13 +40,16 @@ export default
     tagTaggablesLoaded: (response) ->
       @tag_taggables = response.tag_taggables
 
-    newTagTaggable: (params = {}) ->
+    buildTagTaggable: (params = {}) ->
       final_params = JSON.parse JSON.stringify @context
 
       for key, value of params
         final_params[key] = value
 
-      @setFormTagTaggable new TagTaggable final_params
+      new TagTaggable final_params
+
+    newTagTaggable: (params = {}) ->
+      @setFormTagTaggable @buildTagTaggable params
 
     setFormTagTaggable: (@form_tag_taggable) ->
       @form_tag_taggable
@@ -59,23 +63,33 @@ export default
 
       -1
 
-    saveFormTagTaggable: (custom_callback = false) ->
+    saveTagTaggable: (tag_taggable, custom_callback = false) ->
       if custom_callback
         callback = (data) =>
           @tagTaggableSaved(data)
           custom_callback(data)
 
-        @tag_taggables_resource.save @form_tag_taggable, callback
+        @tag_taggables_resource.save tag_taggable, callback
         return
 
-      @tag_taggables_resource.save @form_tag_taggable, @tagTaggableSaved
+      @tag_taggables_resource.save tag_taggable, @tagTaggableSaved
+
+    saveFormTagTaggable: (custom_callback = false) ->
+      @saveTagTaggable @form_tag_taggable, custom_callback
+
+    createTagTaggable: (attributes, custom_callback = false) ->
+      @saveTagTaggable @buildTagTaggable(attributes), custom_callback
 
     addTagTaggable: (tag_taggable) ->
       index = @tagTaggableIndex tag_taggable.id
 
       if index == -1
-        @tag_taggables.unshift tag_taggable
-        index = 0
+        if @add_new == 'before'
+          @tag_taggables.unshift tag_taggable
+          index = 0
+        else
+          @tag_taggables.push tag_taggable
+          index = @tag_taggables.length - 1
 
       else
         Vue.set @tag_taggables, index, tag_taggable

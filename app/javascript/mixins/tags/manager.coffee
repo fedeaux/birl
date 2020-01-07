@@ -11,6 +11,7 @@ export default
   data: ->
     tags: null
     form_tag: null
+    add_new: 'before'
 
   methods:
     tagAdded: (index, tag) ->
@@ -39,16 +40,19 @@ export default
     tagsLoaded: (response) ->
       @tags = response.tags
 
-    newTag: (params = {}) ->
+    buildTag: (params = {}) ->
       final_params = JSON.parse JSON.stringify @context
 
-      params.background_color = {}
-      params.color = {}
+      params.background_color ?= {}
+      params.color ?= {}
 
       for key, value of params
         final_params[key] = value
 
-      @setFormTag new Tag final_params
+      new Tag final_params
+
+    newTag: (params = {}) ->
+      @setFormTag @buildTag params
 
     setFormTag: (@form_tag) ->
       @form_tag
@@ -62,23 +66,33 @@ export default
 
       -1
 
-    saveFormTag: (custom_callback = false) ->
+    saveTag: (tag, custom_callback = false) ->
       if custom_callback
         callback = (data) =>
           @tagSaved(data)
           custom_callback(data)
 
-        @tags_resource.save @form_tag, callback
+        @tags_resource.save tag, callback
         return
 
-      @tags_resource.save @form_tag, @tagSaved
+      @tags_resource.save tag, @tagSaved
+
+    saveFormTag: (custom_callback = false) ->
+      @saveTag @form_tag, custom_callback
+
+    createTag: (attributes, custom_callback = false) ->
+      @saveTag @buildTag(attributes), custom_callback
 
     addTag: (tag) ->
       index = @tagIndex tag.id
 
       if index == -1
-        @tags.unshift tag
-        index = 0
+        if @add_new == 'before'
+          @tags.unshift tag
+          index = 0
+        else
+          @tags.push tag
+          index = @tags.length - 1
 
       else
         Vue.set @tags, index, tag

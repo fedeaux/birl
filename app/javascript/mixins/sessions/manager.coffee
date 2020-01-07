@@ -11,6 +11,7 @@ export default
   data: ->
     sessions: null
     form_session: null
+    add_new: 'before'
 
   methods:
     sessionAdded: (index, session) ->
@@ -39,13 +40,16 @@ export default
     sessionsLoaded: (response) ->
       @sessions = response.sessions
 
-    newSession: (params = {}) ->
+    buildSession: (params = {}) ->
       final_params = JSON.parse JSON.stringify @context
 
       for key, value of params
         final_params[key] = value
 
-      @setFormSession new Session final_params
+      new Session final_params
+
+    newSession: (params = {}) ->
+      @setFormSession @buildSession params
 
     setFormSession: (@form_session) ->
       @form_session
@@ -59,23 +63,33 @@ export default
 
       -1
 
-    saveFormSession: (custom_callback = false) ->
+    saveSession: (session, custom_callback = false) ->
       if custom_callback
         callback = (data) =>
           @sessionSaved(data)
           custom_callback(data)
 
-        @sessions_resource.save @form_session, callback
+        @sessions_resource.save session, callback
         return
 
-      @sessions_resource.save @form_session, @sessionSaved
+      @sessions_resource.save session, @sessionSaved
+
+    saveFormSession: (custom_callback = false) ->
+      @saveSession @form_session, custom_callback
+
+    createSession: (attributes, custom_callback = false) ->
+      @saveSession @buildSession(attributes), custom_callback
 
     addSession: (session) ->
       index = @sessionIndex session.id
 
       if index == -1
-        @sessions.unshift session
-        index = 0
+        if @add_new == 'before'
+          @sessions.unshift session
+          index = 0
+        else
+          @sessions.push session
+          index = @sessions.length - 1
 
       else
         Vue.set @sessions, index, session

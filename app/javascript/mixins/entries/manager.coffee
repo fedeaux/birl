@@ -11,6 +11,7 @@ export default
   data: ->
     entries: null
     form_entry: null
+    add_new: 'before'
 
   methods:
     entryAdded: (index, entry) ->
@@ -39,13 +40,16 @@ export default
     entriesLoaded: (response) ->
       @entries = response.entries
 
-    newEntry: (params = {}) ->
+    buildEntry: (params = {}) ->
       final_params = JSON.parse JSON.stringify @context
 
       for key, value of params
         final_params[key] = value
 
-      @setFormEntry new Entry final_params
+      new Entry final_params
+
+    newEntry: (params = {}) ->
+      @setFormEntry @buildEntry params
 
     setFormEntry: (@form_entry) ->
       @form_entry
@@ -59,23 +63,33 @@ export default
 
       -1
 
-    saveFormEntry: (custom_callback = false) ->
+    saveEntry: (entry, custom_callback = false) ->
       if custom_callback
         callback = (data) =>
           @entrySaved(data)
           custom_callback(data)
 
-        @entries_resource.save @form_entry, callback
+        @entries_resource.save entry, callback
         return
 
-      @entries_resource.save @form_entry, @entrySaved
+      @entries_resource.save entry, @entrySaved
+
+    saveFormEntry: (custom_callback = false) ->
+      @saveEntry @form_entry, custom_callback
+
+    createEntry: (attributes, custom_callback = false) ->
+      @saveEntry @buildEntry(attributes), custom_callback
 
     addEntry: (entry) ->
       index = @entryIndex entry.id
 
       if index == -1
-        @entries.unshift entry
-        index = 0
+        if @add_new == 'before'
+          @entries.unshift entry
+          index = 0
+        else
+          @entries.push entry
+          index = @entries.length - 1
 
       else
         Vue.set @entries, index, entry

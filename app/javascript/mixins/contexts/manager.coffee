@@ -11,6 +11,7 @@ export default
   data: ->
     contexts: null
     form_context: null
+    add_new: 'before'
 
   methods:
     contextAdded: (index, context) ->
@@ -39,13 +40,16 @@ export default
     contextsLoaded: (response) ->
       @contexts = response.contexts
 
-    newContext: (params = {}) ->
+    buildContext: (params = {}) ->
       final_params = JSON.parse JSON.stringify @context
 
       for key, value of params
         final_params[key] = value
 
-      @setFormContext new Context final_params
+      new Context final_params
+
+    newContext: (params = {}) ->
+      @setFormContext @buildContext params
 
     setFormContext: (@form_context) ->
       @form_context
@@ -59,23 +63,33 @@ export default
 
       -1
 
-    saveFormContext: (custom_callback = false) ->
+    saveContext: (context, custom_callback = false) ->
       if custom_callback
         callback = (data) =>
           @contextSaved(data)
           custom_callback(data)
 
-        @contexts_resource.save @form_context, callback
+        @contexts_resource.save context, callback
         return
 
-      @contexts_resource.save @form_context, @contextSaved
+      @contexts_resource.save context, @contextSaved
+
+    saveFormContext: (custom_callback = false) ->
+      @saveContext @form_context, custom_callback
+
+    createContext: (attributes, custom_callback = false) ->
+      @saveContext @buildContext(attributes), custom_callback
 
     addContext: (context) ->
       index = @contextIndex context.id
 
       if index == -1
-        @contexts.unshift context
-        index = 0
+        if @add_new == 'before'
+          @contexts.unshift context
+          index = 0
+        else
+          @contexts.push context
+          index = @contexts.length - 1
 
       else
         Vue.set @contexts, index, context

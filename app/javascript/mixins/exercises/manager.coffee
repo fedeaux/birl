@@ -11,6 +11,7 @@ export default
   data: ->
     exercises: null
     form_exercise: null
+    add_new: 'before'
 
   methods:
     exerciseAdded: (index, exercise) ->
@@ -39,13 +40,16 @@ export default
     exercisesLoaded: (response) ->
       @exercises = response.exercises
 
-    newExercise: (params = {}) ->
+    buildExercise: (params = {}) ->
       final_params = JSON.parse JSON.stringify @context
 
       for key, value of params
         final_params[key] = value
 
-      @setFormExercise new Exercise final_params
+      new Exercise final_params
+
+    newExercise: (params = {}) ->
+      @setFormExercise @buildExercise params
 
     setFormExercise: (@form_exercise) ->
       @form_exercise
@@ -59,23 +63,33 @@ export default
 
       -1
 
-    saveFormExercise: (custom_callback = false) ->
+    saveExercise: (exercise, custom_callback = false) ->
       if custom_callback
         callback = (data) =>
           @exerciseSaved(data)
           custom_callback(data)
 
-        @exercises_resource.save @form_exercise, callback
+        @exercises_resource.save exercise, callback
         return
 
-      @exercises_resource.save @form_exercise, @exerciseSaved
+      @exercises_resource.save exercise, @exerciseSaved
+
+    saveFormExercise: (custom_callback = false) ->
+      @saveExercise @form_exercise, custom_callback
+
+    createExercise: (attributes, custom_callback = false) ->
+      @saveExercise @buildExercise(attributes), custom_callback
 
     addExercise: (exercise) ->
       index = @exerciseIndex exercise.id
 
       if index == -1
-        @exercises.unshift exercise
-        index = 0
+        if @add_new == 'before'
+          @exercises.unshift exercise
+          index = 0
+        else
+          @exercises.push exercise
+          index = @exercises.length - 1
 
       else
         Vue.set @exercises, index, exercise

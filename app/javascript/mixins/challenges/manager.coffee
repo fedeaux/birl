@@ -11,6 +11,7 @@ export default
   data: ->
     challenges: null
     form_challenge: null
+    add_new: 'before'
 
   methods:
     challengeAdded: (index, challenge) ->
@@ -39,13 +40,16 @@ export default
     challengesLoaded: (response) ->
       @challenges = response.challenges
 
-    newChallenge: (params = {}) ->
+    buildChallenge: (params = {}) ->
       final_params = JSON.parse JSON.stringify @context
 
       for key, value of params
         final_params[key] = value
 
-      @setFormChallenge new Challenge final_params
+      new Challenge final_params
+
+    newChallenge: (params = {}) ->
+      @setFormChallenge @buildChallenge params
 
     setFormChallenge: (@form_challenge) ->
       @form_challenge
@@ -59,23 +63,33 @@ export default
 
       -1
 
-    saveFormChallenge: (custom_callback = false) ->
+    saveChallenge: (challenge, custom_callback = false) ->
       if custom_callback
         callback = (data) =>
           @challengeSaved(data)
           custom_callback(data)
 
-        @challenges_resource.save @form_challenge, callback
+        @challenges_resource.save challenge, callback
         return
 
-      @challenges_resource.save @form_challenge, @challengeSaved
+      @challenges_resource.save challenge, @challengeSaved
+
+    saveFormChallenge: (custom_callback = false) ->
+      @saveChallenge @form_challenge, custom_callback
+
+    createChallenge: (attributes, custom_callback = false) ->
+      @saveChallenge @buildChallenge(attributes), custom_callback
 
     addChallenge: (challenge) ->
       index = @challengeIndex challenge.id
 
       if index == -1
-        @challenges.unshift challenge
-        index = 0
+        if @add_new == 'before'
+          @challenges.unshift challenge
+          index = 0
+        else
+          @challenges.push challenge
+          index = @challenges.length - 1
 
       else
         Vue.set @challenges, index, challenge

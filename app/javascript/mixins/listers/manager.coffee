@@ -11,6 +11,7 @@ export default
   data: ->
     listers: null
     form_lister: null
+    add_new: 'before'
 
   methods:
     listerAdded: (index, lister) ->
@@ -39,13 +40,16 @@ export default
     listersLoaded: (response) ->
       @listers = response.listers
 
-    newLister: (params = {}) ->
+    buildLister: (params = {}) ->
       final_params = JSON.parse JSON.stringify @context
 
       for key, value of params
         final_params[key] = value
 
-      @setFormLister new Lister final_params
+      new Lister final_params
+
+    newLister: (params = {}) ->
+      @setFormLister @buildLister params
 
     setFormLister: (@form_lister) ->
       @form_lister
@@ -59,23 +63,33 @@ export default
 
       -1
 
-    saveFormLister: (custom_callback = false) ->
+    saveLister: (lister, custom_callback = false) ->
       if custom_callback
         callback = (data) =>
           @listerSaved(data)
           custom_callback(data)
 
-        @listers_resource.save @form_lister, callback
+        @listers_resource.save lister, callback
         return
 
-      @listers_resource.save @form_lister, @listerSaved
+      @listers_resource.save lister, @listerSaved
+
+    saveFormLister: (custom_callback = false) ->
+      @saveLister @form_lister, custom_callback
+
+    createLister: (attributes, custom_callback = false) ->
+      @saveLister @buildLister(attributes), custom_callback
 
     addLister: (lister) ->
       index = @listerIndex lister.id
 
       if index == -1
-        @listers.unshift lister
-        index = 0
+        if @add_new == 'before'
+          @listers.unshift lister
+          index = 0
+        else
+          @listers.push lister
+          index = @listers.length - 1
 
       else
         Vue.set @listers, index, lister

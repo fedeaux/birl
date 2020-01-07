@@ -11,6 +11,7 @@ export default
   data: ->
     trainings: null
     form_training: null
+    add_new: 'before'
 
   methods:
     trainingAdded: (index, training) ->
@@ -39,13 +40,16 @@ export default
     trainingsLoaded: (response) ->
       @trainings = response.trainings
 
-    newTraining: (params = {}) ->
+    buildTraining: (params = {}) ->
       final_params = JSON.parse JSON.stringify @context
 
       for key, value of params
         final_params[key] = value
 
-      @setFormTraining new Training final_params
+      new Training final_params
+
+    newTraining: (params = {}) ->
+      @setFormTraining @buildTraining params
 
     setFormTraining: (@form_training) ->
       @form_training
@@ -59,23 +63,33 @@ export default
 
       -1
 
-    saveFormTraining: (custom_callback = false) ->
+    saveTraining: (training, custom_callback = false) ->
       if custom_callback
         callback = (data) =>
           @trainingSaved(data)
           custom_callback(data)
 
-        @trainings_resource.save @form_training, callback
+        @trainings_resource.save training, callback
         return
 
-      @trainings_resource.save @form_training, @trainingSaved
+      @trainings_resource.save training, @trainingSaved
+
+    saveFormTraining: (custom_callback = false) ->
+      @saveTraining @form_training, custom_callback
+
+    createTraining: (attributes, custom_callback = false) ->
+      @saveTraining @buildTraining(attributes), custom_callback
 
     addTraining: (training) ->
       index = @trainingIndex training.id
 
       if index == -1
-        @trainings.unshift training
-        index = 0
+        if @add_new == 'before'
+          @trainings.unshift training
+          index = 0
+        else
+          @trainings.push training
+          index = @trainings.length - 1
 
       else
         Vue.set @trainings, index, training
