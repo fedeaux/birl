@@ -63,6 +63,10 @@ class EntityGenerator < Rails::Generators::NamedBase
 
   private
 
+  def filterable_field
+    'name'
+  end
+
   def attributes_as_symbol_list
     ':' + attributes.map(&:column_name).join(', :')
   end

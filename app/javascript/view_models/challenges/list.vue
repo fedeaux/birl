@@ -1,6 +1,9 @@
 <template lang="pug">
 .entity-list.challenge-list.default-container
-  challenges-list-item(v-for='challenge in challenges'
+  .entity-list-filter
+    inputs-clearable.fluid(v-model='filter.text')
+
+  challenges-list-item(v-for='challenge in displayable_challenges'
                        v-if='challenges'
                        :challenge='challenge'
                        :allow_actions='allow_actions'
@@ -19,4 +22,18 @@ export default
 
     challenges:
       default: null
+
+  data: ->
+    filter:
+      text: ''
+
+  methods:
+    matchFilters: (challenge) ->
+      (@filter.text == '' or challenge.name.toLowerCase().indexOf(@filter.text.toLowerCase()) != -1)
+
+  computed:
+    displayable_challenges: ->
+      return [] unless @challenges
+
+      (challenge for challenge in @challenges when @matchFilters challenge)
 </script>

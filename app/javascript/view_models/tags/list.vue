@@ -1,6 +1,9 @@
 <template lang="pug">
 .entity-list.tag-list.default-container
-  tags-list-item(v-for='tag in tags'
+  .entity-list-filter
+    inputs-clearable.fluid(v-model='filter.text')
+
+  tags-list-item(v-for='tag in displayable_tags'
                  v-if='tags'
                  :tag='tag'
                  :allow_actions='allow_actions'
@@ -19,4 +22,18 @@ export default
 
     tags:
       default: null
+
+  data: ->
+    filter:
+      text: ''
+
+  methods:
+    matchFilters: (tag) ->
+      (@filter.text == '' or tag.name.toLowerCase().indexOf(@filter.text.toLowerCase()) != -1)
+
+  computed:
+    displayable_tags: ->
+      return [] unless @tags
+
+      (tag for tag in @tags when @matchFilters tag)
 </script>

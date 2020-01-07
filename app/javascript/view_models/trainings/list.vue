@@ -1,6 +1,9 @@
 <template lang="pug">
 .entity-list.training-list.default-container
-  trainings-list-item(v-for='training in trainings'
+  .entity-list-filter
+    inputs-clearable.fluid(v-model='filter.text')
+
+  trainings-list-item(v-for='training in displayable_trainings'
                       v-if='trainings'
                       :training='training'
                       :allow_actions='allow_actions'
@@ -19,4 +22,18 @@ export default
 
     trainings:
       default: null
+
+  data: ->
+    filter:
+      text: ''
+
+  methods:
+    matchFilters: (training) ->
+      (@filter.text == '' or training.name.toLowerCase().indexOf(@filter.text.toLowerCase()) != -1)
+
+  computed:
+    displayable_trainings: ->
+      return [] unless @trainings
+
+      (training for training in @trainings when @matchFilters training)
 </script>

@@ -1,6 +1,9 @@
 <template lang="pug">
 .entity-list.group-list.default-container
-  groups-list-item(v-for='group in groups'
+  .entity-list-filter
+    inputs-clearable.fluid(v-model='filter.text')
+
+  groups-list-item(v-for='group in displayable_groups'
                    v-if='groups'
                    :group='group'
                    :allow_actions='allow_actions'
@@ -19,4 +22,18 @@ export default
 
     groups:
       default: null
+
+  data: ->
+    filter:
+      text: ''
+
+  methods:
+    matchFilters: (group) ->
+      (@filter.text == '' or group.name.toLowerCase().indexOf(@filter.text.toLowerCase()) != -1)
+
+  computed:
+    displayable_groups: ->
+      return [] unless @groups
+
+      (group for group in @groups when @matchFilters group)
 </script>

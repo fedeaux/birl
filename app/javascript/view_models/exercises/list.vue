@@ -1,6 +1,9 @@
 <template lang="pug">
 .entity-list.exercise-list.default-container
-  exercises-list-item(v-for='exercise in exercises'
+  .entity-list-filter
+    inputs-clearable.fluid(v-model='filter.text')
+
+  exercises-list-item(v-for='exercise in displayable_exercises'
                       v-if='exercises'
                       :exercise='exercise'
                       :allow_actions='allow_actions'
@@ -19,4 +22,18 @@ export default
 
     exercises:
       default: null
+
+  data: ->
+    filter:
+      text: ''
+
+  methods:
+    matchFilters: (exercise) ->
+      (@filter.text == '' or exercise.name.toLowerCase().indexOf(@filter.text.toLowerCase()) != -1)
+
+  computed:
+    displayable_exercises: ->
+      return [] unless @exercises
+
+      (exercise for exercise in @exercises when @matchFilters exercise)
 </script>

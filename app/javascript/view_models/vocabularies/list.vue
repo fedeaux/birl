@@ -1,6 +1,9 @@
 <template lang="pug">
 .entity-list.vocabulary-list.default-container
-  vocabularies-list-item(v-for='vocabulary in vocabularies'
+  .entity-list-filter
+    inputs-clearable.fluid(v-model='filter.text')
+
+  vocabularies-list-item(v-for='vocabulary in displayable_vocabularies'
                          v-if='vocabularies'
                          :vocabulary='vocabulary'
                          :allow_actions='allow_actions'
@@ -19,4 +22,22 @@ export default
 
     vocabularies:
       default: null
+
+  data: ->
+    filter:
+      text: ''
+
+  methods:
+    matchFilters: (vocabulary) ->
+      return true if @filter.text == ''
+
+      for word in [vocabulary.pt_br, vocabulary.es, vocabulary.en]
+        continue unless word
+        return true if word.toLowerCase().indexOf(@filter.text.toLowerCase()) != -1
+
+  computed:
+    displayable_vocabularies: ->
+      return [] unless @vocabularies
+
+      (vocabulary for vocabulary in @vocabularies when @matchFilters vocabulary)
 </script>

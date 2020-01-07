@@ -1,6 +1,9 @@
 <template lang="pug">
 .entity-list.session-list.default-container
-  sessions-list-item(v-for='session in sessions'
+  .entity-list-filter
+    inputs-clearable.fluid(v-model='filter.text')
+
+  sessions-list-item(v-for='session in displayable_sessions'
                      v-if='sessions'
                      :session='session'
                      :allow_actions='allow_actions'
@@ -19,4 +22,18 @@ export default
 
     sessions:
       default: null
+
+  data: ->
+    filter:
+      text: ''
+
+  methods:
+    matchFilters: (session) ->
+      (@filter.text == '' or session.name.toLowerCase().indexOf(@filter.text.toLowerCase()) != -1)
+
+  computed:
+    displayable_sessions: ->
+      return [] unless @sessions
+
+      (session for session in @sessions when @matchFilters session)
 </script>

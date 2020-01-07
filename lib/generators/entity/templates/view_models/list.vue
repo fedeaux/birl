@@ -1,6 +1,9 @@
 <template lang="pug">
 .entity-list.<%= dash_name %>-list.default-container
-  <%= plural_dash_name %>-list-item(v-for='<%= underscore_name %> in <%= plural_underscore_name %>'
+  .entity-list-filter
+    inputs-clearable.fluid(v-model='filter.text')
+
+  <%= plural_dash_name %>-list-item(v-for='<%= underscore_name %> in displayable_<%= plural_underscore_name %>'
   <%= plural_dash_name_as_spaces %>           v-if='<%= plural_underscore_name %>'
   <%= plural_dash_name_as_spaces %>           :<%= underscore_name %>='<%= underscore_name %>'
   <%= plural_dash_name_as_spaces %>           :allow_actions='allow_actions'
@@ -19,4 +22,18 @@ export default
 
     <%= plural_underscore_name %>:
       default: null
+
+  data: ->
+    filter:
+      text: ''
+
+  methods:
+    matchFilters: (<%= underscore_name %>) ->
+      (@filter.text == '' or <%= underscore_name %>.<%= filterable_field %>.toLowerCase().indexOf(@filter.text.toLowerCase()) != -1)
+
+  computed:
+    displayable_<%= plural_underscore_name %>: ->
+      return [] unless @<%= plural_underscore_name %>
+
+      (<%= underscore_name %> for <%= underscore_name %> in @<%= plural_underscore_name %> when @matchFilters <%= underscore_name %>)
 </script>
