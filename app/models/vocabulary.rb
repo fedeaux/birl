@@ -20,8 +20,9 @@ class Vocabulary < ApplicationRecord
       groups << { priority: 1, limit: limit * 2 / 9 }
       groups << { priority: 0, limit: limit * 1 / 9 }
 
-    elsif params[:priority].is_a? Numeric
+    elsif params[:priority] =~ /\d+/
       groups << { priority: params[:priority], limit: limit }
+
     else
       groups << { limit: limit }
     end

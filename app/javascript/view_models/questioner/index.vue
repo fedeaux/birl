@@ -152,9 +152,10 @@ export default
   computed:
     options: ->
       {
-        limit: @count,
-        random: true,
+        limit: @count
+        random: true
         kinds: @selected_kinds
+        priority: @priority
       }
 
     current_vocabulary: ->
