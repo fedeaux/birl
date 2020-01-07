@@ -29,7 +29,7 @@ after(:users) do
      children: [
        {
          name: 'politics',
-         children: ['bandido bom']
+         children: ['bandido-bom']
        }
      ]
    }].each do |tag_attr|
