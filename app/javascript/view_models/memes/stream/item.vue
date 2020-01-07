@@ -11,23 +11,21 @@
       .column
         .ui.basic.fluid.button(@click='cancelDestroy()') No
 
-  .entity-list-item-actions(v-if='!confirming_destroy && showing_actions')
-    .ui.four.column.grid
-      .column
-        router-link.ui.basic.fluid.green.icon.button(:to='meme.path()')
-          i.eye.icon
+  .action-menu(v-if='!confirming_destroy && showing_actions')
+    .action-menu-item(@click='copyToClipboard')
+       i.copy.olive.icon
 
-      .column(@click='$emit("edit")')
-        .ui.basic.fluid.blue.icon.button
-          i.edit.icon
+    router-link.action-menu-item(:to='meme.path()')
+       i.eye.green.icon
 
-      .column(@click='confirmDestroy')
-        .ui.basic.fluid.red.icon.button
-          i.trash.icon
+    .action-menu-item(@click='$emit("edit")')
+       i.edit.blue.icon
 
-      .column(@click='hideActions()')
-        .ui.basic.fluid.icon.button
-          i.cancel.icon
+    .action-menu-item(@click='confirmDestroy')
+       i.trash.red.icon
+
+    .action-menu-item(@click='hideActions()')
+       i.cancel.icon
 
   .entity-list-item.meme-list-item(v-if='!confirming_destroy && !showing_actions')
     memes-display(:meme='meme'
@@ -66,5 +64,8 @@ export default
 
     hideActions: ->
       @showing_actions = false
+
+    copyToClipboard: ->
+      navigator.clipboard.writeText @meme.contents.title
 
 </script>

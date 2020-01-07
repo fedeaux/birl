@@ -11,23 +11,18 @@
       .column
         .ui.basic.fluid.button(@click='cancelDestroy()') No
 
-  .entity-list-item-actions(v-if='!confirming_destroy && showing_actions')
-    .ui.four.column.grid
-      .column
-        router-link.ui.basic.fluid.green.icon.button(:to='lister.path()')
-          i.eye.icon
+  .action-menu(v-if='!confirming_destroy && showing_actions')
+    router-link.action-menu-item(:to='lister.path()')
+       i.eye.green.icon
 
-      .column(@click='$emit("edit")')
-        .ui.basic.fluid.blue.icon.button
-          i.edit.icon
+    .action-menu-item(@click='$emit("edit")')
+       i.edit.blue.icon
 
-      .column(@click='confirmDestroy')
-        .ui.basic.fluid.red.icon.button
-          i.trash.icon
+    .action-menu-item(@click='confirmDestroy')
+       i.trash.red.icon
 
-      .column(@click='hideActions()')
-        .ui.basic.fluid.icon.button
-          i.cancel.icon
+    .action-menu-item(@click='hideActions()')
+       i.cancel.icon
 
   router-link.entity-list-item.lister-list-item(v-if='!confirming_destroy && !showing_actions'
                                                 :to='lister.path()')
