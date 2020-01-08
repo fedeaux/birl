@@ -7,7 +7,12 @@
 export default
   methods:
     setContentPadding: ->
-      $('#contents-wrapper').css 'padding-bottom', "#{$(@$el).height()}px"
+      @scrollableParent().css 'padding-bottom', "#{$(@$el).height() + 5}px"
+
+    scrollableParent: ->
+      # DUCT TAPE SAID HI
+      return $('#contents-wrapper') if $(@$el).parents('#contents-wrapper').length > 0
+      $('.entity-index')
 
   mounted: ->
     @setContentPadding()
@@ -16,5 +21,5 @@ export default
     @setContentPadding()
 
   beforeDestroy: ->
-    $('#contents-wrapper').css 'padding-bottom', 0
+    @scrollableParent().css 'padding-bottom', 0
 </script>

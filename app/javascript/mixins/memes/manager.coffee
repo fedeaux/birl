@@ -15,7 +15,10 @@ export default
 
   methods:
     memeAdded: (index, meme) ->
-      # console.log 'memeAdded', index, meme
+
+    onMemeAdded: (index, meme) ->
+
+    onMemesLoaded: ->
 
     getMeme: (meme_id) ->
       index = @memeIndex meme_id
@@ -39,6 +42,7 @@ export default
 
     memesLoaded: (response) ->
       @memes = response.memes
+      @onMemesLoaded()
 
     buildMeme: (params = {}) ->
       final_params = JSON.parse JSON.stringify @context

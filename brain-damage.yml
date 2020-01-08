@@ -1,20 +1,20 @@
 generate:
-  model: true
-  controllers: true
-  responses: true
-  coffeescripts: true
+  # model: true
+  # controllers: true
+  # responses: true
+  # coffeescripts: true
 
-  view_models:
-    show: true
-    index: true
-    list: true
-    list/item: true
-    new: true
-    edit: true
-    form: true
-    manager: true
-    display: true
-    select: true
+  # view_models:
+  #   show: true
+  #   index: true
+  #   list: true
+  #   list/item: true
+  #   new: true
+  #   edit: true
+  #   form: true
+  #   manager: true
+  #   display: true
+  #   select: true
 
   mixins:
     manager: true

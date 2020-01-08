@@ -99,7 +99,7 @@ namespace :dev do
     end
   end
 
-  task :deploy_cordova do
+  task :deploy do
     index_file = 'cordova/www/index.html'
     downloaded_index = "#{index_file}.downloaded"
     scripts_to_add = ['', '<script src="cordova.js" type="text/javascript"></script>', '<script src="js/index.js" type="text/javascript"></script>']

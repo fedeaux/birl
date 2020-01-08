@@ -3,7 +3,7 @@
   <head>
     <title>Birl App</title>
     <meta name="csrf-param" content="authenticity_token" />
-<meta name="csrf-token" content="Bme3hXgjTF98OQmusebiIHHSKDERL1YD0Kf8hMzyk5RFOdT3ARoW6E1sIgbXZx4GOoVP1xozYow26fRzVq1YqA==" />
+<meta name="csrf-token" content="Lgu0iFz0gNj7NucPMU5AfVZ1yVAeCzzuHBKgGHb53ZnJYcQYGxB7CufSrNSylbEOp1vmUwSQRZjor5vqwlN63g==" />
     
 
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"> -->
@@ -11,7 +11,7 @@
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
 
-    <script src="/packs/application-5c3d9746bb27b4c9a3ea.js"></script>
+    <script src="/packs/application-08de3be4e9f4a2974620.js"></script>
     <link rel="stylesheet" media="screen" href="/packs/semantic_ui-48c2cc49fd942502d74930b602d032cf.css" />
 <link rel="stylesheet" media="screen" href="/packs/theme-1d9ab6d83738eac8cd92e70b36bcb831.css" />
     <link rel="manifest" href="/manifest.json" />
