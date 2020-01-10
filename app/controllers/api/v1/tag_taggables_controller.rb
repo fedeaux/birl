@@ -5,6 +5,16 @@ class Api::V1::TagTaggablesController < Api::V1::ApiController
     @tag_taggables = current_user.tag_taggables
   end
 
+  def batch_ensure_tags
+    params['taggables'].values.each do |taggable_params|
+      params['tags_ids'].each do |tag_id|
+        TagTaggable.where(tag_id: tag_id,
+                          taggable_id: taggable_params['id'],
+                          taggable_type: taggable_params['type']).first_or_create
+      end
+    end
+  end
+
   def show
   end
 

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      post 'tag_taggables/batch_ensure_tags' => 'tag_taggables#batch_ensure_tags'
       resources :tag_taggables
       resources :memes
       get 'tags/hierarchy' => 'tags#hierarchy'

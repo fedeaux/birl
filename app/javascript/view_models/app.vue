@@ -1,7 +1,7 @@
 <template lang="pug">
 #birl-spa-container(@click='hideMenu()')
   #fullscreen(v-if='show_memes || choose_context')
-    i.cancel.icon.fullscreen-close(@click='show_memes = false; choose_context = false')
+    i.cancel.icon#fullscreen-close(@click='show_memes = false; choose_context = false')
     memes-index(v-if='show_memes')
 
     template(v-if='choose_context')

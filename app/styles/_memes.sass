@@ -16,6 +16,26 @@
   background-color: white
 
   .entity-list
+    .meme-list-item-wrapper
+      &.selected
+        border: thin solid $selection-blue-border
+        padding: $d
+        margin-left: -$d
+        margin-right: -$d
+        background-color: $selection-blue
+
+        + .selected
+          border-top: none
+
+        &:has(+ .selected)
+          border-bottom-left-radius: $d
+          border-bottom-right-radius: $d
+
+      &:not(.selected)
+        + .selected
+          border-top-left-radius: $d
+          border-top-right-radius: $d
+
     .entity-display
       font-size: .82em
       line-height: 1.3em

@@ -24,6 +24,9 @@ Vue.use SuiVue
 VueRouter = require('vue-router').default
 Vue.use VueRouter
 
+import LongPress from 'vue-directive-long-press'
+Vue.directive 'long-press', LongPress
+
 import Vuex from 'vuex'
 Vue.use(Vuex)
 store = new Vuex.Store(

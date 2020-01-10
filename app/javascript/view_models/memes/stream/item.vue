@@ -1,5 +1,5 @@
 <template lang="pug">
-.entity-list-item-wrapper.meme-list-item-wrapper
+.entity-list-item-wrapper.meme-list-item-wrapper(:class='{ selected: selected }')
   .entity-list-item-confirming-destroy(v-if='confirming_destroy && !showing_actions')
     .ui.four.column.grid
       .column
@@ -31,9 +31,7 @@
     memes-display(:meme='meme'
                   :allow_actions='allow_actions'
                   @action='showActions')
-      i.ellipsis.vertical.icon
-
-  entity-list-item-divider
+      i.ellipsis.vertical.icon(v-if='!selected')
 </template>
 
 <script lang="coffee">
@@ -44,6 +42,9 @@ export default
       required: true
 
     allow_actions:
+      default: false
+
+    selected:
       default: false
 
   data: ->

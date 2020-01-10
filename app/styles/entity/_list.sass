@@ -11,6 +11,9 @@
     margin-bottom: $d2
 
   .entity-list-item-wrapper
+    padding: $d 0
+    border-bottom: thin solid  $lightest-gray
+
     .entity-list-item-confirming-destroy-message
       text-align: right
       font-size: 0.8em
@@ -29,11 +32,8 @@
       font-weight: 700
       height: 1px
       letter-spacing: 0.7px
-      line-height: $d
-      margin-bottom: $d
       margin-left: 0
       margin-right: 0
-      margin-top: $d
       text-size-adjust: 100%
       text-transform: uppercase
       user-select: none
@@ -47,7 +47,8 @@
     margin-bottom: $d2
 
 .action-menu
-  text-align: right
+  text-align: center
+  position: relative
 
   .action-menu-item
     height: $d8
@@ -61,5 +62,18 @@
       color: $light-text-gray
 
     &:last-child
-      margin-left: $d6
-      width: $d4
+      position: absolute
+      right: 0
+
+.select-mode-menu
+  background-color: white
+  left: 0
+  right: 0
+  top: 0
+  position: fixed
+
+  .action-menu-item
+    font-size: 1.5em
+    height: $ld2
+    line-height: $ld2
+    width: $ld2

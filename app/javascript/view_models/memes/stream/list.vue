@@ -10,9 +10,13 @@
 
   memes-stream-item(v-for='meme in displayable_memes'
                     v-if='memes'
+                    v-long-press='400'
                     :meme='meme'
                     :allow_actions='allow_actions'
                     :key='meme.id'
+                    :selected='selected_ids[meme.id]'
+                    @long-press-stop='toggleSelectIfSelectMode(meme)'
+                    @long-press-start='enableSelectMode(meme)'
                     @edit='$emit("edit", { meme: meme })'
                     @destroy='$emit("destroy", { meme: meme })')
 
@@ -28,7 +32,15 @@ export default
     memes:
       default: null
 
+    select_mode:
+      default: false
+
+    selected_ids:
+      default: {}
+
   data: ->
+    ignore_next_select_toggle: false
+
     filter:
       type: 'all'
       text: ''
@@ -42,6 +54,18 @@ export default
     matchFilters: (meme) ->
       (@filter.type == 'all' or meme.type == @filter.type) and
         (@filter.text == '' or meme.contents.title.toLowerCase().indexOf(@filter.text.toLowerCase()) != -1)
+
+    enableSelectMode: (meme) ->
+      return if @select_mode
+      @ignore_next_select_toggle = true
+
+      @$emit 'enableSelectMode', meme: meme
+
+    toggleSelectIfSelectMode: (meme) ->
+      return unless @select_mode
+      return @ignore_next_select_toggle = false if @ignore_next_select_toggle
+
+      @$emit 'selectModeToggleSelected', meme: meme
 
   computed:
     displayable_memes: ->
