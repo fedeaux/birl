@@ -30,8 +30,6 @@
                  :allow_actions='allow_actions'
                  @action='showActions')
       i.ellipsis.vertical.icon
-
-  entity-list-item-divider
 </template>
 
 <script lang="coffee">

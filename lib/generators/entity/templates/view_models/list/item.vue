@@ -30,8 +30,6 @@
     <%= plural_dash_name_as_spaces %><%= spaces(9) %>:allow_actions='allow_actions'
     <%= plural_dash_name_as_spaces %><%= spaces(9) %>@action='showActions')
       i.ellipsis.vertical.icon
-
-  entity-list-item-divider
 </template>
 
 <script lang="coffee">
