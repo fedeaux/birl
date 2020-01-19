@@ -30,7 +30,7 @@
 
     template(v-else)
       router-link.item(to='/contexts') Contexts
-      router-link.item(to='/') Choose
+      router-link.item(to='/contexts/choose') Choose
 
     router-link.item(to='/tags') Tags
     router-link.item(to='/') Memes

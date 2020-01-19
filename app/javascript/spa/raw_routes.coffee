@@ -24,6 +24,10 @@ routes = [
   {
     path: '/tools'
     view: 'tools/index'
+  },
+  {
+    path: '/contexts/choose'
+    view: 'contexts/choose'
   }
 ]
 

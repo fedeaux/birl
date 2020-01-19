@@ -20,12 +20,10 @@ class Context < ApplicationRecord
   end
 
   def sessions_on_this_weekday
-    current_training.sessions.where(weekday: todays_weekday_in_timezone)
+    current_sessions.where(weekday: todays_weekday_in_timezone)
   end
 
   def current_session
-    return current_training.sessions.first unless name == 'bodybuilding'
-
     being_performed_now_session = sessions_on_this_weekday.where('updated_at >= ?', 12.hours.ago).first
     return being_performed_now_session if being_performed_now_session
 
@@ -38,7 +36,9 @@ class Context < ApplicationRecord
     if slug == 'music'
       todays_things[:progressions] = progressions.all
     elsif slug == 'bodybuilding'
-      todays_things[:sessions] = current_sessions.first(3)
+      todays_things[:sessions] = [current_session] if current_session
+    elsif slug == 'espanol'
+      todays_things[:raw_links] = [{ name: 'Questioner', path: '/questioner' }]
     end
 
     todays_things

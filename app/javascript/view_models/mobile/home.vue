@@ -32,6 +32,7 @@
             context: context
             sessions: sessions
             progressions: progressions
+            raw_links: things.raw_links
 
       loadTodays: ->
         $.ajax

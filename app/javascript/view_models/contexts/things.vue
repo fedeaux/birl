@@ -12,6 +12,11 @@
                           :style='thing_style')
       | {{ progression.name }}
 
+    .context-things-thing(v-for='raw_link in things.raw_links'
+                          @click='goToRawLink(raw_link)'
+                          :style='thing_style')
+      | {{ raw_link.name }}
+
 </template>
 
 <script lang="coffee">
@@ -26,6 +31,10 @@
       goToProgression: (progression) ->
         @updateContext @context, =>
           @$router.push progression.executePath()
+
+      goToRawLink: (raw_link) ->
+        @updateContext @context, =>
+          @$router.push raw_link.path
 
     computed:
       context: ->
