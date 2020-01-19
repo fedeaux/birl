@@ -11,4 +11,11 @@ class TagsResource extends BaseResource
       data: params
       success: @collectionClosure(success)
 
+  leaves: (success, params = {}) ->
+    $.ajax
+      url: @collectionUrl('/leaves')
+      type: 'get'
+      data: params
+      success: @collectionClosure(success)
+
 export default TagsResource

@@ -9,6 +9,11 @@ class Api::V1::TagsController < Api::V1::ApiController
     @tags = current_user.tags.roots
   end
 
+  def leaves
+    @tags = current_user.tags.leaves
+    render :index
+  end
+
   def show
   end
 

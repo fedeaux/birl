@@ -1,5 +1,5 @@
 <template lang="pug">
-.entity-list-item-wrapper.meme-list-item-wrapper(:class='{ selected: selected }')
+.entity-list-item-wrapper.meme-list-item-wrapper(:class='klass')
   .entity-list-item-confirming-destroy(v-if='confirming_destroy && !showing_actions')
     .ui.four.column.grid
       .column
@@ -46,6 +46,21 @@ export default
 
     selected:
       default: false
+
+    previous_selected:
+      default: false
+
+    next_selected:
+      default: false
+
+  computed:
+    klass: ->
+      return '' unless @selected
+
+      classes = ['selected']
+      classes.push 'with-previous-selected' if @previous_selected
+      classes.push 'with-next-selected' if @next_selected
+      classes.join(' ')
 
   data: ->
     showing_actions: false

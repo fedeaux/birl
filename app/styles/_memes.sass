@@ -1,6 +1,6 @@
 .meme-input-wrapper
   display: flex
-  padding: 0 $d $d $d
+  padding: 0 $d2 $d $d2
 
   .circular.button
     margin: 0
@@ -18,23 +18,21 @@
   .entity-list
     .meme-list-item-wrapper
       &.selected
+        background-color: $selection-blue
+        border-radius: $d
         border: thin solid $selection-blue-border
-        padding: $d
         margin-left: -$d
         margin-right: -$d
-        background-color: $selection-blue
+        padding: $d $d2
 
-        + .selected
-          border-top: none
+      &.with-previous-selected
+        border-top-left-radius: 0
+        border-top-right-radius: 0
 
-        &:has(+ .selected)
-          border-bottom-left-radius: $d
-          border-bottom-right-radius: $d
-
-      &:not(.selected)
-        + .selected
-          border-top-left-radius: $d
-          border-top-right-radius: $d
+      &.with-next-selected
+        border-bottom-left-radius: 0
+        border-bottom-right-radius: 0
+        border-bottom: none
 
     .entity-display
       font-size: .82em

@@ -1,21 +1,17 @@
 <template lang="pug">
   .tag-taggables-picker
-    //- shared-modal(v-if='form_tag_taggable' title='New Tag Taggable')
-    //-   tag-taggables-form(v-model='form_tag_taggable'
-    //-                  @save='saveFormTagTaggable()'
-    //-                  @cancel='clearFormTagTaggable()')
-    template(v-for='tag in tags')
-      .tag-taggables-picker-item(@click='toogleSelectedTag(tag)')
-        tags-tag(:tag='tag' display='fullname')
-          template(v-if='isSelected(tag)')
-            | &nbsp;
-            | &nbsp;
-            i.checkmark.icon
+    .tag-taggables-picker-item(v-for='tag in tags' @click='toogleSelectedTag(tag)')
+      tags-tag(:tag='tag' display='fullname')
+        template(v-if='isSelected(tag)')
+          | &nbsp;
+          | &nbsp;
+          i.checkmark.icon
 
 </template>
 
 <script lang="coffee">
 import TagsManagerMixin from '../../mixins/tags/manager'
+import TagsResource from '../../resources/tags_resource'
 
 export default
   mixins: [TagsManagerMixin]
@@ -37,6 +33,15 @@ export default
     selected_tags_ids: []
 
   methods:
+    loadTags: ->
+      @tags_resource ?= new TagsResource
+
+      if @parent_tags
+        @tagsLoaded tags: @parent_tags
+        return
+
+      @tags_resource.leaves @tagsLoaded, @context
+
     isSelected: (tag) ->
       @selected_tags_ids.indexOf(tag.id) != -1
 

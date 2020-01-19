@@ -93,18 +93,6 @@ export default
       # More duct tape... kkkk
       $('html')[0].scrollTop = 612873612897361289372
 
-      # c = $ '.entity-stream-list', @$el
-      # i = 0
-
-      # loop
-      #   e = c[0]
-      #   break unless e
-      #   e.scrollTop = e.scrollHeight * 20
-      #   c = c.parent()
-      #   console.log c
-      #   i += 1
-      #   break if i > 6
-
     toggleType: ->
       return @meme_type = 'Note' if @meme_type == 'Todo'
       @meme_type = 'Todo'

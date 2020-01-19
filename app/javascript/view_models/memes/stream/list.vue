@@ -8,13 +8,15 @@
       i.sticky.note.outline.icon(v-if='filter.type == "Note"')
       i.circle.outline.icon(v-if='filter.type == "all"')
 
-  memes-stream-item(v-for='meme in displayable_memes'
+  memes-stream-item(v-for='(meme, index) in displayable_memes'
                     v-if='memes'
                     v-long-press='400'
                     :meme='meme'
                     :allow_actions='allow_actions'
                     :key='meme.id'
                     :selected='selected_ids[meme.id]'
+                    :previous_selected='previousSelected(index)',
+                    :next_selected='nextSelected(index)',
                     @long-press-stop='toggleSelectIfSelectMode(meme)'
                     @long-press-start='enableSelectMode(meme)'
                     @edit='$emit("edit", { meme: meme })'
@@ -40,12 +42,23 @@ export default
 
   data: ->
     ignore_next_select_toggle: false
+    scroll_when_long_touch_started: null
 
     filter:
       type: 'all'
       text: ''
 
   methods:
+    previousSelected: (displayable_meme_index) ->
+      previous_meme_index = displayable_meme_index - 1
+      return false unless previous_meme_index >= 0
+      @selected_ids[@displayable_memes[previous_meme_index].id]
+
+    nextSelected: (displayable_meme_index) ->
+      next_meme_index = displayable_meme_index + 1
+      return false unless next_meme_index < @displayable_memes.length
+      @selected_ids[@displayable_memes[next_meme_index].id]
+
     toggleType: ->
       return @filter.type = 'Note' if @filter.type == 'Todo'
       return @filter.type = 'all' if @filter.type == 'Note'
@@ -56,12 +69,13 @@ export default
         (@filter.text == '' or meme.contents.title.toLowerCase().indexOf(@filter.text.toLowerCase()) != -1)
 
     enableSelectMode: (meme) ->
-      return if @select_mode
+      return if @select_mode or @scroll_when_long_touch_started != $('html')[0].scrollTop
       @ignore_next_select_toggle = true
 
       @$emit 'enableSelectMode', meme: meme
 
     toggleSelectIfSelectMode: (meme) ->
+      @scroll_when_long_touch_started = $('html')[0].scrollTop
       return unless @select_mode
       return @ignore_next_select_toggle = false if @ignore_next_select_toggle
 

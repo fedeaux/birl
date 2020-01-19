@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       resources :tag_taggables
       resources :memes
       get 'tags/hierarchy' => 'tags#hierarchy'
+      get 'tags/leaves' => 'tags#leaves'
       resources :tags
       resources :vocabularies
       resources :listers
