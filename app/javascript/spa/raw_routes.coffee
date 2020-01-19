@@ -3,7 +3,7 @@
 routes = [
   {
     path: '/'
-    view: 'memes'
+    view: 'mobile/home'
   },
   {
     path: '/today'

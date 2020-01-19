@@ -4,6 +4,10 @@ entities = ['groups', 'exercises', 'challenges', 'progressions', 'entries', 'tra
 views = ['show', 'index', 'display', 'list', 'list/item', 'form', 'new', 'edit', 'select', 'manager']
 
 paths = [
+  'desktop/index'
+  'mobile/home'
+  'mobile/index'
+
   'entity/list/empty'
   'entity/list/item/divider'
   'shared/footer'
