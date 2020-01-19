@@ -34,4 +34,8 @@ module ApplicationHelper
       dimensions: []
     }.to_json
   end
+
+  def dynamic_css_json(user)
+    user.contexts.map(&:dynamic_css).to_json
+  end
 end

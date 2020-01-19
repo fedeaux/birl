@@ -24,8 +24,21 @@ hr
   min-height: 100%
 
   #header
-    background-color: $light-gray
-    color: white
+    color: $text-gray
+
+    .header-button
+      i
+        color: $text-gray
+
+  &.with-context
+    #header
+      color: white
+
+      .header-button
+        i
+          color: white
+
+  #header
     font-size: 24px
     height: $header-height
     line-height: $header-height
@@ -47,12 +60,17 @@ hr
       font-size: 2rem
 
       i
-        color: white
         position: relative
         top: -3px
 
       &:active
         background-color: rgba(black, 0.1)
+
+    #back-button
+      left: $d
+
+    #home-link
+      left: $d2 + $header-buttom-dim
 
     #contexts-toggle
       right: $d2 + 2 * $header-buttom-dim
@@ -62,9 +80,6 @@ hr
 
     #side-menu-toggle
       right: $d
-
-    #back-button
-      left: $d
 
   #menu
     z-index: 998

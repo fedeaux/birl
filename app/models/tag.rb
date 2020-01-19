@@ -12,6 +12,8 @@ class Tag < ApplicationRecord
 
   default_scope ->{ order(:fullname) }
 
+  scope :leaves, -> { joins("LEFT JOIN #{table_name} AS c ON c.#{ancestry_column} = CAST(#{table_name}.id AS char(50)) OR c.#{ancestry_column} = concat(#{table_name}.#{ancestry_column}, '/', #{table_name}.id)").group("#{table_name}.id").having('COUNT(c.id) = 0') }
+
   def color=(value)
     value = { hex: value } unless value.is_a? Hash
     super value

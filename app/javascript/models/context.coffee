@@ -18,4 +18,7 @@ class Context extends BaseModel
   backgroundColor: ->
     { "background-color": @color }
 
+  cssStyle: ->
+    "{ background-color: #{@color} !important }"
+
 export default Context

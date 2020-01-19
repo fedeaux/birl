@@ -5,9 +5,14 @@ class Api::V1::SessionsController < Api::V1::ApiController
     @sessions = current_context.current_training.sessions.order(:weekday)
   end
 
-  def today
-    @sessions = current_context.current_training.sessions
-    render 'index'
+  def todays
+    todays_things_by_context = []
+
+    current_user.contexts.order(:name).each do |context|
+      todays_things_by_context.push(context.todays_things)
+    end
+
+    render json: { things_by_context: todays_things_by_context }
     # TODO
     # @session = current_context.current_session
 

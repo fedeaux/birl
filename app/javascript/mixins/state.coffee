@@ -15,22 +15,26 @@ export default
     setCurrentUser: (user) ->
       @$store.commit type: 'setCurrentUser', current_user: user
 
-    updateContext: (context = null) ->
+    updateContext: (context = null, callback = null) ->
       @current_user.current_context_id = context and context.id
       user = new User JSON.parse JSON.stringify @current_user
-      @profile_resource.update user, @contextUpdated
+      @profile_resource.update user, @contextUpdatedClosure callback
 
       return unless context?.name == 'Bodybuilding'
 
       Global.player.event 'doit_finished', 'birl'
 
-    contextUpdated: (response) ->
+    contextUpdatedClosure: (callback) ->
+      (response) =>
+        @contextUpdated response, callback
+
+    contextUpdated: (response, callback) ->
       @setCurrentUser response.user
 
-      if @current_context
-        @$router.push @current_context.meta and @current_context.meta.root or 'today'
-      else
-        @$router.push '/'
+      return callback() if callback
+      return if @current_context
+
+      @$router.push '/'
 
     setInitialUser: ->
       @setCurrentUser new User Global.server.user.user

@@ -21,18 +21,19 @@
     <%= yield %>
 
     <% if current_user %>
-        <script type="text/json" id="server-json">
-         {
-             "user": <%= raw render template: 'api/v1/users/show', locals: { '@user': current_user }, formats: :json %>,
-             "audio": <%= audio_config_json.html_safe %>,
-             "lists": <%= lists_json.html_safe %>,
-             "entry_data_model": <%= entry_data_model_data_json.html_safe %>,
-             "links": {
-               "logoff": "<%= destroy_user_session_url %>"
-             },
-             "base_url": "<%= ENV['BASE_URL'] %>"
-         }
-        </script>
+      <script type="text/json" id="server-json">
+       {
+         "user": <%= raw render template: 'api/v1/users/show', locals: { '@user': current_user }, formats: :json %>,
+         "audio": <%= audio_config_json.html_safe %>,
+         "lists": <%= lists_json.html_safe %>,
+         "entry_data_model": <%= entry_data_model_data_json.html_safe %>,
+         "links": {
+           "logoff": "<%= destroy_user_session_url %>"
+         },
+         "base_url": "<%= ENV['BASE_URL'] %>",
+         "dynamic_css": <%= dynamic_css_json(current_user).html_safe %>
+       }
+      </script>
     <% end %>
   </body>
 </html>

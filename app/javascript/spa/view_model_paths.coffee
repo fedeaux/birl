@@ -17,6 +17,7 @@ paths = [
   'challenges/data_models/picker'
   'challenges/data_models/picker_item'
   'contexts/choose'
+  'contexts/things'
   'entries/generator'
   'entries/value/display'
   'entries/value/picker'

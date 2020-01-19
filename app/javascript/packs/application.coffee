@@ -43,24 +43,9 @@ store = new Vuex.Store(
       Global.db.set 'audio_schema', state.audio_schema
       Global.player.setSchema data.audio_schema
 
-    setCurrentContext: (state, data) ->
-      state.current_context = data.current_context
-
-      sheet = window.document.styleSheets[0]
-      if state.current_context
-        sheet.insertRule ".context-dependent-background-color, .ui.primary.button { background-color: #{state.current_context.color} !important; }", sheet.cssRules.length
-      else
-        sheet.insertRule ".context-dependent-background-color, .ui.primary.button { background-color: #888 !important; }", sheet.cssRules.length
-
     setCurrentUser: (state, data) ->
       state.current_user = data.current_user
       state.current_context = data.current_user.current_context
-
-      sheet = window.document.styleSheets[0]
-      if state.current_context
-        sheet.insertRule ".context-dependent-background-color, .ui.primary.button { background-color: #{state.current_context.color} !important; }", sheet.cssRules.length
-      else
-        sheet.insertRule ".context-dependent-background-color, .ui.primary.button { background-color: #888 !important; }", sheet.cssRules.length
 
     setCurrentSession: (state, data) ->
       state.current_session = data.current_session
@@ -78,6 +63,13 @@ store = new Vuex.Store(
       session_attributes = Global.db.get 'current_session'
       if session_attributes
         context.commit 'setCurrentSession', current_session: new Session session_attributes
+
+      # Set dynamic css
+      return unless Global.server.dynamic_css
+
+      for rule in Global.server.dynamic_css
+        sheet = window.document.styleSheets[0]
+        sheet.insertRule rule, sheet.cssRules.length
 
     setLoading: (context, data) ->
       context.commit 'setLoading', data
