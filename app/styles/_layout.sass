@@ -120,3 +120,19 @@ hr
     top: $d2
     right: $d
     color: $light-text-gray
+
+#birl-spa-container.desktop
+  #contents-wrapper
+    padding: 0
+
+  #contents
+    display: flex
+
+    .desktop-component
+      flex-grow: 1
+      flex-basis: 33.3%
+      position: relative
+      border-right: thin $lightest-gray solid
+
+      &:last-child
+        border-right: none

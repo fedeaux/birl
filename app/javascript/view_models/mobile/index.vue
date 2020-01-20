@@ -62,7 +62,7 @@
   export default
     data: ->
       show_menu: false
-      show_memes: true
+      show_memes: false
       choose_context: false
 
     methods:

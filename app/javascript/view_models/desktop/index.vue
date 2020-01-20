@@ -1,8 +1,19 @@
 <template lang="pug">
-#birl-spa-container
+#birl-spa-container.desktop
   #contents-wrapper
     #contents
-      h1 Desktop porra
+      .desktop-component.default-container
+        h1 Memes
+        memes-index
+
+      .desktop-component.default-container
+        h1 Tags
+        tags-index
+
+      .desktop-component.default-container
+        h1 Vocabularies
+        vocabularies-index
+
 </template>
 
 <script lang="coffee">

@@ -5,9 +5,14 @@ desktop-index(v-else-if='device == "desktop"')
 
 <script lang="coffee">
 export default
+  data: ->
+    force_mobile: false
+    force_desktop: true
+
   computed:
     device: ->
-      'mobile'
+      return 'mobile' if @force_mobile or (!@force_desktop and window.innerWidth < window.innerHeight)
+      'desktop'
 
   methods:
     logoff: ->
