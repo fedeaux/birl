@@ -55,6 +55,7 @@
 
   #contents-wrapper
     #contents
+      h1 Mas que caralho
       router-view
 </template>
 

@@ -2,8 +2,8 @@
   .home.default-container
     h1 {{ time_now.format('ddd, MMM Do') }}
 
-    div(v-if='today_things_by_context')
-      contexts-things(v-for='things in today_things_by_context' :things='things')
+    //- div(v-if='today_things_by_context')
+    //-   contexts-things(v-for='things in today_things_by_context' :things='things')
 
     h2 Favorite Tags
 
