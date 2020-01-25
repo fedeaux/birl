@@ -5,10 +5,12 @@
               @save='saveFormTag()'
               @cancel='clearFormTag()')
 
-  template(v-else)
-    #new-tag-button.ui.primary.top.attached.fluid.small.icon.button(@click='newTag' v-if='root')
-      i.plus.icon
-      |  Add Tag
+
+  .entity-manager-list(v-else)
+    .entity-manager-list-header
+      #new-tag-button.ui.primary.top.attached.fluid.small.icon.button(@click='newTag' v-if='root')
+        i.plus.icon
+        |  Add Tag
 
     tags-hierarchy-item(v-for='tag in tags'
                         :tag='tag'

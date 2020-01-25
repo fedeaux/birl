@@ -7,7 +7,7 @@ desktop-index(v-else-if='device == "desktop"')
 export default
   data: ->
     force_mobile: false
-    force_desktop: false
+    force_desktop: true
 
   computed:
     device: ->
