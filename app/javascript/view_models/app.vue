@@ -1,20 +1,21 @@
 <template lang="pug">
-mobile-index(v-if='device == "mobile"')
-desktop-index(v-else-if='device == "desktop"')
+mobile-index(v-if='mobile')
+desktop-index(v-else-if='desktop')
 </template>
 
 <script lang="coffee">
 export default
   data: ->
-    force_mobile: false
-    force_desktop: true
-
-  computed:
-    device: ->
-      return 'mobile' if @force_mobile or (!@force_desktop and window.innerWidth < window.innerHeight)
-      'desktop'
+    # force: 'mobile'
+    # force: 'desktop'
+    force: null
 
   methods:
+    resolveDevice: ->
+      return @force if @force
+      return 'mobile' if window.innerWidth < window.innerHeight
+      'desktop'
+
     logoff: ->
       $.ajax
         method: 'delete'
@@ -24,5 +25,6 @@ export default
 
   created: ->
     @setInitialUser()
+    @setDevice @resolveDevice()
 
 </script>

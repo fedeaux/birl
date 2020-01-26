@@ -9,6 +9,9 @@ export default
     setCurrentContext: (context) ->
       @$store.commit type: 'setCurrentContext', current_context: context
 
+    setDevice: (device) ->
+      @$store.commit type: 'setDevice', device: device
+
     setCurrentSession: (session) ->
       @$store.commit type: 'setCurrentSession', current_session: session
 
@@ -51,6 +54,15 @@ export default
 
     current_user: ->
       @$store.state.current_user
+
+    device: ->
+      @$store.state.device
+
+    mobile: ->
+      @$store.state.device == 'mobile'
+
+    desktop: ->
+      @$store.state.device == 'desktop'
 
   created: ->
     @profile_resource = new ProfileResource

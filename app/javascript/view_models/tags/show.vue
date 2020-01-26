@@ -16,10 +16,12 @@ import TagsResource from '../../resources/tags_resource'
 export default
   props:
     parent_tag: null
+    tag_id:
+      type: Number
+      default: null
 
   data: ->
     tag: null
-    tag_id: null
 
   methods:
     loadTag: ->
@@ -37,10 +39,9 @@ export default
     # BrainDamage: Mounted End
 
   watch:
-    '$route.params.id':
+    tag_id:
       immediate: true
       handler: ->
         @tags_resource ?= new TagsResource
-        @tag_id = parseInt @$route.params.id
         @loadTag()
 </script>

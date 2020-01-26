@@ -11,7 +11,10 @@ paths = [
   'entity/list/empty'
   'entity/list/item/divider'
   'shared/footer'
+  'shared/link'
   'shared/modal'
+  'shared/view'
+
   'inputs/clearable'
 
   'challenges/data_models/picker'

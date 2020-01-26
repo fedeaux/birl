@@ -35,6 +35,7 @@ store = new Vuex.Store(
     current_context: null
     current_session: null
     current_user: null
+    device: null
     global_loading: false
 
   mutations:
@@ -50,6 +51,9 @@ store = new Vuex.Store(
     setCurrentSession: (state, data) ->
       state.current_session = data.current_session
       Global.db.set 'current_session', state.current_session
+
+    setDevice: (state, data) ->
+      state.device = data.device
 
     setLoading: (state, data) ->
       state.global_loading = data.loading

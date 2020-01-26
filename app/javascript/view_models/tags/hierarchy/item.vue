@@ -12,7 +12,7 @@
         .ui.basic.fluid.button(@click='cancelDestroy()') No
 
   .action-menu(v-if='!confirming_destroy && showing_actions')
-    router-link.action-menu-item(:to='tag.path()')
+    shared-link.action-menu-item(:to='tag.path()')
        i.eye.green.icon
 
     .action-menu-item(@click='newChild')
