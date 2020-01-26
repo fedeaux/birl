@@ -25,6 +25,7 @@ export default
 
   methods:
     loadTag: ->
+      return unless @tag_id
       @tags_resource.get @tag_id, @tagLoaded
 
     tagLoaded: (response) ->

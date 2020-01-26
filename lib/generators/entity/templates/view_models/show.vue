@@ -14,13 +14,16 @@ import <%= plural_entity_name %>Resource from '../../resources/<%= plural_unders
 export default
   props:
     parent_<%= underscore_name %>: null
+    <%= underscore_name %>_id:
+      type: Number
+      default: null
 
   data: ->
     <%= underscore_name %>: null
-    <%= underscore_name %>_id: null
 
   methods:
     load<%= entity_name %>: ->
+      return unless @<%= underscore_name %>_id
       @<%= plural_underscore_name %>_resource.get @<%= underscore_name %>_id, @<%= lowercase_entity_name %>Loaded
 
     <%= lowercase_entity_name %>Loaded: (response) ->
@@ -33,10 +36,9 @@ export default
 <%= sub_template('Mounted', '#', 4) %>
 
   watch:
-    '$route.params.id':
+    <%= underscore_name %>_id:
       immediate: true
       handler: ->
         @<%= plural_underscore_name %>_resource ?= new <%= plural_entity_name %>Resource
-        @<%= underscore_name %>_id = parseInt @$route.params.id
         @load<%= entity_name %>()
 </script>
