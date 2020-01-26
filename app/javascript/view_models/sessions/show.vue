@@ -35,13 +35,15 @@ import SessionsResource from '../../resources/sessions_resource'
 export default
   props:
     parent_session: null
+    session_id:
+      default: null
 
   data: ->
     session: null
-    session_id: null
 
   methods:
     loadSession: ->
+      return unless @session_id
       @sessions_resource.get @session_id, @sessionLoaded
 
     sessionLoaded: (response) ->
@@ -62,10 +64,9 @@ export default
     # BrainDamage: Mounted End
 
   watch:
-    '$route.params.id':
+    session_id:
       immediate: true
       handler: ->
         @sessions_resource ?= new SessionsResource
-        @session_id = parseInt @$route.params.id
         @loadSession()
 </script>

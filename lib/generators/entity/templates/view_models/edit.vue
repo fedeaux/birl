@@ -17,6 +17,8 @@ import <%= entity_name %> from '../../models/<%= underscore_name %>'
 export default
   data: ->
     <%= underscore_name %>: null
+    <%= underscore_name %>_id:
+      default: null
 
   methods:
     load<%= entity_name %>: ->
@@ -30,10 +32,6 @@ export default
 
     <%= lowercase_entity_name %>Done: ->
       @$router.push @<%= underscore_name %>.path()
-
-  computed:
-    <%= underscore_name %>_id: ->
-      @$route.params.id
 
   mounted: ->
     @<%= plural_underscore_name %>_resource = new <%= plural_entity_name %>Resource

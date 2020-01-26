@@ -17,6 +17,8 @@ import Group from '../../models/group'
 export default
   data: ->
     group: null
+    group_id:
+      default: null
 
   methods:
     loadGroup: ->
@@ -30,10 +32,6 @@ export default
 
     groupDone: ->
       @$router.push @group.path()
-
-  computed:
-    group_id: ->
-      @$route.params.id
 
   mounted: ->
     @groups_resource = new GroupsResource

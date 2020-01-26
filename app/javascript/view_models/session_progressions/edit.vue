@@ -17,6 +17,8 @@ import SessionProgression from '../../models/session_progression'
 export default
   data: ->
     session_progression: null
+    session_progression_id:
+      default: null
 
   methods:
     loadSessionProgression: ->
@@ -30,10 +32,6 @@ export default
 
     sessionProgressionDone: ->
       @$router.push @session_progression.path()
-
-  computed:
-    session_progression_id: ->
-      @$route.params.id
 
   mounted: ->
     @session_progressions_resource = new SessionProgressionsResource

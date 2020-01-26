@@ -15,13 +15,15 @@ import TagTaggablesResource from '../../resources/tag_taggables_resource'
 export default
   props:
     parent_tag_taggable: null
+    tag_taggable_id:
+      default: null
 
   data: ->
     tag_taggable: null
-    tag_taggable_id: null
 
   methods:
     loadTagTaggable: ->
+      return unless @tag_taggable_id
       @tag_taggables_resource.get @tag_taggable_id, @tagTaggableLoaded
 
     tagTaggableLoaded: (response) ->
@@ -36,10 +38,9 @@ export default
     # BrainDamage: Mounted End
 
   watch:
-    '$route.params.id':
+    tag_taggable_id:
       immediate: true
       handler: ->
         @tag_taggables_resource ?= new TagTaggablesResource
-        @tag_taggable_id = parseInt @$route.params.id
         @loadTagTaggable()
 </script>

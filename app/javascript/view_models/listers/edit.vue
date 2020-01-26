@@ -17,6 +17,8 @@ import Lister from '../../models/lister'
 export default
   data: ->
     lister: null
+    lister_id:
+      default: null
 
   methods:
     loadLister: ->
@@ -30,10 +32,6 @@ export default
 
     listerDone: ->
       @$router.push @lister.path()
-
-  computed:
-    lister_id: ->
-      @$route.params.id
 
   mounted: ->
     @listers_resource = new ListersResource

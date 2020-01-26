@@ -17,6 +17,8 @@ import Meme from '../../models/meme'
 export default
   data: ->
     meme: null
+    meme_id:
+      default: null
 
   methods:
     loadMeme: ->
@@ -30,10 +32,6 @@ export default
 
     memeDone: ->
       @$router.push @meme.path()
-
-  computed:
-    meme_id: ->
-      @$route.params.id
 
   mounted: ->
     @memes_resource = new MemesResource

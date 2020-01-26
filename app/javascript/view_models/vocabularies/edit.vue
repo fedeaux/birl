@@ -17,6 +17,8 @@ import Vocabulary from '../../models/vocabulary'
 export default
   data: ->
     vocabulary: null
+    vocabulary_id:
+      default: null
 
   methods:
     loadVocabulary: ->
@@ -30,10 +32,6 @@ export default
 
     vocabularyDone: ->
       @$router.push @vocabulary.path()
-
-  computed:
-    vocabulary_id: ->
-      @$route.params.id
 
   mounted: ->
     @vocabularies_resource = new VocabulariesResource

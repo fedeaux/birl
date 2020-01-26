@@ -17,6 +17,8 @@ import Progression from '../../models/progression'
 export default
   data: ->
     progression: null
+    progression_id:
+      default: null
 
   methods:
     loadProgression: ->
@@ -30,10 +32,6 @@ export default
 
     progressionDone: ->
       @$router.push @progression.path()
-
-  computed:
-    progression_id: ->
-      @$route.params.id
 
   mounted: ->
     @progressions_resource = new ProgressionsResource

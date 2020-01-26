@@ -15,13 +15,15 @@ import ChallengesResource from '../../resources/challenges_resource'
 export default
   props:
     parent_challenge: null
+    challenge_id:
+      default: null
 
   data: ->
     challenge: null
-    challenge_id: null
 
   methods:
     loadChallenge: ->
+      return unless @challenge_id
       @challenges_resource.get @challenge_id, @challengeLoaded
 
     challengeLoaded: (response) ->
@@ -36,10 +38,9 @@ export default
     # BrainDamage: Mounted End
 
   watch:
-    '$route.params.id':
+    challenge_id:
       immediate: true
       handler: ->
         @challenges_resource ?= new ChallengesResource
-        @challenge_id = parseInt @$route.params.id
         @loadChallenge()
 </script>

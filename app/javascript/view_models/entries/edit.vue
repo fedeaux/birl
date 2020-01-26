@@ -18,6 +18,8 @@ import Entry from '../../models/entry'
 export default
   data: ->
     entry: null
+    entry_id:
+      default: null
 
   methods:
     loadEntry: ->
@@ -31,10 +33,6 @@ export default
 
     entryDone: ->
       @$router.push @entry.path()
-
-  computed:
-    entry_id: ->
-      @$route.params.id
 
   mounted: ->
     @entries_resource = new EntriesResource

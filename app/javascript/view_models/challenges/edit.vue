@@ -17,6 +17,8 @@ import Challenge from '../../models/challenge'
 export default
   data: ->
     challenge: null
+    challenge_id:
+      default: null
 
   methods:
     loadChallenge: ->
@@ -30,10 +32,6 @@ export default
 
     challengeDone: ->
       @$router.push @challenge.path()
-
-  computed:
-    challenge_id: ->
-      @$route.params.id
 
   mounted: ->
     @challenges_resource = new ChallengesResource

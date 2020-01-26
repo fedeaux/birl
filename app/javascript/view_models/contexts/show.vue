@@ -15,13 +15,15 @@ import ContextsResource from '../../resources/contexts_resource'
 export default
   props:
     parent_context: null
+    context_id:
+      default: null
 
   data: ->
     context: null
-    context_id: null
 
   methods:
     loadContext: ->
+      return unless @context_id
       @contexts_resource.get @context_id, @contextLoaded
 
     contextLoaded: (response) ->
@@ -36,10 +38,9 @@ export default
     # BrainDamage: Mounted End
 
   watch:
-    '$route.params.id':
+    context_id:
       immediate: true
       handler: ->
         @contexts_resource ?= new ContextsResource
-        @context_id = parseInt @$route.params.id
         @loadContext()
 </script>

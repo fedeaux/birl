@@ -16,13 +16,15 @@ import MemesResource from '../../resources/memes_resource'
 export default
   props:
     parent_meme: null
+    meme_id:
+      default: null
 
   data: ->
     meme: null
-    meme_id: null
 
   methods:
     loadMeme: ->
+      return unless @meme_id
       @memes_resource.get @meme_id, @memeLoaded
 
     memeLoaded: (response) ->
@@ -37,10 +39,9 @@ export default
     # BrainDamage: Mounted End
 
   watch:
-    '$route.params.id':
+    meme_id:
       immediate: true
       handler: ->
         @memes_resource ?= new MemesResource
-        @meme_id = parseInt @$route.params.id
         @loadMeme()
 </script>

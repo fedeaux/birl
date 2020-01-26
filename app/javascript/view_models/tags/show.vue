@@ -17,7 +17,6 @@ export default
   props:
     parent_tag: null
     tag_id:
-      type: Number
       default: null
 
   data: ->

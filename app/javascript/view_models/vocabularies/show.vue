@@ -15,13 +15,15 @@ import VocabulariesResource from '../../resources/vocabularies_resource'
 export default
   props:
     parent_vocabulary: null
+    vocabulary_id:
+      default: null
 
   data: ->
     vocabulary: null
-    vocabulary_id: null
 
   methods:
     loadVocabulary: ->
+      return unless @vocabulary_id
       @vocabularies_resource.get @vocabulary_id, @vocabularyLoaded
 
     vocabularyLoaded: (response) ->
@@ -36,10 +38,9 @@ export default
     # BrainDamage: Mounted End
 
   watch:
-    '$route.params.id':
+    vocabulary_id:
       immediate: true
       handler: ->
         @vocabularies_resource ?= new VocabulariesResource
-        @vocabulary_id = parseInt @$route.params.id
         @loadVocabulary()
 </script>

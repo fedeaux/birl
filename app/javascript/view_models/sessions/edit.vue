@@ -17,6 +17,8 @@ import Session from '../../models/session'
 export default
   data: ->
     session: null
+    session_id:
+      default: null
 
   methods:
     loadSession: ->
@@ -30,10 +32,6 @@ export default
 
     sessionDone: ->
       @$router.push @session.path()
-
-  computed:
-    session_id: ->
-      @$route.params.id
 
   mounted: ->
     @sessions_resource = new SessionsResource

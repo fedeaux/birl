@@ -15,13 +15,15 @@ import EntriesResource from '../../resources/entries_resource'
 export default
   props:
     parent_entry: null
+    entry_id:
+      default: null
 
   data: ->
     entry: null
-    entry_id: null
 
   methods:
     loadEntry: ->
+      return unless @entry_id
       @entries_resource.get @entry_id, @entryLoaded
 
     entryLoaded: (response) ->
@@ -36,10 +38,9 @@ export default
     # BrainDamage: Mounted End
 
   watch:
-    '$route.params.id':
+    entry_id:
       immediate: true
       handler: ->
         @entries_resource ?= new EntriesResource
-        @entry_id = parseInt @$route.params.id
         @loadEntry()
 </script>

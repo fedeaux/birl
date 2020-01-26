@@ -16,13 +16,15 @@ import ExercisesResource from '../../resources/exercises_resource'
 export default
   props:
     parent_exercise: null
+    exercise_id:
+      default: null
 
   data: ->
     exercise: null
-    exercise_id: null
 
   methods:
     loadExercise: ->
+      return unless @exercise_id
       @exercises_resource.get @exercise_id, @exerciseLoaded
 
     exerciseLoaded: (response) ->
@@ -37,10 +39,9 @@ export default
     # BrainDamage: Mounted End
 
   watch:
-    '$route.params.id':
+    exercise_id:
       immediate: true
       handler: ->
         @exercises_resource ?= new ExercisesResource
-        @exercise_id = parseInt @$route.params.id
         @loadExercise()
 </script>

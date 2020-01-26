@@ -15,13 +15,15 @@ import TrainingsResource from '../../resources/trainings_resource'
 export default
   props:
     parent_training: null
+    training_id:
+      default: null
 
   data: ->
     training: null
-    training_id: null
 
   methods:
     loadTraining: ->
+      return unless @training_id
       @trainings_resource.get @training_id, @trainingLoaded
 
     trainingLoaded: (response) ->
@@ -36,10 +38,9 @@ export default
     # BrainDamage: Mounted End
 
   watch:
-    '$route.params.id':
+    training_id:
       immediate: true
       handler: ->
         @trainings_resource ?= new TrainingsResource
-        @training_id = parseInt @$route.params.id
         @loadTraining()
 </script>

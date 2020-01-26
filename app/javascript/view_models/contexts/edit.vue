@@ -17,6 +17,8 @@ import Context from '../../models/context'
 export default
   data: ->
     context: null
+    context_id:
+      default: null
 
   methods:
     loadContext: ->
@@ -30,10 +32,6 @@ export default
 
     contextDone: ->
       @$router.push @context.path()
-
-  computed:
-    context_id: ->
-      @$route.params.id
 
   mounted: ->
     @contexts_resource = new ContextsResource

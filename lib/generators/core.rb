@@ -66,7 +66,7 @@ module GeneratorsCore
   end
 
   def mixins_list
-    @config['generate']['mixins'].keys
+    @config['generate']['mixins'] ? @config['generate']['mixins'].keys : []
   end
 
   def view_models_list

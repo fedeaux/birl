@@ -17,6 +17,8 @@ import Tag from '../../models/tag'
 export default
   data: ->
     tag: null
+    tag_id:
+      default: null
 
   methods:
     loadTag: ->
@@ -30,10 +32,6 @@ export default
 
     tagDone: ->
       @$router.push @tag.path()
-
-  computed:
-    tag_id: ->
-      @$route.params.id
 
   mounted: ->
     @tags_resource = new TagsResource

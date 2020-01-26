@@ -21,13 +21,15 @@ import SessionProgressionsResource from '../../resources/session_progressions_re
 export default
   props:
     parent_session_progression: null
+    session_progression_id:
+      default: null
 
   data: ->
     session_progression: null
-    session_progression_id: null
 
   methods:
     loadSessionProgression: ->
+      return unless @session_progression_id
       @session_progressions_resource.get @session_progression_id, @sessionProgressionLoaded
 
     sessionProgressionLoaded: (response) ->
@@ -41,18 +43,10 @@ export default
     # BrainDamage: Mounted Start
     # BrainDamage: Mounted End
 
-  computed:
-    progression: ->
-      @session_progression.progression
-
-    session: ->
-      @session_progression.session
-
   watch:
-    '$route.params.id':
+    session_progression_id:
       immediate: true
       handler: ->
         @session_progressions_resource ?= new SessionProgressionsResource
-        @session_progression_id = parseInt @$route.params.id
         @loadSessionProgression()
 </script>

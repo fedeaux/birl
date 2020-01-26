@@ -17,6 +17,8 @@ import Training from '../../models/training'
 export default
   data: ->
     training: null
+    training_id:
+      default: null
 
   methods:
     loadTraining: ->
@@ -30,10 +32,6 @@ export default
 
     trainingDone: ->
       @$router.push @training.path()
-
-  computed:
-    training_id: ->
-      @$route.params.id
 
   mounted: ->
     @trainings_resource = new TrainingsResource

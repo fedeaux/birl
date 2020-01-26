@@ -17,6 +17,8 @@ import TagTaggable from '../../models/tag_taggable'
 export default
   data: ->
     tag_taggable: null
+    tag_taggable_id:
+      default: null
 
   methods:
     loadTagTaggable: ->
@@ -30,10 +32,6 @@ export default
 
     tagTaggableDone: ->
       @$router.push @tag_taggable.path()
-
-  computed:
-    tag_taggable_id: ->
-      @$route.params.id
 
   mounted: ->
     @tag_taggables_resource = new TagTaggablesResource

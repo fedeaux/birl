@@ -15,7 +15,6 @@ export default
   props:
     parent_<%= underscore_name %>: null
     <%= underscore_name %>_id:
-      type: Number
       default: null
 
   data: ->

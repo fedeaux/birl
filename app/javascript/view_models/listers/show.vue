@@ -21,13 +21,15 @@ import ListersResource from '../../resources/listers_resource'
 export default
   props:
     parent_lister: null
+    lister_id:
+      default: null
 
   data: ->
     lister: null
-    lister_id: null
 
   methods:
     loadLister: ->
+      return unless @lister_id
       @listers_resource.get @lister_id, @listerLoaded
 
     listerLoaded: (response) ->
@@ -42,10 +44,9 @@ export default
     # BrainDamage: Mounted End
 
   watch:
-    '$route.params.id':
+    lister_id:
       immediate: true
       handler: ->
         @listers_resource ?= new ListersResource
-        @lister_id = parseInt @$route.params.id
         @loadLister()
 </script>

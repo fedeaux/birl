@@ -25,13 +25,15 @@ import ProgressionsResource from '../../resources/progressions_resource'
 export default
   props:
     parent_progression: null
+    progression_id:
+      default: null
 
   data: ->
     progression: null
-    progression_id: null
 
   methods:
     loadProgression: ->
+      return unless @progression_id
       @progressions_resource.get @progression_id, @progressionLoaded
 
     progressionLoaded: (response) ->
@@ -46,10 +48,9 @@ export default
     # BrainDamage: Mounted End
 
   watch:
-    '$route.params.id':
+    progression_id:
       immediate: true
       handler: ->
         @progressions_resource ?= new ProgressionsResource
-        @progression_id = parseInt @$route.params.id
         @loadProgression()
 </script>

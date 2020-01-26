@@ -17,6 +17,8 @@ import Exercise from '../../models/exercise'
 export default
   data: ->
     exercise: null
+    exercise_id:
+      default: null
 
   methods:
     loadExercise: ->
@@ -30,10 +32,6 @@ export default
 
     exerciseDone: ->
       @$router.push @exercise.path()
-
-  computed:
-    exercise_id: ->
-      @$route.params.id
 
   mounted: ->
     @exercises_resource = new ExercisesResource
