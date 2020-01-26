@@ -2,7 +2,7 @@
 .entity-show-wrapper.<%= plural_dash_name %>-show-wrapper.default-container(v-if='<%= underscore_name %>')
   .entity-show.<%= plural_dash_name %>-show
     <%= plural_dash_name %>-display(:<%= underscore_name %>='<%= underscore_name %>')
-      router-link.entity-show-header-actions(:to='<%= underscore_name %>.editPath()')
+      <%= link_tag %>.entity-show-header-actions(:to='<%= underscore_name %>.editPath()')
         i.edit.icon
 
 <%= sub_template('Body', '//-') %>

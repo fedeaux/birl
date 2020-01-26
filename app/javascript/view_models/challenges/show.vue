@@ -2,7 +2,7 @@
 .entity-show-wrapper.challenges-show-wrapper.default-container(v-if='challenge')
   .entity-show.challenges-show
     challenges-display(:challenge='challenge')
-      router-link.entity-show-header-actions(:to='challenge.editPath()')
+      shared-link.entity-show-header-actions(:to='challenge.editPath()')
         i.edit.icon
 
   //- BrainDamage: Body Start

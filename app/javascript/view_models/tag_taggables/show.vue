@@ -2,7 +2,7 @@
 .entity-show-wrapper.tag-taggables-show-wrapper.default-container(v-if='tag_taggable')
   .entity-show.tag-taggables-show
     tag-taggables-display(:tag_taggable='tag_taggable')
-      router-link.entity-show-header-actions(:to='tag_taggable.editPath()')
+      shared-link.entity-show-header-actions(:to='tag_taggable.editPath()')
         i.edit.icon
 
   //- BrainDamage: Body Start

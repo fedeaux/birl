@@ -2,7 +2,7 @@
 .entity-show-wrapper.sessions-show-wrapper.default-container(v-if='session')
   .entity-show.sessions-show
     sessions-display(:session='session')
-      router-link.entity-show-header-actions(:to='session.editPath()')
+      shared-link.entity-show-header-actions(:to='session.editPath()')
         i.edit.icon
 
   //- BrainDamage: Body Start

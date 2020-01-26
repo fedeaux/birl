@@ -2,7 +2,7 @@
 .entity-show-wrapper.listers-show-wrapper.default-container(v-if='lister')
   .entity-show.listers-show
     listers-display(:lister='lister')
-      router-link.entity-show-header-actions(:to='lister.editPath()')
+      shared-link.entity-show-header-actions(:to='lister.editPath()')
         i.edit.icon
 
   //- BrainDamage: Body Start

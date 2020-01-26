@@ -12,7 +12,7 @@
         .ui.basic.fluid.button(@click='cancelDestroy()') No
 
   .action-menu(v-if='!confirming_destroy && showing_actions')
-    router-link.action-menu-item(:to='training.path()')
+    shared-link.action-menu-item(:to='training.path()')
        i.eye.green.icon
 
     .action-menu-item(@click='$emit("edit")')
@@ -24,7 +24,7 @@
     .action-menu-item(@click='hideActions()')
        i.cancel.icon
 
-  router-link.entity-list-item.training-list-item(v-if='!confirming_destroy && !showing_actions'
+  shared-link.entity-list-item.training-list-item(v-if='!confirming_destroy && !showing_actions'
                                                   :to='training.path()')
     trainings-display(:training='training'
                       :allow_actions='allow_actions'

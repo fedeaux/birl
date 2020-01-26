@@ -2,7 +2,7 @@
 .entity-show-wrapper.exercises-show-wrapper.default-container(v-if='exercise')
   .entity-show.exercises-show
     exercises-display(:exercise='exercise')
-      router-link.entity-show-header-actions(:to='exercise.editPath()')
+      shared-link.entity-show-header-actions(:to='exercise.editPath()')
         i.edit.icon
 
   //- BrainDamage: Body Start

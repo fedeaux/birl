@@ -2,7 +2,7 @@
 .entity-show-wrapper.tags-show-wrapper.default-container(v-if='tag')
   .entity-show.tags-show
     tags-display(:tag='tag')
-      router-link.entity-show-header-actions(:to='tag.editPath()')
+      shared-link.entity-show-header-actions(:to='tag.editPath()')
         i.edit.icon
 
   //- BrainDamage: Body Start

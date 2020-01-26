@@ -2,7 +2,7 @@
 .entity-show-wrapper.trainings-show-wrapper.default-container(v-if='training')
   .entity-show.trainings-show
     trainings-display(:training='training')
-      router-link.entity-show-header-actions(:to='training.editPath()')
+      shared-link.entity-show-header-actions(:to='training.editPath()')
         i.edit.icon
 
   //- BrainDamage: Body Start

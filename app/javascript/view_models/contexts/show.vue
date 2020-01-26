@@ -2,7 +2,7 @@
 .entity-show-wrapper.contexts-show-wrapper.default-container(v-if='context')
   .entity-show.contexts-show
     contexts-display(:context='context')
-      router-link.entity-show-header-actions(:to='context.editPath()')
+      shared-link.entity-show-header-actions(:to='context.editPath()')
         i.edit.icon
 
   //- BrainDamage: Body Start

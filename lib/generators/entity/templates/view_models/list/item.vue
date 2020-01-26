@@ -12,7 +12,7 @@
         .ui.basic.fluid.button(@click='cancelDestroy()') No
 
   .action-menu(v-if='!confirming_destroy && showing_actions')
-    router-link.action-menu-item(:to='<%= underscore_name %>.path()')
+    <%= link_tag %>.action-menu-item(:to='<%= underscore_name %>.path()')
        i.eye.green.icon
 
     .action-menu-item(@click='$emit("edit")')
@@ -24,8 +24,8 @@
     .action-menu-item(@click='hideActions()')
        i.cancel.icon
 
-  router-link.entity-list-item.<%= dash_name %>-list-item(v-if='!confirming_destroy && !showing_actions'
-                               <%= dash_name_as_spaces %><%= spaces(11) %>:to='<%= underscore_name %>.path()')
+  <%= link_tag %>.entity-list-item.<%= dash_name %>-list-item(v-if='!confirming_destroy && !showing_actions'
+                    <%= link_tag_as_spaces %><%= dash_name_as_spaces %><%= spaces(11) %>:to='<%= underscore_name %>.path()')
     <%= plural_dash_name %>-display(:<%= underscore_name %>='<%= underscore_name %>'
     <%= plural_dash_name_as_spaces %><%= spaces(9) %>:allow_actions='allow_actions'
     <%= plural_dash_name_as_spaces %><%= spaces(9) %>@action='showActions')

@@ -2,7 +2,7 @@
 .entity-show-wrapper.memes-show-wrapper.default-container(v-if='meme')
   .entity-show.memes-show
     memes-display(:meme='meme')
-      router-link.entity-show-header-actions(:to='meme.editPath()')
+      shared-link.entity-show-header-actions(:to='meme.editPath()')
         i.edit.icon
 
   //- BrainDamage: Body Start

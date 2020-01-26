@@ -2,7 +2,7 @@
 .entity-show-wrapper.progressions-show-wrapper.default-container(v-if='progression')
   .entity-show.progressions-show
     progressions-display(:progression='progression')
-      router-link.entity-show-header-actions(:to='progression.editPath()')
+      shared-link.entity-show-header-actions(:to='progression.editPath()')
         i.edit.icon
 
   //- BrainDamage: Body Start

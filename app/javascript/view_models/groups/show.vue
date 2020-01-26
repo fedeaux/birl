@@ -2,7 +2,7 @@
 .entity-show-wrapper.groups-show-wrapper.default-container(v-if='group')
   .entity-show.groups-show
     groups-display(:group='group')
-      router-link.entity-show-header-actions(:to='group.editPath()')
+      shared-link.entity-show-header-actions(:to='group.editPath()')
         i.edit.icon
 
   //- BrainDamage: Body Start

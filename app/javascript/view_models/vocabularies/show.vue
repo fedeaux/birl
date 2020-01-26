@@ -2,7 +2,7 @@
 .entity-show-wrapper.vocabularies-show-wrapper.default-container(v-if='vocabulary')
   .entity-show.vocabularies-show
     vocabularies-display(:vocabulary='vocabulary')
-      router-link.entity-show-header-actions(:to='vocabulary.editPath()')
+      shared-link.entity-show-header-actions(:to='vocabulary.editPath()')
         i.edit.icon
 
   //- BrainDamage: Body Start

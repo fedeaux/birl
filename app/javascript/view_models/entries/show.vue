@@ -2,7 +2,7 @@
 .entity-show-wrapper.entries-show-wrapper.default-container(v-if='entry')
   .entity-show.entries-show
     entries-display(:entry='entry')
-      router-link.entity-show-header-actions(:to='entry.editPath()')
+      shared-link.entity-show-header-actions(:to='entry.editPath()')
         i.edit.icon
 
   //- BrainDamage: Body Start

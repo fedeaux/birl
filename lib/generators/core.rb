@@ -61,6 +61,10 @@ module GeneratorsCore
     "app/javascript/view_models/#{plural_underscore_name}/#{view_model_name}.vue"
   end
 
+  def link_tag
+    @config.dig('options', 'view_models', 'link_tag') || 'router-link'
+  end
+
   def controller_name
     "#{plural_entity_name}Controller"
   end
