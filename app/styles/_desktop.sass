@@ -1,0 +1,21 @@
+#birl-spa-container.desktop
+  #contents-wrapper
+    padding: 0
+
+  #contents
+    display: flex
+
+    .desktop-component
+      flex-grow: 1
+      flex-basis: 33.3%
+      position: relative
+      border-right: thin $lightest-gray solid
+      padding-top: $d6
+
+      &:last-child
+        border-right: none
+
+      .desktop-component-close
+        position: absolute
+        top: $d2
+        right: $d2
