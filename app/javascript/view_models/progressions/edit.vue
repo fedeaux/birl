@@ -15,10 +15,12 @@ import ProgressionsResource from '../../resources/progressions_resource'
 import Progression from '../../models/progression'
 
 export default
-  data: ->
-    progression: null
+  props:
     progression_id:
       default: null
+
+  data: ->
+    progression: null
 
   methods:
     loadProgression: ->

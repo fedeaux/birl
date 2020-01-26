@@ -16,10 +16,12 @@ import EntriesResource from '../../resources/entries_resource'
 import Entry from '../../models/entry'
 
 export default
-  data: ->
-    entry: null
+  props:
     entry_id:
       default: null
+
+  data: ->
+    entry: null
 
   methods:
     loadEntry: ->

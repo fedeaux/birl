@@ -15,10 +15,12 @@ import ChallengesResource from '../../resources/challenges_resource'
 import Challenge from '../../models/challenge'
 
 export default
-  data: ->
-    challenge: null
+  props:
     challenge_id:
       default: null
+
+  data: ->
+    challenge: null
 
   methods:
     loadChallenge: ->

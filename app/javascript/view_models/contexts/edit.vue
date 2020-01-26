@@ -15,10 +15,12 @@ import ContextsResource from '../../resources/contexts_resource'
 import Context from '../../models/context'
 
 export default
-  data: ->
-    context: null
+  props:
     context_id:
       default: null
+
+  data: ->
+    context: null
 
   methods:
     loadContext: ->

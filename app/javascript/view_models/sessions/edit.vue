@@ -15,10 +15,12 @@ import SessionsResource from '../../resources/sessions_resource'
 import Session from '../../models/session'
 
 export default
-  data: ->
-    session: null
+  props:
     session_id:
       default: null
+
+  data: ->
+    session: null
 
   methods:
     loadSession: ->

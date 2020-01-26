@@ -21,11 +21,16 @@
 
     methods:
       goTo: (data) ->
+        return unless @viewIndex(data.to) == -1
+
         @views.push data.to
 
       close: (view) ->
-        index = @views.indexOf view
+        index = @viewIndex view
         @views.splice index
+
+      viewIndex: (view) ->
+        @views.indexOf view
 
     mounted: ->
       Global.events.$on 'Desktop::GoTo', @goTo

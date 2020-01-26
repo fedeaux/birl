@@ -15,10 +15,12 @@ import MemesResource from '../../resources/memes_resource'
 import Meme from '../../models/meme'
 
 export default
-  data: ->
-    meme: null
+  props:
     meme_id:
       default: null
+
+  data: ->
+    meme: null
 
   methods:
     loadMeme: ->

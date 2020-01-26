@@ -1,7 +1,11 @@
 <template lang="pug">
-.tags-tag(v-if="tag" :style='style')
-  | {{ tag[display] }}
-  slot
+  shared-link.tags-tag(v-if='tag && linked' :style='style' :to='tag.path()')
+    | {{ tag[display] }}
+    slot
+
+  .tags-tag(v-else-if='tag' :style='style' :is='html_tag')
+    | {{ tag[display] }}
+    slot
 </template>
 
 <script lang="coffee">
@@ -12,6 +16,9 @@
 
       tag:
         required: true
+
+      linked:
+        default: true
 
     data: ->
       style: {}

@@ -15,10 +15,12 @@ import GroupsResource from '../../resources/groups_resource'
 import Group from '../../models/group'
 
 export default
-  data: ->
-    group: null
+  props:
     group_id:
       default: null
+
+  data: ->
+    group: null
 
   methods:
     loadGroup: ->

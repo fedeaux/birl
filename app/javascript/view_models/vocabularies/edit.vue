@@ -15,10 +15,12 @@ import VocabulariesResource from '../../resources/vocabularies_resource'
 import Vocabulary from '../../models/vocabulary'
 
 export default
-  data: ->
-    vocabulary: null
+  props:
     vocabulary_id:
       default: null
+
+  data: ->
+    vocabulary: null
 
   methods:
     loadVocabulary: ->

@@ -15,10 +15,12 @@ import TagTaggablesResource from '../../resources/tag_taggables_resource'
 import TagTaggable from '../../models/tag_taggable'
 
 export default
-  data: ->
-    tag_taggable: null
+  props:
     tag_taggable_id:
       default: null
+
+  data: ->
+    tag_taggable: null
 
   methods:
     loadTagTaggable: ->

@@ -15,10 +15,12 @@ import SessionProgressionsResource from '../../resources/session_progressions_re
 import SessionProgression from '../../models/session_progression'
 
 export default
-  data: ->
-    session_progression: null
+  props:
     session_progression_id:
       default: null
+
+  data: ->
+    session_progression: null
 
   methods:
     loadSessionProgression: ->

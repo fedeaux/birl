@@ -15,10 +15,12 @@ import ListersResource from '../../resources/listers_resource'
 import Lister from '../../models/lister'
 
 export default
-  data: ->
-    lister: null
+  props:
     lister_id:
       default: null
+
+  data: ->
+    lister: null
 
   methods:
     loadLister: ->

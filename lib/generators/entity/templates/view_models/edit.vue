@@ -15,10 +15,12 @@ import <%= plural_entity_name %>Resource from '../../resources/<%= plural_unders
 import <%= entity_name %> from '../../models/<%= underscore_name %>'
 
 export default
-  data: ->
-    <%= underscore_name %>: null
+  props:
     <%= underscore_name %>_id:
       default: null
+
+  data: ->
+    <%= underscore_name %>: null
 
   methods:
     load<%= entity_name %>: ->

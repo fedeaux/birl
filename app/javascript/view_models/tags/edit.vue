@@ -15,10 +15,12 @@ import TagsResource from '../../resources/tags_resource'
 import Tag from '../../models/tag'
 
 export default
-  data: ->
-    tag: null
+  props:
     tag_id:
       default: null
+
+  data: ->
+    tag: null
 
   methods:
     loadTag: ->

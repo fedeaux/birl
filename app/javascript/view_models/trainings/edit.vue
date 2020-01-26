@@ -15,10 +15,12 @@ import TrainingsResource from '../../resources/trainings_resource'
 import Training from '../../models/training'
 
 export default
-  data: ->
-    training: null
+  props:
     training_id:
       default: null
+
+  data: ->
+    training: null
 
   methods:
     loadTraining: ->

@@ -15,10 +15,12 @@ import ExercisesResource from '../../resources/exercises_resource'
 import Exercise from '../../models/exercise'
 
 export default
-  data: ->
-    exercise: null
+  props:
     exercise_id:
       default: null
+
+  data: ->
+    exercise: null
 
   methods:
     loadExercise: ->
