@@ -1,5 +1,10 @@
 <template lang="pug">
 #birl-spa-container.desktop
+  #header
+    #menu.ui.inverted.menu
+      shared-link.item(to='/tags') Tags
+      shared-link.item(to='/memes') Memes
+
   #contents-wrapper
     #contents
       .desktop-component.default-container(v-for='view in views')
