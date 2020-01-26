@@ -15,7 +15,7 @@
     .action-menu-item(@click='copyToClipboard')
        i.copy.olive.icon
 
-    router-link.action-menu-item(:to='meme.path()')
+    shared-link.action-menu-item(:to='meme.path()')
        i.eye.green.icon
 
     .action-menu-item(@click='$emit("edit")')

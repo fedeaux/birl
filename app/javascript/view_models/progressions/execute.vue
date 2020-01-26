@@ -2,7 +2,7 @@
 .entity-show-wrapper.progressions-show-wrapper.default-container(v-if='progression')
   .entity-show.progressions-show
     progressions-display(:progression='progression')
-      router-link.entity-show-header-actions(:to='progression.path()')
+      shared-link.entity-show-header-actions(:to='progression.path()')
         i.eye.icon
 
   .progressions-show-challenge-description(v-if='progression.challenge_description')

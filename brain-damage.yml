@@ -18,3 +18,7 @@ generate:
 
   mixins:
     manager: true
+
+options:
+  view_models:
+    link_tag: 'shared-link'

@@ -12,7 +12,7 @@
   shared-footer
     .ui.two.column.centered.grid
       .column
-       router-link.ui.primary.icon.fluid.button(:to='progression.executePath()')
+       shared-link.ui.primary.icon.fluid.button(:to='progression.executePath()')
          | Go to Executor
          | &nbsp;
          i.play.icon

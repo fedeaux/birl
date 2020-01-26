@@ -14,7 +14,7 @@
   .entity-list-item-actions(v-if='!confirming_destroy && showing_actions')
     .ui.four.column.grid
       .column(@click='$emit("edit")')
-        router-link.ui.basic.fluid.green.icon.button(:to='user.path()')
+        shared-link.ui.basic.fluid.green.icon.button(:to='user.path()')
           i.eye.icon
           |  View
 
@@ -33,7 +33,7 @@
           i.cancel.icon
           |  Cancel
 
-  router-link.entity-list-item.user-list-item(v-if='!confirming_destroy && !showing_actions'
+  shared-link.entity-list-item.user-list-item(v-if='!confirming_destroy && !showing_actions'
                                                  :to='user.path()')
     users-display(:user='user'
                      :allow_actions='allow_actions'
