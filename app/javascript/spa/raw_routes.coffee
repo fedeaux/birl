@@ -2,6 +2,10 @@
 
 routes = [
   {
+    path: ''
+    view: 'mobile/home'
+  },
+  {
     path: '/'
     view: 'mobile/home'
   },

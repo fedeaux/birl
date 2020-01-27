@@ -35,6 +35,7 @@ paths = [
   'tags/hierarchy'
   'tags/hierarchy/item'
   'tags/tag'
+  'tags/tag_list'
   'tags/tags'
   'tag_taggables/picker'
 

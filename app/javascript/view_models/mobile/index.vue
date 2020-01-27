@@ -1,13 +1,14 @@
 <template lang="pug">
 #birl-spa-container(@click='hideMenu()' :class='klass')
   #fullscreen(v-if='show_memes || choose_context')
-    i.cancel.icon#fullscreen-close(@click='show_memes = false; choose_context = false')
     memes-index(v-if='show_memes')
 
     template(v-if='choose_context')
       br
       br
       contexts-choose
+
+    i.cancel.icon#fullscreen-close(@click='show_memes = false; choose_context = false')
 
   sui-dimmer(:active='global_loading' inverted)
     sui-loader.massive

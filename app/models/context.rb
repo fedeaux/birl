@@ -45,6 +45,6 @@ class Context < ApplicationRecord
   end
 
   def dynamic_css
-    ".current-context-#{slug} .context-dependent-background-color, .current-context-#{slug} .ui.primary.button { background-color: #{color} !important }"
+    ".current-context-#{slug} .context-dependent-background-color, .current-context-#{slug} .ui.primary.button, .current-context-#{slug} ::-webkit-scrollbar-thumb { background-color: #{color} !important }"
   end
 end

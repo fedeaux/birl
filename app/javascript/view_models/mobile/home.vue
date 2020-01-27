@@ -5,21 +5,30 @@
     div(v-if='today_things_by_context')
       contexts-things(v-for='things in today_things_by_context' :things='things')
 
-    h2 Favorite Tags
-
+    template(v-if='tags')
+      h2 Tags
+      tags-tag-list.compact(:tags='tags')
 </template>
 
 <script lang="coffee">
   import Context from '../../models/context'
   import Session from '../../models/session'
   import Progression from '../../models/progression'
+  import TagsManagerMixin from '../../mixins/tags/manager'
+  import TagsResource from '../../resources/tags_resource'
 
   export default
+    mixins: [TagsManagerMixin]
+
     data: ->
       time_now: moment()
       today_things_by_context: null
 
     methods:
+      loadTags: ->
+        @tags_resource ?= new TagsResource
+        @tags_resource.leaves @tagsLoaded, @context
+
       todaysLoaded: (data) ->
         @today_things_by_context = []
 

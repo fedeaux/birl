@@ -1,6 +1,6 @@
 <template lang="pug">
-  .tag-taggables-picker
-    .tag-taggables-picker-item(v-for='tag in tags' @click='toogleSelectedTag(tag)')
+  .tags-tag-list
+    .tags-tag-list-item(v-for='tag in tags' @click='toogleSelectedTag(tag)')
       tags-tag(:tag='tag' display='fullname' :linked='false')
         template(v-if='isSelected(tag)')
           | &nbsp;
