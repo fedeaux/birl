@@ -1,12 +1,13 @@
 <template lang="pug">
 .entity-show-wrapper.challenges-show-wrapper.default-container(v-if='challenge')
-  .entity-show.challenges-show
-    challenges-display(:challenge='challenge')
-      shared-link.entity-show-header-actions(:to='challenge.editPath()')
-        i.edit.icon
+  .header-contents-footer
+    .entity-show.challenges-show.header-contents-footer-header
+      challenges-display(:challenge='challenge')
+        shared-link.entity-show-header-actions(:to='challenge.editPath()')
+          i.edit.icon
 
-  //- BrainDamage: Body Start
-  //- BrainDamage: Body End
+    //- BrainDamage: Body Start
+    //- BrainDamage: Body End
 </template>
 
 <script lang="coffee">

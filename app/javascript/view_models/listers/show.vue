@@ -1,18 +1,19 @@
 <template lang="pug">
 .entity-show-wrapper.listers-show-wrapper.default-container(v-if='lister')
-  .entity-show.listers-show
-    listers-display(:lister='lister')
-      shared-link.entity-show-header-actions(:to='lister.editPath()')
-        i.edit.icon
+  .header-contents-footer
+    .entity-show.listers-show.header-contents-footer-header
+      listers-display(:lister='lister')
+        shared-link.entity-show-header-actions(:to='lister.editPath()')
+          i.edit.icon
 
-  //- BrainDamage: Body Start
+    //- BrainDamage: Body Start
   .entity-list.lister-list.default-container
     .entity-list-item-wrapper.lister-list-item-wrapper
        .entity-list-item.lister-list-item(v-for='item in lister.values.items')
          .entity-display
            .entity-display-main
              | {{ item }}
-  //- BrainDamage: Body End
+    //- BrainDamage: Body End
 </template>
 
 <script lang="coffee">

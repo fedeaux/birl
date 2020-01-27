@@ -125,11 +125,16 @@ hr
   display: flex
   flex-direction: column
 
+  .header-contents-footer-header
+    flex-grow: 0
+
   .header-contents-footer-contents
     height: 100%
     overflow-y: auto
+    flex-grow: 1
 
   .header-contents-footer-footer
+    flex-grow: 0
     padding-top: $d4
 
     &.bottom-attached-footer

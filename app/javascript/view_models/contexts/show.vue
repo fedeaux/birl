@@ -1,12 +1,13 @@
 <template lang="pug">
 .entity-show-wrapper.contexts-show-wrapper.default-container(v-if='context')
-  .entity-show.contexts-show
-    contexts-display(:context='context')
-      shared-link.entity-show-header-actions(:to='context.editPath()')
-        i.edit.icon
+  .header-contents-footer
+    .entity-show.contexts-show.header-contents-footer-header
+      contexts-display(:context='context')
+        shared-link.entity-show-header-actions(:to='context.editPath()')
+          i.edit.icon
 
-  //- BrainDamage: Body Start
-  //- BrainDamage: Body End
+    //- BrainDamage: Body Start
+    //- BrainDamage: Body End
 </template>
 
 <script lang="coffee">

@@ -1,32 +1,35 @@
 <template lang="pug">
 .entity-show-wrapper.sessions-show-wrapper.default-container(v-if='session')
-  .entity-show.sessions-show
-    sessions-display(:session='session')
-      shared-link.entity-show-header-actions(:to='session.editPath()')
-        i.edit.icon
+  .header-contents-footer
+    .entity-show.sessions-show.header-contents-footer-header
+      sessions-display(:session='session')
+        shared-link.entity-show-header-actions(:to='session.editPath()')
+          i.edit.icon
 
-  //- BrainDamage: Body Start
-  .default-container(v-if='session.done_today')
-    br
-    .ui.green.message
-      | Completed! Good work :)
-    br
+    //- BrainDamage: Body Start
+    .header-contents-footer-contents.header-contents-footer
+      .header-contents-footer-header
+        .default-container(v-if='session.done_today')
+          br
+          .ui.green.message
+            | Completed! Good work :)
+          br
 
-  .muted-text These are the session progressions, not the progressions themselves
-  session-progressions-manager(:context='{ session_id: session.id }'
-                               :parent_session_progressions='session.session_progressions')
+        .muted-text These are the session progressions, not the progressions themselves
 
-  shared-footer
-    .ui.two.column.centered.grid
-      .column
-        .ui.fluid.primary.icon.button(@click='executeNextProgression' v-if='!session.done_today')
-          template(v-if='session.started_today')
-            | Continue
-          template(v-else)
-            | Start
-          | &nbsp;
-          i.play.icon
-  //- BrainDamage: Body End
+      .header-contents-footer-contents
+        session-progressions-manager(:context='{ session_id: session.id }'
+                                     :parent_session_progressions='session.session_progressions')
+
+    .header-contents-footer-footer.bottom-attached-footer.action-footer
+      .ui.fluid.primary.icon.button(@click='executeNextProgression' v-if='!session.done_today')
+        template(v-if='session.started_today')
+          | Continue
+        template(v-else)
+          | Start
+        | &nbsp;
+        i.play.icon
+    //- BrainDamage: Body End
 </template>
 
 <script lang="coffee">

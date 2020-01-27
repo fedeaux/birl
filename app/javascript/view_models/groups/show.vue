@@ -1,12 +1,13 @@
 <template lang="pug">
 .entity-show-wrapper.groups-show-wrapper.default-container(v-if='group')
-  .entity-show.groups-show
-    groups-display(:group='group')
-      shared-link.entity-show-header-actions(:to='group.editPath()')
-        i.edit.icon
+  .header-contents-footer
+    .entity-show.groups-show.header-contents-footer-header
+      groups-display(:group='group')
+        shared-link.entity-show-header-actions(:to='group.editPath()')
+          i.edit.icon
 
-  //- BrainDamage: Body Start
-  //- BrainDamage: Body End
+    //- BrainDamage: Body Start
+    //- BrainDamage: Body End
 </template>
 
 <script lang="coffee">

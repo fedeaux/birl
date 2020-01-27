@@ -1,12 +1,13 @@
 <template lang="pug">
 .entity-show-wrapper.trainings-show-wrapper.default-container(v-if='training')
-  .entity-show.trainings-show
-    trainings-display(:training='training')
-      shared-link.entity-show-header-actions(:to='training.editPath()')
-        i.edit.icon
+  .header-contents-footer
+    .entity-show.trainings-show.header-contents-footer-header
+      trainings-display(:training='training')
+        shared-link.entity-show-header-actions(:to='training.editPath()')
+          i.edit.icon
 
-  //- BrainDamage: Body Start
-  //- BrainDamage: Body End
+    //- BrainDamage: Body Start
+    //- BrainDamage: Body End
 </template>
 
 <script lang="coffee">

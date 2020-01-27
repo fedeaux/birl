@@ -1,12 +1,13 @@
 <template lang="pug">
 .entity-show-wrapper.vocabularies-show-wrapper.default-container(v-if='vocabulary')
-  .entity-show.vocabularies-show
-    vocabularies-display(:vocabulary='vocabulary')
-      shared-link.entity-show-header-actions(:to='vocabulary.editPath()')
-        i.edit.icon
+  .header-contents-footer
+    .entity-show.vocabularies-show.header-contents-footer-header
+      vocabularies-display(:vocabulary='vocabulary')
+        shared-link.entity-show-header-actions(:to='vocabulary.editPath()')
+          i.edit.icon
 
-  //- BrainDamage: Body Start
-  //- BrainDamage: Body End
+    //- BrainDamage: Body Start
+    //- BrainDamage: Body End
 </template>
 
 <script lang="coffee">

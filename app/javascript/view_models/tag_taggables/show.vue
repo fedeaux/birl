@@ -1,12 +1,13 @@
 <template lang="pug">
 .entity-show-wrapper.tag-taggables-show-wrapper.default-container(v-if='tag_taggable')
-  .entity-show.tag-taggables-show
-    tag-taggables-display(:tag_taggable='tag_taggable')
-      shared-link.entity-show-header-actions(:to='tag_taggable.editPath()')
-        i.edit.icon
+  .header-contents-footer
+    .entity-show.tag-taggables-show.header-contents-footer-header
+      tag-taggables-display(:tag_taggable='tag_taggable')
+        shared-link.entity-show-header-actions(:to='tag_taggable.editPath()')
+          i.edit.icon
 
-  //- BrainDamage: Body Start
-  //- BrainDamage: Body End
+    //- BrainDamage: Body Start
+    //- BrainDamage: Body End
 </template>
 
 <script lang="coffee">

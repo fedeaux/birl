@@ -1,13 +1,14 @@
 <template lang="pug">
 .entity-show-wrapper.tags-show-wrapper.default-container(v-if='tag')
-  .entity-show.tags-show
-    tags-display(:tag='tag')
-      shared-link.entity-show-header-actions(:to='tag.editPath()')
-        i.edit.icon
+  .header-contents-footer
+    .entity-show.tags-show.header-contents-footer-header
+      tags-display(:tag='tag')
+        shared-link.entity-show-header-actions(:to='tag.editPath()')
+          i.edit.icon
 
-  //- BrainDamage: Body Start
+    //- BrainDamage: Body Start
   memes-stream-index(:context='{ tag_id: tag.id }')
-  //- BrainDamage: Body End
+    //- BrainDamage: Body End
 </template>
 
 <script lang="coffee">
