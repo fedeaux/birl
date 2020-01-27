@@ -48,8 +48,16 @@ paths = [
   'questioner/item'
 ]
 
+meme_types = [
+  'morning_checkup'
+]
+
 for entity in entities
   for view in views
     paths.push "#{entity}/#{view}"
+
+for meme_type in meme_types
+  paths.push "memes/types/#{meme_type}/form"
+  paths.push "memes/types/#{meme_type}/button"
 
 export default { paths }

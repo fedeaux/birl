@@ -1,6 +1,6 @@
 <template lang="pug">
   .context-things(:style='things_style')
-    .context-things-context-name(:style='context_name_style') {{ context.name }}
+    //- .context-things-context-name(:style='context_name_style') {{ context.name }}
 
     .context-things-thing(v-for='session in things.sessions'
                           @click='goToSession(session)'
