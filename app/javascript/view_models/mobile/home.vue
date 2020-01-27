@@ -36,8 +36,8 @@
 
       loadTodays: ->
         $.ajax
-          url: 'api/v1/sessions/todays'
-          method: 'get',
+          url: "#{Global.server.base_url}/api/v1/sessions/todays"
+          method: 'get'
           success: @todaysLoaded
 
     mounted: ->

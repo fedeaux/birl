@@ -5,7 +5,6 @@
               @save='saveFormTag()'
               @cancel='clearFormTag()')
 
-
   .entity-manager-list(v-else)
     .entity-manager-list-header
       #new-tag-button.ui.primary.top.attached.fluid.small.icon.button(@click='newTag' v-if='root')
@@ -15,7 +14,6 @@
     tags-hierarchy-item(v-for='tag in tags'
                         :tag='tag'
                         :depth='depth')
-
 </template>
 
 <script lang="coffee">

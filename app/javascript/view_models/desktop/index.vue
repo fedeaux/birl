@@ -4,7 +4,6 @@
     #menu.ui.inverted.menu
       shared-link.item(to='/tags') Tags
       shared-link.item(to='/memes') Memes
-      shared-link.item(to='/exercises') Exercises
       shared-link.item(to='/contexts/choose') Contexts
 
   #contents-wrapper
