@@ -6,7 +6,7 @@
     | {{ text }}
 
     //- BrainDamage: Details Start
-    tags-tags(:tags='meme.tags')
+    tags-tags(:tags='meme.tags' :hide='context.tag_id')
     //- BrainDamage: Details End
 
   .entity-display-actions(v-if='allow_actions' @click='action($event)')
@@ -21,6 +21,9 @@
 
       allow_actions:
         default: true
+
+      context:
+        default: {}
 
     data: ->
       done: !!@meme.done_at

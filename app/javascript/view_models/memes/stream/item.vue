@@ -29,6 +29,7 @@
 
   .entity-list-item.meme-list-item(v-if='!confirming_destroy && !showing_actions')
     memes-display(:meme='meme'
+                  :context='context'
                   :allow_actions='allow_actions'
                   @action='showActions')
       i.ellipsis.vertical.icon(v-if='!selected')
@@ -38,6 +39,9 @@
 
 export default
   props:
+    context:
+      default: {}
+
     meme:
       required: true
 

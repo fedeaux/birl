@@ -1,7 +1,9 @@
 <template lang="pug">
-  .home.default-container
+.home.default-container.header-contents-footer
+  .header-contents-footer-header
     h1 {{ time_now.format('ddd, MMM Do') }}
 
+  .header-contents-footer-contents
     div(v-if='today_things_by_context')
       contexts-things(v-for='things in today_things_by_context' :things='things')
 

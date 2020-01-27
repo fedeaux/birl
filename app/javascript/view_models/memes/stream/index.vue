@@ -26,6 +26,7 @@
     .entity-stream-list(v-if='!form_meme')
       memes-stream-list(:memes='memes'
                         :allow_actions='true'
+                        :context='context'
                         :select_mode='select_mode'
                         :selected_ids='selected_ids'
                         :show_header='!select_mode'

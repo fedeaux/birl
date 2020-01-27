@@ -1,6 +1,6 @@
 <template lang="pug">
 .tags-tags(v-if="tags && tags.length > 0")
-  tags-tag(v-for='tag in tags' :tag='tag' :display='display')
+  tags-tag(v-for='tag in tags' :tag='tag' :display='display' v-if='tag.id != hide')
 </template>
 
 <script lang="coffee">
@@ -11,4 +11,7 @@
 
       tags:
         required: true
+
+      hide:
+        default: false
 </script>

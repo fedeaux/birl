@@ -21,6 +21,7 @@
                         v-long-press='400'
                         :meme='meme'
                         :allow_actions='allow_actions'
+                        :context='context'
                         :key='meme.id'
                         :selected='selected_ids[meme.id]'
                         :previous_selected='previousSelected(index)',
@@ -38,6 +39,9 @@ export default
   props:
     allow_actions:
       default: false
+
+    context:
+      default: {}
 
     memes:
       default: null
