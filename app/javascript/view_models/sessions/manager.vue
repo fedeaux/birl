@@ -8,16 +8,17 @@
                   @save='saveFormSession()'
                   @cancel='clearFormSession()')
 
-  .entity-manager-list(v-else)
-    .entity-manager-list-header
+  .entity-manager-list.header-contents-footer(v-else)
+    .entity-manager-list-header.header-contents-footer-header
       #new-session-button.ui.primary.top.attached.fluid.small.icon.button(@click='newSession')
         i.plus.icon
         |  Add Session
 
-    sessions-list(:sessions='sessions'
-                  :allow_actions='true'
-                  @edit='editSession($event)'
-                  @destroy='destroySession($event)')
+    .header-contents-footer-contents
+      sessions-list(:sessions='sessions'
+                    :allow_actions='true'
+                    @edit='editSession($event)'
+                    @destroy='destroySession($event)')
 </template>
 
 <script lang="coffee">

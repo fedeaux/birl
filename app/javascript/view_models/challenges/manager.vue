@@ -8,16 +8,17 @@
                     @save='saveFormChallenge()'
                     @cancel='clearFormChallenge()')
 
-  .entity-manager-list(v-else)
-    .entity-manager-list-header
+  .entity-manager-list.header-contents-footer(v-else)
+    .entity-manager-list-header.header-contents-footer-header
       #new-challenge-button.ui.primary.top.attached.fluid.small.icon.button(@click='newChallenge')
         i.plus.icon
         |  Add Challenge
 
-    challenges-list(:challenges='challenges'
-                    :allow_actions='true'
-                    @edit='editChallenge($event)'
-                    @destroy='destroyChallenge($event)')
+    .header-contents-footer-contents
+      challenges-list(:challenges='challenges'
+                      :allow_actions='true'
+                      @edit='editChallenge($event)'
+                      @destroy='destroyChallenge($event)')
 </template>
 
 <script lang="coffee">

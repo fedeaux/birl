@@ -8,16 +8,17 @@
                               @save='saveFormSessionProgression()'
                               @cancel='clearFormSessionProgression()')
 
-  .entity-manager-list(v-else)
-    .entity-manager-list-header
+  .entity-manager-list.header-contents-footer(v-else)
+    .entity-manager-list-header.header-contents-footer-header
       #new-session-progression-button.ui.primary.top.attached.fluid.small.icon.button(@click='newSessionProgression')
         i.plus.icon
         |  Add Session Progression
 
-    session-progressions-list(:session_progressions='session_progressions'
-                              :allow_actions='true'
-                              @edit='editSessionProgression($event)'
-                              @destroy='destroySessionProgression($event)')
+    .header-contents-footer-contents
+      session-progressions-list(:session_progressions='session_progressions'
+                                :allow_actions='true'
+                                @edit='editSessionProgression($event)'
+                                @destroy='destroySessionProgression($event)')
 </template>
 
 <script lang="coffee">

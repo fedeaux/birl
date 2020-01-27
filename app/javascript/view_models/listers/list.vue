@@ -1,17 +1,19 @@
 <template lang="pug">
-.entity-list.lister-list.default-container
-  .entity-list-filter
-    inputs-clearable.fluid(v-model='filter.text')
+.entity-list.lister-list.default-container.header-contents-footer
+  .header-contents-footer-header
+    .entity-list-filter
+      inputs-clearable.fluid(v-model='filter.text')
 
-  listers-list-item(v-for='lister in displayable_listers'
-                    v-if='listers'
-                    :lister='lister'
-                    :allow_actions='allow_actions'
-                    :key='lister.id'
-                    @edit='$emit("edit", { lister: lister })'
-                    @destroy='$emit("destroy", { lister: lister })')
+  .header-contents-footer-contents
+    listers-list-item(v-for='lister in displayable_listers'
+                      v-if='listers'
+                      :lister='lister'
+                      :allow_actions='allow_actions'
+                      :key='lister.id'
+                      @edit='$emit("edit", { lister: lister })'
+                      @destroy='$emit("destroy", { lister: lister })')
 
-  entity-list-empty(v-if='!listers || listers.length == 0')
+    entity-list-empty(v-if='!listers || listers.length == 0')
 </template>
 
 <script lang="coffee">

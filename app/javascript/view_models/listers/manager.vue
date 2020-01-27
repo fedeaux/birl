@@ -8,16 +8,17 @@
                  @save='saveFormLister()'
                  @cancel='clearFormLister()')
 
-  .entity-manager-list(v-else)
-    .entity-manager-list-header
+  .entity-manager-list.header-contents-footer(v-else)
+    .entity-manager-list-header.header-contents-footer-header
       #new-lister-button.ui.primary.top.attached.fluid.small.icon.button(@click='newLister')
         i.plus.icon
         |  Add Lister
 
-    listers-list(:listers='listers'
-                 :allow_actions='true'
-                 @edit='editLister($event)'
-                 @destroy='destroyLister($event)')
+    .header-contents-footer-contents
+      listers-list(:listers='listers'
+                   :allow_actions='true'
+                   @edit='editLister($event)'
+                   @destroy='destroyLister($event)')
 </template>
 
 <script lang="coffee">

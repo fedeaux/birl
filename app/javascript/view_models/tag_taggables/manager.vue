@@ -8,16 +8,17 @@
                        @save='saveFormTagTaggable()'
                        @cancel='clearFormTagTaggable()')
 
-  .entity-manager-list(v-else)
-    .entity-manager-list-header
+  .entity-manager-list.header-contents-footer(v-else)
+    .entity-manager-list-header.header-contents-footer-header
       #new-tag-taggable-button.ui.primary.top.attached.fluid.small.icon.button(@click='newTagTaggable')
         i.plus.icon
         |  Add Tag Taggable
 
-    tag-taggables-list(:tag_taggables='tag_taggables'
-                       :allow_actions='true'
-                       @edit='editTagTaggable($event)'
-                       @destroy='destroyTagTaggable($event)')
+    .header-contents-footer-contents
+      tag-taggables-list(:tag_taggables='tag_taggables'
+                         :allow_actions='true'
+                         @edit='editTagTaggable($event)'
+                         @destroy='destroyTagTaggable($event)')
 </template>
 
 <script lang="coffee">

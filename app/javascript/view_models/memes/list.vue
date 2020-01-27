@@ -1,14 +1,19 @@
 <template lang="pug">
-.entity-list.meme-list.default-container
-  memes-list-item(v-for='meme in memes'
-                  v-if='memes'
-                  :meme='meme'
-                  :allow_actions='allow_actions'
-                  :key='meme.id'
-                  @edit='$emit("edit", { meme: meme })'
-                  @destroy='$emit("destroy", { meme: meme })')
+.entity-list.meme-list.default-container.header-contents-footer
+  .header-contents-footer-header
+    .entity-list-filter
+      inputs-clearable.fluid(v-model='filter.text')
 
-  entity-list-empty(v-if='!memes || memes.length == 0')
+  .header-contents-footer-contents
+    memes-list-item(v-for='meme in displayable_memes'
+                    v-if='memes'
+                    :meme='meme'
+                    :allow_actions='allow_actions'
+                    :key='meme.id'
+                    @edit='$emit("edit", { meme: meme })'
+                    @destroy='$emit("destroy", { meme: meme })')
+
+    entity-list-empty(v-if='!memes || memes.length == 0')
 </template>
 
 <script lang="coffee">
@@ -19,4 +24,18 @@ export default
 
     memes:
       default: null
+
+  data: ->
+    filter:
+      text: ''
+
+  methods:
+    matchFilters: (meme) ->
+      (@filter.text == '' or meme.name.toLowerCase().indexOf(@filter.text.toLowerCase()) != -1)
+
+  computed:
+    displayable_memes: ->
+      return [] unless @memes
+
+      (meme for meme in @memes when @matchFilters meme)
 </script>

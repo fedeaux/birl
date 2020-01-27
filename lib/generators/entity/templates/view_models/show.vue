@@ -1,11 +1,12 @@
 <template lang="pug">
 .entity-show-wrapper.<%= plural_dash_name %>-show-wrapper.default-container(v-if='<%= underscore_name %>')
-  .entity-show.<%= plural_dash_name %>-show
-    <%= plural_dash_name %>-display(:<%= underscore_name %>='<%= underscore_name %>')
-      <%= link_tag %>.entity-show-header-actions(:to='<%= underscore_name %>.editPath()')
-        i.edit.icon
+  .header-contents-footer
+    .entity-show.<%= plural_dash_name %>-show.header-contents-footer-header
+      <%= plural_dash_name %>-display(:<%= underscore_name %>='<%= underscore_name %>')
+        <%= link_tag %>.entity-show-header-actions(:to='<%= underscore_name %>.editPath()')
+          i.edit.icon
 
-<%= sub_template('Body', '//-') %>
+<%= sub_template('Body', '//-', 4) %>
 </template>
 
 <script lang="coffee">

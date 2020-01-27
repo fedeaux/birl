@@ -8,16 +8,17 @@
                       @save='saveFormVocabulary()'
                       @cancel='clearFormVocabulary()')
 
-  .entity-manager-list(v-else)
-    .entity-manager-list-header
+  .entity-manager-list.header-contents-footer(v-else)
+    .entity-manager-list-header.header-contents-footer-header
       #new-vocabulary-button.ui.primary.top.attached.fluid.small.icon.button(@click='newVocabulary')
         i.plus.icon
         |  Add Vocabulary
 
-    vocabularies-list(:vocabularies='vocabularies'
-                      :allow_actions='true'
-                      @edit='editVocabulary($event)'
-                      @destroy='destroyVocabulary($event)')
+    .header-contents-footer-contents
+      vocabularies-list(:vocabularies='vocabularies'
+                        :allow_actions='true'
+                        @edit='editVocabulary($event)'
+                        @destroy='destroyVocabulary($event)')
 </template>
 
 <script lang="coffee">

@@ -8,16 +8,17 @@
                 @save='saveFormGroup()'
                 @cancel='clearFormGroup()')
 
-  .entity-manager-list(v-else)
-    .entity-manager-list-header
+  .entity-manager-list.header-contents-footer(v-else)
+    .entity-manager-list-header.header-contents-footer-header
       #new-group-button.ui.primary.top.attached.fluid.small.icon.button(@click='newGroup')
         i.plus.icon
         |  Add Group
 
-    groups-list(:groups='groups'
-                :allow_actions='true'
-                @edit='editGroup($event)'
-                @destroy='destroyGroup($event)')
+    .header-contents-footer-contents
+      groups-list(:groups='groups'
+                  :allow_actions='true'
+                  @edit='editGroup($event)'
+                  @destroy='destroyGroup($event)')
 </template>
 
 <script lang="coffee">

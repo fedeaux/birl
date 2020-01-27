@@ -1,17 +1,19 @@
 <template lang="pug">
-.entity-list.progression-list.default-container
-  .entity-list-filter
-    inputs-clearable.fluid(v-model='filter.text')
+.entity-list.progression-list.default-container.header-contents-footer
+  .header-contents-footer-header
+    .entity-list-filter
+      inputs-clearable.fluid(v-model='filter.text')
 
-  progressions-list-item(v-for='progression in displayable_progressions'
-                         v-if='progressions'
-                         :progression='progression'
-                         :allow_actions='allow_actions'
-                         :key='progression.id'
-                         @edit='$emit("edit", { progression: progression })'
-                         @destroy='$emit("destroy", { progression: progression })')
+  .header-contents-footer-contents
+    progressions-list-item(v-for='progression in displayable_progressions'
+                           v-if='progressions'
+                           :progression='progression'
+                           :allow_actions='allow_actions'
+                           :key='progression.id'
+                           @edit='$emit("edit", { progression: progression })'
+                           @destroy='$emit("destroy", { progression: progression })')
 
-  entity-list-empty(v-if='!progressions || progressions.length == 0')
+    entity-list-empty(v-if='!progressions || progressions.length == 0')
 </template>
 
 <script lang="coffee">

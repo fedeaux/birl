@@ -8,16 +8,17 @@
                    @save='saveFormTraining()'
                    @cancel='clearFormTraining()')
 
-  .entity-manager-list(v-else)
-    .entity-manager-list-header
+  .entity-manager-list.header-contents-footer(v-else)
+    .entity-manager-list-header.header-contents-footer-header
       #new-training-button.ui.primary.top.attached.fluid.small.icon.button(@click='newTraining')
         i.plus.icon
         |  Add Training
 
-    trainings-list(:trainings='trainings'
-                   :allow_actions='true'
-                   @edit='editTraining($event)'
-                   @destroy='destroyTraining($event)')
+    .header-contents-footer-contents
+      trainings-list(:trainings='trainings'
+                     :allow_actions='true'
+                     @edit='editTraining($event)'
+                     @destroy='destroyTraining($event)')
 </template>
 
 <script lang="coffee">

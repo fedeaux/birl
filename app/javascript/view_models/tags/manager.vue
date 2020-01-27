@@ -8,16 +8,17 @@
               @save='saveFormTag()'
               @cancel='clearFormTag()')
 
-  .entity-manager-list(v-else)
-    .entity-manager-list-header
+  .entity-manager-list.header-contents-footer(v-else)
+    .entity-manager-list-header.header-contents-footer-header
       #new-tag-button.ui.primary.top.attached.fluid.small.icon.button(@click='newTag')
         i.plus.icon
         |  Add Tag
 
-    tags-list(:tags='tags'
-              :allow_actions='true'
-              @edit='editTag($event)'
-              @destroy='destroyTag($event)')
+    .header-contents-footer-contents
+      tags-list(:tags='tags'
+                :allow_actions='true'
+                @edit='editTag($event)'
+                @destroy='destroyTag($event)')
 </template>
 
 <script lang="coffee">

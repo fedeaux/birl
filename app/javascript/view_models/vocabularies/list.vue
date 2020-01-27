@@ -1,17 +1,19 @@
 <template lang="pug">
-.entity-list.vocabulary-list.default-container
-  .entity-list-filter
-    inputs-clearable.fluid(v-model='filter.text')
+.entity-list.vocabulary-list.default-container.header-contents-footer
+  .header-contents-footer-header
+    .entity-list-filter
+      inputs-clearable.fluid(v-model='filter.text')
 
-  vocabularies-list-item(v-for='vocabulary in displayable_vocabularies'
-                         v-if='vocabularies'
-                         :vocabulary='vocabulary'
-                         :allow_actions='allow_actions'
-                         :key='vocabulary.id'
-                         @edit='$emit("edit", { vocabulary: vocabulary })'
-                         @destroy='$emit("destroy", { vocabulary: vocabulary })')
+  .header-contents-footer-contents
+    vocabularies-list-item(v-for='vocabulary in displayable_vocabularies'
+                           v-if='vocabularies'
+                           :vocabulary='vocabulary'
+                           :allow_actions='allow_actions'
+                           :key='vocabulary.id'
+                           @edit='$emit("edit", { vocabulary: vocabulary })'
+                           @destroy='$emit("destroy", { vocabulary: vocabulary })')
 
-  entity-list-empty(v-if='!vocabularies || vocabularies.length == 0')
+    entity-list-empty(v-if='!vocabularies || vocabularies.length == 0')
 </template>
 
 <script lang="coffee">
@@ -29,11 +31,7 @@ export default
 
   methods:
     matchFilters: (vocabulary) ->
-      return true if @filter.text == ''
-
-      for word in [vocabulary.pt_br, vocabulary.es, vocabulary.en]
-        continue unless word
-        return true if word.toLowerCase().indexOf(@filter.text.toLowerCase()) != -1
+      (@filter.text == '' or vocabulary.name.toLowerCase().indexOf(@filter.text.toLowerCase()) != -1)
 
   computed:
     displayable_vocabularies: ->

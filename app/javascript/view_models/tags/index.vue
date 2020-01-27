@@ -1,8 +1,6 @@
 <template lang="pug">
 .entity-index.tags-index.default-container
-  tags-hierarchy(v-if='tags'
-                 :parent_tags='tags'
-                 @forceReload='forceReload')
+  tags-manager(:parent_tags='tags')
 </template>
 
 <script lang="coffee">
@@ -14,15 +12,10 @@ export default
 
   methods:
     loadTags: ->
-      @tags_resource.hierarchy @tagsLoaded
+      @tags_resource.index @tagsLoaded
 
     tagsLoaded: (response) ->
       @tags = response.tags
-
-    forceReload: ->
-      @tags = null
-      @$nextTick =>
-        @loadTags()
 
   mounted: ->
     @tags_resource = new TagsResource

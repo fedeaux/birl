@@ -1,14 +1,19 @@
 <template lang="pug">
-.entity-list.entry-list.default-container
-  entries-list-item(v-for='entry in entries'
-                    v-if='entries'
-                    :entry='entry'
-                    :allow_actions='allow_actions'
-                    :key='entry.id'
-                    @edit='$emit("edit", { entry: entry })'
-                    @destroy='$emit("destroy", { entry: entry })')
+.entity-list.entry-list.default-container.header-contents-footer
+  .header-contents-footer-header
+    .entity-list-filter
+      inputs-clearable.fluid(v-model='filter.text')
 
-  entity-list-empty(v-if='!entries || entries.length == 0')
+  .header-contents-footer-contents
+    entries-list-item(v-for='entry in displayable_entries'
+                      v-if='entries'
+                      :entry='entry'
+                      :allow_actions='allow_actions'
+                      :key='entry.id'
+                      @edit='$emit("edit", { entry: entry })'
+                      @destroy='$emit("destroy", { entry: entry })')
+
+    entity-list-empty(v-if='!entries || entries.length == 0')
 </template>
 
 <script lang="coffee">
@@ -19,4 +24,18 @@ export default
 
     entries:
       default: null
+
+  data: ->
+    filter:
+      text: ''
+
+  methods:
+    matchFilters: (entry) ->
+      (@filter.text == '' or entry.name.toLowerCase().indexOf(@filter.text.toLowerCase()) != -1)
+
+  computed:
+    displayable_entries: ->
+      return [] unless @entries
+
+      (entry for entry in @entries when @matchFilters entry)
 </script>

@@ -1,17 +1,19 @@
 <template lang="pug">
-.entity-list.group-list.default-container
-  .entity-list-filter
-    inputs-clearable.fluid(v-model='filter.text')
+.entity-list.group-list.default-container.header-contents-footer
+  .header-contents-footer-header
+    .entity-list-filter
+      inputs-clearable.fluid(v-model='filter.text')
 
-  groups-list-item(v-for='group in displayable_groups'
-                   v-if='groups'
-                   :group='group'
-                   :allow_actions='allow_actions'
-                   :key='group.id'
-                   @edit='$emit("edit", { group: group })'
-                   @destroy='$emit("destroy", { group: group })')
+  .header-contents-footer-contents
+    groups-list-item(v-for='group in displayable_groups'
+                     v-if='groups'
+                     :group='group'
+                     :allow_actions='allow_actions'
+                     :key='group.id'
+                     @edit='$emit("edit", { group: group })'
+                     @destroy='$emit("destroy", { group: group })')
 
-  entity-list-empty(v-if='!groups || groups.length == 0')
+    entity-list-empty(v-if='!groups || groups.length == 0')
 </template>
 
 <script lang="coffee">

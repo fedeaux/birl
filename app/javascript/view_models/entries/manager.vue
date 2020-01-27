@@ -14,16 +14,17 @@
                  @save='saveFormEntry()'
                  @cancel='clearFormEntry()')
 
-  .entity-manager-list(v-else)
-    .entity-manager-list-header
+  .entity-manager-list.header-contents-footer(v-else)
+    .entity-manager-list-header.header-contents-footer-header(v-if='actions.add')
       #new-entry-button.ui.primary.top.attached.fluid.small.icon.button(@click='newEntry')
         i.plus.icon
         |  Add Entry
 
-    entries-list(:entries='entries'
-                 :allow_actions='true'
-                 @edit='editEntry($event)'
-                 @destroy='destroyEntry($event)')
+    .header-contents-footer-contents
+      entries-list(:entries='entries'
+                   :allow_actions='true'
+                   @edit='editEntry($event)'
+                   @destroy='destroyEntry($event)')
 </template>
 
 <script lang="coffee">

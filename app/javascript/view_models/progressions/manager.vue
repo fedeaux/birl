@@ -8,16 +8,17 @@
                       @save='saveFormProgression()'
                       @cancel='clearFormProgression()')
 
-  .entity-manager-list(v-else)
-    .entity-manager-list-header
+  .entity-manager-list.header-contents-footer(v-else)
+    .entity-manager-list-header.header-contents-footer-header
       #new-progression-button.ui.primary.top.attached.fluid.small.icon.button(@click='newProgression')
         i.plus.icon
         |  Add Progression
 
-    progressions-list(:progressions='progressions'
-                      :allow_actions='true'
-                      @edit='editProgression($event)'
-                      @destroy='destroyProgression($event)')
+    .header-contents-footer-contents
+      progressions-list(:progressions='progressions'
+                        :allow_actions='true'
+                        @edit='editProgression($event)'
+                        @destroy='destroyProgression($event)')
 </template>
 
 <script lang="coffee">

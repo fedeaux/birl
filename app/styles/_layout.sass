@@ -117,7 +117,7 @@ hr
     right: $d
     color: $light-text-gray
 
-.entity-manager, .entity-index, .entity-manager-list
+.entity-manager, .entity-index, .entity-manager-list, .entity-show-wrapper
   height: 100%
 
 .header-contents-footer
@@ -128,3 +128,15 @@ hr
   .header-contents-footer-contents
     height: 100%
     overflow-y: auto
+
+  .header-contents-footer-footer
+    padding-top: $d4
+
+    &.bottom-attached-footer
+      margin-bottom: -$d2
+      margin-right: -$d2
+      margin-left: -$d2
+
+    &.action-footer
+      padding-top: $d2
+      text-align: center

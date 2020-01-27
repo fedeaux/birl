@@ -1,17 +1,19 @@
 <template lang="pug">
-.entity-list.<%= dash_name %>-list.default-container
-  .entity-list-filter
-    inputs-clearable.fluid(v-model='filter.text')
+.entity-list.<%= dash_name %>-list.default-container.header-contents-footer
+  .header-contents-footer-header
+    .entity-list-filter
+      inputs-clearable.fluid(v-model='filter.text')
 
-  <%= plural_dash_name %>-list-item(v-for='<%= underscore_name %> in displayable_<%= plural_underscore_name %>'
-  <%= plural_dash_name_as_spaces %>           v-if='<%= plural_underscore_name %>'
-  <%= plural_dash_name_as_spaces %>           :<%= underscore_name %>='<%= underscore_name %>'
-  <%= plural_dash_name_as_spaces %>           :allow_actions='allow_actions'
-  <%= plural_dash_name_as_spaces %>           :key='<%= underscore_name %>.id'
-  <%= plural_dash_name_as_spaces %>           @edit='$emit("edit", { <%= underscore_name %>: <%= underscore_name %> })'
-  <%= plural_dash_name_as_spaces %>           @destroy='$emit("destroy", { <%= underscore_name %>: <%= underscore_name %> })')
+  .header-contents-footer-contents
+    <%= plural_dash_name %>-list-item(v-for='<%= underscore_name %> in displayable_<%= plural_underscore_name %>'
+    <%= plural_dash_name_as_spaces %>           v-if='<%= plural_underscore_name %>'
+    <%= plural_dash_name_as_spaces %>           :<%= underscore_name %>='<%= underscore_name %>'
+    <%= plural_dash_name_as_spaces %>           :allow_actions='allow_actions'
+    <%= plural_dash_name_as_spaces %>           :key='<%= underscore_name %>.id'
+    <%= plural_dash_name_as_spaces %>           @edit='$emit("edit", { <%= underscore_name %>: <%= underscore_name %> })'
+    <%= plural_dash_name_as_spaces %>           @destroy='$emit("destroy", { <%= underscore_name %>: <%= underscore_name %> })')
 
-  entity-list-empty(v-if='!<%= plural_underscore_name %> || <%= plural_underscore_name %>.length == 0')
+    entity-list-empty(v-if='!<%= plural_underscore_name %> || <%= plural_underscore_name %>.length == 0')
 </template>
 
 <script lang="coffee">

@@ -8,16 +8,17 @@
                @save='saveFormMeme()'
                @cancel='clearFormMeme()')
 
-  .entity-manager-list(v-else)
-    .entity-manager-list-header
+  .entity-manager-list.header-contents-footer(v-else)
+    .entity-manager-list-header.header-contents-footer-header
       #new-meme-button.ui.primary.top.attached.fluid.small.icon.button(@click='newMeme')
         i.plus.icon
         |  Add Meme
 
-    memes-list(:memes='memes'
-               :allow_actions='true'
-               @edit='editMeme($event)'
-               @destroy='destroyMeme($event)')
+    .header-contents-footer-contents
+      memes-list(:memes='memes'
+                 :allow_actions='true'
+                 @edit='editMeme($event)'
+                 @destroy='destroyMeme($event)')
 </template>
 
 <script lang="coffee">

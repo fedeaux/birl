@@ -7,16 +7,17 @@
     <%= plural_dash_name_as_spaces %>      @save='saveForm<%= entity_name %>()'
     <%= plural_dash_name_as_spaces %>      @cancel='clearForm<%= entity_name %>()')
 
-  .entity-manager-list(v-else)
-    .entity-manager-list-header
+  .entity-manager-list.header-contents-footer(v-else)
+    .entity-manager-list-header.header-contents-footer-header
       #new-<%= dash_name %>-button.ui.primary.top.attached.fluid.small.icon.button(@click='new<%= entity_name %>')
         i.plus.icon
         |  Add <%= human_name %>
 
-    <%= plural_dash_name %>-list(:<%= plural_underscore_name %>='<%= plural_underscore_name %>'
-    <%= plural_dash_name_as_spaces %>      :allow_actions='true'
-    <%= plural_dash_name_as_spaces %>      @edit='edit<%= entity_name %>($event)'
-    <%= plural_dash_name_as_spaces %>      @destroy='destroy<%= entity_name %>($event)')
+    .header-contents-footer-contents
+      <%= plural_dash_name %>-list(:<%= plural_underscore_name %>='<%= plural_underscore_name %>'
+      <%= plural_dash_name_as_spaces %>      :allow_actions='true'
+      <%= plural_dash_name_as_spaces %>      @edit='edit<%= entity_name %>($event)'
+      <%= plural_dash_name_as_spaces %>      @destroy='destroy<%= entity_name %>($event)')
 </template>
 
 <script lang="coffee">

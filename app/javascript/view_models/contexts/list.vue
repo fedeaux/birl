@@ -1,17 +1,19 @@
 <template lang="pug">
-.entity-list.context-list.default-container
-  .entity-list-filter
-    inputs-clearable.fluid(v-model='filter.text')
+.entity-list.context-list.default-container.header-contents-footer
+  .header-contents-footer-header
+    .entity-list-filter
+      inputs-clearable.fluid(v-model='filter.text')
 
-  contexts-list-item(v-for='context in displayable_contexts'
-                     v-if='contexts'
-                     :context='context'
-                     :allow_actions='allow_actions'
-                     :key='context.id'
-                     @edit='$emit("edit", { context: context })'
-                     @destroy='$emit("destroy", { context: context })')
+  .header-contents-footer-contents
+    contexts-list-item(v-for='context in displayable_contexts'
+                       v-if='contexts'
+                       :context='context'
+                       :allow_actions='allow_actions'
+                       :key='context.id'
+                       @edit='$emit("edit", { context: context })'
+                       @destroy='$emit("destroy", { context: context })')
 
-  entity-list-empty(v-if='!contexts || contexts.length == 0')
+    entity-list-empty(v-if='!contexts || contexts.length == 0')
 </template>
 
 <script lang="coffee">
