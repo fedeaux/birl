@@ -15,6 +15,7 @@
 .memes-stream
   background-color: white
   position: relative
+  user-select: none
 
   .entity-list
     .meme-list-item-wrapper
@@ -22,8 +23,6 @@
         background-color: $selection-blue
         border-radius: $d
         border: thin solid $selection-blue-border
-        margin-left: -$d
-        margin-right: -$d
         padding: $d $d2
 
       &.with-previous-selected

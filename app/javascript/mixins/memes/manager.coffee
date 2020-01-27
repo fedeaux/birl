@@ -14,8 +14,6 @@ export default
     add_new: 'before'
 
   methods:
-    memeAdded: (index, meme) ->
-
     onMemeAdded: (index, meme) ->
 
     onMemesLoaded: ->
@@ -98,7 +96,7 @@ export default
       else
         Vue.set @memes, index, meme
 
-      @memeAdded index, meme
+      @onMemeAdded index, meme
 
     memeSaved: (data) ->
       @addMeme data.meme

@@ -117,7 +117,7 @@ hr
     right: $d
     color: $light-text-gray
 
-.entity-manager, .entity-index, .entity-manager-list, .entity-show-wrapper
+.entity-manager, .entity-index, .entity-manager-list, .entity-show-wrapper, .entity-stream-list
   height: 100%
 
 .header-contents-footer
@@ -131,6 +131,7 @@ hr
   .header-contents-footer-contents
     height: 100%
     overflow-y: auto
+    overflow-x: hidden
     flex-grow: 1
 
   .header-contents-footer-footer
@@ -141,6 +142,11 @@ hr
       margin-bottom: -$d2
       margin-right: -$d2
       margin-left: -$d2
+
+    &.slim-bottom-attached-footer
+      margin-bottom: -$d
+      margin-right: -$d
+      margin-left: -$d
 
     &.action-footer
       padding-top: $d2
