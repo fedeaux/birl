@@ -56,7 +56,7 @@ export default
     scroll_when_long_touch_started: null
 
     filter:
-      tags: 'none'
+      tags: 'all'
       type: 'all'
       text: ''
 

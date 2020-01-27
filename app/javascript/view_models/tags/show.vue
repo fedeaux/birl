@@ -7,7 +7,8 @@
           i.edit.icon
 
     //- BrainDamage: Body Start
-  memes-stream-index(:context='{ tag_id: tag.id }')
+    .header-contents-footer-contents
+      memes-stream-index(:context='{ tag_id: tag.id }')
     //- BrainDamage: Body End
 </template>
 
