@@ -8,16 +8,17 @@
                    @save='saveFormExercise()'
                    @cancel='clearFormExercise()')
 
-  .entity-manager-list(v-else)
-    .entity-manager-list-header
+  .entity-manager-list.header-contents-footer(v-else)
+    .entity-manager-list-header.header-contents-footer-header
       #new-exercise-button.ui.primary.top.attached.fluid.small.icon.button(@click='newExercise')
         i.plus.icon
         |  Add Exercise
 
-    exercises-list(:exercises='exercises'
-                   :allow_actions='true'
-                   @edit='editExercise($event)'
-                   @destroy='destroyExercise($event)')
+    .header-contents-footer-contents
+      exercises-list(:exercises='exercises'
+                     :allow_actions='true'
+                     @edit='editExercise($event)'
+                     @destroy='destroyExercise($event)')
 </template>
 
 <script lang="coffee">

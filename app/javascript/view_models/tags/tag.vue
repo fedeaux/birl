@@ -3,7 +3,7 @@
     | {{ tag[display] }}
     slot
 
-  .tags-tag(v-else-if='tag' :style='style' :is='html_tag')
+  .tags-tag(v-else-if='tag' :style='style')
     | {{ tag[display] }}
     slot
 </template>

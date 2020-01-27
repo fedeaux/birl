@@ -7,6 +7,8 @@
 export default
   methods:
     setContentPadding: ->
+      return unless @mobile
+
       @scrollableParent().css 'padding-bottom', "#{$(@$el).height() + 5}px"
 
     scrollableParent: ->

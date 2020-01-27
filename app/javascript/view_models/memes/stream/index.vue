@@ -20,7 +20,7 @@
       tag-taggables-picker(v-model='selected_tags')
 
       .ui.two.buttons
-        .ui.primary.button(@click='tagSelected()') Tag All
+        .ui.primary.button(@click='tagSelected()' v-if='selected_tags.length > 0') Tag All
         .ui.button(@click='stopTaggingSelected()') Cancel
 
     template(v-else)

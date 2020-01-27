@@ -4,6 +4,8 @@
     #menu.ui.inverted.menu
       shared-link.item(to='/tags') Tags
       shared-link.item(to='/memes') Memes
+      shared-link.item(to='/exercises') Exercises
+      shared-link.item(to='/contexts/choose') Contexts
 
   #contents-wrapper
     #contents
@@ -27,7 +29,7 @@
 
       close: (view) ->
         index = @viewIndex view
-        @views.splice index
+        @views.splice index, 1
 
       viewIndex: (view) ->
         @views.indexOf view

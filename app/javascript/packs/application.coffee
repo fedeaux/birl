@@ -71,9 +71,9 @@ store = new Vuex.Store(
       # Set dynamic css
       return unless Global.server.dynamic_css
 
-      # for rule in Global.server.dynamic_css
-      #   sheet = window.document.styleSheets[0]
-      #   sheet.insertRule rule, sheet.cssRules.length
+      for rule in Global.server.dynamic_css
+        sheet = window.document.styleSheets[0]
+        sheet.insertRule rule, sheet.cssRules.length
 
     setLoading: (context, data) ->
       context.commit 'setLoading', data

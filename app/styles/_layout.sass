@@ -1,10 +1,10 @@
 $header-height: 54px
 $header-buttom-dim: $header-height - $d2
 
-html, body
+html, body, #contents-wrapper, #contents
   height: 100%
   width: 100%
-  overflow-x: hidden
+  overflow: hidden
 
 *:not(i)
   font-weight: 300
@@ -21,7 +21,7 @@ hr
   border-top: thin $lightest-gray solid
 
 #birl-spa-container
-  min-height: 100%
+  height: 100%
 
   #header
     color: $text-gray
@@ -87,10 +87,6 @@ hr
 
   #contents-wrapper
     padding-top: $header-height
-    height: 100%
-
-    #contents
-      overflowy: scroll
 
   .default-container
     padding: $d4
@@ -120,3 +116,15 @@ hr
     top: $d2
     right: $d
     color: $light-text-gray
+
+.entity-manager, .entity-index, .entity-manager-list
+  height: 100%
+
+.header-contents-footer
+  height: 100%
+  display: flex
+  flex-direction: column
+
+  .header-contents-footer-contents
+    height: 100%
+    overflow-y: auto
