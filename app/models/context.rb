@@ -23,11 +23,36 @@ class Context < ApplicationRecord
     current_sessions.where(weekday: todays_weekday_in_timezone)
   end
 
-  def current_session
-    being_performed_now_session = sessions_on_this_weekday.where('updated_at >= ?', 12.hours.ago).first
-    return being_performed_now_session if being_performed_now_session
+  def recurrence_scheme_groups
+    Context.first.current_sessions.pluck(:recurrence_scheme).map { |rs| rs['group'] }.uniq
+  end
 
-    sessions_on_this_weekday.order(:updated_at).first
+  def oldest_recurrence_scheme_sequence_in_group(recurrence_scheme_group)
+    current_sessions
+      .where("recurrence_scheme->'group' = ?", recurrence_scheme_group.to_json)
+      .order(:executed_at, "recurrence_scheme->'sequence' DESC")
+      .limit(1)
+      .first
+      .recurrence_scheme['sequence']
+  end
+
+  def next_session_on_recurrence_scheme_group(recurrence_scheme_group)
+    oldest_recurrence_scheme_sequence = oldest_recurrence_scheme_sequence_in_group recurrence_scheme_group
+
+    next_in_sequence = current_sessions
+                         .where("recurrence_scheme->'group' = ?", recurrence_scheme_group.to_json)
+                         .where("recurrence_scheme->'sequence' = ?", (oldest_recurrence_scheme_sequence + 1).to_json)
+                         .first
+
+    next_in_sequence || current_sessions
+                          .where("recurrence_scheme->'group' = ?", recurrence_scheme_group.to_json)
+                          .where("recurrence_scheme->'sequence' = ?", 0.to_json).first
+  end
+
+  def next_sessions
+    recurrence_scheme_groups.map do |recurrence_scheme_group|
+      next_session_on_recurrence_scheme_group(recurrence_scheme_group)
+    end
   end
 
   def todays_things
@@ -36,7 +61,7 @@ class Context < ApplicationRecord
     if slug == 'music'
       todays_things[:progressions] = progressions.all
     elsif slug == 'bodybuilding'
-      todays_things[:sessions] = [current_session] if current_session
+      todays_things[:sessions] = next_sessions
     elsif slug == 'espanol'
       todays_things[:raw_links] = [{ name: 'Questioner', path: '/questioner' }]
     end

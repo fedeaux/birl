@@ -6,7 +6,7 @@ rails g entity group name context:references
 rails g entity lister name values:jsonb
 rails g entity meme type done_at:datetime user:belongs_to contents:jsonb
 rails g entity progression name details context:references challenge:references exercise:references last_entry_at:datetime
-rails g entity session name training:belongs_to
+rails g entity session name training:belongs_to recurrence_scheme:jsonb
 rails g entity session_progression session:belongs_to progression:belongs_to order:integer
 rails g entity tag name color background_color user:belongs_to meta:jsonb
 rails g entity tag_taggable taggable:references{polymorphic} tag:references

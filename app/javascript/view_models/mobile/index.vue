@@ -68,8 +68,7 @@
 
     methods:
       goHome: ->
-        @updateContext null, =>
-          @$router.push '/'
+        @$router.push '/'
 
       toggleMenu: (e) ->
         @show_menu = !@show_menu

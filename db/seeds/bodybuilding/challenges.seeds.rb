@@ -41,14 +41,24 @@ after('bodybuilding:exercises') do
         data_model: EntryDataModel::Isometry
       },
       {
+        name: 'HIIT sem peso',
+        description: '',
+        data_model: EntryDataModel::WeightlessHiit
+      },
+      {
         name: 'HIIT (leve)',
         description: '',
         data_model: EntryDataModel::Hiit
       },
       {
-        name: 'HIIT sem peso',
+        name: 'HIIT (médio)',
         description: '',
-        data_model: EntryDataModel::WeightlessHiit
+        data_model: EntryDataModel::Hiit
+      },
+      {
+        name: 'HIIT (pesado)',
+        description: '',
+        data_model: EntryDataModel::Hiit
       },
       {
         name: 'Movimento',

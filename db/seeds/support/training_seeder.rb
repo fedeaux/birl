@@ -57,10 +57,14 @@ class TrainingSeeder
   def ensure_session(signature)
     parts = signature.split('-').map(&:strip)
     name = parts[0]
-    weekday = Date.strptime(parts[1], '%A').wday
-
     session = Session.where(training_id: training.id, name: name).first_or_create
-    session.update(weekday: weekday)
+
+    begin
+      recurrence_scheme = instance_eval parts[1].strip
+      session.update(recurrence_scheme: recurrence_scheme)
+    rescue StandardError => e
+    end
+
     @created_session_ids.push session.id
     @order = ensure_everyday_progressions session
     session

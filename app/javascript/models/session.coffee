@@ -22,6 +22,7 @@ class Session extends BaseModel
       done_today: {}
       started_today: {}
       last_entry_at: { type: moment }
+      recurrence_scheme: {}
     }
 
 export default Session

@@ -1,1 +1,1 @@
-json.extract! session, :id, :name, :training_id, :weekday
+json.extract! session, :id, :name, :training_id, :recurrence_scheme
