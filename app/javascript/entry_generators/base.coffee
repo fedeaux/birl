@@ -5,10 +5,10 @@ class Base
   constructor: (@params = {}) ->
     @lister = new Lister
 
-  executionFromList: (list, count) ->
-    @executionFromArray @lister.list list, count
+  executionFromList: (list, count, variations_list = null) ->
+    @executionFromArray @lister.list(list, count), (variations_list && @lister.list(variations_list, count))
 
-  executionFromArray: (array) ->
-    new EntryValueSetExecution type: 'list', values: array
+  executionFromArray: (values, variations = null) ->
+    new EntryValueSetExecution type: 'list', values: values, variations: variations
 
 export default Base

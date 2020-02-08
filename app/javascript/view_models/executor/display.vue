@@ -16,6 +16,14 @@
       execution: ->
         @entry && @entry.value && @entry.value.sets && @entry.value.sets[@set_index] && @entry.value.sets[@set_index].execution
 
+      details: ->
+        return false unless @execution and
+                       @execution.variations and
+                       @execution.type == 'list' and
+                       typeof(@set_execution) == 'number'
+
+        @execution.variations[(@set_execution - 1) % @execution.variations.length]
+
       custom_text: ->
         return null unless @execution
 

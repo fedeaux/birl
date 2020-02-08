@@ -44,7 +44,10 @@
     .executor-form(v-if='(state == "doit" || state == "rest") && editable_set')
       .executor-detail(v-if='state == "rest"')
         | After rest
-      entries-value-set-picker(v-model='current_set' :data_model='data_model' :in_execution='true')
+      entries-value-set-picker(v-if="!bpm"
+                               v-model='current_set'
+                               :data_model='data_model'
+                               :in_execution='true')
 
     .executor-clock(v-if='state != "finished" && state != "idle"')
       .executor-clock-time(v-if='time_based || state == "rest"')

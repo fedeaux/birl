@@ -8,7 +8,11 @@ class Session < ApplicationRecord
   end
 
   def done_today
-    progressions.all?(&:done_today)
+    executed_at && executed_at > 12.hours.ago
+  end
+
+  def done_today?
+    executed_at && executed_at > 12.hours.ago
   end
 
   def started_today

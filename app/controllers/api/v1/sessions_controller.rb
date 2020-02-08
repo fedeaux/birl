@@ -54,6 +54,6 @@ class Api::V1::SessionsController < Api::V1::ApiController
   end
 
   def session_params
-    params.require(:session).permit(:id, :name, :training_id)
+    params.require(:session).permit(:id, :name, :training_id, :executed_at)
   end
 end

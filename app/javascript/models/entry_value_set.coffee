@@ -61,6 +61,7 @@ class EntryValueSet extends BaseModel
 
   human: ->
     str = ''
+
     if @reps
       str += @reps
 

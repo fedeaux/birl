@@ -64,6 +64,5 @@
         true
 
     mounted: ->
-      @updateContext null, =>
-        @loadTodays()
+      @loadTodays()
 </script>

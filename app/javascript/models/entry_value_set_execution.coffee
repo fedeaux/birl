@@ -9,6 +9,7 @@ class EntryValueSetExecution extends BaseModel
     {
       type: {}
       values: {}
+      variations: {}
     }
 
   numberOfExecutions: (set_mult) ->

@@ -5,6 +5,15 @@ class Lister
       cromatisms_warmup: ['1234', '2341', '3412', '4123']
       cromatisms_hard: ['1342', '2431', '3124', '4213']
       cromatisms_regular: ['1243', '2134', '1324', '2413', '1423', '2314']
+      # cromatisms_variations: ['x', 'downstairs', 'upstairs', 'string jump', 'pestana']
+
+      guitar_expressions: ['hammers&pulls', 'vibrato', 'bends', 'trills',
+                           'double bends', 'left tapping', 'slide']
+      # octabe playng, # volume swell
+
+      arpeggios: ['m7 (5)', 'M7 (5)', 'M7+ (6)']
+
+      musical_small_intervals: ['2m', '2M', '3m', '3M', '4J', '4#']
 
       kyokushin_kicks_basics: ['Mae Geri']
       kyokushin_kicks_basics_one_leg: ['Mawashi Geri']

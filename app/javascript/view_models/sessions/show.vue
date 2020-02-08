@@ -55,10 +55,13 @@ export default
     # BrainDamage: Methods Start
     executeNextProgression: ->
       @setCurrentSession @session
+
       for progression in @session.progressions
         unless progression.done_today
           @$router.push progression.executePath()
           return
+
+      @$router.push @session.progressions[0].executePath()
     # BrainDamage: Methods End
 
   mounted: ->

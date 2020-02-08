@@ -37,22 +37,24 @@ class Context < ApplicationRecord
   end
 
   def next_session_on_recurrence_scheme_group(recurrence_scheme_group)
+    sessions = current_sessions.where("recurrence_scheme->'group' = ?", recurrence_scheme_group.to_json)
+
+    # return nil if sessions.select(&:done_today?).any?
+
     oldest_recurrence_scheme_sequence = oldest_recurrence_scheme_sequence_in_group recurrence_scheme_group
 
-    next_in_sequence = current_sessions
-                         .where("recurrence_scheme->'group' = ?", recurrence_scheme_group.to_json)
+    next_in_sequence = sessions
                          .where("recurrence_scheme->'sequence' = ?", (oldest_recurrence_scheme_sequence + 1).to_json)
                          .first
 
-    next_in_sequence || current_sessions
-                          .where("recurrence_scheme->'group' = ?", recurrence_scheme_group.to_json)
+    next_in_sequence || sessions
                           .where("recurrence_scheme->'sequence' = ?", 0.to_json).first
   end
 
   def next_sessions
     recurrence_scheme_groups.map do |recurrence_scheme_group|
       next_session_on_recurrence_scheme_group(recurrence_scheme_group)
-    end
+    end.compact
   end
 
   def todays_things

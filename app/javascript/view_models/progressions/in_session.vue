@@ -21,6 +21,7 @@
 </template>
 
 <script lang="coffee">
+import SessionsResource from '../../resources/sessions_resource'
 import Session from '../../models/session'
 
 export default
@@ -31,18 +32,26 @@ export default
   data: ->
     next_progression: null
     prev_progression: null
+    sessions_resource: null
 
   methods:
     navigateToNext: ->
-      return unless @next_progression
-      @$router.push @next_progression.executePath()
+      if @next_progression
+        @$router.push @next_progression.executePath()
+      else
+        @currentSessionExecuted()
 
     finishSession: ->
       if @current_session
-        @$router.push @current_session.path()
+        @sessions_resource ?= new SessionsResource
+        @current_session.executed_at = moment()
+        @sessions_resource.update @current_session, @currentSessionUpdated
         return
 
       @$router.push '/'
+
+    currentSessionUpdated: ->
+      @$router.push @current_session.path()
 
   watch:
     current_progression_id:
