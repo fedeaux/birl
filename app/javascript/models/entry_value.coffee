@@ -8,7 +8,7 @@ class EntryValue extends BaseModel
 
   @attributes = ->
     {
-      global: { type: EntryValueSet }
+      global: { type: EntryValueSet, default: (new EntryValueSet) }
       sets: { type: EntryValueSet }
       options: {}
     }
@@ -19,5 +19,10 @@ class EntryValue extends BaseModel
 
   newSet: (data_model) ->
     @constructor.newSet @sets, data_model
+
+  formattedSets: ->
+    return [{ text: "#{@global.bpm}bpm" }] if @global.bpm
+
+    ({ text: set.human() } for set in @sets)
 
 export default EntryValue

@@ -77,7 +77,7 @@ class EntryValueSet extends BaseModel
     return "#{@mult}x(#{str})" if @mult and @mult > 1
     str
 
-  human_rest: ->
+  humanRest: ->
     return false unless @rest
     @formattedTime @rest
 

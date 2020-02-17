@@ -13,14 +13,10 @@
     computed:
       elements: ->
         els = []
-        last_set = null
 
-        for set in @value.sets
-          if last_set
-            els.push { class: 'rest', text: ' / ' }
+        for formatted_set in @value.formattedSets()
+          els.push formatted_set
+          els.push { text: ' / ', class: 'rest' }
 
-          els.push { class: 'set', text: set.human() }
-          last_set = set
-
-        els
+        els[0..-2]
 </script>
