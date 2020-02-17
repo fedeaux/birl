@@ -8,7 +8,8 @@ class Tag < ApplicationRecord
   has_many :tag_taggables, dependent: :destroy
   has_many :taggables, through: :taggables
 
-  has_many :memes, through: :tag_taggables, source: :taggable, source_type: "Meme"
+  has_many :memes, through: :tag_taggables, source: :taggable, source_type: 'Meme'
+  has_many :timelogs, through: :tag_taggables, source: :taggable, source_type: 'Timelog'
 
   default_scope ->{ order(:fullname) }
 

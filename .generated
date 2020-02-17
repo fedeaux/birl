@@ -10,6 +10,7 @@ rails g entity session name training:belongs_to recurrence_scheme:jsonb
 rails g entity session_progression session:belongs_to progression:belongs_to order:integer
 rails g entity tag name color background_color user:belongs_to meta:jsonb
 rails g entity tag_taggable taggable:references{polymorphic} tag:references
+rails g entity timelogs start:datetime finish:datetime description:text meta:jsonb user:references
 rails g entity training name context:references
 rails g entity vocabulary es pt_br en comment kind priority:integer meta:jsonb
 

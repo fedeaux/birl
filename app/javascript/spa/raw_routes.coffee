@@ -32,6 +32,10 @@ routes = [
   {
     path: '/contexts/choose'
     view: 'contexts/choose'
+  },
+  {
+    path: '/timelogs/today'
+    view: 'timelogs/today'
   }
 ]
 
@@ -57,7 +61,7 @@ add_rest = (routes, resource) ->
     path: "/#{resource}/:#{singular_resource}_id/edit"
     view: "#{resource}/edit"
 
-for resource in ['exercises', 'challenges', 'progressions', 'entries', 'trainings', 'sessions', 'contexts', 'listers', 'session_progressions', 'vocabularies', 'tags', 'memes']
+for resource in ['exercises', 'challenges', 'progressions', 'entries', 'trainings', 'sessions', 'contexts', 'listers', 'session_progressions', 'vocabularies', 'timelogs', 'tags', 'memes']
   add_rest routes, resource
 
 export default { routes }

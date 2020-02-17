@@ -1,0 +1,31 @@
+.timeline
+  position: relative
+
+  .timeline-item-wrapper
+    border-radius: $d
+    color: green
+    left: 26px
+    opacity: 0.5
+    padding: $d $d+3px
+    position: absolute
+    width: 156px
+
+    &:hover
+      opacity: 1
+      z-index: 1
+
+  .timeline-step
+    height: 10px
+    display: flex
+
+    .timeline-step-time
+      color: $text-gray
+      flex-basis: 26px
+      font-size: 8px
+      height: 10px
+      line-height: 10px
+      vertical-align: middle
+
+    .timeline-step-space
+      border-bottom: thin white solid
+      flex-grow: 1

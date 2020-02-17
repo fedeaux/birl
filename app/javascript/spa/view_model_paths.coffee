@@ -16,6 +16,7 @@ paths = [
   'shared/view'
 
   'inputs/clearable'
+  'inputs/time'
 
   'challenges/data_models/picker'
   'challenges/data_models/picker_item'
@@ -38,6 +39,12 @@ paths = [
   'tags/tag_list'
   'tags/tags'
   'tag_taggables/picker'
+
+  'timelogs/timer'
+
+  'timeline/day'
+  'timeline/item'
+  'timeline/step'
 
   'executor/audio_controls'
   'executor/counter'

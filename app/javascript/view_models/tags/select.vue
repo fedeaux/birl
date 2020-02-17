@@ -11,8 +11,7 @@
                :allowAdditions='allow_additions'
                placeholder='Tag'
                v-else
-               v-model='selected_tag_id')
-
+               v-model='selected_tag')
 </template>
 
 <script lang="coffee">
@@ -22,24 +21,25 @@ export default
   mixins: [TagsManagerMixin]
 
   model:
-    prop: 'tag_id'
+    prop: 'tag'
 
   props:
-    tag_id:
+    tag:
       default: null
 
     allow_additions:
       default: true
 
+    emit:
+      default: 'id'
+
   data: ->
+    selected_tag: null
     selected_tag_id: null
 
   methods:
     tagAdded: (index, tag) ->
-      @selectTag tag
-
-    selectTag: (tag) ->
-      @selected_tag_id = parseInt tag.id
+      @selected_tag = tag
 
   computed:
     loading: ->
@@ -47,22 +47,28 @@ export default
 
     tags_as_options: ->
       return [] unless @tags
-      { key: tag.id, value: tag.id, text: tag.name } for tag in @tags
+
+      { key: tag.id, value: tag, text: tag.name } for tag in @tags
 
   watch:
-    selected_tag_id: ->
-      selected_tag_id = parseInt @selected_tag_id
+    selected_tag: ->
+      @selected_tag_id = @selected_tag.id
 
-      unless isNaN selected_tag_id
-        @$emit 'input', selected_tag_id
+      unless isNaN @selected_tag_id
+        @$emit 'input', (@emit == 'id' and @selected_tag_id or @selected_tag)
         return
 
       @newTag name: @selected_tag_id
 
-    tag_id:
+    tag:
       immediate: true
       handler: ->
-        return unless @tag_id
-        @selected_tag_id = parseInt @tag_id
+        return unless @tag
+
+        if typeof @tag == 'Object'
+          @selected_tag_id = parseInt @tag.id
+          @selected_tag = @tag
+        else
+          @selected_tag_id = parseInt @tag
 
 </script>

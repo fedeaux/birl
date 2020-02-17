@@ -16,23 +16,25 @@ after(:users) do
 
   user = User.find_by(email: 'phec06@gmail.com')
 
-  [{
-     name: 'work',
-     children: [
-       {
-         name: 'runa',
-         children: ['issues', 'meeting']
-       }
-     ]
-   }, {
-     name: 'videos',
-     children: [
-       {
-         name: 'politics',
-         children: ['bandido-bom']
-       }
-     ]
-   }].each do |tag_attr|
+  [
+    {
+      name: 'work',
+      children: [
+        {
+          name: 'runa',
+          children: ['issues', 'meeting']
+        }
+      ]
+    }, {
+      name: 'videos',
+      children: [
+        {
+          name: 'politics',
+          children: ['bandido-bom']
+        }
+      ]
+    }
+  ].each do |tag_attr|
     create_tag user, tag_attr
   end
 end

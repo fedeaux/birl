@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_07_230837) do
+ActiveRecord::Schema.define(version: 2020_02_13_190257) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -145,6 +145,17 @@ ActiveRecord::Schema.define(version: 2020_02_07_230837) do
     t.index ["user_id"], name: "index_tags_on_user_id"
   end
 
+  create_table "timelogs", force: :cascade do |t|
+    t.datetime "start"
+    t.datetime "finish"
+    t.text "description"
+    t.jsonb "meta"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_timelogs_on_user_id"
+  end
+
   create_table "trainings", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -196,5 +207,6 @@ ActiveRecord::Schema.define(version: 2020_02_07_230837) do
   add_foreign_key "sessions", "trainings"
   add_foreign_key "tag_taggables", "tags"
   add_foreign_key "tags", "users"
+  add_foreign_key "timelogs", "users"
   add_foreign_key "users", "contexts", column: "current_context_id"
 end

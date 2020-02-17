@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      resources :timelogs
       post 'tag_taggables/batch_ensure_tags' => 'tag_taggables#batch_ensure_tags'
       resources :tag_taggables
       resources :memes
@@ -21,6 +22,7 @@ Rails.application.routes.draw do
       resources :session_progressions
       get 'sessions/todays' => 'sessions#todays'
       resources :sessions
+      resources :timelogs
       resources :training_sessions
       resources :trainings
     end
