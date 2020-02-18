@@ -4,7 +4,9 @@
 
     timeline-item(v-for='timelineable in timelineables'
                   :timelineable='timelineable'
-                  :key='timelineable.id')
+                  :key='timelineable.id'
+                  @edit='$emit("edit", { timelog: timelineable })'
+                  @destroy='$emit("destroy", { timelog: timelineable })')
 </template>
 
 <script lang="coffee">

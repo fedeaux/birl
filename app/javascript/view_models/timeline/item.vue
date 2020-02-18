@@ -68,7 +68,6 @@
         @confirming_destroy = false
 
       showActions: ->
-        console.log 'q'
         @showing_actions = true
         @confirming_destroy = false
 

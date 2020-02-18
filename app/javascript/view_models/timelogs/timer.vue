@@ -24,7 +24,10 @@
           .ui.basic.button(@click='cancel()') Cancel
 
         .field
-          .value {{ current_duration }}
+          template(v-if='mode == "chronometer"')
+            .value {{ current_chronometer }}
+          template(v-if='mode == "timer"')
+            .value {{ current_timer }}
 </template>
 
 <script lang="coffee">
@@ -42,10 +45,11 @@ export default
     timelog: null
     selected_tag: null
     timer_interval: null
+    mode: 'timer'
 
   methods:
     start: ->
-      @timer_interval = setInterval (=> @increaseTimelogFinish()), 1000
+      @timer_interval = setInterval (=> @clockTick()), 1000
 
     input: ->
       @$emit 'input', @timelog
@@ -58,16 +62,40 @@ export default
       @selected_tag = null
       @$emit 'cancel'
 
-    increaseTimelogFinish: ->
-      if @timelog and @timelog.finish
+    clockTick: ->
+      unless @timelog and @timelog.finish
+        clearInterval @timer_interval
+        @timer_interval = null
+
+      if @mode == 'chronometer'
         @timelog.finish = @timelog.finish.add 1, 'second'
-        @input()
 
-        @$forceUpdate()
-        return
+      @$forceUpdate()
+      @input()
 
-      clearInterval @timer_interval
-      @timer_interval = null
+    secondsFormatted: (seconds) ->
+      signal = seconds < 0 and '-' or ''
+      seconds = Math.abs seconds
+
+      hours = parseInt seconds / 3600
+      seconds -= hours * 3600
+      minutes = parseInt seconds / 60
+      seconds -= minutes * 60
+
+      parts = [signal]
+
+      if hours > 0
+        parts.push "#{hours}h"
+
+      if minutes > 0
+        parts.push "#{minutes}m"
+
+      if seconds != 0
+        parts.push "#{seconds}s"
+
+      return '--:--' unless parts.length > 0
+
+      parts.join('')
 
   computed:
     state: ->
@@ -76,37 +104,29 @@ export default
 
       'active'
 
-    current_duration: ->
+    current_timer: ->
       return '--:--' unless @timelog and @timelog.start and @timelog.finish
+      @secondsFormatted @timelog.finish.diff(moment(), 'seconds')
 
-      seconds = @timelog.finish.diff @timelog.start, 'seconds'
+    chronometer: ->
+      return null unless @timelog and @timelog.start and @timelog.finish
+      @timelog.finish.diff @timelog.start, 'seconds'
 
-      hours = parseInt seconds / 3600
-      seconds -= hours * 3600
-      minutes = parseInt seconds / 60
-      seconds -= minutes * 60
-
-      parts = []
-
-      if hours > 0
-        parts.push "#{hours}h"
-
-      if minutes > 0
-        parts.push "#{minutes}m"
-
-      if seconds > 0
-        parts.push "#{seconds}s"
-
-      return '--:--' unless parts.length > 0
-
-      parts.join('')
+    current_chronometer: ->
+      return '--:--' unless @chronometer
+      @secondsFormatted @chronometer
 
   watch:
     selected_tag:
       handler: ->
         return @$emit('cancel') unless @selected_tag
 
-        @$emit('new', main_tag: @selected_tag, start: moment(), finish: moment())
+        if @mode == 'timer'
+          @$emit('new', main_tag: @selected_tag, start: moment(), finish: moment().add(1, 'hour'))
+
+        else if @mode == 'chronometer'
+          @$emit('new', main_tag: @selected_tag, start: moment(), finish: moment())
+
         @start()
 
     original_timelog:

@@ -8,7 +8,9 @@
 
   .header-contents-footer-contents
     timeline-day(v-if='timelogs'
-                 :timelineables='all_timelogs')
+                 :timelineables='all_timelogs'
+                 @edit='editTimelog($event)'
+                 @destroy='destroyTimelog($event)')
 </template>
 
 <script lang="coffee">
