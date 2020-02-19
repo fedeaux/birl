@@ -18,7 +18,7 @@
 <script lang="coffee">
   export default
     data: ->
-      views: ['/timelogs/today']
+      views: ['/tags', '/memes', '/timelogs/today']
 
     methods:
       goTo: (data) ->

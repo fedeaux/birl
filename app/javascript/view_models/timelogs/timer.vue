@@ -1,33 +1,32 @@
 <template lang="pug">
 .entity-timer-wrapper.timelogs-timer-wrapper.default-container
   .ui.form
-    .fields
-      template(v-if='state == "idle"')
-        .field
-          tags-select(v-model='selected_tag' emit="value")
+    .fields.timer-tag-select(v-if='state == "idle"')
+      .field
+        tags-select(v-model='selected_tag' emit="value")
 
-      template(v-if='state == "preparing" || state == "active"')
-        .field
-          inputs-time(v-model='timelog.start')
+    .fields.timer-fields(v-if='state == "preparing" || state == "active"')
+      .field
+        inputs-time(v-model='timelog.start')
 
-        .field
-          inputs-time(v-model='timelog.finish')
+      .field
+        inputs-time(v-model='timelog.finish')
 
-        .field
-          input(type='text' v-model='timelog.description')
+      .field
+        input(type='text' v-model='timelog.description')
 
-      template(v-if='state == "active"')
-        .field
-          .ui.primary.button(@click='save()') Done
+    .fields.timer-actions(v-if='state == "active"')
+      .field
+        .ui.basic.button(@click='cancel()') Cancel
 
-        .field
-          .ui.basic.button(@click='cancel()') Cancel
+      .field
+        template(v-if='mode == "chronometer"')
+          .value {{ current_chronometer }}
+        template(v-if='mode == "timer"')
+          .value {{ current_timer }}
 
-        .field
-          template(v-if='mode == "chronometer"')
-            .value {{ current_chronometer }}
-          template(v-if='mode == "timer"')
-            .value {{ current_timer }}
+      .field
+        .ui.primary.button(@click='save()') Done
 </template>
 
 <script lang="coffee">

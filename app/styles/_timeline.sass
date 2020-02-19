@@ -45,6 +45,20 @@
 
 .ui.form
   .fields
-    .field
-      .tags-select.dropdown
-        width: 400px
+    &.timer-tag-select
+      .field, .tags-select.dropdown
+        width: 100%
+
+    &.timer-fields
+      display: flex
+
+      .field
+        flex-grow: 0
+
+      .field:last-child
+        flex-grow: 1
+
+    &.timer-actions
+      text-align: center
+      align-items: center
+      justify-content: center
