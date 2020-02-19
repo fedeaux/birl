@@ -1,6 +1,8 @@
 <template lang="pug">
 .entity-timeline.timelogs-timeline.header-contents-footer
-  .header-contents-footer-header
+  .header-contents-footer-header.timelogs-timeline-header
+    .timelogs-timeline-header-title {{ base_date.format('ddd, MMM DD') }}
+
     timelogs-timer(v-model='form_timelog'
                    @cancel='clearFormTimelog()'
                    @save='saveFormTimelog()'
@@ -23,10 +25,14 @@ import TimelogsResource from '../../resources/timelogs_resource'
 export default
   mixins: [TimelogsManagerMixin]
 
+  props:
+    base_date:
+      default: -> moment()
+
   data: ->
     range: false
-    start: moment().startOf('day')
-    finish: moment().endOf('day')
+    start: @base_date.clone().startOf('day')
+    finish: @base_date.clone().endOf('day')
 
   methods:
     rangeSelected: (@range) ->

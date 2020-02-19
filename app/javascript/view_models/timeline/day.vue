@@ -69,7 +69,9 @@
         @current_selection.range.contains step
 
       clockTick: ->
-        @hora_certa = moment()
+        timenow = moment()
+        return @hora_certa = null unless timenow.isAfter(@start) and timenow.isBefore(@finish)
+        @hora_certa = timenow
 
     created: ->
       @timer_interval = setInterval (=> @clockTick()), 1000

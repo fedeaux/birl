@@ -40,7 +40,9 @@ paths = [
   'tags/tags'
   'tag_taggables/picker'
 
+  'timelogs/range'
   'timelogs/timer'
+  'timelogs/today'
 
   'timeline/day'
   'timeline/item'

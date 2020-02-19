@@ -36,6 +36,10 @@ routes = [
   {
     path: '/timelogs/today'
     view: 'timelogs/today'
+  },
+  {
+    path: '/timelogs/week'
+    view: 'timelogs/week'
   }
 ]
 

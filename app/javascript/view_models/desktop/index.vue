@@ -6,6 +6,7 @@
       shared-link.item(to='/memes') Memes
       shared-link.item(to='/contexts/choose') Contexts
       shared-link.item(to='/timelogs/today') Today
+      shared-link.item(to='/timelogs/week') Week
 
   #contents-wrapper
     #contents

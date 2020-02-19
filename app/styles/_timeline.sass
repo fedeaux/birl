@@ -67,11 +67,25 @@
     .timeline-step-space
       flex-grow: 1
 
-    &:nth-child(even)
+    &.even
       background-color: $almost-white-gray
 
     &:hover, &.selected
       background-color: $selection-blue
+
+.timelogs-range
+  display: flex
+
+  .timelogs-range-day
+    flex-grow: 1
+
+    .timelogs-timeline-header
+      padding: 0 $d
+
+.timelogs-timeline-header-title
+  text-align: center
+  font-size: 1.2em
+  margin-bottom: $d
 
 .ui.form
   .fields
