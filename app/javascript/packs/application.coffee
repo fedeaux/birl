@@ -2,7 +2,10 @@ window.Vue = require('vue').default
 window._ = require 'underscore'
 window.$ = require 'jquery'
 window.jQuery = window.$
-window.moment = require 'moment'
+
+import Moment from 'moment'
+import { extendMoment } from 'moment-range';
+window.moment = extendMoment(Moment)
 
 import Database from 'lib/database'
 import Player from 'lib/player'

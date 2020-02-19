@@ -25,7 +25,19 @@
       height: 10px
       line-height: 10px
       vertical-align: middle
+      user-select: none
 
     .timeline-step-space
-      border-bottom: thin white solid
       flex-grow: 1
+
+    &:nth-child(even)
+      background-color: $almost-white-gray
+
+    &:hover, &.selected
+      background-color: $selection-blue
+
+.ui.form
+  .fields
+    .field
+      .tags-select.dropdown
+        width: 400px

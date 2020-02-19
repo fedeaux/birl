@@ -4,18 +4,19 @@
                    @save='saveFormTag()'
                    @cancel='clearFormTag()')
 
-  sui-dropdown(:options='tags_as_options'
-               :loading='loading'
-               :search='true'
-               :selection='true'
-               :allowAdditions='allow_additions'
-               placeholder='Tag'
-               v-else
-               v-model='selected_tag')
+  sui-dropdown.tags-select(:options='tags_as_options'
+                           :loading='loading'
+                           :search='true'
+                           :selection='true'
+                           :allowAdditions='allow_additions'
+                           placeholder='Tag'
+                           v-else
+                           v-model='selected_tag')
 </template>
 
 <script lang="coffee">
 import TagsManagerMixin from '../../mixins/tags/manager'
+import TagsResource from '../../resources/tags_resource'
 
 export default
   mixins: [TagsManagerMixin]
@@ -41,6 +42,15 @@ export default
     tagAdded: (index, tag) ->
       @selected_tag = tag
 
+    loadTags: ->
+      @tags_resource ?= new TagsResource
+
+      if @parent_tags
+        @tagsLoaded tags: @parent_tags
+        return
+
+      @tags_resource.leaves @tagsLoaded
+
   computed:
     loading: ->
       !@tags
@@ -48,7 +58,7 @@ export default
     tags_as_options: ->
       return [] unless @tags
 
-      { key: tag.id, value: tag, text: tag.name } for tag in @tags
+      { key: tag.id, value: tag, text: tag.fullname } for tag in @tags
 
   watch:
     selected_tag: ->

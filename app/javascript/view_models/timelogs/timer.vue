@@ -106,6 +106,10 @@ export default
 
     current_timer: ->
       return '--:--' unless @timelog and @timelog.start and @timelog.finish
+
+      range = moment().range @timelog.start, @timelog.finish
+      return @secondsFormatted @timelog.finish.diff(@timelog.start, 'seconds') unless range.contains moment()
+
       @secondsFormatted @timelog.finish.diff(moment(), 'seconds')
 
     chronometer: ->
