@@ -5,6 +5,11 @@ class Timelog < ApplicationRecord
 
   after_save :save_main_tag
 
+  scope :in_range, ->(from, to) {
+    range = (from..to)
+    where(start: range).or(where(finish: range))
+  }
+
   def main_tag
     tags.first
   end

@@ -3,6 +3,10 @@ class Api::V1::TimelogsController < Api::V1::ApiController
 
   def index
     @timelogs = current_user.timelogs
+
+    if params[:from] && params[:to]
+      @timelogs = @timelogs.in_range(params[:from], params[:to])
+    end
   end
 
   def show

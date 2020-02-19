@@ -9,6 +9,8 @@
   .header-contents-footer-contents
     timeline-day(v-if='timelogs'
                  :timelineables='all_timelogs'
+                 :start='start'
+                 :finish='finish'
                  @edit='editTimelog($event)'
                  @destroy='destroyTimelog($event)'
                  @rangeSelected='rangeSelected')
@@ -16,12 +18,15 @@
 
 <script lang="coffee">
 import TimelogsManagerMixin from '../../mixins/timelogs/manager'
+import TimelogsResource from '../../resources/timelogs_resource'
 
 export default
   mixins: [TimelogsManagerMixin]
 
   data: ->
     range: false
+    start: moment().startOf('day')
+    finish: moment().endOf('day')
 
   methods:
     rangeSelected: (@range) ->
@@ -35,6 +40,10 @@ export default
         params.finish = @range.finish
 
       @newTimelog params
+
+    loadTimelogs: ->
+      @timelogs_resource ?= new TimelogsResource
+      @timelogs_resource.index @timelogsLoaded, { from: @start.format(), to: @finish.format() }
 
   computed:
     all_timelogs: ->
