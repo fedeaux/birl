@@ -1,5 +1,5 @@
 <template lang="pug">
-  .timeline-step(@mousedown='mousedown' @mouseup='mouseup')
+  .timeline-step(@mousedown='mousedown' @mouseout='mouseout' @mouseup='mouseup' @click='click')
     .timeline-step-time
       | {{ time }}
     .timeline-step-space
@@ -13,8 +13,14 @@
       mousedown: ->
         @$emit 'selectionStarted', { step: @step }
 
+      mouseout: ->
+        @$emit 'selectionUpdated', { step: @step }
+
       mouseup: ->
         @$emit 'selectionFinished', { step: @step }
+
+      click: ->
+        @$emit 'toggleStep', { step: @step }
 
     computed:
       time: ->

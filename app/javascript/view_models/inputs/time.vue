@@ -8,7 +8,7 @@
     props: ['value']
 
     data: ->
-      inner_value: moment()
+      inner_value: null
       display_value: ''
 
     watch:
@@ -26,7 +26,9 @@
       inner_value:
         immediate: true
         handler: ->
-          @display_value = @inner_value.format('HH:mm')
+          return unless @inner_value
+
+          @display_value = @inner_value.format 'HH:mm'
 
       value:
         immediate: true

@@ -6,6 +6,7 @@
                   :step='step'
                   :class='{ selected: isSelected(step) }'
                   @selectionStarted='startASelection'
+                  @selectionUpdated='updateCurrentSelection'
                   @selectionFinished='finishCurrentSelection')
 
     timeline-item(v-for='timelineable in timelineables'
@@ -51,9 +52,15 @@
         @current_selection = { start: data.step, finish: false, range: null }
 
       finishCurrentSelection: (data) ->
+        @updateCurrentSelection data
+        @$emit 'rangeSelected', @current_selection
+        @current_selection.finished = true
+
+      updateCurrentSelection: (data) ->
+        return if !@current_selection or @current_selection.finished
+
         @current_selection.finish = data.step.clone().add @grid, 'minutes'
         @current_selection.range = moment().range(@current_selection.start, @current_selection.finish.clone().subtract(1, 'second'))
-        @$emit 'rangeSelected', @current_selection
 
       isSelected: (step) ->
         return false unless @current_selection and @current_selection.start
