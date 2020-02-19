@@ -18,6 +18,7 @@ export default
       # console.log 'timelogAdded', index, timelog
 
     getTimelog: (timelog_id) ->
+      return null unless timelog_id
       index = @timelogIndex timelog_id
       return null if index == -1
       @timelogs[index]

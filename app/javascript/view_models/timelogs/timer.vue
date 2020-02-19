@@ -1,7 +1,7 @@
 <template lang="pug">
 .entity-timer-wrapper.timelogs-timer-wrapper.default-container
   .ui.form
-    .fields.timer-tag-select(v-if='state == "idle"')
+    .fields.timer-tag-select
       .field
         tags-select(v-model='selected_tag' emit="value")
 
@@ -48,6 +48,8 @@ export default
 
   methods:
     start: ->
+      return if @timer_interval
+
       @timer_interval = setInterval (=> @clockTick()), 1000
 
     input: ->
@@ -124,11 +126,15 @@ export default
       handler: ->
         return @$emit('cancel') unless @selected_tag
 
-        if @mode == 'timer'
-          @$emit('new', main_tag: @selected_tag, start: moment(), finish: moment().add(1, 'hour'))
+        if @timelog
+          @timelog.main_tag = @selected_tag unless @timelog.main_tag == @selected_tag
 
-        else if @mode == 'chronometer'
-          @$emit('new', main_tag: @selected_tag, start: moment(), finish: moment())
+        else
+          if @mode == 'timer'
+            @$emit('new', main_tag: @selected_tag, start: moment(), finish: moment().add(1, 'hour'))
+
+          else if @mode == 'chronometer'
+            @$emit('new', main_tag: @selected_tag, start: moment(), finish: moment())
 
         @start()
 
@@ -138,6 +144,11 @@ export default
       handler: ->
         if @original_timelog
           @timelog = @original_timelog.clone()
+          return if @timelog.main_tag == @selected_tag
+
+          @selected_tag = @timelog.main_tag
+
         else
           @timelog = null
+          @selected_tag = null
 </script>

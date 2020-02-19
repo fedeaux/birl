@@ -11,7 +11,7 @@
                            :allowAdditions='allow_additions'
                            placeholder='Tag'
                            v-else
-                           v-model='selected_tag')
+                           v-model='selected_tag_id')
 </template>
 
 <script lang="coffee">
@@ -58,24 +58,25 @@ export default
     tags_as_options: ->
       return [] unless @tags
 
-      { key: tag.id, value: tag, text: tag.fullname } for tag in @tags
+      { key: tag.id, value: tag.id, text: tag.fullname } for tag in @tags
 
   watch:
-    selected_tag: ->
-      @selected_tag_id = @selected_tag.id
+    selected_tag_id: ->
+      @selected_tag = @getTag @selected_tag_id
 
       unless isNaN @selected_tag_id
         @$emit 'input', (@emit == 'id' and @selected_tag_id or @selected_tag)
         return
 
-      @newTag name: @selected_tag_id
+      # @newTag name: @selected_tag_id
 
     tag:
       immediate: true
       handler: ->
-        return unless @tag
-
-        if typeof @tag == 'Object'
+        if ! @tag
+          @selected_tag_id = null
+          @selected_tag = null
+        else if typeof @tag == 'object'
           @selected_tag_id = parseInt @tag.id
           @selected_tag = @tag
         else

@@ -47,7 +47,7 @@ export default
 
   computed:
     all_timelogs: ->
-      return @timelogs unless @form_timelog
+      return @timelogs unless @form_timelog and @form_timelog.isNewRecord()
 
       [@form_timelog].concat @timelogs
 </script>

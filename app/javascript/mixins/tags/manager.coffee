@@ -18,6 +18,7 @@ export default
       # console.log 'tagAdded', index, tag
 
     getTag: (tag_id) ->
+      return null unless tag_id
       index = @tagIndex tag_id
       return null if index == -1
       @tags[index]
