@@ -44,6 +44,7 @@ paths = [
 
   'timeline/day'
   'timeline/item'
+  'timeline/rule'
   'timeline/step'
 
   'executor/audio_controls'

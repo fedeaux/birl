@@ -1,5 +1,7 @@
 <template lang="pug">
   .timeline
+    timeline-rule(:at='hora_certa' :start='start')
+
     timeline-step(v-for='step in steps'
                   :step='step'
                   :class='{ selected: isSelected(step) }'
@@ -18,6 +20,8 @@
     data: ->
       current_selection: null
       selections: []
+      timer_interval: null
+      hora_certa: null
 
     props:
       grid:
@@ -56,4 +60,13 @@
         return step.isSame(@current_selection.start) unless @current_selection.finish
 
         @current_selection.range.contains step
+
+      clockTick: ->
+        @hora_certa = moment()
+
+    created: ->
+      @timer_interval = setInterval (=> @clockTick()), 1000
+
+    beforeDestroy: ->
+      clearInterval @timer_interval
 </script>
