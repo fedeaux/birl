@@ -22,9 +22,20 @@
        i.cancel.icon
 
   .timeline-item(v-if='!confirming_destroy && !showing_actions')
-    | {{ timelineable.start && timelineable.start.format('hh:mm') }}
-    | {{ timelineable.finish && timelineable.finish.format('hh:mm') }}
-    i.ellipsis.vertical.icon(@click='showActions')
+    .timeline-item-header
+      .timeline-item-header-actions
+        i.ellipsis.vertical.icon(@click='showActions')
+
+      .timeline-item-header-tag
+        | {{ timelineable.main_tag.fullname }}
+
+    .timeline-item-body
+      | {{ timelineable.description }}
+
+    .timeline-item-range
+      | {{ timelineable.start && timelineable.start.format('hh:mm') }}
+      | &rarr;
+      | {{ timelineable.finish && timelineable.finish.format('hh:mm') }}
 
 </template>
 

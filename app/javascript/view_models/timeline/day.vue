@@ -45,7 +45,7 @@
         @total_minutes / @grid
 
       steps: ->
-        (moment(@start).add(@grid * step, 'minutes') for step in [0..@number_of_steps])
+        (moment(@start).add(@grid * step, 'minutes') for step in [0...@number_of_steps])
 
     methods:
       startASelection: (data) ->

@@ -3,16 +3,45 @@
 
   .timeline-item-wrapper
     border-radius: $d
-    color: green
-    left: 26px
-    opacity: 0.5
-    padding: $d $d+3px
+    left: 30px
+    opacity: 0.9
+    padding: $d $d2
     position: absolute
-    width: 156px
+    width: calc(100%-35px)
+    overflow-y: hidden
 
     &:hover
       opacity: 1
       z-index: 1
+
+  .timeline-item
+    color: inherit
+
+    .timeline-item-header
+      color: inherit
+      font-size: .9em
+      position: relative
+
+      .timeline-item-header-tag
+        color: inherit
+        text-align: left
+
+      .timeline-item-header-actions
+        color: inherit
+        text-align: right
+        position: absolute
+        top: 0
+        right: -$d2
+
+    .timeline-item-range
+      color: inherit
+      font-size: .8em
+      font-family: "Courier New", Courier, monospace
+      position: absolute
+      bottom: $d
+
+    .timeline-item-body
+      color: inherit
 
   .timeline-rule
     background-color: blue
@@ -33,6 +62,7 @@
       line-height: 10px
       vertical-align: middle
       user-select: none
+      font-family: "Courier New", Courier, monospace
 
     .timeline-step-space
       flex-grow: 1
