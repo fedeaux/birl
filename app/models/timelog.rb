@@ -6,8 +6,7 @@ class Timelog < ApplicationRecord
   after_save :save_main_tag
 
   scope :in_range, ->(from, to) {
-    range = (from..to)
-    where(start: range).or(where(finish: range))
+    where('(start > :from AND start < :to) OR (finish > :from AND finish < :to)', from: from, to: to)
   }
 
   def main_tag

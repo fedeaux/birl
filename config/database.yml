@@ -29,4 +29,4 @@ staging:
 # To copy staging data to development
 # heroku backups:capture
 # heroku backups:download
-# pg_restore --verbose --clean --no-acl --no-owner -h localhost -U postgres -d getaway_development latest.dump
+# pg_restore --verbose --clean --no-acl --no-owner -h localhost -U postgres -d birl_development latest.dump

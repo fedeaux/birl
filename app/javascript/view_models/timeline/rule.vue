@@ -9,6 +9,6 @@
 
     methods:
       style: ->
-        { top: "#{moment.duration(@at.diff(@start)).asMinutes() + 10}px" }
+        { top: "#{moment.duration(@at.diff(@start)).asMinutes()}px" }
 
 </script>

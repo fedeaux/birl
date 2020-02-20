@@ -32,10 +32,13 @@
     .timeline-item-body
       | {{ timelineable.description }}
 
-    .timeline-item-range
-      | {{ timelineable.start && timelineable.start.format('hh:mm') }}
-      | &rarr;
-      | {{ timelineable.finish && timelineable.finish.format('hh:mm') }}
+    .timeline-item-footer
+      .timeline-item-footer-range
+        | {{ timelineable.start && timelineable.start.format('hh:mm') }}
+        | &rarr;
+        | {{ timelineable.finish && timelineable.finish.format('hh:mm') }}
+      .timeline-item-footer-duration
+        | ({{ timelineable.formattedDuration()}})
 
 </template>
 

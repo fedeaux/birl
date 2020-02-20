@@ -16,6 +16,8 @@
 
   .timeline-item
     color: inherit
+    position: relative
+    height: 100%
 
     .timeline-item-header
       color: inherit
@@ -33,12 +35,26 @@
         top: 0
         right: -$d2
 
-    .timeline-item-range
-      color: inherit
-      font-size: .8em
-      font-family: "Courier New", Courier, monospace
-      position: absolute
+    .timeline-item-footer
       bottom: $d
+      color: inherit
+      font-family: "Courier New", Courier, monospace
+      font-size: .8em
+      left: 0
+      position: absolute
+      right: 0
+
+      .timeline-item-footer-range
+        color: inherit
+        position: absolute
+        left: 0
+        bottom: 0
+
+      .timeline-item-footer-duration
+        color: inherit
+        position: absolute
+        right: 0
+        bottom: 0
 
     .timeline-item-body
       color: inherit

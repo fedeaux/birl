@@ -5,7 +5,7 @@ class Api::V1::TimelogsController < Api::V1::ApiController
     @timelogs = current_user.timelogs
 
     if params[:from] && params[:to]
-      @timelogs = @timelogs.in_range(params[:from], params[:to])
+      @timelogs = @timelogs.in_range(DateTime.parse(params[:from]), DateTime.parse(params[:to]))
     end
   end
 
