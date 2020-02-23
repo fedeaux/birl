@@ -29,6 +29,7 @@ gem 'rubocop', '>= 0.69', require: false
 gem 'sass-rails', '~> 5.0'
 gem 'seedbank'
 gem 'serviceworker-rails'
+gem 'sidekiq'
 gem 'slim'
 gem 'table_print', '~> 1.5'
 gem 'turbolinks', '~> 5'
