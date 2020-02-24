@@ -29,43 +29,43 @@
     text-align: center
     color: white
 
-    .executor-metronome-animation
-      background-repeat: no-repeat
-      background-size: contain
-      height: 120px
-      width: 120px
-      margin: auto
-      position: relative
+    /* .executor-metronome-animation
+    /*   background-repeat: no-repeat
+    /*   background-size: contain
+    /*   /* height: 120px
+    /*   /* width: 120px
+    /*   margin: auto
+    /*   position: relative
 
-      .executor-metronome-animation-label
-        bottom: $d
-        color: black
-        font-size: 14px
-        position: absolute
-        text-align: center
-        width: 100%
-        font-family: "Courier New", Courier, monospace
-        font-weight: bold
+    /*   .executor-metronome-animation-label
+    /*     bottom: $d
+    /*     color: white
+    /*     font-size: 14px
+    /*     position: absolute
+    /*     text-align: center
+    /*     width: 100%
+    /*     font-family: "Courier New", Courier, monospace
+    /*     font-weight: bold
 
-      &.left
-        background-image: url('/metronome/left.png')
+    /*   /* &.left
+    /*   /*   background-image: url('/metronome/left.png')
 
-      &.right
-        background-image: url('/metronome/right.png')
+    /*   /* &.right
+    /*   /*   background-image: url('/metronome/right.png')
 
     .executor-metronome-actions
-      margin-top: $d
+      margin: $d2 0
 
       .executor-metronome-action
-        font-size: 24px
         color: white
         display: inline-block
+        font-size: 24px
         height: $d8
         line-height: $d8
-        width: $d8
+        opacity: 0.8
         text-align: center
         vertical-align: center
-        opacity: 0.8
+        width: $d8
 
   .executor-form
     width: 100%
@@ -90,7 +90,7 @@
         color: white
 
         .ascii_drawing
-          font-size: 0.72em
+          font-size: 0.5em
 
     &.executor-label-doit
       font-size: 36px
@@ -139,12 +139,6 @@
       color: white !important
       font-size: 70px
       line-height: 70px
-      text-align: center
-
-    .executor-clock-next
-      color: white !important
-      font-size: 40px
-      line-height: 40px
       text-align: center
 
   &.executor-countdown
@@ -252,3 +246,18 @@
       .executor-counter-sets-set
         &.done, &.pending
           opacity: 0.7
+
+
+  .executor-main-action
+    background-color: rgba(white, 0.4)
+    border-radius: $d
+    font-size: 30px
+    height: 36px
+    line-height: 36px
+    margin: auto
+    text-align: center
+    vertical-align: middle
+    width: 33.3%
+
+    i
+      color: white

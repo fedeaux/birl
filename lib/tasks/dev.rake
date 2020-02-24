@@ -158,7 +158,7 @@ namespace :dev do
       f.write(index)
     end
 
-    apk = '/Users/fedorius/Work/my/birl/web/cordova/platforms/android/app/build/outputs/apk/debug/app-debug.apk'
+    apk = '/Users/fedorius/Work/birl/web/cordova/platforms/android/app/build/outputs/apk/debug/app-debug.apk'
     `rm #{apk}`
 
     `cd cordova/ && cordova build android`

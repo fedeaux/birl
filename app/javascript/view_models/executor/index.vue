@@ -52,7 +52,7 @@
     .executor-clock(v-if='state != "finished" && state != "idle"')
       .executor-clock-time(v-if='time_based || state == "rest"')
         | {{ display_time }}
-      .executor-clock-next(v-else)
+      .executor-main-action(v-else)
         i.white.arrow.alternate.circle.right.outline.icon(@click='timeout')
 
   .executor-actions

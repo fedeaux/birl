@@ -37,7 +37,7 @@ export default class AsciiDrawer
 
     rows = []
 
-    rows[0] = "#{a}-#{b}-#{c}-#{d}-"
+    rows[0] = "-#{a}-#{b}-#{c}-#{d}-"
     rows[1] = @rowToChar(rows[0]) + "#{c}-"
     rows[2] = @rowToChar(rows[1]) + "#{b}-"
     rows[3] = @rowToChar(rows[2]) + "#{a}-#{b}-#{c}-#{d}-"

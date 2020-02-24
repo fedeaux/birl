@@ -2,11 +2,8 @@
 #birl-spa-container.desktop
   #header
     #menu.ui.inverted.menu
-      shared-link.item(to='/tags') Tags
-      shared-link.item(to='/memes') Memes
-      shared-link.item(to='/contexts/choose') Contexts
-      shared-link.item(to='/timelogs/today') Today
-      shared-link.item(to='/timelogs/week') Week
+      router-link.item(:to='"/"') Home
+      router-link.item(:to='"/timelogs/week"') Week
 
   #contents-wrapper
     #contents

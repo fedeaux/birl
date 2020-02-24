@@ -1,21 +1,16 @@
 <template lang="pug">
   .executor-metronome
-    .executor-metronome-animation(:class='position')
-      .executor-metronome-animation-label
-        | {{ actual_bpm }}
-
     .executor-metronome-actions
       .executor-metronome-action(@click='minus5p') -5%
       .executor-metronome-action(@click='minus1') -1
-      .executor-metronome-action(v-if='bpm != actual_bpm' @click='reset')
-        i.refresh.icon
-      .executor-metronome-action(@click='toogleSound')
-        i.volume.off.icon(v-if='sound')
-        i.volume.up.icon(v-else)
-
+      .executor-metronome-action.bold
+        | {{ actual_bpm }}
       .executor-metronome-action(@click='plus1') +1
       .executor-metronome-action(@click='plus5p') +5%
 
+    .executor-main-action(@click='toogleSound')
+      i.volume.off.icon(v-if='sound')
+      i.volume.up.icon(v-else)
 </template>
 
 <script lang="coffee">

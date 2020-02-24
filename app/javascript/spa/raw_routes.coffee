@@ -10,6 +10,10 @@ routes = [
     view: 'home'
   },
   {
+    path: '/timelogs/week'
+    view: 'timelogs/week'
+  },
+  {
     path: '/today'
     view: 'sessions/today'
   },
