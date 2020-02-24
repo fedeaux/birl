@@ -180,8 +180,8 @@ export default
 
         @state = 'rest'
 
-        console.log '@current_set_execution', @current_set_execution
-        console.log '@current_set_target_executions', @current_set_target_executions
+        # console.log '@current_set_execution', @current_set_execution
+        # console.log '@current_set_target_executions', @current_set_target_executions
 
         if @current_set_execution < @current_set_target_executions
           @countdown parseInt @current_set.pause || @current_set.rest
