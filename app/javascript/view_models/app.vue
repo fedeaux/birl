@@ -4,6 +4,9 @@ desktop-index(v-else-if='desktop')
 </template>
 
 <script lang="coffee">
+
+import Device from '../lib/device'
+
 export default
   data: ->
     # force: 'mobile'
@@ -12,9 +15,9 @@ export default
 
   methods:
     resolveDevice: ->
-      return @force if @force
-      return 'mobile' if window.innerWidth < window.innerHeight
-      'desktop'
+      return new Device @force if @force
+      return new Device 'mobile' if window.innerWidth < window.innerHeight
+      new Device 'desktop'
 
     logoff: ->
       $.ajax

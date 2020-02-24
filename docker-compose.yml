@@ -6,3 +6,9 @@ services:
     container_name: "birl_development"
     ports:
       - "127.0.0.1:5432:5432"
+
+  redis:
+    image: "redis:5.0.7"
+    container_name: "birl_redis"
+    ports:
+      - "127.0.0.1:6379:6379"

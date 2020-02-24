@@ -58,11 +58,14 @@ export default
     device: ->
       @$store.state.device
 
+    deviceHomeComponentName: ->
+      @$store.state.device.homeComponentName()
+
     mobile: ->
-      @$store.state.device == 'mobile'
+      @$store.state.device.isMobile()
 
     desktop: ->
-      @$store.state.device == 'desktop'
+      @$store.state.device.isDesktop()
 
   created: ->
     @profile_resource = new ProfileResource

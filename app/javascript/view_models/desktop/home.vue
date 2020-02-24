@@ -1,21 +1,11 @@
 <template lang="pug">
-#birl-spa-container.desktop
-  #header
-    #menu.ui.inverted.menu
-      shared-link.item(to='/tags') Tags
-      shared-link.item(to='/memes') Memes
-      shared-link.item(to='/contexts/choose') Contexts
-      shared-link.item(to='/timelogs/today') Today
-      shared-link.item(to='/timelogs/week') Week
-
-  #contents-wrapper
-    #contents
-      router-view.slim-container
-      //- .desktop-component.default-container(v-for='view in views')
-      //-   .desktop-component-close(@click='close(view)')
-      //-     i.cancel.icon
-
-      //-   shared-view(:path='view')
+  .flex-views
+    .flex-view
+      shared-view(:path='"/tags"')
+    .flex-view.grow-2
+      shared-view(:path='"/timelogs/today"')
+    .flex-view
+      shared-view(:path='"/memes"')
 </template>
 
 <script lang="coffee">

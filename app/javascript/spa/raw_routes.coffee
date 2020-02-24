@@ -3,11 +3,11 @@
 routes = [
   {
     path: ''
-    view: 'mobile/home'
+    view: 'home'
   },
   {
     path: '/'
-    view: 'mobile/home'
+    view: 'home'
   },
   {
     path: '/today'
