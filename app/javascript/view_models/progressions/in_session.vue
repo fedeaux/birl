@@ -39,19 +39,17 @@ export default
       if @next_progression
         @$router.push @next_progression.executePath()
       else
-        @currentSessionExecuted()
+        @finishSession()
 
     finishSession: ->
-      if @current_session
-        @sessions_resource ?= new SessionsResource
-        @current_session.executed_at = moment()
-        @sessions_resource.update @current_session, @currentSessionUpdated
-        return
+      return @currentSessionUpdated() unless @current_session
 
-      @$router.push '/'
+      @sessions_resource ?= new SessionsResource
+      @current_session.executed_at = moment()
+      @sessions_resource.update @current_session, @currentSessionUpdated
 
     currentSessionUpdated: ->
-      @$router.push @current_session.path()
+      @$router.push '/'
 
   watch:
     current_progression_id:

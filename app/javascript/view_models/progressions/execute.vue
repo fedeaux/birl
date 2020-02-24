@@ -99,7 +99,9 @@ export default
 
   computed:
     executable: ->
-      @state == 'preparing' && @$refs.entries_manager.form_entry.value.sets.length > 0
+      @state == 'preparing' and
+        @$refs.entries_manager.form_entry and
+        @$refs.entries_manager.form_entry.value.sets.length > 0
 
     show_in_session: ->
       @current_session && @current_session.progressions &&

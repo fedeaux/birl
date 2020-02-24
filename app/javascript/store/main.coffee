@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import Session from '../models/session'
+
 Vue.use(Vuex)
 
 store = new Vuex.Store(

@@ -19,7 +19,6 @@ window.Global =
 
 require 'semantic-ui-sass'
 
-import Session from '../models/session'
 import routes from '../spa/routes'
 import SuiVue from 'semantic-ui-vue'
 Vue.use SuiVue
