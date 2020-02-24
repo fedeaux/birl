@@ -32,8 +32,7 @@ export default class AsciiDrawer
   draw: ->
     return JSON.stringify @args unless @args.ascii_drawing.model == 'fretboard' and @args.ascii_drawing.preset == 'x'
 
-    [a, b, c, d] = @args.text.split('')
-    [a, b, c, d] = '1324'.split('')
+    [a, b, c, d] = @args.ascii_drawing.chromatism.split('')
 
     rows = []
 

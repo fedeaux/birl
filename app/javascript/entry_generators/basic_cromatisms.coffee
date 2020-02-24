@@ -12,7 +12,11 @@ class BasicCromatisms extends Base
 
   addVariation: (chromatism, variation) ->
     execution = {
-      x: [{ text: chromatism, ascii_drawing: { model: 'fretboard', preset: 'x' } }]
+      x: [
+           { text: chromatism }
+           { ascii_drawing: { model: 'fretboard', preset: 'x', chromatism: chromatism } }
+           { ascii_drawing: { model: 'fretboard', preset: 'x', chromatism: '1515' } }
+         ]
     }[variation]
 
     return execution if execution
@@ -22,7 +26,6 @@ class BasicCromatisms extends Base
   addCromatisms: ->
     regular_cromatisms = @lister.list 'cromatisms_regular', 3
     warmup_cromatisms = @lister.list 'cromatisms_warmup', 2
-    cromatisms_variations = @lister.list 'cromatisms_variations', 2
 
     @new_entry.value.sets[0] = new EntryValueSet(mult: 1, bpmm: 1, rest: 30)
     @new_entry.value.sets[0].execution = @executionFromArray [warmup_cromatisms[0]]
@@ -31,13 +34,13 @@ class BasicCromatisms extends Base
     @new_entry.value.sets[1].execution = @executionFromArray [regular_cromatisms[0]]
 
     @new_entry.value.sets[2] = new EntryValueSet(mult: 1, bpmm: 4/5, rest: 30)
-    @new_entry.value.sets[2].execution = @executionFromArray [@addVariation regular_cromatisms[0], cromatisms_variations[0]]
+    @new_entry.value.sets[2].execution = @executionFromArray [@addVariation regular_cromatisms[0], @lister.item 'easy_cromatisms_variations']
 
     @new_entry.value.sets[3] = new EntryValueSet(mult: 1, bpmm: 1, rest: 30)
     @new_entry.value.sets[3].execution = @executionFromArray [regular_cromatisms[1]]
 
-    @new_entry.value.sets[4] = new EntryValueSet(mult: 1, bpmm: 4/5, rest: 30)
-    @new_entry.value.sets[4].execution = @executionFromArray [@addVariation regular_cromatisms[1], cromatisms_variations[1]]
+    @new_entry.value.sets[4] = new EntryValueSet(mult: 1, bpmm: 7/10, rest: 30)
+    @new_entry.value.sets[4].execution = @executionFromArray [@addVariation regular_cromatisms[1], @lister.item 'hard_cromatisms_variations']
 
     @new_entry.value.sets[5] = new EntryValueSet(mult: 1, bpmm: 7/8, rest: 30)
     @new_entry.value.sets[5].execution = @executionFromList('cromatisms_hard', @new_entry.value.sets[2].mult)
