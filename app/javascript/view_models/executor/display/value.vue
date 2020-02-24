@@ -1,7 +1,7 @@
 <template lang="pug">
 .executor-display-value(v-if='value')
   template(v-for='item in value')
-    template(v-if='item.text')
+    div(v-if='item.text')
       | {{ item.text }}
 
     pre.ascii_drawing(v-if='item.ascii_drawing')

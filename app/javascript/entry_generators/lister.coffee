@@ -5,7 +5,7 @@ class Lister
       cromatisms_warmup: ['1234', '2341', '3412', '4123']
       cromatisms_hard: ['1342', '2431', '3124', '4213']
       cromatisms_regular: ['1243', '2134', '1324', '2413', '1423', '2314']
-      # cromatisms_variations: ['x', 'downstairs', 'upstairs', 'string jump', 'pestana']
+      cromatisms_variations: ['x', 'downstairs', 'upstairs', 'string jump', 'pestana', 'one string']
 
       guitar_expressions: ['hammers&pulls', 'vibrato', 'bends', 'trills',
                            'double bends', 'left tapping', 'slide']
@@ -75,9 +75,6 @@ class Lister
       result.push all[index % all.length]
 
     result
-
-  chromatisms: (list, count) ->
-    [{ text: value, ascii_drawing: { model: 'fretboard', preset: 'x' } }] for value in @list(list, count)
 
 window.Lister = Lister
 export default Lister
