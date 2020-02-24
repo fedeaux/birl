@@ -55,6 +55,7 @@ paths = [
   'executor/audio_controls'
   'executor/counter'
   'executor/display'
+  'executor/display/value'
   'executor/index'
   'executor/metronome'
   'executor/progress_bar'

@@ -15,7 +15,8 @@ class BasicCromatisms extends Base
     warmup_cromatisms = @lister.list 'cromatisms_warmup', 2
 
     @new_entry.value.sets[0] = new EntryValueSet(mult: 1, bpmm: 1, rest: 30)
-    @new_entry.value.sets[0].execution = @executionFromArray [warmup_cromatisms[0]]
+    @new_entry.value.sets[0].execution = @executionFromArray @lister.chromatisms 'cromatisms_regular', 1
+    # @new_entry.value.sets[0].execution = @executionFromArray [warmup_cromatisms[0]]
 
     @new_entry.value.sets[1] = new EntryValueSet(mult: 3, bpmm: 1, rest: 30)
     @new_entry.value.sets[1].execution = @executionFromArray regular_cromatisms.slice(0, 3)

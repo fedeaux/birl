@@ -21,8 +21,8 @@ class EntryValueSetExecution extends BaseModel
     index = (set_execution - 1) % @values.length
     value = @values[index]
 
-    return value if typeof(value) == 'Object'
+    return value if _.isArray value
 
-    { type: 'text', text: value }
+    [{ text: value }]
 
 export default EntryValueSetExecution

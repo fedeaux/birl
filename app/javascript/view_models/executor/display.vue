@@ -1,8 +1,8 @@
 <template lang="pug">
 .executor-display
-  template(v-if='custom_text')
-    slot(v-if='custom_text || default_text')
-    | {{ custom_text }}
+  template(v-if='custom_value')
+    slot(v-if='custom_value || default_text')
+    executor-display-value(:value='custom_value')
 
   template(v-else-if='default_text')
     | {{ default_text }}
@@ -22,7 +22,7 @@
         @execution.getValue @set_execution
 
       custom_text: ->
-        return unless @custom_value and @custom_value.type == 'text'
+        return unless @custom_value and @custom_value.text
         text = @custom_value.text
 
         if @data_model && @data_model.label

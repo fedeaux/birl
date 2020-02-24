@@ -76,5 +76,8 @@ class Lister
 
     result
 
+  chromatisms: (list, count) ->
+    [{ text: value, ascii_drawing: { model: 'fretboard', preset: 'x' } }] for value in @list(list, count)
+
 window.Lister = Lister
 export default Lister
