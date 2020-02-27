@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_13_190257) do
+ActiveRecord::Schema.define(version: 2020_02_27_231659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,15 @@ ActiveRecord::Schema.define(version: 2020_02_13_190257) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_contexts_on_user_id"
+  end
+
+  create_table "days", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "stamp"
+    t.boolean "planned"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_days_on_user_id"
   end
 
   create_table "entries", force: :cascade do |t|
@@ -153,6 +162,8 @@ ActiveRecord::Schema.define(version: 2020_02_13_190257) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "day_id"
+    t.index ["day_id"], name: "index_timelogs_on_day_id"
     t.index ["user_id"], name: "index_timelogs_on_user_id"
   end
 
@@ -197,6 +208,7 @@ ActiveRecord::Schema.define(version: 2020_02_13_190257) do
   end
 
   add_foreign_key "contexts", "users"
+  add_foreign_key "days", "users"
   add_foreign_key "entries", "progressions"
   add_foreign_key "exercises", "groups"
   add_foreign_key "memes", "users"
@@ -207,6 +219,7 @@ ActiveRecord::Schema.define(version: 2020_02_13_190257) do
   add_foreign_key "sessions", "trainings"
   add_foreign_key "tag_taggables", "tags"
   add_foreign_key "tags", "users"
+  add_foreign_key "timelogs", "days"
   add_foreign_key "timelogs", "users"
   add_foreign_key "users", "contexts", column: "current_context_id"
 end

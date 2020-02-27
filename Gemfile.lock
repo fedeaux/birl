@@ -313,6 +313,7 @@ GEM
     slim (4.0.1)
       temple (>= 0.7.6, < 0.9)
       tilt (>= 2.0.6, < 2.1)
+    spring (2.1.0)
     sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -381,6 +382,7 @@ DEPENDENCIES
   serviceworker-rails
   sidekiq
   slim
+  spring
   table_print (~> 1.5)
   turbolinks (~> 5)
   tzinfo-data

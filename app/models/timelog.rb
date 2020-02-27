@@ -14,12 +14,15 @@ class Timelog < ApplicationRecord
   end
 
   def main_tag=(main_tag_params)
-    @main_tag = Tag.find(main_tag_params[:id])
+    @main_tag = if main_tag_params.nil? || main_tag_params.is_a?(Tag)
+                  main_tag_params
+                else
+                  Tag.find(main_tag_params[:id])
+                end
   end
 
   def save_main_tag
-    return unless @main_tag
-    return if @main_tag.id == main_tag&.id
+    return unless @main_tag && @main_tag.id != main_tag&.id
 
     tag_taggables.destroy_all
     TagTaggable.create(taggable: self, tag_id: @main_tag.id)

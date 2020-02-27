@@ -37,11 +37,12 @@ gem 'uglifier', '>= 1.3.0'
 gem 'webpacker', '~> 4.2.2'
 
 group :development, :test do
+  gem 'better_errors'
+  gem 'binding_of_caller'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'listen'
   gem 'rspec-rails'
-  gem 'better_errors'
-  gem 'binding_of_caller'
+  gem 'spring'
 end
 
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

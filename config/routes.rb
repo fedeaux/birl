@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      post 'timelogs/plan_my_day' => 'timelogs#plan_my_day'
       resources :timelogs
       post 'tag_taggables/batch_ensure_tags' => 'tag_taggables#batch_ensure_tags'
       resources :tag_taggables

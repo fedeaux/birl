@@ -16,7 +16,7 @@ class Context < ApplicationRecord
   end
 
   def todays_weekday_in_timezone
-    DateTime.now.in_time_zone(user.timezone).wday
+    user.time_now.wday
   end
 
   def sessions_on_this_weekday

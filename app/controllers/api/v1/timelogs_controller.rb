@@ -9,6 +9,12 @@ class Api::V1::TimelogsController < Api::V1::ApiController
     end
   end
 
+  def plan_my_day
+    DayBuilder::Day.new(current_user).build
+
+    render head: 200
+  end
+
   def show
   end
 
