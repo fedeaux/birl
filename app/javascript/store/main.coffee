@@ -44,10 +44,10 @@ store = new Vuex.Store(
         context.commit 'setCurrentSession', current_session: new Session session_attributes
 
       # Set dynamic css
-      return unless Global.server.dynamic_css
+      sheet = window.document.styleSheets[0]
+      return unless Global.server.dynamic_css and sheet
 
       for rule in Global.server.dynamic_css
-        sheet = window.document.styleSheets[0]
         sheet.insertRule rule, sheet.cssRules.length
 
     setLoading: (context, data) ->

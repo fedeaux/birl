@@ -1,5 +1,5 @@
 <template lang="pug">
-.entity-timeline.timelogs-timeline.header-contents-footer
+.entity-timeline.timelogs-timeline.header-contents-footer(@mouseup='stopDragging')
   .header-contents-footer-header.timelogs-timeline-header
     .timelogs-timeline-header-title {{ base_date.format('ddd, MMM DD') }}
 
@@ -18,7 +18,10 @@
                  :finish='finish'
                  @edit='editTimelog($event)'
                  @destroy='destroyTimelog($event)'
-                 @rangeSelected='rangeSelected')
+                 @rangeSelected='rangeSelected'
+                 @startDragging='startDragging'
+                 @stopDragging='stopDragging'
+                 @stepHovered='stepHovered')
 </template>
 
 <script lang="coffee">
@@ -36,8 +39,25 @@ export default
     range: false
     start: @base_date.clone().startOf('day')
     finish: @base_date.clone().endOf('day')
+    dragging_timelog: null
+    dragging_handle: null
 
   methods:
+    startDragging: (data) ->
+      @dragging_timelog = data.timelineable
+      @dragging_handle = data.handle
+
+    stepHovered: (data) ->
+      return unless @dragging_timelog and @dragging_handle
+
+      @dragging_timelog[@dragging_handle] = data.step.clone()
+
+    stopDragging: ->
+      return unless @dragging_timelog
+
+      @setFormTimelog @dragging_timelog
+      @dragging_timelog = null
+
     rangeSelected: (@range) ->
       if @form_timelog
         @form_timelog.start = @range.start

@@ -1,9 +1,9 @@
 <template lang="pug">
-  .timeline-step(@mousedown='mousedown'
+  .timeline-step(:class='{ even: parseInt(step.minutes() / 10) % 2 == 0 }'
+                 @mousedown='mousedown'
                  @mouseout='mouseout'
                  @mouseup='mouseup'
-                 @click='click'
-                 :class='{ even: parseInt(step.minutes() / 10) % 2 == 0 }')
+                 @click='click')
     .timeline-step-time
       | {{ time }}
     .timeline-step-space

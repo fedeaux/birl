@@ -1,6 +1,9 @@
 .timeline
   position: relative
 
+  *
+    user-select: none
+
   .timeline-item-wrapper
     border-radius: $d
     left: 30px
@@ -10,9 +13,27 @@
     width: calc(100%-35px)
     overflow-y: hidden
 
+    .timeline-item-upper-handle, .timeline-item-lower-handle
+      @include texture(rgba(black, 0.5), 1, 1)
+      cursor: ns-resize
+      height: $d
+      left: 0
+      position: absolute
+      right: 0
+      display: none
+
+    .timeline-item-upper-handle
+      top: 0
+
+    .timeline-item-lower-handle
+      bottom: 0
+
     &:hover
       opacity: 1
       z-index: 1
+
+      .timeline-item-upper-handle, .timeline-item-lower-handle
+        display: inline
 
   .timeline-item
     color: inherit

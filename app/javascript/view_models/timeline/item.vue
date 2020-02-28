@@ -1,5 +1,8 @@
 <template lang="pug">
 .timeline-item-wrapper(:style='style')
+  .timeline-item-upper-handle(@mousedown='startDragging({ handle: "start" })')
+    | &nbsp;
+
   .entity-timeline-item-confirming-destroy(v-if='confirming_destroy && !showing_actions')
     .ui.four.column.grid
       .column
@@ -34,11 +37,14 @@
 
     .timeline-item-footer
       .timeline-item-footer-range
-        | {{ timelineable.start && timelineable.start.format('hh:mm') }}
+        | {{ timelineable.start && timelineable.start.format('HH:mm') }}
         | &rarr;
-        | {{ timelineable.finish && timelineable.finish.format('hh:mm') }}
+        | {{ timelineable.finish && timelineable.finish.format('HH:mm') }}
       .timeline-item-footer-duration
         | ({{ timelineable.formattedDuration()}})
+
+  .timeline-item-lower-handle(@mousedown='startDragging({ handle: "finish" })')
+    | &nbsp;
 
 </template>
 
@@ -73,6 +79,10 @@
     methods:
       snapToGrid: (position) ->
         parseInt(position / 10) * 10
+
+      startDragging: (data) ->
+        data.timelineable = @timelineable
+        @$emit 'startDragging', data
 
       confirmDestroy: ->
         @confirming_destroy = true

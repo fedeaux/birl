@@ -13,7 +13,8 @@
                   :timelineable='timelineable'
                   :key='timelineable.id'
                   @edit='$emit("edit", { timelog: timelineable })'
-                  @destroy='$emit("destroy", { timelog: timelineable })')
+                  @destroy='$emit("destroy", { timelog: timelineable })'
+                  @startDragging='startDragging')
 </template>
 
 <script lang="coffee">
@@ -53,13 +54,20 @@
 
       finishCurrentSelection: (data) ->
         @updateCurrentSelection data
-        @$emit 'rangeSelected', @current_selection
-        @current_selection.finished = true
+
+        if @current_selection
+          @$emit 'rangeSelected', @current_selection
+          @current_selection.finished = true
 
       updateCurrentSelection: (data) ->
-        return if !@current_selection or @current_selection.finished
+        if !@current_selection or @current_selection.finished
+          return @$emit 'stepHovered', data
 
         @current_selection.finish = data.step.clone().add @grid, 'minutes'
+
+        if @current_selection.finish.isBefore @current_selection.start
+          [@current_selection.start, @current_selection.finish] = [@current_selection.finish, @current_selection.start]
+
         @current_selection.range = moment().range(@current_selection.start, @current_selection.finish.clone().subtract(1, 'second'))
 
       isSelected: (step) ->
@@ -72,6 +80,9 @@
         timenow = moment()
         return @hora_certa = null unless timenow.isAfter(@start) and timenow.isBefore(@finish)
         @hora_certa = timenow
+
+      startDragging: (data) ->
+        @$emit 'startDragging', data
 
     created: ->
       @timer_interval = setInterval (=> @clockTick()), 1000
