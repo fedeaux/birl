@@ -43,6 +43,10 @@ class Player
     schema ?= @schema
     (@audios[schema] && @audios[schema][name] || @audios['default'][name])?.play()
 
+  srcFor: (name, schema) ->
+    schema ?= @schema
+    (@audios[schema] && @audios[schema][name] || @audios['default'][name])?.src
+
   image: (schema) ->
     @images[schema]
 
@@ -55,6 +59,15 @@ class Player
 
     i = Math.floor Math.random() * n
     @play @events[schema][event][i], schema
+
+  srcForEvent: (event, schema) ->
+    schema ?= @schema
+    return unless schema && @events[schema] && @events[schema][event]
+    n = @events[schema][event].length
+    return if n < 1
+
+    i = Math.floor Math.random() * n
+    @srcFor @events[schema][event][i], schema
 
   namelize: (path) ->
     parts = path.split('/')

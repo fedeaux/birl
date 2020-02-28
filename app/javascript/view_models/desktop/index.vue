@@ -43,7 +43,8 @@
       notify: (notification) ->
         Notification.requestPermission().then ->
           notification.options.icon = '/logo_xxxhdpi.png'
-          notification.options.badge = '/favicon.ico'
+          notification.options.sound = Global.player.srcForEvent 'doit_finished', 'birl'
+          notification.options.silent = false
           window.serviceWorkerRegistration.showNotification notification.title, notification.options
 
     mounted: ->
