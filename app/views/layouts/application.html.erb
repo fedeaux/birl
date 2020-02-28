@@ -10,6 +10,7 @@
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
 
+    <%= javascript_include_tag 'application' %>
     <%= javascript_pack_tag 'application' %>
     <%= stylesheet_link_tag(*sources_from_manifest_entries(['semantic_ui', 'theme'], type: :stylesheet)) %>
     <link rel="manifest" href="/manifest.json" />

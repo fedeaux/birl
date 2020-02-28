@@ -4,6 +4,7 @@
     #menu.ui.inverted.menu
       router-link.item(:to='"/"') Home
       router-link.item(:to='"/timelogs/week"') Week
+      .item(@click='requestNotificationsPermission') Notifications
 
   #contents-wrapper
     #contents
@@ -34,6 +35,10 @@
 
       viewIndex: (view) ->
         @views.indexOf view
+
+      requestNotificationsPermission: ->
+        Notification.requestPermission().then ->
+          window.serviceWorkerRegistration.showNotification('oe')
 
     mounted: ->
       Global.events.$on 'Desktop::GoTo', @goTo
