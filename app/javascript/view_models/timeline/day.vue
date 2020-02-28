@@ -92,6 +92,11 @@
         @notifyCurrentTimelineables added_timelineables, removed_timelineables
 
         @timelineables_at_rule = new_timelineables_at_rule
+        timelog = @timelineables_at_rule[0]
+        return unless timelog
+
+        seconds = @$options.filters.seconds timelog.finish.diff(@hora_certa, 'seconds')
+        Global.events.$emit 'SetTitle', title: "#{seconds} - #{timelog.main_tag.fullname}"
 
       startDragging: (data) ->
         @current_selection = null
