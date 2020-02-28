@@ -176,7 +176,7 @@ def download_assets(css_lines, base_url)
       if ms && ms[1]
         url = ms[1].gsub('"', '')
 
-        unless url.index('data:')
+        unless url.index('data:') || url.index('https')
           path = ''
           file_name = ''
 
