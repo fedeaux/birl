@@ -1,5 +1,5 @@
 <template lang="pug">
-.timeline-item-wrapper(:style='style')
+.timeline-item-wrapper(:style='style' @dblclick='$emit("edit")')
   .timeline-item-upper-handle(@mousedown='startDragging({ handle: "start" })')
     | &nbsp;
 

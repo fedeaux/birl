@@ -82,6 +82,7 @@
         @hora_certa = timenow
 
       startDragging: (data) ->
+        @current_selection = null
         @$emit 'startDragging', data
 
     created: ->
