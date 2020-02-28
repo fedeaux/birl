@@ -45,6 +45,9 @@
     //- .header-button#contexts-toggle(@click='choose_context = !choose_context')
     //-   i.bars.icon
 
+    .header-title
+      | {{ title }}
+
     .header-button#home-link(@click='goHome')
       i.home.icon
 
@@ -61,6 +64,8 @@
 
 <script lang="coffee">
   export default
+    props: ['title']
+
     data: ->
       show_menu: false
       show_memes: false

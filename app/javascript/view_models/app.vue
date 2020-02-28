@@ -1,5 +1,5 @@
 <template lang="pug">
-mobile-index(v-if='mobile')
+mobile-index(v-if='mobile' :title='title')
 desktop-index(v-else-if='desktop')
 </template>
 
@@ -12,6 +12,7 @@ export default
     # force: 'mobile'
     # force: 'desktop'
     force: null
+    title: ''
 
   methods:
     resolveDevice: ->
@@ -26,8 +27,16 @@ export default
         complete: (a, b, c) ->
           console.log a, b, c
 
+    setTitle: (data) ->
+      @title = data.title
+      document.title = @title
+
   created: ->
     @setInitialUser()
     @setDevice @resolveDevice()
+    Global.events.$on 'SetTitle', @setTitle
+
+  beforeDestroy: ->
+    Global.events.$off 'SetTitle', @setTitle
 
 </script>

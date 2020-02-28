@@ -33,6 +33,7 @@ export default
     next_progression: null
     prev_progression: null
     sessions_resource: null
+    chronometer: null
 
   methods:
     navigateToNext: ->
@@ -50,6 +51,21 @@ export default
 
     currentSessionUpdated: ->
       @$router.push '/'
+
+    clockTick: ->
+      return unless @current_session and @current_session.started_at
+      seconds = @$options.filters.seconds(moment.duration(moment().diff(@current_session.started_at)).asSeconds())
+
+      Global.events.$emit 'SetTitle', title: "#{seconds} - #{@current_session.name}"
+
+  created: ->
+    return unless @current_session and @current_session.started_at
+
+    @chronometer = setInterval @clockTick, 1000
+
+  beforeDestroy: ->
+    clearInterval @chronometer
+    Global.events.$emit 'SetTitle', title: null
 
   watch:
     current_progression_id:
@@ -74,5 +90,4 @@ export default
         unless passed_current
           @next_progression = null
           @prev_progression = null
-
 </script>

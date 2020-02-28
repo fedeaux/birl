@@ -74,30 +74,6 @@ export default
       @$forceUpdate()
       @input()
 
-    secondsFormatted: (seconds) ->
-      signal = seconds < 0 and '-' or ''
-      seconds = Math.abs seconds
-
-      hours = parseInt seconds / 3600
-      seconds -= hours * 3600
-      minutes = parseInt seconds / 60
-      seconds -= minutes * 60
-
-      parts = [signal]
-
-      if hours > 0
-        parts.push "#{hours}h"
-
-      if minutes > 0
-        parts.push "#{minutes}m"
-
-      if seconds != 0
-        parts.push "#{seconds}s"
-
-      return '--:--' unless parts.length > 0
-
-      parts.join('')
-
   computed:
     state: ->
       return 'idle' unless @selected_tag and @timelog
@@ -109,9 +85,9 @@ export default
       return '--:--' unless @timelog and @timelog.start and @timelog.finish
 
       range = moment().range @timelog.start, @timelog.finish
-      return @secondsFormatted @timelog.finish.diff(@timelog.start, 'seconds') unless range.contains moment()
+      return @$options.filters.seconds @timelog.finish.diff(@timelog.start, 'seconds') unless range.contains moment()
 
-      @secondsFormatted @timelog.finish.diff(moment(), 'seconds')
+      @$options.filters.seconds @timelog.finish.diff(moment(), 'seconds')
 
     chronometer: ->
       return null unless @timelog and @timelog.start and @timelog.finish
@@ -119,7 +95,7 @@ export default
 
     current_chronometer: ->
       return '--:--' unless @chronometer
-      @secondsFormatted @chronometer
+      @$options.filters.seconds @chronometer
 
   watch:
     selected_tag:

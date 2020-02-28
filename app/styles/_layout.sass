@@ -26,7 +26,9 @@ hr
   #header
     color: $text-gray
 
-    .header-button
+    .header-button, .header-title
+      color: $text-gray
+
       i
         color: $text-gray
 
@@ -34,7 +36,9 @@ hr
     #header
       color: white
 
-      .header-button
+      .header-button, .header-title
+        color: white
+
         i
           color: white
 
@@ -50,14 +54,14 @@ hr
     .header-button
       border-radius: $d
       display: inline-block
+      font-size: 2rem
       height: $header-buttom-dim
       line-height: $header-buttom-dim
-      width: $header-buttom-dim
       padding: $d
       position: absolute
       top: $d
       vertical-align: middle
-      font-size: 2rem
+      width: $header-buttom-dim
 
       i
         position: relative
@@ -80,6 +84,11 @@ hr
 
     #side-menu-toggle
       right: $d
+
+    .header-title
+      font-size: 1.6rem
+      text-align: center
+      padding-top: 0.2rem
 
   #menu
     z-index: 998

@@ -83,6 +83,7 @@ export default
 
     execute: ->
       return unless @executable
+
       @setExecutableEntry @$refs.entries_manager.populateFormEntry()
 
       @$nextTick =>

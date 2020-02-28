@@ -54,6 +54,9 @@ export default
 
     # BrainDamage: Methods Start
     executeNextProgression: ->
+      unless @session.started_today
+        @session.started_at = moment()
+
       @setCurrentSession @session
 
       for progression in @session.progressions

@@ -53,8 +53,10 @@ for view_model_path in view_model_paths.paths
 import { Chrome } from 'vue-color'
 Vue.component 'color-picker', Chrome
 
-# for name, filter of Filters
-#   Vue.filter name, filter
+import filters from '../spa/filters'
+
+for name, filter of filters
+  Vue.filter name, filter
 
 Global.initialize = ->
   if $('#birl-spa-container').length > 0
