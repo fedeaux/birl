@@ -1,5 +1,4 @@
 class Day < ApplicationRecord
-  belongs_to :day, optional: true
   belongs_to :user
 
   def self.ensure(user)

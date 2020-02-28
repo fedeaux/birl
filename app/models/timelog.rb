@@ -1,4 +1,5 @@
 class Timelog < ApplicationRecord
+  belongs_to :day, optional: true
   belongs_to :user
   has_many :tag_taggables, as: :taggable, dependent: :destroy
   has_many :tags, through: :tag_taggables

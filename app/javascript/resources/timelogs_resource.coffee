@@ -4,11 +4,11 @@ import Timelog from '../models/timelog'
 class TimelogsResource extends BaseResource
   @model = -> Timelog
 
-  planMyDay: (success, params = {}) ->
+  planMyDay: (complete, params = {}) ->
     $.ajax
       url: @collectionUrl('/plan_my_day')
       type: 'post'
       data: params
-      success: success
+      complete: complete
 
 export default TimelogsResource

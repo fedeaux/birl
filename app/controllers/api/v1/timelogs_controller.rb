@@ -10,9 +10,9 @@ class Api::V1::TimelogsController < Api::V1::ApiController
   end
 
   def plan_my_day
-    DayBuilder::Day.new(current_user).build
+    DayBuilder::Day.new(current_user, plan_my_day_params).build
 
-    render head: 200
+    head 200
   end
 
   def show
@@ -47,5 +47,9 @@ class Api::V1::TimelogsController < Api::V1::ApiController
 
   def timelog_params
     params.require(:timelog).permit(:id, :start, :finish, :description, :meta, main_tag: [:id])
+  end
+
+  def plan_my_day_params
+    params.permit(:start)
   end
 end

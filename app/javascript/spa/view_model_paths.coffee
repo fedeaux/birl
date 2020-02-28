@@ -43,6 +43,7 @@ paths = [
   'tags/tags'
   'tag_taggables/picker'
 
+  'timelogs/day_planner'
   'timelogs/range'
   'timelogs/timer'
   'timelogs/today'

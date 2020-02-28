@@ -3,7 +3,8 @@
   .header-contents-footer-header.timelogs-timeline-header
     .timelogs-timeline-header-title {{ base_date.format('ddd, MMM DD') }}
 
-    .ui.primary.button(@click='planMyDay') Plan my day
+    timelogs-day-planner(:base_date='base_date'
+                         @dayPlanned='loadTimelogs')
 
     timelogs-timer(v-model='form_timelog'
                    @cancel='clearFormTimelog()'
@@ -52,10 +53,6 @@ export default
     loadTimelogs: ->
       @timelogs_resource ?= new TimelogsResource
       @timelogs_resource.index @timelogsLoaded, { from: @start.format(), to: @finish.format() }
-
-    planMyDay: ->
-      @timelogs_resource ?= new TimelogsResource
-      @timelogs_resource.planMyDay @loadTimelogs
 
   computed:
     all_timelogs: ->
