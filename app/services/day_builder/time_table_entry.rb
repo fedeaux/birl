@@ -1,12 +1,13 @@
 module DayBuilder
   class TimeTableEntry
-    attr_reader :user, :start
+    attr_reader :user, :start, :description
     attr_accessor :duration
     attr_writer :finish
 
     def initialize(params = {})
       @duration = params[:duration]
       @finish = params[:finish]
+      @description = params[:description]
       @start = params[:start]
       @tag_fullname = params[:tag]
 
@@ -38,6 +39,7 @@ module DayBuilder
       {
         start: start,
         finish: finish,
+        description: description,
         main_tag: tag,
         user: user,
         day: day
@@ -61,21 +63,21 @@ module DayBuilder
       return [] if day(user).planned?
 
       # First thing in the morning
-      guitar_and_cook = new(start: start_of_day,
+      cook = new(start: start_of_day,
                             duration: '1h30min',
-                            tag: 'progressions:guitar',
-                            description: 'While cooking',
+                            tag: 'chores:cook',
+                            description: '(and meditate)',
                             user: user
                            )
-      entries = [guitar_and_cook]
+      entries = [cook]
 
       # first meal
-      entries.push new(start: guitar_and_cook.finish - 20.minutes,
+      entries.push new(start: cook.finish - 20.minutes,
                        duration: '10min',
                        tag: 'life:eat',
                        user: user)
 
-      first_runa = new(start: guitar_and_cook.finish,
+      first_runa = new(start: cook.finish,
                        duration: '4h',
                        tag: 'work:runa:squad_ron',
                        user: user)
@@ -125,6 +127,7 @@ module DayBuilder
 end
 
 # chores:acyclic
+# chores:cook
 # chores:market
 # chores:other
 # life:beloveds

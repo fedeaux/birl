@@ -96,7 +96,7 @@
         return unless timelog
 
         seconds = @$options.filters.seconds timelog.finish.diff(@hora_certa, 'seconds')
-        Global.events.$emit 'SetTitle', title: "#{seconds} - #{timelog.main_tag.fullname}"
+        Global.events.$emit 'SetTitle', title: "#{seconds} - #{timelog.main_tag.name}"
 
       startDragging: (data) ->
         @current_selection = null
@@ -105,7 +105,9 @@
       notifyCurrentTimelineables: (added_timelineables, removed_timelineables) ->
         return if added_timelineables.length == 0
 
-        Global.events.$emit 'Notify', title: 'Starting now', options: { body: "#{added_timelineables[0].main_tag.fullname}" }
+        body = added_timelineables[0].description || ''
+
+        Global.events.$emit 'Notify', title: "Starting #{added_timelineables[0].main_tag.fullname}", options: { body: body }
 
     created: ->
       @timer_interval = setInterval (=> @clockTick()), 1000
