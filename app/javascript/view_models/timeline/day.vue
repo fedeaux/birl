@@ -24,6 +24,7 @@
       selections: []
       timer_interval: null
       hora_certa: null
+      timelineables_at_rule: []
 
     props:
       grid:
@@ -80,10 +81,26 @@
         timenow = moment()
         return @hora_certa = null unless timenow.isAfter(@start) and timenow.isBefore(@finish)
         @hora_certa = timenow
+        return unless @timelineables
+
+        new_timelineables_at_rule = @timelineables.filter (timelineable) =>
+          (@hora_certa.isAfter(timelineable.start) and @hora_certa.isBefore(timelineable.finish))
+
+        added_timelineables = _.difference new_timelineables_at_rule, @timelineables_at_rule
+        removed_timelineables = _.difference @timelineables_at_rule, new_timelineables_at_rule
+
+        @notifyCurrentTimelineables added_timelineables, removed_timelineables
+
+        @timelineables_at_rule = new_timelineables_at_rule
 
       startDragging: (data) ->
         @current_selection = null
         @$emit 'startDragging', data
+
+      notifyCurrentTimelineables: (added_timelineables, removed_timelineables) ->
+        return if added_timelineables.length == 0
+
+        Global.events.$emit 'Notify', title: 'Starting now', options: { body: "#{added_timelineables[0].main_tag.fullname}" }
 
     created: ->
       @timer_interval = setInterval (=> @clockTick()), 1000

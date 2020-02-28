@@ -73,6 +73,7 @@ Global.initialize = ->
       created: ->
         @$store.dispatch 'setInitialState'
         $(document).ajaxStart(@load).ajaxComplete(@loaded)
+
     ).$mount '#birl-spa-container'
 
 unless location.protocol == 'file:'

@@ -38,11 +38,19 @@
 
       requestNotificationsPermission: ->
         Notification.requestPermission().then ->
-          window.serviceWorkerRegistration.showNotification('oe')
+          window.serviceWorkerRegistration.showNotification('permitted')
+
+      notify: (notification) ->
+        Notification.requestPermission().then ->
+          notification.options.icon = '/logo_xxxhdpi.png'
+          notification.options.badge = '/favicon.ico'
+          window.serviceWorkerRegistration.showNotification notification.title, notification.options
 
     mounted: ->
       Global.events.$on 'Desktop::GoTo', @goTo
+      Global.events.$on 'Notify', @notify
 
     beforeDestroy: ->
       Global.events.$off 'Desktop::GoTo', @goTo
+      Global.events.$off 'Notify', @notify
 </script>
