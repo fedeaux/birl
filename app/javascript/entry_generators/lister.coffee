@@ -1,31 +1,40 @@
 class Lister
   constructor: ->
     @lists = {
+      # Music
       musical_notes: ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#']
+      musical_small_intervals: ['2m', '2M', '3m', '3M', '4J', '4#']
+
+      # Guitar
       cromatisms_warmup: ['1234', '2341', '3412', '4123']
       cromatisms_hard: ['1342', '2431', '3124', '4213']
       cromatisms_regular: ['1243', '2134', '1324', '2413', '1423', '2314']
       easy_cromatisms_variations: ['stairs', 'pestana', 'one string']
       hard_cromatisms_variations: ['x', 'string jump']
 
-      guitar_expressions: ['hammers&pulls', 'vibrato', 'bends', 'trills',
-                           'double bends', 'left tapping', 'slide']
-      # octabe playng, # volume swell
+      guitar_expressions: ['hammers&pulls', 'vibrato', 'bends', 'trills', 'octave playng',
+                           'double bends', 'left tapping', 'slide', 'volume swell']
 
       arpeggios: ['m7 (5)', 'M7 (5)', 'M7+ (6)']
 
-      musical_small_intervals: ['2m', '2M', '3m', '3M', '4J', '4#']
-
+      # Karate
       kyokushin_kicks_basics: ['Mae Geri']
       kyokushin_kicks_basics_one_leg: ['Mawashi Geri']
 
-      kyokushin_kicks_secondary: ['Yoko Geri', 'Ushiro Geri', 'Ura Mawashi Geri', 'Kubi Geri']
+      kyokushin_kicks_secondary: ['Yoko Geri', 'Ushiro Geri', 'Uchi Heisoku Geri Jodan', 'Ura Mawashi Geri', 'Kubi Geri']
 
-      kyokushin_kicks_stretch: ['Uchi Mawashi Geri', 'Soto Mawashi Geri', 'Straight Yoko Geri']
-      kyokushin_kicks_stretch_one_leg: ['Straight Mae Geri']
+      kyokushin_kicks_stretch: ['Uchi Mawashi Geri', 'Yoko Keage Geri']
+      kyokushin_kicks_stretch_one_leg: ['Mae Keage Geri']
 
       kyokushin_kicks_hard: ['Ushiro Mawashi Geri', 'Uchi Kakato Otoshi Geri', 'Soto Kakato Otoshi Geri']
       kyokushin_kicks_explosive: ['Explosive Mawashi Geri', 'Explosive Gedan Mawashi Geri']
+
+      # Yoga
+      yoga_sessions: [
+        { link: 'https://www.youtube.com/watch?v=sO3g2fm0Gcw' }
+        { link: 'https://www.youtube.com/watch?v=sXSzAeOADbE' }
+        { link: 'https://www.youtube.com/watch?v=SYJtLGrod7Y' }
+      ]
     }
 
     for list in window.Global.server.lists

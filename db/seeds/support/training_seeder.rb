@@ -101,24 +101,59 @@ class TrainingSeeder
   end
 
   def special_progressions
-    chutes_kyokushin = Progression.find_by(name: 'Chutes Kyokushin - HIIT (leve)')
-    return unless chutes_kyokushin
+    [
+      {
+        name: 'Chutes Kyokushin - HIIT (leve)',
+        data: {
+          override_entry_data_model: {
+            generator: {
+              name: :kyokushin_kihon_kicks
+            }
+          }
+        }
+      },
 
-    chutes_kyokushin.update(override_entry_data_model: {
-                              generator: {
-                                name: :kyokushin_kihon_kicks
-                              }
-                            })
+      {
+        name: 'Chutes Kyokushin - HIIT (pesado)',
+        data: {
+          override_entry_data_model: {
+            generator: {
+              name: :weighted_kyokushin_kihon_kicks
+            }
+          }
+        }
+      },
 
-    movimentos_legais = Progression.find_by(name: 'Movimentos Legais - Movimento')
-    return unless movimentos_legais
+      {
+        name: 'Movimentos Legais - Movimento',
+        data: {
+          override_entry_data_model: {
+            generator: {
+              name: :abstract_list,
+              params: { list: 'Cool Moves' }
+            }
+          }
+        }
+      },
 
-    movimentos_legais.update(override_entry_data_model: {
-                               generator: {
-                                 name: :abstract_list,
-                                 params: { list: 'Cool Moves' }
-                               }
-                             })
+      {
+        name: 'Yoga - Movimento',
+        data: {
+          override_entry_data_model: {
+            generator: {
+              name: :abstract_list,
+              params: { list: 'yoga_sessions' }
+            }
+          }
+        }
+      }
+    ].each do |progression_params|
+      progression = Progression.find_by(name: progression_params[:name])
+
+      next unless progression
+
+      progression.update(progression_params[:data])
+    end
   end
 
   def user

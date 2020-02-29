@@ -1,6 +1,11 @@
 <template lang="pug">
 .executor-display-value(v-if='value')
   template(v-for='item in value')
+    a(v-if='item.link'
+      target='blank'
+      :href='item.link')
+      | link
+
     div(v-if='item.text')
       | {{ item.text }}
 
@@ -13,10 +18,6 @@
 
   export default
     props: ['value']
-
-    computed:
-      execution: ->
-        'kkkk'
 
     methods:
       asciiDrawing: (item) ->
