@@ -1,7 +1,7 @@
 <template lang="pug">
 .timelogs-range
   .timelogs-range-day(v-for='date in dates')
-    timelogs-today(:base_date='date')
+    timelogs-today(:override_base_date='date')
 </template>
 
 <script lang="coffee">

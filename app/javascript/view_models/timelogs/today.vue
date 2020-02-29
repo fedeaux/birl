@@ -1,7 +1,15 @@
 <template lang="pug">
 .entity-timeline.timelogs-timeline.header-contents-footer(@mouseup='stopDragging')
   .header-contents-footer-header.timelogs-timeline-header
-    .timelogs-timeline-header-title {{ base_date.format('ddd, MMM DD') }}
+    .timelogs-timeline-header-title
+      span.action(@click='backward')
+        | &larr;
+
+      span.contents(v-if='base_date')
+        | {{ base_date.format('ddd, MMM DD') }}
+
+      span.action(@click='forward')
+        | &rarr;
 
     timelogs-day-planner(:base_date='base_date'
                          @dayPlanned='loadTimelogs')
@@ -32,17 +40,22 @@ export default
   mixins: [TimelogsManagerMixin]
 
   props:
-    base_date:
+    override_base_date:
       default: -> moment()
 
   data: ->
     range: false
-    start: @base_date.clone().startOf('day')
-    finish: @base_date.clone().endOf('day')
     dragging_timelog: null
     dragging_handle: null
+    base_date: @override_base_date.clone()
 
   methods:
+    backward: ->
+      @base_date = @base_date.clone().subtract 1, 'day'
+
+    forward: ->
+      @base_date = @base_date.clone().add 1, 'day'
+
     startDragging: (data) ->
       @dragging_timelog = data.timelineable
       @dragging_handle = data.handle
@@ -72,7 +85,19 @@ export default
 
     loadTimelogs: ->
       @timelogs_resource ?= new TimelogsResource
+      return unless @start and @finish
+
       @timelogs_resource.index @timelogsLoaded, { from: @start.format(), to: @finish.format() }
+
+  watch:
+    base_date:
+      deep: true
+      immediate: true
+      handler: ->
+        console.log 'kkkkkkkkkkkkk'
+        @start = @base_date.clone().startOf('day')
+        @finish = @base_date.clone().endOf('day')
+        @loadTimelogs()
 
   computed:
     all_timelogs: ->
