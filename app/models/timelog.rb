@@ -11,7 +11,7 @@ class Timelog < ApplicationRecord
   }
 
   def main_tag
-    tags.first
+    tag_taggables.find_by("meta->>'main' = ?", true.to_json)&.tag
   end
 
   def main_tag=(main_tag_params)
@@ -26,6 +26,6 @@ class Timelog < ApplicationRecord
     return unless @main_tag && @main_tag.id != main_tag&.id
 
     tag_taggables.destroy_all
-    TagTaggable.create(taggable: self, tag_id: @main_tag.id)
+    TagTaggable.create(taggable: self, tag_id: @main_tag.id, meta: { main: true })
   end
 end

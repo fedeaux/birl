@@ -47,11 +47,17 @@
           notification.options.silent = false
           window.serviceWorkerRegistration.showNotification notification.title, notification.options
 
+      currentTimelineablesChanged: (data) ->
+        return unless data.added_timelineables and data.added_timelineables.length > 0
+
+        body = data.added_timelineables[0].description || ''
+        @notify title: "Starting #{data.added_timelineables[0].main_tag.fullname}", options: { body: body }
+
     mounted: ->
       Global.events.$on 'Desktop::GoTo', @goTo
-      Global.events.$on 'Notify', @notify
+      Global.events.$on 'Timeline::CurrentTimelineables', @currentTimelineablesChanged
 
     beforeDestroy: ->
       Global.events.$off 'Desktop::GoTo', @goTo
-      Global.events.$off 'Notify', @notify
+      Global.events.$off 'Timeline::CurrentTimelineables', @currentTimelineablesChanged
 </script>

@@ -107,7 +107,9 @@
 
         body = added_timelineables[0].description || ''
 
-        Global.events.$emit 'Notify', title: "Starting #{added_timelineables[0].main_tag.fullname}", options: { body: body }
+        Global.events.$emit 'Timeline::CurrentTimelineables',
+          added_timelineables: added_timelineables,
+          removed_timelineables: removed_timelineables
 
     created: ->
       @timer_interval = setInterval (=> @clockTick()), 1000

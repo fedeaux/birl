@@ -94,7 +94,6 @@ export default
       deep: true
       immediate: true
       handler: ->
-        console.log 'kkkkkkkkkkkkk'
         @start = @base_date.clone().startOf('day')
         @finish = @base_date.clone().endOf('day')
         @loadTimelogs()
