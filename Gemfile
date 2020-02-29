@@ -22,7 +22,7 @@ gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2', '>= 0.6'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'prism-rails'
-gem 'puma', '~> 3.11'
+gem 'puma', '~> 3.12'
 gem 'rack-cors'
 gem 'rails', '~> 5.2.3'
 gem 'rubocop', '>= 0.69', require: false
