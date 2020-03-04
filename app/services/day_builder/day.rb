@@ -17,5 +17,8 @@ module DayBuilder
         Timelog.create(entry.timelog_params)
       end
     end
+
+    def remove
+    end
   end
 end

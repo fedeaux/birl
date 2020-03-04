@@ -42,7 +42,8 @@ module DayBuilder
         description: description,
         main_tag: tag,
         user: user,
-        day: day
+        day: day,
+        meta: { day_built: true }
       }
     end
 

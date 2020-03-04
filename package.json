@@ -3,6 +3,8 @@
   "private": true,
   "dependencies": {
     "@rails/webpacker": "3.5",
+    "babylonjs": "^4.1.0",
+    "babylonjs-procedural-textures": "^4.1.0",
     "coffee-loader": "^0.9.0",
     "coffeescript": "1.12.7",
     "jquery": "^3.3.1",
