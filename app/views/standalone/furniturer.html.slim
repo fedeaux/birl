@@ -1,1 +1,5 @@
 canvas#board
+
+- %w(big exponential grow exp_grow golden doors grow_shelf sala).each do |shelf|
+  div
+    a(href="/furniturer?shelf=#{shelf}")= shelf
