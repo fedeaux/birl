@@ -1,3 +1,5 @@
+window._ = require 'underscore'
+
 import * as BABYLON from 'babylonjs'
 import 'babylonjs-procedural-textures'
 
