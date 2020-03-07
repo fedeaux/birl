@@ -40,3 +40,7 @@ $header-buttom-dim: $header-height - $d2
   .v-paddeds-#{$i}
     & > *
       padding: ($d * $i) 0
+
+  .v-paddeds-#{$i}-list
+    @extend .v-paddeds-#{$i}
+    padding-bottom: 0

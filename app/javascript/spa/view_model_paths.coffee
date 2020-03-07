@@ -60,7 +60,12 @@ paths = [
   'executor/index'
   'executor/metronome'
   'executor/progress_bar'
+
   'questioner/item'
+
+  'goaler/widget'
+  'goaler/widget/group'
+  'goaler/widget/item'
 ]
 
 meme_types = [

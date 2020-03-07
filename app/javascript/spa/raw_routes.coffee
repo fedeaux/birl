@@ -44,7 +44,11 @@ routes = [
   {
     path: '/timelogs/week'
     view: 'timelogs/week'
-  }
+  },
+  {
+    path: '/goaler'
+    view: 'goaler/widget'
+  },
 ]
 
 singularResource = (resource) ->

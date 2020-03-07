@@ -10,8 +10,13 @@
       .flex-item(v-else)
         shared-view(:path='"/memes"')
 
-    .flex-item.grow-2
+    .flex-item.v-padded-2.grow-2
       shared-view(:path='"/timelogs/today"')
+
+    .flex-item
+      .padded-2
+        shared-view(:path='"/goaler"')
+
 </template>
 
 <script lang="coffee">
