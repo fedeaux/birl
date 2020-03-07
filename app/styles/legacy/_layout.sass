@@ -1,0 +1,180 @@
+$header-height: 54px
+$header-buttom-dim: $header-height - $d2
+
+html, body, #contents-wrapper, #contents
+  height: 100%
+  width: 100%
+  overflow: hidden
+
+*:not(i)
+  font-weight: 300
+  color: $text-gray
+
+body
+  padding: 3em
+
+  &.birl-spa
+    padding: 0
+
+hr
+  border: none
+  border-top: thin $lightest-gray solid
+
+#birl-spa-container
+  height: 100%
+
+  #header
+    color: $text-gray
+
+    .header-button, .header-title
+      color: $text-gray
+
+      i
+        color: $text-gray
+
+  &.with-context
+    #header
+      color: white
+
+      .header-button, .header-title
+        color: white
+
+        i
+          color: white
+
+  #header
+    font-size: 24px
+    height: $header-height
+    line-height: $header-height
+    position: fixed
+    width: 100%
+    z-index: 999
+    font-size: 0
+
+    .header-button
+      border-radius: $d
+      display: inline-block
+      font-size: 2rem
+      height: $header-buttom-dim
+      line-height: $header-buttom-dim
+      padding: $d
+      position: absolute
+      top: $d
+      vertical-align: middle
+      width: $header-buttom-dim
+
+      i
+        position: relative
+        top: -3px
+
+      &:active
+        background-color: rgba(black, 0.1)
+
+    #back-button
+      left: $d
+
+    #home-link
+      left: $d2 + $header-buttom-dim
+
+    #contexts-toggle
+      right: $d2 + 2 * $header-buttom-dim
+
+    #memes-toggle
+      right: $d + $header-buttom-dim
+
+    #side-menu-toggle
+      right: $d
+
+    .header-title
+      font-size: 1.6rem
+      text-align: center
+      padding-top: 0.2rem
+
+  #menu
+    z-index: 998
+    padding-top: $header-height + $d2
+
+  #contents-wrapper
+    padding-top: $header-height
+
+  .default-container
+    padding: $d4
+
+  .slim-container
+    padding: $d2
+
+  .default-container, .slim-container
+    .default-container, .slim-container
+      padding: 0
+
+#fullscreen
+  display: block
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  z-index: 2000
+  background-color: white
+
+  .slim-container, .default-container
+    background-color: white
+
+  #fullscreen-close
+    position: fixed
+    top: $d2
+    right: $d
+    color: $light-text-gray
+
+.entity-manager, .entity-index, .entity-manager-list, .entity-show-wrapper, .entity-stream, .entity-stream-list
+  height: 100%
+
+.action-contents-action
+  width: 100%
+  display: flex
+  flex-direction: row
+
+  .action-contents-action-action
+    flex-grow: 0
+
+  .action-contents-action-contents
+    flex-grow: 1
+
+.header-contents-footer
+  height: 100%
+  display: flex
+  flex-direction: column
+
+  .header-contents-footer-header
+    flex-grow: 0
+
+  .header-contents-footer-contents
+    height: 100%
+    overflow-y: auto
+    overflow-x: hidden
+    flex-grow: 1
+
+  .header-contents-footer-footer
+    flex-grow: 0
+    padding-top: $d4
+
+    &.bottom-attached-footer
+      margin-bottom: -$d2
+      margin-right: -$d2
+      margin-left: -$d2
+
+    &.slim-bottom-attached-footer
+      margin-bottom: -$d
+      margin-right: -$d
+      margin-left: -$d
+
+    &.action-footer
+      padding-top: $d2
+      text-align: center
+
+.entity-show-wrapper
+  .header-contents-footer-footer
+    &.bottom-attached-footer,&.slim-bottom-attached-footer
+      margin-bottom: 0
+      margin-right: 0
+      margin-left: 0

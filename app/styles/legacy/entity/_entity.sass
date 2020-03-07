@@ -1,0 +1,41 @@
+.entity-show
+  .entity-display
+    margin-bottom: $d2
+    font-size: 1.4em
+
+.entity-list-item
+  .entity-display
+    line-height: 1.28em
+
+    .entity-display-main
+      padding-right: $d4
+
+.entity-show-subheader
+  color: $text-red
+  text-transform: uppercase
+  font-weight: bold
+  border-bottom: thin $main-red-opc-1 solid
+
+.entity-display
+  font-size: 1.2em
+  position: relative
+
+  .entity-display-main
+    font-size: 1.2em
+    font-weight: 300
+    padding: 0
+    text-align: left
+    margin-bottom: 0.25em
+
+  .entity-display-detail
+    @extend .detail
+    display: block
+
+  .entity-display-actions
+    position: absolute
+    top: 0
+    right: 0
+    z-index: 997
+
+    i
+      color: $light-text-gray

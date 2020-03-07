@@ -1,0 +1,60 @@
+@charset "UTF-8"
+
+// 1. Configuration and helpers
+@import abstracts/colors
+@import abstracts/dimensions
+@import abstracts/functions
+@import abstracts/mixins
+
+// 2. Vendors
+@import vendors/normalize
+@import vendors/texture
+@import vendors/semantic_ui_overrides
+
+// 3. Base stuff
+@import base/base
+@import base/fonts
+@import base/typography
+@import base/helpers
+
+// 4. Layout-related sections
+@import layout/base
+@import layout/header
+@import layout/footer
+
+@import layout/desktop
+
+// 5. Shared between all entities
+@import entity/base/entity
+@import entity/base/list
+@import entity/base/hierarchy
+
+// 6. Entity specific
+@import entity/challenges
+@import entity/contexts
+@import entity/entries
+@import entity/groups
+@import entity/listers
+@import entity/memes
+@import entity/progressions
+@import entity/sessions
+@import entity/tags
+
+// 6. Components
+@import components/button
+@import components/mobile/shared_footer
+
+// 7. Machines
+@import machines/timeline
+@import machines/executor
+@import machines/questioner
+
+// 8. Page-specific styles
+@import pages/home
+@import pages/standalone/3d_engine
+
+// 9. Themes
+@import themes/default
+
+// 10. Browsers
+@import browsers/chrome
