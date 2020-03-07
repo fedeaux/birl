@@ -1,0 +1,69 @@
+.flex-rows
+  width: 100%
+  flex-direction: column
+
+  .flex-item
+    overflow-y: hidden
+    overflow-x: auto
+
+    &:first-child
+      padding-top: 0
+
+    &:last-child
+      padding-bottom: 0
+
+.flex-columns
+  height: 100%
+
+  .flex-item
+    overflow-y: auto
+    overflow-x: hidden
+
+    &:first-child
+      padding-left: 0
+
+    &:last-child
+      padding-right: 0
+
+.flex-columns, .flex-rows
+  display: flex
+
+  .flex-item
+    flex: 1 1 0
+    position: relative
+    height: 100%
+
+    &.grow-2
+      flex-grow: 2
+
+.header-contents-footer
+  height: 100%
+  display: flex
+  flex-direction: column
+
+  .header-contents-footer-header
+    flex-grow: 0
+
+  .header-contents-footer-contents
+    height: 100%
+    overflow-y: auto
+    overflow-x: hidden
+    flex-grow: 1
+
+  .header-contents-footer-footer
+    flex-grow: 0
+    padding-top: $d4
+
+    &.bottom-attached-footer
+      margin-bottom: -$d2
+      margin-right: -$d2
+      margin-left: -$d2
+
+    &.slim-bottom-attached-footer
+      margin-bottom: -$d
+      margin-right: -$d
+      margin-left: -$d
+
+    &.action-footer
+      padding-top: $d2
+      text-align: center

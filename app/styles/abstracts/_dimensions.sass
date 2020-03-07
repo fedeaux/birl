@@ -1,4 +1,8 @@
+@use "sass:list"
+
 $d: 5px
+$d: 5px
+$d1: $d
 $d2: 2 * $d
 $d3: 3 * $d
 $d4: 4 * $d
@@ -14,3 +18,25 @@ $ld2: $l + $d2
 
 $header-height: 54px
 $header-buttom-dim: $header-height - $d2
+
+@for $i from 1 to 3
+  .padded-#{$i}
+    padding: $d * $i
+
+  .h-padded-#{$i}
+    padding: 0 ($d * $i)
+
+  .v-padded-#{$i}
+    padding: ($d * $i) 0
+
+  .paddeds-#{$i}
+    & > *
+      padding: $d * $i
+
+  .h-paddeds-#{$i}
+    & > *
+      padding: 0 ($d * $i)
+
+  .v-paddeds-#{$i}
+    & > *
+      padding: ($d * $i) 0

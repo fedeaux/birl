@@ -8,7 +8,7 @@
 
   #contents-wrapper
     #contents
-      router-view.slim-container
+      router-view
       //- .desktop-component.default-container(v-for='view in views')
       //-   .desktop-component-close(@click='close(view)')
       //-     i.cancel.icon
