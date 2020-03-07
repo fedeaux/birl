@@ -1,9 +1,9 @@
 <template lang="pug">
   .goaler
     .goal-period.v-padded-2(v-for='period in goal_periods')
-      .header
-        .name {{ period.name }}
-      .body.v-paddeds-2-list
+      .goal-period-header
+        .goal-period-header-name {{ period.name }}
+      .goal-period-body.v-paddeds-2-list
         component(v-for='item in period.items' :item='item' :is="'goaler-widget-'+item.widgetComponent()")
 </template>
 
@@ -22,7 +22,11 @@
             name: 'Yesterday'
             items: [
               new Goal(
-                name: 'Commit to sleep @ 23:30'
+                name: 'Do not smoke weed after 21:00'
+                type: 'yes-no'
+              )
+              new Goal(
+                name: 'Commit to sleep @ 23:00'
                 type: 'yes-no'
               )
               new GoalGroup(

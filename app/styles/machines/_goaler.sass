@@ -1,14 +1,22 @@
 .goaler
   .goal-period
-    .header
-      .name
+    &-header
+      &-name
         @extend .f-small
         text-align: center
 
-    .body
+    &-body
 
   .goal-group
-    .name
+    &-header
+      background-color: #7A6FF0
+
+      &-name
+        text-align: left
+        color: white
 
   .goal-item
-    .name
+    &-header
+      &-name
+        @extend .f-small
+        text-align: center

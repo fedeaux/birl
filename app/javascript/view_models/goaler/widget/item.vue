@@ -5,9 +5,14 @@
 
     .body(v-if='item.type')
       template(v-if='item.type == "yes-no"')
-        .ui.three.buttons
-          .ui.green.button Yes
-          .ui.red.button No
+        .flex-row.ui.form
+          .flex-item.grow-0
+            .ui.basic.discret.tiny.green.button Yes
+          .flex-item.grow-0
+            .ui.basic.tiny.red.button No
+          .flex-item.grow-3.ui.mini.input
+            input(type='text')
+
       template(v-if='item.type == "timelog-track"')
         | 3.5 / 5 (70%)
 </template>

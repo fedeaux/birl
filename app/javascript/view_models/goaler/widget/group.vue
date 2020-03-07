@@ -1,6 +1,6 @@
 <template lang="pug">
   .goal-group
-    .name {{ item.name }}
+    .goal-group-header {{ item.name }}
     goaler-widget-item(v-for='goal in item.goals' :item='goal')
 </template>
 

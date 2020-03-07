@@ -1,6 +1,6 @@
 <template lang="pug">
-  .flex-columns
-    .flex-rows.flex-item.h-padded-2.v-paddeds-2
+  .flex-row
+    .flex-item.flex-column.h-padded-2.v-paddeds-2
       .flex-item
         shared-view(:path='"/tags"')
 

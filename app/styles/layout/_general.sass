@@ -1,4 +1,4 @@
-.flex-rows
+.flex-column
   width: 100%
   flex-direction: column
 
@@ -12,8 +12,9 @@
     &:last-child
       padding-bottom: 0
 
-.flex-columns
+.flex-row
   height: 100%
+  flex-direction: row
 
   .flex-item
     overflow-y: auto
@@ -23,15 +24,19 @@
       padding-left: 0
 
     &:last-child
-      padding-right: 0
+      padding-right: 0a
 
-.flex-columns, .flex-rows
+.flex-column, .flex-row
   display: flex
 
   .flex-item
     flex: 1 1 0
     position: relative
     height: 100%
+
+    &.grow-0
+      flex-grow: 0
+      flex-basis: auto
 
     @for $i from 1 to 10
       &.grow-#{$i}
