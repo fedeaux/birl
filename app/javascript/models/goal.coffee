@@ -10,6 +10,8 @@ class Goal extends BaseModel
       id: {}
       name: {}
       type: {}
+      meta: {}
+      recurrence_scheme: {}
     }
 
   widgetComponent: ->

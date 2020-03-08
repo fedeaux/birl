@@ -14,7 +14,7 @@ rails g entity timelogs start:datetime finish:datetime description:text meta:jso
 rails g entity training name context:references
 rails g entity vocabulary es pt_br en comment kind priority:integer meta:jsonb
 
-rails g entity goal name user:belongs_to meta:jsonb
-rails g entity goal_entry name goal:belongs_to meta:jsonb
+rails g entity goal name user:belongs_to meta:jsonb recurrence_scheme:jsonb
+rails g entity goal_entry name goal:belongs_to start:datetime finish:datetime meta:jsonb
 
 rails g templater session_progression
