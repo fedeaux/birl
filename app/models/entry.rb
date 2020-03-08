@@ -15,6 +15,10 @@ class Entry < ApplicationRecord
   belongs_to :progression, counter_cache: true, touch: true
   after_commit :update_progression_last_entry_at
 
+  scope :in_range, ->(from, to) {
+    where(created_at: (from..to))
+  }
+
   def update_progression_last_entry_at
     progression.update_last_entry_at
   end

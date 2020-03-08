@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.5'
 
+gem 'active_model_serializers'
 gem 'ancestry'
 gem 'awesome_print', '~> 1.8'
 gem 'bootsnap', '>= 1.1.0', require: false
@@ -25,6 +26,7 @@ gem 'prism-rails'
 gem 'puma', '~> 3.11'
 gem 'rack-cors'
 gem 'rails', '~> 5.2.3'
+gem 'recursive-open-struct'
 gem 'rubocop', '>= 0.69', require: false
 gem 'sass-rails', '~> 5.0'
 gem 'seedbank'
