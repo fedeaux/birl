@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(version: 2020_03_08_001051) do
     t.bigint "goal_id"
     t.datetime "start"
     t.datetime "finish"
-    t.jsonb "meta"
+    t.jsonb "meta", default: {}
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["goal_id"], name: "index_goal_entries_on_goal_id"
@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(version: 2020_03_08_001051) do
     t.string "name"
     t.string "type"
     t.bigint "user_id"
-    t.jsonb "meta"
+    t.jsonb "meta", default: {}
     t.jsonb "recurrence_scheme"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -13,6 +13,7 @@ class GoalEntry extends BaseModel
       goal: { type: Goal }
       goal_id: {}
       start: {}
+      type: {}
       finish: {}
       meta: {}
     }

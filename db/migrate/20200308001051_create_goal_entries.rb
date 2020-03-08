@@ -5,7 +5,7 @@ class CreateGoalEntries < ActiveRecord::Migration[5.2]
       t.belongs_to :goal, foreign_key: true
       t.datetime :start
       t.datetime :finish
-      t.jsonb :meta
+      t.jsonb :meta, default: {}
 
       t.timestamps
     end

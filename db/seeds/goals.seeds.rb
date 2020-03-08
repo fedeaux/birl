@@ -7,7 +7,12 @@ after(:users) do
       type: 'YesOrNoGoal',
       recurrence_scheme: {
         type: 'every_day'
-      }
+      }# ,
+      # meta: {
+      #   entry_meta: {
+      #     target_duration: 300
+      #   }
+      # }
     },
     {
       name: 'Work 5h on SquadRon',
@@ -15,9 +20,14 @@ after(:users) do
       recurrence_scheme: {
         type: 'every_weekday',
         skip_weekends: true
+      },
+      meta: {
+        entry_meta: {
+          target_duration: 300
+        }
       }
     }
   ].each do |goal_params|
-    Goal.where(goal_params.slice(:name, :type).merge(user: user)).first_or_create.update(goal_params)
+    Goal.where(goal_params.slice(:name).merge(user: user)).first_or_create.update(goal_params)
   end
 end

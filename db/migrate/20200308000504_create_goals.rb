@@ -4,7 +4,7 @@ class CreateGoals < ActiveRecord::Migration[5.2]
       t.string :name
       t.string :type
       t.belongs_to :user, foreign_key: true
-      t.jsonb :meta
+      t.jsonb :meta, default: {}
       t.jsonb :recurrence_scheme
 
       t.timestamps
