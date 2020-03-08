@@ -14,7 +14,4 @@ class Goal extends BaseModel
       recurrence_scheme: {}
     }
 
-  widgetComponent: ->
-    'item'
-
 export default Goal

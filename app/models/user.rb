@@ -5,10 +5,13 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :current_context, class_name: 'Context', optional: true
+
   has_many :contexts
   has_many :days
+  has_many :goals
   has_many :memes
   has_many :timelogs
+
   has_many :tags
   has_many :tag_taggables, through: :tags
 
@@ -17,6 +20,10 @@ class User < ApplicationRecord
   end
 
   def time_now
-    DateTime.now.in_time_zone(timezone)
+    in_time_zone DateTime.now
+  end
+
+  def in_time_zone(date_time)
+    date_time.in_time_zone(timezone)
   end
 end

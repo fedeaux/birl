@@ -32,5 +32,6 @@ module Birl2
     end
 
     config.autoload_paths += ["#{config.root}/app/models/memes"]
+    config.autoload_paths += ["#{config.root}/app/models/goals"]
   end
 end

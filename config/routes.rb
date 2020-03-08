@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :goal_entries
+      get 'goals_periods' => 'goals_periods#index'
       resources :goals
       post 'timelogs/plan_my_day' => 'timelogs#plan_my_day'
       resources :timelogs

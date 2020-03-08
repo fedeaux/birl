@@ -1,5 +1,5 @@
 import BaseModel from './base_model'
-import Goal from './goal'
+import GoalEntry from './goal_entry'
 
 class GoalGroup extends BaseModel
   @collection = 'goal_groups'
@@ -10,7 +10,7 @@ class GoalGroup extends BaseModel
     {
       id: {}
       name: {}
-      goals: { type: Goal }
+      goal_entries: { type: GoalEntry }
     }
 
   widgetComponent: ->

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_29_030915) do
+ActiveRecord::Schema.define(version: 2020_03_08_001051) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,28 @@ ActiveRecord::Schema.define(version: 2020_02_29_030915) do
     t.bigint "context_id"
     t.index ["context_id"], name: "index_exercises_on_context_id"
     t.index ["group_id"], name: "index_exercises_on_group_id"
+  end
+
+  create_table "goal_entries", force: :cascade do |t|
+    t.string "name"
+    t.bigint "goal_id"
+    t.datetime "start"
+    t.datetime "finish"
+    t.jsonb "meta"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["goal_id"], name: "index_goal_entries_on_goal_id"
+  end
+
+  create_table "goals", force: :cascade do |t|
+    t.string "name"
+    t.string "type"
+    t.bigint "user_id"
+    t.jsonb "meta"
+    t.jsonb "recurrence_scheme"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_goals_on_user_id"
   end
 
   create_table "groups", force: :cascade do |t|
@@ -212,6 +234,8 @@ ActiveRecord::Schema.define(version: 2020_02_29_030915) do
   add_foreign_key "days", "users"
   add_foreign_key "entries", "progressions"
   add_foreign_key "exercises", "groups"
+  add_foreign_key "goal_entries", "goals"
+  add_foreign_key "goals", "users"
   add_foreign_key "memes", "users"
   add_foreign_key "progressions", "challenges"
   add_foreign_key "progressions", "exercises"

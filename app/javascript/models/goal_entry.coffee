@@ -17,4 +17,7 @@ class GoalEntry extends BaseModel
       meta: {}
     }
 
+  widgetComponent: ->
+    'item'
+
 export default GoalEntry
