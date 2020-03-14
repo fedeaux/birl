@@ -1,24 +1,24 @@
 <template lang="pug">
-.entity-manager.tags-manager.default-container
+.tags-manager.flex-column
   //- BrainDamage: ManagerHead Start
   //- BrainDamage: ManagerHead End
 
-  .entity-manager-form(v-if='form_tag')
+  .entity-manager-form.flex-item-fixed(v-if='form_tag')
     tags-form(v-model='form_tag'
               @save='saveFormTag()'
               @cancel='clearFormTag()')
 
-  .entity-manager-list.flex-column(v-else)
-    .entity-manager-list-header.flex-item-fixed
-      #new-tag-button.ui.primary.top.attached.fluid.small.icon.button(@click='newTag')
+  template(v-else)
+    .flex-item-fixed.action-block.b-padded-1
+      .ui.primary.action-block-button.small.icon.button(@click='newTag')
         i.plus.icon
         |  Add Tag
 
-    .flex-item
-      tags-list(:tags='tags'
-                :allow_actions='true'
-                @edit='editTag($event)'
-                @destroy='destroyTag($event)')
+    .flex-column
+      tags-list.flex-item(:tags='tags'
+                          :allow_actions='true'
+                          @edit='editTag($event)'
+                          @destroy='destroyTag($event)')
 </template>
 
 <script lang="coffee">

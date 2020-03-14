@@ -4,6 +4,17 @@ import Session from '../models/session'
 
 Vue.use(Vuex)
 
+# hack
+window.setDynamicCss = ->
+  sheet = window.document.styleSheets[0]
+  if Global.server.dynamic_css and sheet
+    for rule in Global.server.dynamic_css
+      sheet.insertRule rule, sheet.cssRules.length
+
+    return
+
+  setTimeout @setDynamicCss, 1000
+
 store = new Vuex.Store(
   state:
     audio_schema: null
@@ -44,11 +55,7 @@ store = new Vuex.Store(
         context.commit 'setCurrentSession', current_session: new Session session_attributes
 
       # Set dynamic css
-      sheet = window.document.styleSheets[0]
-      return unless Global.server.dynamic_css and sheet
-
-      for rule in Global.server.dynamic_css
-        sheet.insertRule rule, sheet.cssRules.length
+      window.setDynamicCss()
 
     setLoading: (context, data) ->
       context.commit 'setLoading', data

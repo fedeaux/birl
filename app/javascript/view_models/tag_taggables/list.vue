@@ -1,19 +1,20 @@
 <template lang="pug">
-.entity-list.tag-taggable-list.default-container.flex-column
+.tag-taggable-list.flex-column
   .flex-item-fixed
     .entity-list-filter
       inputs-clearable.fluid(v-model='filter.text')
 
-  .flex-item
-    tag-taggables-list-item(v-for='tag_taggable in displayable_tag_taggables'
-                            v-if='tag_taggables'
-                            :tag_taggable='tag_taggable'
-                            :allow_actions='allow_actions'
-                            :key='tag_taggable.id'
-                            @edit='$emit("edit", { tag_taggable: tag_taggable })'
-                            @destroy='$emit("destroy", { tag_taggable: tag_taggable })')
+  .flex-item.scroll-y
+    .tag-taggables-list-items-wrapper
+      tag-taggables-list-item(v-for='tag_taggable in displayable_tag_taggables'
+                              v-if='tag_taggables'
+                              :tag_taggable='tag_taggable'
+                              :allow_actions='allow_actions'
+                              :key='tag_taggable.id'
+                              @edit='$emit("edit", { tag_taggable: tag_taggable })'
+                              @destroy='$emit("destroy", { tag_taggable: tag_taggable })')
 
-    entity-list-empty(v-if='!tag_taggables || tag_taggables.length == 0')
+      entity-list-empty(v-if='!tag_taggables || tag_taggables.length == 0')
 </template>
 
 <script lang="coffee">

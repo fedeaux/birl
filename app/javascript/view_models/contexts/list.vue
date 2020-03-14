@@ -1,19 +1,20 @@
 <template lang="pug">
-.entity-list.context-list.default-container.flex-column
+.context-list.flex-column
   .flex-item-fixed
     .entity-list-filter
       inputs-clearable.fluid(v-model='filter.text')
 
-  .flex-item
-    contexts-list-item(v-for='context in displayable_contexts'
-                       v-if='contexts'
-                       :context='context'
-                       :allow_actions='allow_actions'
-                       :key='context.id'
-                       @edit='$emit("edit", { context: context })'
-                       @destroy='$emit("destroy", { context: context })')
+  .flex-item.scroll-y
+    .contexts-list-items-wrapper
+      contexts-list-item(v-for='context in displayable_contexts'
+                         v-if='contexts'
+                         :context='context'
+                         :allow_actions='allow_actions'
+                         :key='context.id'
+                         @edit='$emit("edit", { context: context })'
+                         @destroy='$emit("destroy", { context: context })')
 
-    entity-list-empty(v-if='!contexts || contexts.length == 0')
+      entity-list-empty(v-if='!contexts || contexts.length == 0')
 </template>
 
 <script lang="coffee">

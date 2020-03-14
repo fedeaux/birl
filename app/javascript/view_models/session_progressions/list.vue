@@ -1,19 +1,20 @@
 <template lang="pug">
-.entity-list.session-progression-list.default-container.flex-column
+.session-progression-list.flex-column
   .flex-item-fixed
     .entity-list-filter
       inputs-clearable.fluid(v-model='filter.text')
 
-  .flex-item
-    session-progressions-list-item(v-for='session_progression in displayable_session_progressions'
-                                   v-if='session_progressions'
-                                   :session_progression='session_progression'
-                                   :allow_actions='allow_actions'
-                                   :key='session_progression.id'
-                                   @edit='$emit("edit", { session_progression: session_progression })'
-                                   @destroy='$emit("destroy", { session_progression: session_progression })')
+  .flex-item.scroll-y
+    .session-progressions-list-items-wrapper
+      session-progressions-list-item(v-for='session_progression in displayable_session_progressions'
+                                     v-if='session_progressions'
+                                     :session_progression='session_progression'
+                                     :allow_actions='allow_actions'
+                                     :key='session_progression.id'
+                                     @edit='$emit("edit", { session_progression: session_progression })'
+                                     @destroy='$emit("destroy", { session_progression: session_progression })')
 
-    entity-list-empty(v-if='!session_progressions || session_progressions.length == 0')
+      entity-list-empty(v-if='!session_progressions || session_progressions.length == 0')
 </template>
 
 <script lang="coffee">

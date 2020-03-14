@@ -1,24 +1,24 @@
 <template lang="pug">
-.entity-manager.session-progressions-manager.default-container
+.session-progressions-manager.flex-column
   //- BrainDamage: ManagerHead Start
   //- BrainDamage: ManagerHead End
 
-  .entity-manager-form(v-if='form_session_progression')
+  .entity-manager-form.flex-item-fixed(v-if='form_session_progression')
     session-progressions-form(v-model='form_session_progression'
                               @save='saveFormSessionProgression()'
                               @cancel='clearFormSessionProgression()')
 
-  .entity-manager-list.flex-column(v-else)
-    .entity-manager-list-header.flex-item-fixed
-      #new-session-progression-button.ui.primary.top.attached.fluid.small.icon.button(@click='newSessionProgression')
+  template(v-else)
+    .flex-item-fixed.action-block.b-padded-1
+      .ui.primary.action-block-button.small.icon.button(@click='newSessionProgression')
         i.plus.icon
         |  Add Session Progression
 
-    .flex-item
-      session-progressions-list(:session_progressions='session_progressions'
-                                :allow_actions='true'
-                                @edit='editSessionProgression($event)'
-                                @destroy='destroySessionProgression($event)')
+    .flex-column
+      session-progressions-list.flex-item(:session_progressions='session_progressions'
+                                          :allow_actions='true'
+                                          @edit='editSessionProgression($event)'
+                                          @destroy='destroySessionProgression($event)')
 </template>
 
 <script lang="coffee">

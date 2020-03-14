@@ -1,19 +1,20 @@
 <template lang="pug">
-.entity-list.lister-list.default-container.flex-column
+.lister-list.flex-column
   .flex-item-fixed
     .entity-list-filter
       inputs-clearable.fluid(v-model='filter.text')
 
-  .flex-item
-    listers-list-item(v-for='lister in displayable_listers'
-                      v-if='listers'
-                      :lister='lister'
-                      :allow_actions='allow_actions'
-                      :key='lister.id'
-                      @edit='$emit("edit", { lister: lister })'
-                      @destroy='$emit("destroy", { lister: lister })')
+  .flex-item.scroll-y
+    .listers-list-items-wrapper
+      listers-list-item(v-for='lister in displayable_listers'
+                        v-if='listers'
+                        :lister='lister'
+                        :allow_actions='allow_actions'
+                        :key='lister.id'
+                        @edit='$emit("edit", { lister: lister })'
+                        @destroy='$emit("destroy", { lister: lister })')
 
-    entity-list-empty(v-if='!listers || listers.length == 0')
+      entity-list-empty(v-if='!listers || listers.length == 0')
 </template>
 
 <script lang="coffee">

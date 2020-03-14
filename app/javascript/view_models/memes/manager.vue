@@ -1,24 +1,24 @@
 <template lang="pug">
-.entity-manager.memes-manager.default-container
+.memes-manager.flex-column
   //- BrainDamage: ManagerHead Start
   //- BrainDamage: ManagerHead End
 
-  .entity-manager-form(v-if='form_meme')
+  .entity-manager-form.flex-item-fixed(v-if='form_meme')
     memes-form(v-model='form_meme'
                @save='saveFormMeme()'
                @cancel='clearFormMeme()')
 
-  .entity-manager-list.flex-column(v-else)
-    .entity-manager-list-header.flex-item-fixed
-      #new-meme-button.ui.primary.top.attached.fluid.small.icon.button(@click='newMeme')
+  template(v-else)
+    .flex-item-fixed.action-block.b-padded-1
+      .ui.primary.action-block-button.small.icon.button(@click='newMeme')
         i.plus.icon
         |  Add Meme
 
-    .flex-item
-      memes-list(:memes='memes'
-                 :allow_actions='true'
-                 @edit='editMeme($event)'
-                 @destroy='destroyMeme($event)')
+    .flex-column
+      memes-list.flex-item(:memes='memes'
+                           :allow_actions='true'
+                           @edit='editMeme($event)'
+                           @destroy='destroyMeme($event)')
 </template>
 
 <script lang="coffee">

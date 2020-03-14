@@ -1,24 +1,24 @@
 <template lang="pug">
-.entity-manager.vocabularies-manager.default-container
+.vocabularies-manager.flex-column
   //- BrainDamage: ManagerHead Start
   //- BrainDamage: ManagerHead End
 
-  .entity-manager-form(v-if='form_vocabulary')
+  .entity-manager-form.flex-item-fixed(v-if='form_vocabulary')
     vocabularies-form(v-model='form_vocabulary'
                       @save='saveFormVocabulary()'
                       @cancel='clearFormVocabulary()')
 
-  .entity-manager-list.flex-column(v-else)
-    .entity-manager-list-header.flex-item-fixed
-      #new-vocabulary-button.ui.primary.top.attached.fluid.small.icon.button(@click='newVocabulary')
+  template(v-else)
+    .flex-item-fixed.action-block.b-padded-1
+      .ui.primary.action-block-button.small.icon.button(@click='newVocabulary')
         i.plus.icon
         |  Add Vocabulary
 
-    .flex-item
-      vocabularies-list(:vocabularies='vocabularies'
-                        :allow_actions='true'
-                        @edit='editVocabulary($event)'
-                        @destroy='destroyVocabulary($event)')
+    .flex-column
+      vocabularies-list.flex-item(:vocabularies='vocabularies'
+                                  :allow_actions='true'
+                                  @edit='editVocabulary($event)'
+                                  @destroy='destroyVocabulary($event)')
 </template>
 
 <script lang="coffee">

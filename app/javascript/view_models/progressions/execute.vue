@@ -1,5 +1,14 @@
 <template lang="pug">
 .progressions-execute.flex-column(v-if='progression')
+  executor-index(v-if='executable_entry'
+                 :data_model='progression.entry_data_model'
+                 :entry='executable_entry'
+                 :main_title='progression.name'
+                 @entrySetUpdated='entrySetUpdated'
+                 @entryAddSet='entryAddSet'
+                 @done='done'
+                 ref='executor')
+
   .flex-item-fixed
     .entity-show.progressions-show
       progressions-display(:progression='progression')
@@ -9,20 +18,10 @@
     .progressions-show-challenge-description(v-if='progression.challenge_description')
       | {{ progression.challenge_description }}
 
-  .flex-item
-    entries-manager(:context='entries_context'
-                    :data_model='progression.entry_data_model'
-                    :actions='{ add: false, form: { actions: false } }'
-                    ref='entries_manager')
-
-    executor-index(v-if='executable_entry'
-                   :data_model='progression.entry_data_model'
-                   :entry='executable_entry'
-                   :main_title='progression.name'
-                   @entrySetUpdated='entrySetUpdated'
-                   @entryAddSet='entryAddSet'
-                   @done='done'
-                   ref='executor')
+  entries-manager.flex-item(:context='entries_context'
+                            :data_model='progression.entry_data_model'
+                            :actions='{ add: false, form: { actions: false } }'
+                            ref='entries_manager')
 
   .flex-item-fixed
     .action-block

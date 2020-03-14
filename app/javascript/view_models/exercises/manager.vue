@@ -1,24 +1,24 @@
 <template lang="pug">
-.entity-manager.exercises-manager.default-container
+.exercises-manager.flex-column
   //- BrainDamage: ManagerHead Start
   //- BrainDamage: ManagerHead End
 
-  .entity-manager-form(v-if='form_exercise')
+  .entity-manager-form.flex-item-fixed(v-if='form_exercise')
     exercises-form(v-model='form_exercise'
                    @save='saveFormExercise()'
                    @cancel='clearFormExercise()')
 
-  .entity-manager-list.flex-column(v-else)
-    .entity-manager-list-header.flex-item-fixed
-      #new-exercise-button.ui.primary.top.attached.fluid.small.icon.button(@click='newExercise')
+  template(v-else)
+    .flex-item-fixed.action-block.b-padded-1
+      .ui.primary.action-block-button.small.icon.button(@click='newExercise')
         i.plus.icon
         |  Add Exercise
 
-    .flex-item
-      exercises-list(:exercises='exercises'
-                     :allow_actions='true'
-                     @edit='editExercise($event)'
-                     @destroy='destroyExercise($event)')
+    .flex-column
+      exercises-list.flex-item(:exercises='exercises'
+                               :allow_actions='true'
+                               @edit='editExercise($event)'
+                               @destroy='destroyExercise($event)')
 </template>
 
 <script lang="coffee">

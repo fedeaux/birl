@@ -1,6 +1,5 @@
 <template lang="pug">
-.entity-index.tag-taggables-index.default-container
-  tag-taggables-manager(:parent_tag_taggables='tag_taggables')
+tag-taggables-manager.tag-taggables-index(:parent_tag_taggables='tag_taggables')
 </template>
 
 <script lang="coffee">

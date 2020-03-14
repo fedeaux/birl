@@ -1,6 +1,5 @@
 <template lang="pug">
-.entity-index.goals-index.default-container
-  goals-manager(:parent_goals='goals')
+goals-manager.goals-index(:parent_goals='goals')
 </template>
 
 <script lang="coffee">

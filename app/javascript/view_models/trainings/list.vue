@@ -1,19 +1,20 @@
 <template lang="pug">
-.entity-list.training-list.default-container.flex-column
+.training-list.flex-column
   .flex-item-fixed
     .entity-list-filter
       inputs-clearable.fluid(v-model='filter.text')
 
-  .flex-item
-    trainings-list-item(v-for='training in displayable_trainings'
-                        v-if='trainings'
-                        :training='training'
-                        :allow_actions='allow_actions'
-                        :key='training.id'
-                        @edit='$emit("edit", { training: training })'
-                        @destroy='$emit("destroy", { training: training })')
+  .flex-item.scroll-y
+    .trainings-list-items-wrapper
+      trainings-list-item(v-for='training in displayable_trainings'
+                          v-if='trainings'
+                          :training='training'
+                          :allow_actions='allow_actions'
+                          :key='training.id'
+                          @edit='$emit("edit", { training: training })'
+                          @destroy='$emit("destroy", { training: training })')
 
-    entity-list-empty(v-if='!trainings || trainings.length == 0')
+      entity-list-empty(v-if='!trainings || trainings.length == 0')
 </template>
 
 <script lang="coffee">

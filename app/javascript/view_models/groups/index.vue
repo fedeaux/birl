@@ -1,6 +1,5 @@
 <template lang="pug">
-.entity-index.groups-index.default-container
-  groups-manager(:parent_groups='groups')
+groups-manager.groups-index(:parent_groups='groups')
 </template>
 
 <script lang="coffee">

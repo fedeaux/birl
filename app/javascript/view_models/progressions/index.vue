@@ -1,6 +1,5 @@
 <template lang="pug">
-.entity-index.progressions-index.default-container
-  progressions-manager(:parent_progressions='progressions')
+progressions-manager.progressions-index(:parent_progressions='progressions')
 </template>
 
 <script lang="coffee">

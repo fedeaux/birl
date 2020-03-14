@@ -1,7 +1,5 @@
 <template lang="pug">
-tags-hierarchy.tags-index(v-if='tags'
-                          :parent_tags='tags'
-                          @forceReload='forceReload')
+tags-manager.tags-index(:parent_tags='tags')
 </template>
 
 <script lang="coffee">

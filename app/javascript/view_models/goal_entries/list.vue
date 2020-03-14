@@ -1,19 +1,20 @@
 <template lang="pug">
-.entity-list.goal-entry-list.default-container.flex-column
+.goal-entry-list.flex-column
   .flex-item-fixed
     .entity-list-filter
       inputs-clearable.fluid(v-model='filter.text')
 
-  .flex-item
-    goal-entries-list-item(v-for='goal_entry in displayable_goal_entries'
-                           v-if='goal_entries'
-                           :goal_entry='goal_entry'
-                           :allow_actions='allow_actions'
-                           :key='goal_entry.id'
-                           @edit='$emit("edit", { goal_entry: goal_entry })'
-                           @destroy='$emit("destroy", { goal_entry: goal_entry })')
+  .flex-item.scroll-y
+    .goal-entries-list-items-wrapper
+      goal-entries-list-item(v-for='goal_entry in displayable_goal_entries'
+                             v-if='goal_entries'
+                             :goal_entry='goal_entry'
+                             :allow_actions='allow_actions'
+                             :key='goal_entry.id'
+                             @edit='$emit("edit", { goal_entry: goal_entry })'
+                             @destroy='$emit("destroy", { goal_entry: goal_entry })')
 
-    entity-list-empty(v-if='!goal_entries || goal_entries.length == 0')
+      entity-list-empty(v-if='!goal_entries || goal_entries.length == 0')
 </template>
 
 <script lang="coffee">

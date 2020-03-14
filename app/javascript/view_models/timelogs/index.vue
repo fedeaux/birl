@@ -1,6 +1,5 @@
 <template lang="pug">
-.entity-index.timelogs-index.default-container
-  timelogs-manager(:parent_timelogs='timelogs')
+timelogs-manager.timelogs-index(:parent_timelogs='timelogs')
 </template>
 
 <script lang="coffee">

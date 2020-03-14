@@ -1,19 +1,20 @@
 <template lang="pug">
-.entity-list.timelog-list.default-container.flex-column
+.timelog-list.flex-column
   .flex-item-fixed
     .entity-list-filter
       inputs-clearable.fluid(v-model='filter.text')
 
-  .flex-item
-    timelogs-list-item(v-for='timelog in displayable_timelogs'
-                       v-if='timelogs'
-                       :timelog='timelog'
-                       :allow_actions='allow_actions'
-                       :key='timelog.id'
-                       @edit='$emit("edit", { timelog: timelog })'
-                       @destroy='$emit("destroy", { timelog: timelog })')
+  .flex-item.scroll-y
+    .timelogs-list-items-wrapper
+      timelogs-list-item(v-for='timelog in displayable_timelogs'
+                         v-if='timelogs'
+                         :timelog='timelog'
+                         :allow_actions='allow_actions'
+                         :key='timelog.id'
+                         @edit='$emit("edit", { timelog: timelog })'
+                         @destroy='$emit("destroy", { timelog: timelog })')
 
-    entity-list-empty(v-if='!timelogs || timelogs.length == 0')
+      entity-list-empty(v-if='!timelogs || timelogs.length == 0')
 </template>
 
 <script lang="coffee">

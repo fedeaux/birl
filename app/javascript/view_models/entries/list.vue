@@ -1,19 +1,20 @@
 <template lang="pug">
-.entity-list.entry-list.default-container.flex-column
+.entry-list.flex-column
   .flex-item-fixed
     .entity-list-filter
       inputs-clearable.fluid(v-model='filter.text')
 
-  .flex-item
-    entries-list-item(v-for='entry in displayable_entries'
-                      v-if='entries'
-                      :entry='entry'
-                      :allow_actions='allow_actions'
-                      :key='entry.id'
-                      @edit='$emit("edit", { entry: entry })'
-                      @destroy='$emit("destroy", { entry: entry })')
+  .flex-item.scroll-y
+    .entries-list-items-wrapper
+      entries-list-item(v-for='entry in displayable_entries'
+                        v-if='entries'
+                        :entry='entry'
+                        :allow_actions='allow_actions'
+                        :key='entry.id'
+                        @edit='$emit("edit", { entry: entry })'
+                        @destroy='$emit("destroy", { entry: entry })')
 
-    entity-list-empty(v-if='!entries || entries.length == 0')
+      entity-list-empty(v-if='!entries || entries.length == 0')
 </template>
 
 <script lang="coffee">

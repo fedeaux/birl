@@ -1,19 +1,20 @@
 <template lang="pug">
-.entity-list.progression-list.default-container.flex-column
+.progression-list.flex-column
   .flex-item-fixed
     .entity-list-filter
       inputs-clearable.fluid(v-model='filter.text')
 
-  .flex-item
-    progressions-list-item(v-for='progression in displayable_progressions'
-                           v-if='progressions'
-                           :progression='progression'
-                           :allow_actions='allow_actions'
-                           :key='progression.id'
-                           @edit='$emit("edit", { progression: progression })'
-                           @destroy='$emit("destroy", { progression: progression })')
+  .flex-item.scroll-y
+    .progressions-list-items-wrapper
+      progressions-list-item(v-for='progression in displayable_progressions'
+                             v-if='progressions'
+                             :progression='progression'
+                             :allow_actions='allow_actions'
+                             :key='progression.id'
+                             @edit='$emit("edit", { progression: progression })'
+                             @destroy='$emit("destroy", { progression: progression })')
 
-    entity-list-empty(v-if='!progressions || progressions.length == 0')
+      entity-list-empty(v-if='!progressions || progressions.length == 0')
 </template>
 
 <script lang="coffee">

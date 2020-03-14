@@ -1,6 +1,5 @@
 <template lang="pug">
-.entity-index.<%= plural_dash_name %>-index.default-container
-  <%= plural_dash_name %>-manager(:parent_<%= plural_underscore_name %>='<%= plural_underscore_name %>')
+<%= plural_dash_name %>-manager.<%= plural_dash_name %>-index(:parent_<%= plural_underscore_name %>='<%= plural_underscore_name %>')
 </template>
 
 <script lang="coffee">

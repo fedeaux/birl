@@ -1,24 +1,24 @@
 <template lang="pug">
-.entity-manager.sessions-manager.default-container
+.sessions-manager.flex-column
   //- BrainDamage: ManagerHead Start
   //- BrainDamage: ManagerHead End
 
-  .entity-manager-form(v-if='form_session')
+  .entity-manager-form.flex-item-fixed(v-if='form_session')
     sessions-form(v-model='form_session'
                   @save='saveFormSession()'
                   @cancel='clearFormSession()')
 
-  .entity-manager-list.flex-column(v-else)
-    .entity-manager-list-header.flex-item-fixed
-      #new-session-button.ui.primary.top.attached.fluid.small.icon.button(@click='newSession')
+  template(v-else)
+    .flex-item-fixed.action-block.b-padded-1
+      .ui.primary.action-block-button.small.icon.button(@click='newSession')
         i.plus.icon
         |  Add Session
 
-    .flex-item
-      sessions-list(:sessions='sessions'
-                    :allow_actions='true'
-                    @edit='editSession($event)'
-                    @destroy='destroySession($event)')
+    .flex-column
+      sessions-list.flex-item(:sessions='sessions'
+                              :allow_actions='true'
+                              @edit='editSession($event)'
+                              @destroy='destroySession($event)')
 </template>
 
 <script lang="coffee">

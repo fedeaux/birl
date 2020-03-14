@@ -1,6 +1,5 @@
 <template lang="pug">
-.entity-index.vocabularies-index.default-container
-  vocabularies-manager(:parent_vocabularies='vocabularies')
+vocabularies-manager.vocabularies-index(:parent_vocabularies='vocabularies')
 </template>
 
 <script lang="coffee">

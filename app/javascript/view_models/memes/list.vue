@@ -1,19 +1,20 @@
 <template lang="pug">
-.entity-list.meme-list.flex-column
-  .flex-item.grow-0
+.meme-list.flex-column
+  .flex-item-fixed
     .entity-list-filter
       inputs-clearable.fluid(v-model='filter.text')
 
-  .flex-item.grow-1
-    memes-list-item(v-for='meme in displayable_memes'
-                    v-if='memes'
-                    :meme='meme'
-                    :allow_actions='allow_actions'
-                    :key='meme.id'
-                    @edit='$emit("edit", { meme: meme })'
-                    @destroy='$emit("destroy", { meme: meme })')
+  .flex-item.scroll-y
+    .memes-list-items-wrapper
+      memes-list-item(v-for='meme in displayable_memes'
+                      v-if='memes'
+                      :meme='meme'
+                      :allow_actions='allow_actions'
+                      :key='meme.id'
+                      @edit='$emit("edit", { meme: meme })'
+                      @destroy='$emit("destroy", { meme: meme })')
 
-    entity-list-empty(v-if='!memes || memes.length == 0')
+      entity-list-empty(v-if='!memes || memes.length == 0')
 </template>
 
 <script lang="coffee">

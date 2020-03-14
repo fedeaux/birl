@@ -1,24 +1,24 @@
 <template lang="pug">
-.entity-manager.trainings-manager.default-container
+.trainings-manager.flex-column
   //- BrainDamage: ManagerHead Start
   //- BrainDamage: ManagerHead End
 
-  .entity-manager-form(v-if='form_training')
+  .entity-manager-form.flex-item-fixed(v-if='form_training')
     trainings-form(v-model='form_training'
                    @save='saveFormTraining()'
                    @cancel='clearFormTraining()')
 
-  .entity-manager-list.flex-column(v-else)
-    .entity-manager-list-header.flex-item-fixed
-      #new-training-button.ui.primary.top.attached.fluid.small.icon.button(@click='newTraining')
+  template(v-else)
+    .flex-item-fixed.action-block.b-padded-1
+      .ui.primary.action-block-button.small.icon.button(@click='newTraining')
         i.plus.icon
         |  Add Training
 
-    .flex-item
-      trainings-list(:trainings='trainings'
-                     :allow_actions='true'
-                     @edit='editTraining($event)'
-                     @destroy='destroyTraining($event)')
+    .flex-column
+      trainings-list.flex-item(:trainings='trainings'
+                               :allow_actions='true'
+                               @edit='editTraining($event)'
+                               @destroy='destroyTraining($event)')
 </template>
 
 <script lang="coffee">

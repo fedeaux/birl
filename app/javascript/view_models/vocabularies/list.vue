@@ -1,19 +1,20 @@
 <template lang="pug">
-.entity-list.vocabulary-list.default-container.flex-column
+.vocabulary-list.flex-column
   .flex-item-fixed
     .entity-list-filter
       inputs-clearable.fluid(v-model='filter.text')
 
-  .flex-item
-    vocabularies-list-item(v-for='vocabulary in displayable_vocabularies'
-                           v-if='vocabularies'
-                           :vocabulary='vocabulary'
-                           :allow_actions='allow_actions'
-                           :key='vocabulary.id'
-                           @edit='$emit("edit", { vocabulary: vocabulary })'
-                           @destroy='$emit("destroy", { vocabulary: vocabulary })')
+  .flex-item.scroll-y
+    .vocabularies-list-items-wrapper
+      vocabularies-list-item(v-for='vocabulary in displayable_vocabularies'
+                             v-if='vocabularies'
+                             :vocabulary='vocabulary'
+                             :allow_actions='allow_actions'
+                             :key='vocabulary.id'
+                             @edit='$emit("edit", { vocabulary: vocabulary })'
+                             @destroy='$emit("destroy", { vocabulary: vocabulary })')
 
-    entity-list-empty(v-if='!vocabularies || vocabularies.length == 0')
+      entity-list-empty(v-if='!vocabularies || vocabularies.length == 0')
 </template>
 
 <script lang="coffee">

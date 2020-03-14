@@ -1,24 +1,24 @@
 <template lang="pug">
-.entity-manager.progressions-manager.default-container
+.progressions-manager.flex-column
   //- BrainDamage: ManagerHead Start
   //- BrainDamage: ManagerHead End
 
-  .entity-manager-form(v-if='form_progression')
+  .entity-manager-form.flex-item-fixed(v-if='form_progression')
     progressions-form(v-model='form_progression'
                       @save='saveFormProgression()'
                       @cancel='clearFormProgression()')
 
-  .entity-manager-list.flex-column(v-else)
-    .entity-manager-list-header.flex-item-fixed
-      #new-progression-button.ui.primary.top.attached.fluid.small.icon.button(@click='newProgression')
+  template(v-else)
+    .flex-item-fixed.action-block.b-padded-1
+      .ui.primary.action-block-button.small.icon.button(@click='newProgression')
         i.plus.icon
         |  Add Progression
 
-    .flex-item
-      progressions-list(:progressions='progressions'
-                        :allow_actions='true'
-                        @edit='editProgression($event)'
-                        @destroy='destroyProgression($event)')
+    .flex-column
+      progressions-list.flex-item(:progressions='progressions'
+                                  :allow_actions='true'
+                                  @edit='editProgression($event)'
+                                  @destroy='destroyProgression($event)')
 </template>
 
 <script lang="coffee">

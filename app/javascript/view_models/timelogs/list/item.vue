@@ -1,5 +1,5 @@
 <template lang="pug">
-.entity-list-item-wrapper.timelog-list-item-wrapper
+.timelog-list-item-wrapper
   .entity-list-item-confirming-destroy(v-if='confirming_destroy && !showing_actions')
     .ui.four.column.grid
       .column

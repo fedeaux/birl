@@ -1,24 +1,24 @@
 <template lang="pug">
-.entity-manager.challenges-manager.default-container
+.challenges-manager.flex-column
   //- BrainDamage: ManagerHead Start
   //- BrainDamage: ManagerHead End
 
-  .entity-manager-form(v-if='form_challenge')
+  .entity-manager-form.flex-item-fixed(v-if='form_challenge')
     challenges-form(v-model='form_challenge'
                     @save='saveFormChallenge()'
                     @cancel='clearFormChallenge()')
 
-  .entity-manager-list.flex-column(v-else)
-    .entity-manager-list-header.flex-item-fixed
-      #new-challenge-button.ui.primary.top.attached.fluid.small.icon.button(@click='newChallenge')
+  template(v-else)
+    .flex-item-fixed.action-block.b-padded-1
+      .ui.primary.action-block-button.small.icon.button(@click='newChallenge')
         i.plus.icon
         |  Add Challenge
 
-    .flex-item
-      challenges-list(:challenges='challenges'
-                      :allow_actions='true'
-                      @edit='editChallenge($event)'
-                      @destroy='destroyChallenge($event)')
+    .flex-column
+      challenges-list.flex-item(:challenges='challenges'
+                                :allow_actions='true'
+                                @edit='editChallenge($event)'
+                                @destroy='destroyChallenge($event)')
 </template>
 
 <script lang="coffee">
