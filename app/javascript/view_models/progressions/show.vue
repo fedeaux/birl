@@ -1,22 +1,20 @@
 <template lang="pug">
-.entity-show-wrapper.progressions-show-wrapper.default-container(v-if='progression')
-  .header-contents-footer
-    .entity-show.progressions-show.header-contents-footer-header
-      progressions-display(:progression='progression')
-        shared-link.entity-show-header-actions(:to='progression.editPath()')
-          i.edit.icon
+.progressions-show-wrapper.flex-column.t-padded-2(v-if='progression')
+  .progressions-show.flex-item-fixed
+    progressions-display(:progression='progression')
+      shared-link.action-text(:to='progression.editPath()')
+        i.edit.icon
 
-    //- BrainDamage: Body Start
-    .header-contents-footer-contents
-      entries-manager(:context='{ progression_id: progression.id }'
-                      :data_model='progression.entry_data_model')
+  //- BrainDamage: Body Start
+  entries-manager.flex-item(:context='{ progression_id: progression.id }'
+                            :data_model='progression.entry_data_model')
 
-    .header-contents-footer-footer.bottom-attached-footer.action-footer
-       shared-link.ui.primary.icon.button(:to='progression.executePath()')
-         | Go to Executor
-         | &nbsp;
-         i.play.icon
-    //- BrainDamage: Body End
+  .flex-item-fixed.action-block
+     shared-link.ui.primary.large.icon.button(:to='progression.executePath()')
+       | Go to Executor
+       | &nbsp;
+       i.play.icon
+  //- BrainDamage: Body End
 </template>
 
 <script lang="coffee">

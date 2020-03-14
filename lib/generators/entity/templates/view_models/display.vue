@@ -3,8 +3,8 @@
   .entity-display-main
     | {{ <%= underscore_name %>.name }}
 
-  .entity-display-detail
-<%= sub_template('Details', '//-', 4) %>
+    .entity-display-detail
+<%= sub_template('Details', '//-', 6) %>
 
   .entity-display-actions(v-if='allow_actions' @click='action($event)')
     slot
