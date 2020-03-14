@@ -1,20 +1,21 @@
 <template lang="pug">
-.entity-hierarchy.tags-hierarchy
-  .entity-hierarchy-form(v-if='form_tag && root')
+.entity-hierarchy.flex-column
+  .flex-item.grow-0(v-if='form_tag && root')
     tags-form(v-model='form_tag'
               @save='saveFormTag()'
               @cancel='clearFormTag()')
 
-  .entity-manager-list.header-contents-footer(v-else)
-    .entity-manager-list-header.header-contents-footer-header
-      #new-tag-button.ui.primary.top.attached.fluid.small.icon.button(@click='newTag' v-if='root')
+  .flex-column(v-else)
+    #new-tag-button.flex-item-fixed.b-padded-1(v-if='root' @click='newTag')
+      .ui.primary.top.attached.fluid.small.icon.button
         i.plus.icon
         |  Add Tag
 
-    .header-contents-footer-contents
-      tags-hierarchy-item(v-for='tag in tags'
-                          :tag='tag'
-                          :depth='depth')
+    .flex-column
+      .flex-column
+        tags-hierarchy-item(v-for='tag in tags'
+                            :tag='tag'
+                            :depth='depth')
 </template>
 
 <script lang="coffee">

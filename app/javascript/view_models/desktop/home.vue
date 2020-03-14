@@ -1,26 +1,31 @@
 <template lang="pug">
   .desktop-home.flex-row
-    .flex-item.flex-column.h-padded-2.v-paddeds-2.grow-2
-      .flex-item
-        h1 Tags
-        shared-view(:path='"/tags"')
+    //- .h-padded-2.v-paddeds-2.grow-2
+    .desktop-home-tags-and-memes.flex-item.flex-column
+      .desktop-home-tags.flex-column.padded-1
+        h1.flex-item-fixed Tags
+        shared-view.flex-item(:path='"/tags"')
 
       //- One of these two
-      .flex-item(v-if='timelineable_tag')
-        h1
-          | {{ timelineable_tag.fullname }} Memes
-        shared-view(:path='timelineable_tag.path()')
+      .desktop-home-memes.flex-column.padded-1
+        template(v-if='timelineable_tag')
+          h1.flex-item-fixed
+            | {{ timelineable_tag.fullname }} Memes
+          shared-view.flex-item(:path='timelineable_tag.path()')
 
-      .flex-item(v-else)
-        shared-view(:path='"/memes"')
+        template(v-else)
+          h1.flex-item-fixed Memes
+          shared-view.flex-item(:path='"/memes"')
 
-    .flex-item.v-padded-2.grow-3
-      h1 Today
-      shared-view(:path='"/timelogs/today"')
+    //- .v-padded-2
+    .flex-column.grow-3.padded-1
+      h1.flex-item-fixed Today
+      shared-view.flex-item.scroll-y(:path='"/timelogs/today"')
 
-    .flex-item.v-padded-2.grow-3
-      h1 goaler
-      shared-view(:path='"/goaler"')
+    //- .v-padded-2
+    .flex-column.grow-2.padded-1
+      h1.flex-item-fixed Goaler
+      shared-view.flex-item.scroll-y(:path='"/goaler"')
 
 </template>
 

@@ -1,5 +1,5 @@
 <template lang="pug">
-.entity-hierarchy-item-wrapper.tags-hierarchy-item-wrapper(v-if='tag')
+.entity-hierarchy-item-wrapper(v-if='tag')
   .entity-list-item-confirming-destroy(v-if='confirming_destroy && !showing_actions')
     .ui.four.column.grid
       .column

@@ -19,6 +19,52 @@ $ld2: $l + $d2
 $header-height: 54px
 $header-buttom-dim: $header-height - $d2
 
+.flex-column
+  flex-direction: column
+
+  .flex-item
+    overflow-y: hidden
+    overflow-x: auto
+
+    &.scroll-y
+      overflow-y: scroll
+
+.flex-row
+  flex-direction: row
+
+  .flex-item
+    overflow-y: auto
+    overflow-x: hidden
+
+.flex-column, .flex-row
+  display: flex
+  scroll-y: auto
+  flex: 1 1 0
+  position: relative
+  flex-grow: 1
+
+  .flex-item
+    flex: 1 1 0
+    position: relative
+
+.flex-column, .flex-row, .flex-item
+  &.grow-0
+    flex-grow: 0
+    flex-basis: auto
+
+  @for $i from 1 to 10
+    &.grow-#{$i}
+      flex-grow: $i
+
+.flex-item-fixed
+  flex: 1 1 0
+  flex-grow: 0
+  flex-basis: auto
+  position: relative
+
+.h-padded
+  padding: 0 1px
+
 @for $i from 1 to 3
   .padded-#{$i}
     padding: $d * $i
@@ -28,6 +74,9 @@ $header-buttom-dim: $header-height - $d2
 
   .v-padded-#{$i}
     padding: ($d * $i) 0
+
+  .b-padded-#{i}
+    padding-bottom: $d * $i
 
   .paddeds-#{$i}
     & > *
@@ -44,51 +93,6 @@ $header-buttom-dim: $header-height - $d2
   .v-paddeds-#{$i}-list
     @extend .v-paddeds-#{$i}
     padding-bottom: 0
-
-.flex-column
-  flex-direction: column
-
-  .flex-item
-    overflow-y: hidden
-    overflow-x: auto
-
-    &:first-child
-      padding-top: 0
-
-    &:last-child
-      padding-bottom: 0
-
-    &.scroll-y
-      overflow-y: scroll
-
-.flex-row
-  flex-direction: row
-
-  .flex-item
-    overflow-y: auto
-    overflow-x: hidden
-
-    &:first-child
-      padding-left: 0
-
-    &:last-child
-      padding-right: 0a
-
-.flex-column, .flex-row
-  display: flex
-  scroll-y: auto
-
-  .flex-item
-    flex: 1 1 0
-    position: relative
-
-    &.grow-0
-      flex-grow: 0
-      flex-basis: auto
-
-    @for $i from 1 to 10
-      &.grow-#{$i}
-        flex-grow: $i
 
 .header-contents-footer
   height: 100%

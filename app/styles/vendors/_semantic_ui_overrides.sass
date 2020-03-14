@@ -1,13 +1,22 @@
-.ui.form
-  .fields
-    .field
-      .ui.input
-        input
-          &.time
-            width: 68px !important
-
 .field
   .value
     height: 36px
     line-height: 36px
     vertical-align: middle
+
+.ui
+  &.button
+    margin-right: 0
+
+  &.form
+    .fields
+      .field
+        .ui.input
+          input
+            &.time
+              width: 68px !important
+
+  &.input
+    &.circular
+      input
+        border-radius: 99999px !important

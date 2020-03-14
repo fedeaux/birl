@@ -1,19 +1,14 @@
 <template lang="pug">
-#birl-spa-container.desktop
-  #header
+#birl-spa-container.desktop.flex-column
+  #header.fixed-flex-item
     #menu.ui.inverted.menu
       router-link.item(:to='"/"') Home
       router-link.item(:to='"/timelogs/week"') Week
       .item(@click='requestNotificationsPermission') Notifications
 
-  #contents-wrapper
-    #contents
-      router-view
-      //- .desktop-component.default-container(v-for='view in views')
-      //-   .desktop-component-close(@click='close(view)')
-      //-     i.cancel.icon
-
-      //-   shared-view(:path='view')
+  #contents-wrapper.flex-column
+    #contents.flex-column
+      router-view.flex-item
 </template>
 
 <script lang="coffee">

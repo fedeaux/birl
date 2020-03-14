@@ -1,7 +1,6 @@
 <template lang="pug">
 .memes-stream-list.flex-column
-  //- .entity-list-filter
-  .flex-item.grow-0(v-if='show_header')
+  .flex-item.grow-0(v-if='show_header && false')
     inputs-clearable(v-model='filter.text')
 
     .ui.icon.circular.basic.button(@click='toggleType')

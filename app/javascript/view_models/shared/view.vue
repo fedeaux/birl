@@ -18,7 +18,7 @@
       resolved = parent.$router.resolve(options.props.path)
       component = resolved.resolved.matched[0].components.default
       params = resolved.route.params
-      data = { attrs: resolveParamsToAtts params, component.props }
+      data = { attrs: resolveParamsToAtts(params, component.props), staticClass: options.data.staticClass }
 
       parent.$createElement component, data
 </script>

@@ -1,8 +1,7 @@
 <template lang="pug">
-.entity-index.tags-index.default-container
-  tags-hierarchy(v-if='tags'
-                 :parent_tags='tags'
-                 @forceReload='forceReload')
+tags-hierarchy.tags-index(v-if='tags'
+                          :parent_tags='tags'
+                          @forceReload='forceReload')
 </template>
 
 <script lang="coffee">

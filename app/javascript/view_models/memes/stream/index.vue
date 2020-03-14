@@ -1,6 +1,6 @@
 <template lang="pug">
-.memes-stream-index.flex-column.grow-1
-  .memes-stream-header.flex-item.grow-0
+.memes-stream-index.flex-column
+  .memes-stream-header.flex-item-fixed
     //- .select-mode-menu.action-menu
     .memes-stream-select-mode-wrapper(v-if='select_mode')
       template(v-if='tagging_selected')
@@ -23,7 +23,7 @@
                  @save='saveFormMeme()'
                  @cancel='clearFormMeme()')
 
-  .memes-stream-list-wrapper.flex-item.grow-1.flex-column(v-if='!form_meme')
+  .memes-stream-list-wrapper.flex-column.b-padded-1(v-if='!form_meme')
     memes-stream-list.flex-item.grow-1(:memes='memes'
                                        :allow_actions='true'
                                        :context='context'
@@ -37,13 +37,15 @@
 
   //- .action-footer.slim-bottom-attached-footer
   .memes-stream-input-wrapper.flex-item.grow-0.flex-row
-    .ui.icon.circular.basic.button(@click='toggleType')
-      i.check.square.outline.icon(v-if='meme_type == "Todo"')
-      i.sticky.note.outline.icon(v-if='meme_type == "Note"')
-    .ui.input
+    .flex-item.grow-0
+      .ui.icon.circular.basic.button(@click='toggleType')
+        i.check.square.outline.icon(v-if='meme_type == "Todo"')
+        i.sticky.note.outline.icon(v-if='meme_type == "Note"')
+    .flex-item.ui.circular.input.h-padded-1
       input(v-model='meme_contents_title' @keyup='detectEnters')
-    .ui.green.icon.circular.button(@click='createMemeFromTitle' :class='{ disabled: meme_contents_title.length == 0 }')
-      i.chevron.right.icon
+    .flex-item.grow-0
+      .ui.green.icon.circular.button(@click='createMemeFromTitle' :class='{ disabled: meme_contents_title.length == 0 }')
+        i.chevron.right.icon
 </template>
 
 <script lang="coffee">
@@ -90,8 +92,8 @@ export default
 
     scrollDown: ->
       # More duct tape... kkkk
-      parent = $ '.meme-list .header-contents-footer-contents'
-      parent[0].scrollTop = $('.meme-list-items', parent).height()
+      # parent = $ '.meme-list .header-contents-footer-contents'
+      # parent[0].scrollTop = $('.meme-list-items', parent).height()
 
     toggleType: ->
       return @meme_type = 'Note' if @meme_type == 'Todo'
