@@ -1,10 +1,10 @@
 <template lang="pug">
-.entity-list.goal-entry-list.default-container.header-contents-footer
-  .header-contents-footer-header
+.entity-list.goal-entry-list.default-container.flex-column
+  .flex-item-fixed
     .entity-list-filter
       inputs-clearable.fluid(v-model='filter.text')
 
-  .header-contents-footer-contents
+  .flex-item
     goal-entries-list-item(v-for='goal_entry in displayable_goal_entries'
                            v-if='goal_entries'
                            :goal_entry='goal_entry'

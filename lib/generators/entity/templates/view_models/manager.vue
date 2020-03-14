@@ -7,13 +7,13 @@
     <%= plural_dash_name_as_spaces %>      @save='saveForm<%= entity_name %>()'
     <%= plural_dash_name_as_spaces %>      @cancel='clearForm<%= entity_name %>()')
 
-  .entity-manager-list.header-contents-footer(v-else)
-    .entity-manager-list-header.header-contents-footer-header
+  .entity-manager-list.flex-column(v-else)
+    .entity-manager-list-header.flex-item-fixed
       #new-<%= dash_name %>-button.ui.primary.top.attached.fluid.small.icon.button(@click='new<%= entity_name %>')
         i.plus.icon
         |  Add <%= human_name %>
 
-    .header-contents-footer-contents
+    .flex-item
       <%= plural_dash_name %>-list(:<%= plural_underscore_name %>='<%= plural_underscore_name %>'
       <%= plural_dash_name_as_spaces %>      :allow_actions='true'
       <%= plural_dash_name_as_spaces %>      @edit='edit<%= entity_name %>($event)'

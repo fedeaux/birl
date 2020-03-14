@@ -8,13 +8,13 @@
                        @save='saveFormTagTaggable()'
                        @cancel='clearFormTagTaggable()')
 
-  .entity-manager-list.header-contents-footer(v-else)
-    .entity-manager-list-header.header-contents-footer-header
+  .entity-manager-list.flex-column(v-else)
+    .entity-manager-list-header.flex-item-fixed
       #new-tag-taggable-button.ui.primary.top.attached.fluid.small.icon.button(@click='newTagTaggable')
         i.plus.icon
         |  Add Tag Taggable
 
-    .header-contents-footer-contents
+    .flex-item
       tag-taggables-list(:tag_taggables='tag_taggables'
                          :allow_actions='true'
                          @edit='editTagTaggable($event)'

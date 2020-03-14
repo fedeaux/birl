@@ -1,6 +1,6 @@
 <template lang="pug">
-.entity-timeline.timelogs-timeline.header-contents-footer
-  .header-contents-footer-contents
+.entity-timeline.timelogs-timeline.flex-column
+  .flex-item
     timelogs-range(:first_date='first_date'
                    :last_date='last_date')
 </template>

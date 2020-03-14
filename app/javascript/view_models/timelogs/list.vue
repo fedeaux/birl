@@ -1,10 +1,10 @@
 <template lang="pug">
-.entity-list.timelog-list.default-container.header-contents-footer
-  .header-contents-footer-header
+.entity-list.timelog-list.default-container.flex-column
+  .flex-item-fixed
     .entity-list-filter
       inputs-clearable.fluid(v-model='filter.text')
 
-  .header-contents-footer-contents
+  .flex-item
     timelogs-list-item(v-for='timelog in displayable_timelogs'
                        v-if='timelogs'
                        :timelog='timelog'

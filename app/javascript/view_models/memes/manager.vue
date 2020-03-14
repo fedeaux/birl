@@ -8,13 +8,13 @@
                @save='saveFormMeme()'
                @cancel='clearFormMeme()')
 
-  .entity-manager-list.header-contents-footer(v-else)
-    .entity-manager-list-header.header-contents-footer-header
+  .entity-manager-list.flex-column(v-else)
+    .entity-manager-list-header.flex-item-fixed
       #new-meme-button.ui.primary.top.attached.fluid.small.icon.button(@click='newMeme')
         i.plus.icon
         |  Add Meme
 
-    .header-contents-footer-contents
+    .flex-item
       memes-list(:memes='memes'
                  :allow_actions='true'
                  @edit='editMeme($event)'

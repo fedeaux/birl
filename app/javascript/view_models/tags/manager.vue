@@ -8,13 +8,13 @@
               @save='saveFormTag()'
               @cancel='clearFormTag()')
 
-  .entity-manager-list.header-contents-footer(v-else)
-    .entity-manager-list-header.header-contents-footer-header
+  .entity-manager-list.flex-column(v-else)
+    .entity-manager-list-header.flex-item-fixed
       #new-tag-button.ui.primary.top.attached.fluid.small.icon.button(@click='newTag')
         i.plus.icon
         |  Add Tag
 
-    .header-contents-footer-contents
+    .flex-item
       tags-list(:tags='tags'
                 :allow_actions='true'
                 @edit='editTag($event)'

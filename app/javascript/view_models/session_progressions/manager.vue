@@ -8,13 +8,13 @@
                               @save='saveFormSessionProgression()'
                               @cancel='clearFormSessionProgression()')
 
-  .entity-manager-list.header-contents-footer(v-else)
-    .entity-manager-list-header.header-contents-footer-header
+  .entity-manager-list.flex-column(v-else)
+    .entity-manager-list-header.flex-item-fixed
       #new-session-progression-button.ui.primary.top.attached.fluid.small.icon.button(@click='newSessionProgression')
         i.plus.icon
         |  Add Session Progression
 
-    .header-contents-footer-contents
+    .flex-item
       session-progressions-list(:session_progressions='session_progressions'
                                 :allow_actions='true'
                                 @edit='editSessionProgression($event)'

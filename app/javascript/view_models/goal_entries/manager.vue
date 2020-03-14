@@ -8,13 +8,13 @@
                       @save='saveFormGoalEntry()'
                       @cancel='clearFormGoalEntry()')
 
-  .entity-manager-list.header-contents-footer(v-else)
-    .entity-manager-list-header.header-contents-footer-header
+  .entity-manager-list.flex-column(v-else)
+    .entity-manager-list-header.flex-item-fixed
       #new-goal-entry-button.ui.primary.top.attached.fluid.small.icon.button(@click='newGoalEntry')
         i.plus.icon
         |  Add Goal Entry
 
-    .header-contents-footer-contents
+    .flex-item
       goal-entries-list(:goal_entries='goal_entries'
                         :allow_actions='true'
                         @edit='editGoalEntry($event)'

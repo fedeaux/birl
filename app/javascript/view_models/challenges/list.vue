@@ -1,10 +1,10 @@
 <template lang="pug">
-.entity-list.challenge-list.default-container.header-contents-footer
-  .header-contents-footer-header
+.entity-list.challenge-list.default-container.flex-column
+  .flex-item-fixed
     .entity-list-filter
       inputs-clearable.fluid(v-model='filter.text')
 
-  .header-contents-footer-contents
+  .flex-item
     challenges-list-item(v-for='challenge in displayable_challenges'
                          v-if='challenges'
                          :challenge='challenge'

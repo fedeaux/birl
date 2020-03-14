@@ -1,10 +1,10 @@
 <template lang="pug">
-.entity-list.session-progression-list.default-container.header-contents-footer
-  .header-contents-footer-header
+.entity-list.session-progression-list.default-container.flex-column
+  .flex-item-fixed
     .entity-list-filter
       inputs-clearable.fluid(v-model='filter.text')
 
-  .header-contents-footer-contents
+  .flex-item
     session-progressions-list-item(v-for='session_progression in displayable_session_progressions'
                                    v-if='session_progressions'
                                    :session_progression='session_progression'

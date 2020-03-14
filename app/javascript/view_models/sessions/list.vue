@@ -1,10 +1,10 @@
 <template lang="pug">
-.entity-list.session-list.default-container.header-contents-footer
-  .header-contents-footer-header
+.entity-list.session-list.default-container.flex-column
+  .flex-item-fixed
     .entity-list-filter
       inputs-clearable.fluid(v-model='filter.text')
 
-  .header-contents-footer-contents
+  .flex-item
     sessions-list-item(v-for='session in displayable_sessions'
                        v-if='sessions'
                        :session='session'

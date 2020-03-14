@@ -8,13 +8,13 @@
                   @save='saveFormContext()'
                   @cancel='clearFormContext()')
 
-  .entity-manager-list.header-contents-footer(v-else)
-    .entity-manager-list-header.header-contents-footer-header
+  .entity-manager-list.flex-column(v-else)
+    .entity-manager-list-header.flex-item-fixed
       #new-context-button.ui.primary.top.attached.fluid.small.icon.button(@click='newContext')
         i.plus.icon
         |  Add Context
 
-    .header-contents-footer-contents
+    .flex-item
       contexts-list(:contexts='contexts'
                     :allow_actions='true'
                     @edit='editContext($event)'

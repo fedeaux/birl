@@ -14,13 +14,13 @@
                  @save='saveFormEntry()'
                  @cancel='clearFormEntry()')
 
-  .entity-manager-list.header-contents-footer(v-else)
-    .entity-manager-list-header.header-contents-footer-header(v-if='actions.add')
+  .entity-manager-list.flex-column(v-else)
+    .entity-manager-list-header.flex-item-fixed(v-if='actions.add')
       #new-entry-button.ui.primary.top.attached.fluid.small.icon.button(@click='newEntry')
         i.plus.icon
         |  Add Entry
 
-    .header-contents-footer-contents
+    .flex-item
       entries-list(:entries='entries'
                    :allow_actions='true'
                    @edit='editEntry($event)'

@@ -1,10 +1,10 @@
 <template lang="pug">
-.entity-list.entry-list.default-container.header-contents-footer
-  .header-contents-footer-header
+.entity-list.entry-list.default-container.flex-column
+  .flex-item-fixed
     .entity-list-filter
       inputs-clearable.fluid(v-model='filter.text')
 
-  .header-contents-footer-contents
+  .flex-item
     entries-list-item(v-for='entry in displayable_entries'
                       v-if='entries'
                       :entry='entry'

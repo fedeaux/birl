@@ -8,13 +8,13 @@
                     @save='saveFormChallenge()'
                     @cancel='clearFormChallenge()')
 
-  .entity-manager-list.header-contents-footer(v-else)
-    .entity-manager-list-header.header-contents-footer-header
+  .entity-manager-list.flex-column(v-else)
+    .entity-manager-list-header.flex-item-fixed
       #new-challenge-button.ui.primary.top.attached.fluid.small.icon.button(@click='newChallenge')
         i.plus.icon
         |  Add Challenge
 
-    .header-contents-footer-contents
+    .flex-item
       challenges-list(:challenges='challenges'
                       :allow_actions='true'
                       @edit='editChallenge($event)'

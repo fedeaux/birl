@@ -1,10 +1,10 @@
 <template lang="pug">
-.entity-list.vocabulary-list.default-container.header-contents-footer
-  .header-contents-footer-header
+.entity-list.vocabulary-list.default-container.flex-column
+  .flex-item-fixed
     .entity-list-filter
       inputs-clearable.fluid(v-model='filter.text')
 
-  .header-contents-footer-contents
+  .flex-item
     vocabularies-list-item(v-for='vocabulary in displayable_vocabularies'
                            v-if='vocabularies'
                            :vocabulary='vocabulary'

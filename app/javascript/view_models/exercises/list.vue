@@ -1,10 +1,10 @@
 <template lang="pug">
-.entity-list.exercise-list.default-container.header-contents-footer
-  .header-contents-footer-header
+.entity-list.exercise-list.default-container.flex-column
+  .flex-item-fixed
     .entity-list-filter
       inputs-clearable.fluid(v-model='filter.text')
 
-  .header-contents-footer-contents
+  .flex-item
     exercises-list-item(v-for='exercise in displayable_exercises'
                         v-if='exercises'
                         :exercise='exercise'

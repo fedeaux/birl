@@ -8,13 +8,13 @@
                @save='saveFormGoal()'
                @cancel='clearFormGoal()')
 
-  .entity-manager-list.header-contents-footer(v-else)
-    .entity-manager-list-header.header-contents-footer-header
+  .entity-manager-list.flex-column(v-else)
+    .entity-manager-list-header.flex-item-fixed
       #new-goal-button.ui.primary.top.attached.fluid.small.icon.button(@click='newGoal')
         i.plus.icon
         |  Add Goal
 
-    .header-contents-footer-contents
+    .flex-item
       goals-list(:goals='goals'
                  :allow_actions='true'
                  @edit='editGoal($event)'

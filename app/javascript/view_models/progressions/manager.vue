@@ -8,13 +8,13 @@
                       @save='saveFormProgression()'
                       @cancel='clearFormProgression()')
 
-  .entity-manager-list.header-contents-footer(v-else)
-    .entity-manager-list-header.header-contents-footer-header
+  .entity-manager-list.flex-column(v-else)
+    .entity-manager-list-header.flex-item-fixed
       #new-progression-button.ui.primary.top.attached.fluid.small.icon.button(@click='newProgression')
         i.plus.icon
         |  Add Progression
 
-    .header-contents-footer-contents
+    .flex-item
       progressions-list(:progressions='progressions'
                         :allow_actions='true'
                         @edit='editProgression($event)'

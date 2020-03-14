@@ -8,13 +8,13 @@
                  @save='saveFormLister()'
                  @cancel='clearFormLister()')
 
-  .entity-manager-list.header-contents-footer(v-else)
-    .entity-manager-list-header.header-contents-footer-header
+  .entity-manager-list.flex-column(v-else)
+    .entity-manager-list-header.flex-item-fixed
       #new-lister-button.ui.primary.top.attached.fluid.small.icon.button(@click='newLister')
         i.plus.icon
         |  Add Lister
 
-    .header-contents-footer-contents
+    .flex-item
       listers-list(:listers='listers'
                    :allow_actions='true'
                    @edit='editLister($event)'

@@ -8,13 +8,13 @@
                       @save='saveFormVocabulary()'
                       @cancel='clearFormVocabulary()')
 
-  .entity-manager-list.header-contents-footer(v-else)
-    .entity-manager-list-header.header-contents-footer-header
+  .entity-manager-list.flex-column(v-else)
+    .entity-manager-list-header.flex-item-fixed
       #new-vocabulary-button.ui.primary.top.attached.fluid.small.icon.button(@click='newVocabulary')
         i.plus.icon
         |  Add Vocabulary
 
-    .header-contents-footer-contents
+    .flex-item
       vocabularies-list(:vocabularies='vocabularies'
                         :allow_actions='true'
                         @edit='editVocabulary($event)'

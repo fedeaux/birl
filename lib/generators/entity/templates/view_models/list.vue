@@ -1,10 +1,10 @@
 <template lang="pug">
-.entity-list.<%= dash_name %>-list.default-container.header-contents-footer
-  .header-contents-footer-header
+.<%= dash_name %>-list.flex-column
+  .flex-item.grow-0
     .entity-list-filter
       inputs-clearable.fluid(v-model='filter.text')
 
-  .header-contents-footer-contents
+  .flex-item.grow-1
     <%= plural_dash_name %>-list-item(v-for='<%= underscore_name %> in displayable_<%= plural_underscore_name %>'
     <%= plural_dash_name_as_spaces %>           v-if='<%= plural_underscore_name %>'
     <%= plural_dash_name_as_spaces %>           :<%= underscore_name %>='<%= underscore_name %>'

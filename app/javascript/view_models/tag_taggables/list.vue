@@ -1,10 +1,10 @@
 <template lang="pug">
-.entity-list.tag-taggable-list.default-container.header-contents-footer
-  .header-contents-footer-header
+.entity-list.tag-taggable-list.default-container.flex-column
+  .flex-item-fixed
     .entity-list-filter
       inputs-clearable.fluid(v-model='filter.text')
 
-  .header-contents-footer-contents
+  .flex-item
     tag-taggables-list-item(v-for='tag_taggable in displayable_tag_taggables'
                             v-if='tag_taggables'
                             :tag_taggable='tag_taggable'

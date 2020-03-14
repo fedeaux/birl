@@ -8,13 +8,13 @@
                    @save='saveFormTraining()'
                    @cancel='clearFormTraining()')
 
-  .entity-manager-list.header-contents-footer(v-else)
-    .entity-manager-list-header.header-contents-footer-header
+  .entity-manager-list.flex-column(v-else)
+    .entity-manager-list-header.flex-item-fixed
       #new-training-button.ui.primary.top.attached.fluid.small.icon.button(@click='newTraining')
         i.plus.icon
         |  Add Training
 
-    .header-contents-footer-contents
+    .flex-item
       trainings-list(:trainings='trainings'
                      :allow_actions='true'
                      @edit='editTraining($event)'

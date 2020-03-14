@@ -1,7 +1,7 @@
 <template lang="pug">
 .entity-show-wrapper.progressions-show-wrapper.default-container(v-if='progression')
-  .header-contents-footer
-    .header-contents-footer-header
+  .flex-column
+    .flex-item-fixed
       .entity-show.progressions-show
         progressions-display(:progression='progression')
           shared-link.entity-show-header-actions(:to='progression.path()')
@@ -10,7 +10,7 @@
       .progressions-show-challenge-description(v-if='progression.challenge_description')
         | {{ progression.challenge_description }}
 
-    .header-contents-footer-contents
+    .flex-item
       entries-manager(:context='entries_context'
                       :data_model='progression.entry_data_model'
                       :actions='{ add: false, form: { actions: false } }'
@@ -25,7 +25,7 @@
                      @done='done'
                      ref='executor')
 
-    .header-contents-footer-footer.bottom-attached-footer.action-footer
+    .flex-item-fixed.bottom-attached-footer.action-footer
       .ui.primary.fluid.button(@click='prepare' v-if='state == "idle"')
         | Prepare&nbsp;&nbsp;
 

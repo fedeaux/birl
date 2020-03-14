@@ -92,7 +92,7 @@ export default
 
     scrollDown: ->
       # More duct tape... kkkk
-      # parent = $ '.meme-list .header-contents-footer-contents'
+      # parent = $ '.meme-list .flex-item'
       # parent[0].scrollTop = $('.meme-list-items', parent).height()
 
     toggleType: ->

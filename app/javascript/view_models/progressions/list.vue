@@ -1,10 +1,10 @@
 <template lang="pug">
-.entity-list.progression-list.default-container.header-contents-footer
-  .header-contents-footer-header
+.entity-list.progression-list.default-container.flex-column
+  .flex-item-fixed
     .entity-list-filter
       inputs-clearable.fluid(v-model='filter.text')
 
-  .header-contents-footer-contents
+  .flex-item
     progressions-list-item(v-for='progression in displayable_progressions'
                            v-if='progressions'
                            :progression='progression'

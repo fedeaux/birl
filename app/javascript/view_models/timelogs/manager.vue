@@ -8,13 +8,13 @@
                   @save='saveFormTimelog()'
                   @cancel='clearFormTimelog()')
 
-  .entity-manager-list.header-contents-footer(v-else)
-    .entity-manager-list-header.header-contents-footer-header
+  .entity-manager-list.flex-column(v-else)
+    .entity-manager-list-header.flex-item-fixed
       #new-timelog-button.ui.primary.top.attached.fluid.small.icon.button(@click='newTimelog')
         i.plus.icon
         |  Add Timelog
 
-    .header-contents-footer-contents
+    .flex-item
       timelogs-list(:timelogs='timelogs'
                     :allow_actions='true'
                     @edit='editTimelog($event)'

@@ -6,7 +6,7 @@
         i.edit.icon
 
   //- BrainDamage: Body Start
-    .header-contents-footer-contents
+    .flex-item
       progressions-manager(v-if='exercise_id' :context='{ exercise_id: exercise_id }' :allow_actions='true')
   //- BrainDamage: Body End
 </template>

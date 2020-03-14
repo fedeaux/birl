@@ -8,13 +8,13 @@
                 @save='saveFormGroup()'
                 @cancel='clearFormGroup()')
 
-  .entity-manager-list.header-contents-footer(v-else)
-    .entity-manager-list-header.header-contents-footer-header
+  .entity-manager-list.flex-column(v-else)
+    .entity-manager-list-header.flex-item-fixed
       #new-group-button.ui.primary.top.attached.fluid.small.icon.button(@click='newGroup')
         i.plus.icon
         |  Add Group
 
-    .header-contents-footer-contents
+    .flex-item
       groups-list(:groups='groups'
                   :allow_actions='true'
                   @edit='editGroup($event)'
