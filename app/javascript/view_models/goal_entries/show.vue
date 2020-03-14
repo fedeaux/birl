@@ -1,13 +1,12 @@
 <template lang="pug">
-.entity-show-wrapper.goal-entries-show-wrapper.default-container(v-if='goal_entry')
-  .header-contents-footer
-    .entity-show.goal-entries-show.header-contents-footer-header
-      goal-entries-display(:goal_entry='goal_entry')
-        shared-link.entity-show-header-actions(:to='goal_entry.editPath()')
-          i.edit.icon
+.goal-entries-show-wrapper.flex-column.t-padded-2(v-if='goal_entry')
+  .goal-entries-show.flex-item-fixed
+    goal-entries-display(:goal_entry='goal_entry')
+      shared-link.action-text(:to='goal_entry.editPath()')
+        i.edit.icon
 
-    //- BrainDamage: Body Start
-    //- BrainDamage: Body End
+  //- BrainDamage: Body Start
+  //- BrainDamage: Body End
 </template>
 
 <script lang="coffee">

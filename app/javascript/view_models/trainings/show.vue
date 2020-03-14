@@ -1,13 +1,12 @@
 <template lang="pug">
-.entity-show-wrapper.trainings-show-wrapper.default-container(v-if='training')
-  .header-contents-footer
-    .entity-show.trainings-show.header-contents-footer-header
-      trainings-display(:training='training')
-        shared-link.entity-show-header-actions(:to='training.editPath()')
-          i.edit.icon
+.trainings-show-wrapper.flex-column.t-padded-2(v-if='training')
+  .trainings-show.flex-item-fixed
+    trainings-display(:training='training')
+      shared-link.action-text(:to='training.editPath()')
+        i.edit.icon
 
-    //- BrainDamage: Body Start
-    //- BrainDamage: Body End
+  //- BrainDamage: Body Start
+  //- BrainDamage: Body End
 </template>
 
 <script lang="coffee">

@@ -1,13 +1,12 @@
 <template lang="pug">
-.entity-show-wrapper.memes-show-wrapper.default-container(v-if='meme')
-  .header-contents-footer
-    .entity-show.memes-show.header-contents-footer-header
-      memes-display(:meme='meme')
-        shared-link.entity-show-header-actions(:to='meme.editPath()')
-          i.edit.icon
+.memes-show-wrapper.flex-column.t-padded-2(v-if='meme')
+  .memes-show.flex-item-fixed
+    memes-display(:meme='meme')
+      shared-link.action-text(:to='meme.editPath()')
+        i.edit.icon
 
-    //- BrainDamage: Body Start
-    //- BrainDamage: Body End
+  //- BrainDamage: Body Start
+  //- BrainDamage: Body End
 </template>
 
 <script lang="coffee">

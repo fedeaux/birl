@@ -1,19 +1,18 @@
 <template lang="pug">
-.entity-show-wrapper.session-progressions-show-wrapper.default-container(v-if='session_progression')
-  .header-contents-footer
-    .entity-show.session-progressions-show.header-contents-footer-header
-      session-progressions-display(:session_progression='session_progression')
-        shared-link.entity-show-header-actions(:to='session_progression.editPath()')
-          i.edit.icon
+.session-progressions-show-wrapper.flex-column.t-padded-2(v-if='session_progression')
+  .session-progressions-show.flex-item-fixed
+    session-progressions-display(:session_progression='session_progression')
+      shared-link.action-text(:to='session_progression.editPath()')
+        i.edit.icon
 
-    //- BrainDamage: Body Start
+  //- BrainDamage: Body Start
   h3 Progression
   progressions-list-item(:progression='progression')
   //- BrainDamage: Body End
 
   h3 Session
   sessions-list-item(:session='session')
-    //- BrainDamage: Body End
+  //- BrainDamage: Body End
 </template>
 
 <script lang="coffee">

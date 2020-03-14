@@ -9,7 +9,7 @@
     tags-tags(:tags='meme.tags' :hide='context.tag_id')
     //- BrainDamage: Details End
 
-  .entity-display-actions(v-if='allow_actions' @click='action($event)')
+  .top-right-actions(v-if='allow_actions' @click='action($event)')
     slot
 </template>
 

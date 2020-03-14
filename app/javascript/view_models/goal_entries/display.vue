@@ -3,11 +3,11 @@
   .entity-display-main
     | {{ goal_entry.name }}
 
-  .entity-display-detail
-    //- BrainDamage: Details Start
-    //- BrainDamage: Details End
+    .entity-display-detail
+      //- BrainDamage: Details Start
+      //- BrainDamage: Details End
 
-  .entity-display-actions(v-if='allow_actions' @click='action($event)')
+  .top-right-actions(v-if='allow_actions' @click='action($event)')
     slot
 </template>
 

@@ -3,12 +3,12 @@
   .entity-display-main
     | {{ challenge.name }}
 
-  .entity-display-detail
-    //- BrainDamage: Details Start
-    | {{ challenge.description }}
-    //- BrainDamage: Details End
+    .entity-display-detail
+      //- BrainDamage: Details Start
+      | {{ challenge.description }}
+      //- BrainDamage: Details End
 
-  .entity-display-actions(v-if='allow_actions' @click='action($event)')
+  .top-right-actions(v-if='allow_actions' @click='action($event)')
     slot
 </template>
 

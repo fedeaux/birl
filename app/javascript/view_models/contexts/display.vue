@@ -3,12 +3,12 @@
   .entity-display-main
     | {{ context.name }}
 
-  .entity-display-detail
-    //- BrainDamage: Details Start
-    | {{ context.color }}
-    //- BrainDamage: Details End
+    .entity-display-detail
+      //- BrainDamage: Details Start
+      | {{ context.color }}
+      //- BrainDamage: Details End
 
-  .entity-display-actions(v-if='allow_actions' @click='action($event)')
+  .top-right-actions(v-if='allow_actions' @click='action($event)')
     slot
 </template>
 
@@ -26,6 +26,7 @@
         event.preventDefault()
         event.stopPropagation()
         @$emit 'action', event
+
     # BrainDamage: Other Start
     # BrainDamage: Other End
 </script>

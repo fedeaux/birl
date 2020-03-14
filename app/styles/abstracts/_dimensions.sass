@@ -78,6 +78,9 @@ $header-buttom-dim: $header-height - $d2
   .b-padded-#{i}
     padding-bottom: $d * $i
 
+  .t-padded-#{i}
+    padding-top: $d * $i
+
   .paddeds-#{$i}
     & > *
       padding: $d * $i
@@ -94,34 +97,34 @@ $header-buttom-dim: $header-height - $d2
     @extend .v-paddeds-#{$i}
     padding-bottom: 0
 
-.header-contents-footer
-  height: 100%
-  display: flex
-  flex-direction: column
+/* .header-contents-footer
+/*   height: 100%
+/*   display: flex
+/*   flex-direction: column
 
-  .header-contents-footer-header
-    flex-grow: 0
+/*   .header-contents-footer-header
+/*     flex-grow: 0
 
-  .header-contents-footer-contents
-    height: 100%
-    overflow-y: auto
-    overflow-x: hidden
-    flex-grow: 1
+/*   .header-contents-footer-contents
+/*     height: 100%
+/*     overflow-y: auto
+/*     overflow-x: hidden
+/*     flex-grow: 1
 
-  .header-contents-footer-footer
-    flex-grow: 0
-    padding-top: $d4
+/*   .header-contents-footer-footer
+/*     flex-grow: 0
+/*     padding-top: $d4
 
-    &.bottom-attached-footer
-      margin-bottom: -$d2
-      margin-right: -$d2
-      margin-left: -$d2
+/*     &.bottom-attached-footer
+/*       margin-bottom: -$d2
+/*       margin-right: -$d2
+/*       margin-left: -$d2
 
-    &.slim-bottom-attached-footer
-      margin-bottom: -$d
-      margin-right: -$d
-      margin-left: -$d
+/*     &.slim-bottom-attached-footer
+/*       margin-bottom: -$d
+/*       margin-right: -$d
+/*       margin-left: -$d
 
-    &.action-footer
-      padding-top: $d2
-      text-align: center
+/*     &.action-footer
+/*       padding-top: $d2
+/*

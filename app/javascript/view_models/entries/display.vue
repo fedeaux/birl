@@ -3,20 +3,20 @@
   .entity-display-main
     entries-value-display(:value='entry.value')
 
-  .entity-display-detail
-    //- BrainDamage: Details Start
-    template(v-if='entry.created_at')
-      |  {{ entry.created_at.fromNow() }}
-    template(v-else)
-      |  not saved
-    template(v-if='entry.observations')
+    .entity-display-detail
+      //- BrainDamage: Details Start
+      template(v-if='entry.created_at')
+        |  {{ entry.created_at.fromNow() }}
+      template(v-else)
+        |  not saved
+      template(v-if='entry.observations')
+        |  &middot;
+        |  {{ entry.observations }}
       |  &middot;
-      |  {{ entry.observations }}
-    |  &middot;
-    |  {{ entry.id }}
-    //- BrainDamage: Details End
+      |  {{ entry.id }}
+      //- BrainDamage: Details End
 
-  .entity-display-actions(v-if='allow_actions' @click='action($event)')
+  .top-right-actions(v-if='allow_actions' @click='action($event)')
     slot
 </template>
 

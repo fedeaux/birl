@@ -1,19 +1,18 @@
 <template lang="pug">
-.entity-show-wrapper.listers-show-wrapper.default-container(v-if='lister')
-  .header-contents-footer
-    .entity-show.listers-show.header-contents-footer-header
-      listers-display(:lister='lister')
-        shared-link.entity-show-header-actions(:to='lister.editPath()')
-          i.edit.icon
+.listers-show-wrapper.flex-column.t-padded-2(v-if='lister')
+  .listers-show.flex-item-fixed
+    listers-display(:lister='lister')
+      shared-link.action-text(:to='lister.editPath()')
+        i.edit.icon
 
-    //- BrainDamage: Body Start
+  //- BrainDamage: Body Start
   .entity-list.lister-list.default-container
     .entity-list-item-wrapper.lister-list-item-wrapper
        .entity-list-item.lister-list-item(v-for='item in lister.values.items')
          .entity-display
            .entity-display-main
              | {{ item }}
-    //- BrainDamage: Body End
+  //- BrainDamage: Body End
 </template>
 
 <script lang="coffee">

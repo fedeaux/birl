@@ -1,12 +1,11 @@
 <template lang="pug">
-.entity-show-wrapper.sessions-show-wrapper.default-container(v-if='session')
-  .header-contents-footer
-    .entity-show.sessions-show.header-contents-footer-header
-      sessions-display(:session='session')
-        shared-link.entity-show-header-actions(:to='session.editPath()')
-          i.edit.icon
+.sessions-show-wrapper.flex-column.t-padded-2(v-if='session')
+  .sessions-show.flex-item-fixed
+    sessions-display(:session='session')
+      shared-link.action-text(:to='session.editPath()')
+        i.edit.icon
 
-    //- BrainDamage: Body Start
+  //- BrainDamage: Body Start
     .header-contents-footer-contents.header-contents-footer
       .header-contents-footer-header
         .default-container(v-if='session.done_today')
@@ -29,7 +28,7 @@
           | Start
         | &nbsp;
         i.play.icon
-    //- BrainDamage: Body End
+  //- BrainDamage: Body End
 </template>
 
 <script lang="coffee">

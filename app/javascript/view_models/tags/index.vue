@@ -26,4 +26,4 @@ export default
   mounted: ->
     @tags_resource = new TagsResource
     @loadTags()
-</script->
+</script>

@@ -1,13 +1,12 @@
 <template lang="pug">
-.entity-show-wrapper.goals-show-wrapper.default-container(v-if='goal')
-  .header-contents-footer
-    .entity-show.goals-show.header-contents-footer-header
-      goals-display(:goal='goal')
-        shared-link.entity-show-header-actions(:to='goal.editPath()')
-          i.edit.icon
+.goals-show-wrapper.flex-column.t-padded-2(v-if='goal')
+  .goals-show.flex-item-fixed
+    goals-display(:goal='goal')
+      shared-link.action-text(:to='goal.editPath()')
+        i.edit.icon
 
-    //- BrainDamage: Body Start
-    //- BrainDamage: Body End
+  //- BrainDamage: Body Start
+  //- BrainDamage: Body End
 </template>
 
 <script lang="coffee">

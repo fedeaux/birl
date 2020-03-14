@@ -1,13 +1,12 @@
 <template lang="pug">
-.entity-show-wrapper.tag-taggables-show-wrapper.default-container(v-if='tag_taggable')
-  .header-contents-footer
-    .entity-show.tag-taggables-show.header-contents-footer-header
-      tag-taggables-display(:tag_taggable='tag_taggable')
-        shared-link.entity-show-header-actions(:to='tag_taggable.editPath()')
-          i.edit.icon
+.tag-taggables-show-wrapper.flex-column.t-padded-2(v-if='tag_taggable')
+  .tag-taggables-show.flex-item-fixed
+    tag-taggables-display(:tag_taggable='tag_taggable')
+      shared-link.action-text(:to='tag_taggable.editPath()')
+        i.edit.icon
 
-    //- BrainDamage: Body Start
-    //- BrainDamage: Body End
+  //- BrainDamage: Body Start
+  //- BrainDamage: Body End
 </template>
 
 <script lang="coffee">

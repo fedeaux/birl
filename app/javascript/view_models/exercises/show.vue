@@ -1,15 +1,14 @@
 <template lang="pug">
-.entity-show-wrapper.exercises-show-wrapper.default-container(v-if='exercise')
-  .header-contents-footer
-    .entity-show.exercises-show.header-contents-footer-header
-      exercises-display(:exercise='exercise')
-        shared-link.entity-show-header-actions(:to='exercise.editPath()')
-          i.edit.icon
+.exercises-show-wrapper.flex-column.t-padded-2(v-if='exercise')
+  .exercises-show.flex-item-fixed
+    exercises-display(:exercise='exercise')
+      shared-link.action-text(:to='exercise.editPath()')
+        i.edit.icon
 
-    //- BrainDamage: Body Start
+  //- BrainDamage: Body Start
     .header-contents-footer-contents
       progressions-manager(v-if='exercise_id' :context='{ exercise_id: exercise_id }' :allow_actions='true')
-    //- BrainDamage: Body End
+  //- BrainDamage: Body End
 </template>
 
 <script lang="coffee">

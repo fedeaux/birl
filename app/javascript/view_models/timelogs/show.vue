@@ -1,13 +1,12 @@
 <template lang="pug">
-.entity-show-wrapper.timelogs-show-wrapper.default-container(v-if='timelog')
-  .header-contents-footer
-    .entity-show.timelogs-show.header-contents-footer-header
-      timelogs-display(:timelog='timelog')
-        shared-link.entity-show-header-actions(:to='timelog.editPath()')
-          i.edit.icon
+.timelogs-show-wrapper.flex-column.t-padded-2(v-if='timelog')
+  .timelogs-show.flex-item-fixed
+    timelogs-display(:timelog='timelog')
+      shared-link.action-text(:to='timelog.editPath()')
+        i.edit.icon
 
-    //- BrainDamage: Body Start
-    //- BrainDamage: Body End
+  //- BrainDamage: Body Start
+  //- BrainDamage: Body End
 </template>
 
 <script lang="coffee">
