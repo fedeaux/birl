@@ -1,5 +1,5 @@
 <template lang="pug">
-#birl-spa-container(@click='hideMenu()' :class='klass')
+#birl-spa-container.mobile.flex-column(@click='hideMenu()' :class='klass')
   #fullscreen(v-if='show_memes || choose_context')
     memes-index(v-if='show_memes')
 
@@ -38,7 +38,7 @@
 
     //- a.item(@click='logoff') Logoff
 
-  #header.context-dependent-background-color
+  #header.flex-item.grow-0.context-dependent-background-color
     .header-button#back-button(@click='back()')
       i.angle.left.icon
 
@@ -57,9 +57,9 @@
     .header-button#side-menu-toggle(@click='toggleMenu($event)')
       i.ellipsis.vertical.icon
 
-  #contents-wrapper
-    #contents
-      router-view
+  #contents-wrapper.flex-item.grow-1.flex-column
+    #contents.flex-item.grow-1.flex-column.paddeds-2
+      router-view.flex-item.grow-1
 </template>
 
 <script lang="coffee">

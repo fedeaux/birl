@@ -1,7 +1,8 @@
 <template lang="pug">
-.entity-stream.memes-stream.header-contents-footer.slim-container
-  .header-contents-footer-header
-    .select-mode-menu.action-menu(v-if='select_mode')
+.memes-stream-index.flex-column.grow-1
+  .memes-stream-header.flex-item.grow-0
+    //- .select-mode-menu.action-menu
+    .memes-stream-select-mode-wrapper(v-if='select_mode')
       template(v-if='tagging_selected')
         h3 Pick Tags
         tag-taggables-picker(v-model='selected_tags')
@@ -22,34 +23,27 @@
                  @save='saveFormMeme()'
                  @cancel='clearFormMeme()')
 
-  .header-contents-footer-contents
-    .entity-stream-list(v-if='!form_meme')
-      memes-stream-list(:memes='memes'
-                        :allow_actions='true'
-                        :context='context'
-                        :select_mode='select_mode'
-                        :selected_ids='selected_ids'
-                        :show_header='!select_mode'
-                        @enableSelectMode='enableSelectMode'
-                        @selectModeToggleSelected='selectModeToggleSelected'
-                        @edit='editMeme($event)'
-                        @destroy='destroyMeme($event)')
+  .memes-stream-list-wrapper.flex-item.grow-1.flex-column(v-if='!form_meme')
+    memes-stream-list.flex-item.grow-1(:memes='memes'
+                                       :allow_actions='true'
+                                       :context='context'
+                                       :select_mode='select_mode'
+                                       :selected_ids='selected_ids'
+                                       :show_header='!select_mode'
+                                       @enableSelectMode='enableSelectMode'
+                                       @selectModeToggleSelected='selectModeToggleSelected'
+                                       @edit='editMeme($event)'
+                                       @destroy='destroyMeme($event)')
 
-      //- .action-menu-item
-      //-    i.edit.blue.icon
-
-      //- .action-menu-item(@click='confirmBatchDestroy()')
-      //-    i.trash.red.icon
-
-  .header-contents-footer-footer.action-footer.slim-bottom-attached-footer
-    .meme-input-wrapper
-      .ui.icon.circular.basic.button(@click='toggleType')
-        i.check.square.outline.icon(v-if='meme_type == "Todo"')
-        i.sticky.note.outline.icon(v-if='meme_type == "Note"')
-      .ui.input
-        input(v-model='meme_contents_title' @keyup='detectEnters')
-      .ui.green.icon.circular.button(@click='createMemeFromTitle' :class='{ disabled: meme_contents_title.length == 0 }')
-        i.chevron.right.icon
+  //- .action-footer.slim-bottom-attached-footer
+  .memes-stream-input-wrapper.flex-item.grow-0.flex-row
+    .ui.icon.circular.basic.button(@click='toggleType')
+      i.check.square.outline.icon(v-if='meme_type == "Todo"')
+      i.sticky.note.outline.icon(v-if='meme_type == "Note"')
+    .ui.input
+      input(v-model='meme_contents_title' @keyup='detectEnters')
+    .ui.green.icon.circular.button(@click='createMemeFromTitle' :class='{ disabled: meme_contents_title.length == 0 }')
+      i.chevron.right.icon
 </template>
 
 <script lang="coffee">

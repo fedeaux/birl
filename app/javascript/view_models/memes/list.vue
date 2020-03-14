@@ -1,10 +1,10 @@
 <template lang="pug">
-.entity-list.meme-list.default-container.header-contents-footer
-  .header-contents-footer-header
+.entity-list.meme-list.flex-column
+  .flex-item.grow-0
     .entity-list-filter
       inputs-clearable.fluid(v-model='filter.text')
 
-  .header-contents-footer-contents
+  .flex-item.grow-1
     memes-list-item(v-for='meme in displayable_memes'
                     v-if='memes'
                     :meme='meme'

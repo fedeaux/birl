@@ -1,21 +1,21 @@
 <template lang="pug">
-.entity-list.meme-list.header-contents-footer
-  .header-contents-footer-header(v-if='show_header')
-    .entity-list-filter
-      inputs-clearable(v-model='filter.text')
+.memes-stream-list.flex-column
+  //- .entity-list-filter
+  .flex-item.grow-0(v-if='show_header')
+    inputs-clearable(v-model='filter.text')
 
-      .ui.icon.circular.basic.button(@click='toggleType')
-        i.check.square.outline.icon(v-if='filter.type == "Todo"')
-        i.sticky.note.outline.icon(v-if='filter.type == "Note"')
-        i.circle.outline.icon(v-if='filter.type == "all"')
+    .ui.icon.circular.basic.button(@click='toggleType')
+      i.check.square.outline.icon(v-if='filter.type == "Todo"')
+      i.sticky.note.outline.icon(v-if='filter.type == "Note"')
+      i.circle.outline.icon(v-if='filter.type == "all"')
 
-      .ui.icon.circular.basic.button(@click='toggleTagged')
-        i.tags.icon(v-if='filter.tags == "all"')
-        i.tags.icon(v-if='filter.tags == "none"')
-        i.tags.icon(v-if='filter.tags == "tagged"')
+    .ui.icon.circular.basic.button(@click='toggleTagged')
+      i.tags.icon(v-if='filter.tags == "all"')
+      i.tags.icon(v-if='filter.tags == "none"')
+      i.tags.icon(v-if='filter.tags == "tagged"')
 
-  .header-contents-footer-contents
-    .meme-list-items
+  .memes-stream-list-items-wrapper-wrapper.flex-item.grow-1.scroll-y
+    .memes-stream-list-items-wrapper
       memes-stream-item(v-for='(meme, index) in displayable_memes'
                         v-if='memes'
                         v-long-press='400'

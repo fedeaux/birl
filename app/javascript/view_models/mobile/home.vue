@@ -1,9 +1,9 @@
 <template lang="pug">
-.home.default-container.header-contents-footer
-  .header-contents-footer-header
+.home.flex-column
+  .flex-item.grow-0
     h1 {{ time_now.format('ddd, MMM Do') }}
 
-  .header-contents-footer-contents
+  .flex-item.grow-1.scroll-y
     .home-block
       memes-types-morning-checkup-button
 

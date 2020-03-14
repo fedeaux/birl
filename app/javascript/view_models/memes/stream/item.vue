@@ -1,5 +1,5 @@
 <template lang="pug">
-.entity-list-item-wrapper.meme-list-item-wrapper(:class='klass')
+.memes-stream-list-item-wrapper(:class='klass')
   .entity-list-item-confirming-destroy(v-if='confirming_destroy && !showing_actions')
     .ui.four.column.grid
       .column

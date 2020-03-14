@@ -1,0 +1,14 @@
+/* To puto
+
+$minha-rola-start-color: #000
+$minha-rola-end-color: #a01997
+
+$minha-rola-count: 5
+
+@for $i from 0 to $minha-rola-count
+  .minha-rola-#{i}
+    background: mix($minha-rola-start-color, $minha-rola-end-color, percentage($i / ($minha-rola-count - 1)))
+
+#desktop
+  #header
+    background-color: green

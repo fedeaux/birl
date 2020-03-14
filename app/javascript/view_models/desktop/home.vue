@@ -1,21 +1,26 @@
 <template lang="pug">
-  .flex-row
-    .flex-item.flex-column.h-padded-2.v-paddeds-2
+  .desktop-home.flex-row
+    .flex-item.flex-column.h-padded-2.v-paddeds-2.grow-2
       .flex-item
+        h1 Tags
         shared-view(:path='"/tags"')
 
+      //- One of these two
       .flex-item(v-if='timelineable_tag')
+        h1
+          | {{ timelineable_tag.fullname }} Memes
         shared-view(:path='timelineable_tag.path()')
 
       .flex-item(v-else)
         shared-view(:path='"/memes"')
 
-    .flex-item.v-padded-2.grow-2
+    .flex-item.v-padded-2.grow-3
+      h1 Today
       shared-view(:path='"/timelogs/today"')
 
-    .flex-item
-      .padded-2
-        shared-view(:path='"/goaler"')
+    .flex-item.v-padded-2.grow-3
+      h1 goaler
+      shared-view(:path='"/goaler"')
 
 </template>
 

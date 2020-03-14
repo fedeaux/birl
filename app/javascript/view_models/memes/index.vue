@@ -1,5 +1,5 @@
 <template lang="pug">
-memes-stream-index
+memes-stream-index.memes-index
 </template>
 
 <script lang="coffee">
