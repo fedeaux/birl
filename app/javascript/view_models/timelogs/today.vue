@@ -1,14 +1,14 @@
 <template lang="pug">
-.entity-timeline.timelogs-timeline.header-contents-footer(@mouseup='stopDragging')
-  .header-contents-footer-header.timelogs-timeline-header
-    .timelogs-timeline-header-title
-      span.action(@click='backward')
+.entity-timeline.timelogs-timeline.flex-column(@mouseup='stopDragging')
+  .flex-item-fixed
+    h1.centered
+      span.action-text(@click='backward')
         | &larr;
 
       span.contents(v-if='base_date')
         | {{ base_date.format('ddd, MMM DD') }}
 
-      span.action(@click='forward')
+      span.action-text(@click='forward')
         | &rarr;
 
     timelogs-day-planner(:base_date='base_date'
@@ -19,7 +19,7 @@
                    @save='saveFormTimelog()'
                    @new='newTimelogWithRange')
 
-  .header-contents-footer-contents
+  .flex-item
     timeline-day(v-if='timelogs'
                  :timelineables='all_timelogs'
                  :start='start'

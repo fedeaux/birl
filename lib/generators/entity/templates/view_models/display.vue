@@ -6,7 +6,7 @@
     .entity-display-detail
 <%= sub_template('Details', '//-', 6) %>
 
-  .entity-display-actions(v-if='allow_actions' @click='action($event)')
+  .top-right-actions(v-if='allow_actions' @click='action($event)')
     slot
 </template>
 

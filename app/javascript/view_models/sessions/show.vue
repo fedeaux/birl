@@ -6,28 +6,28 @@
         i.edit.icon
 
   //- BrainDamage: Body Start
-    .header-contents-footer-contents.header-contents-footer
-      .header-contents-footer-header
-        .default-container(v-if='session.done_today')
-          br
-          .ui.green.message
-            | Completed! Good work :)
-          br
+  .flex-column
+    .flex-item-fixed
+      .default-container(v-if='session.done_today')
+        br
+        .ui.green.message
+          | Completed! Good work :)
+        br
 
-        .muted-text These are the session progressions, not the progressions themselves
+      .muted-text These are the session progressions, not the progressions themselves
 
-      .header-contents-footer-contents
-        session-progressions-manager(:context='{ session_id: session.id }'
-                                     :parent_session_progressions='session.session_progressions')
+    .flex-item
+      session-progressions-manager(:context='{ session_id: session.id }'
+                                   :parent_session_progressions='session.session_progressions')
 
-    .header-contents-footer-footer.bottom-attached-footer.action-footer
-      .ui.fluid.primary.icon.button(@click='executeNextProgression' v-if='!session.done_today')
-        template(v-if='session.started_today')
-          | Continue
-        template(v-else)
-          | Start
-        | &nbsp;
-        i.play.icon
+  .flex-item-fixed.action-block
+    .ui.primary.large.icon.button.action-block-button(@click='executeNextProgression' v-if='!session.done_today')
+      template(v-if='session.started_today')
+        | Continue
+      template(v-else)
+        | Start
+      | &nbsp;
+      i.play.icon
   //- BrainDamage: Body End
 </template>
 

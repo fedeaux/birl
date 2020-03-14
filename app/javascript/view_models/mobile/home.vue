@@ -4,8 +4,8 @@
     h1 {{ time_now.format('ddd, MMM Do') }}
 
   .flex-item.grow-1.scroll-y
-    .home-block
-      memes-types-morning-checkup-button
+    //- .home-block
+    //-   memes-types-morning-checkup-button
 
     .home-block(v-if='today_things_by_context')
       .seamless-title Progressions
