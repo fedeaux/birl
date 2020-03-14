@@ -1,42 +1,42 @@
 <template lang="pug">
-.entity-show-wrapper.progressions-show-wrapper.default-container(v-if='progression')
-  .flex-column
-    .flex-item-fixed
-      .entity-show.progressions-show
-        progressions-display(:progression='progression')
-          shared-link.entity-show-header-actions(:to='progression.path()')
-            i.eye.icon
+.progressions-execute.flex-column(v-if='progression')
+  .flex-item-fixed
+    .entity-show.progressions-show
+      progressions-display(:progression='progression')
+        shared-link.action-text(:to='progression.path()')
+          i.eye.icon
 
-      .progressions-show-challenge-description(v-if='progression.challenge_description')
-        | {{ progression.challenge_description }}
+    .progressions-show-challenge-description(v-if='progression.challenge_description')
+      | {{ progression.challenge_description }}
 
-    .flex-item
-      entries-manager(:context='entries_context'
-                      :data_model='progression.entry_data_model'
-                      :actions='{ add: false, form: { actions: false } }'
-                      ref='entries_manager')
+  .flex-item
+    entries-manager(:context='entries_context'
+                    :data_model='progression.entry_data_model'
+                    :actions='{ add: false, form: { actions: false } }'
+                    ref='entries_manager')
 
-      executor-index(v-if='executable_entry'
-                     :data_model='progression.entry_data_model'
-                     :entry='executable_entry'
-                     :main_title='progression.name'
-                     @entrySetUpdated='entrySetUpdated'
-                     @entryAddSet='entryAddSet'
-                     @done='done'
-                     ref='executor')
+    executor-index(v-if='executable_entry'
+                   :data_model='progression.entry_data_model'
+                   :entry='executable_entry'
+                   :main_title='progression.name'
+                   @entrySetUpdated='entrySetUpdated'
+                   @entryAddSet='entryAddSet'
+                   @done='done'
+                   ref='executor')
 
-    .flex-item-fixed.bottom-attached-footer.action-footer
-      .ui.primary.fluid.button(@click='prepare' v-if='state == "idle"')
+  .flex-item-fixed
+    .action-block
+      .ui.primary.large.button.action-block-button(@click='prepare' v-if='state == "idle"')
         | Prepare&nbsp;&nbsp;
 
-      .ui.primary.fluid.button(@click='execute' v-if='state == "preparing"' :class='{ "disabled": !executable }')
+      .ui.primary.large.button.action-block-button(@click='execute' v-if='state == "preparing"' :class='{ "disabled": !executable }')
         | Execute&nbsp;&nbsp;
         i.play.icon
 
-      template(v-if='show_in_session')
-        hr
-        progressions-in-session(:current_progression_id='progression_id'
-                                ref='in_session')
+    template(v-if='show_in_session')
+      hr
+      progressions-in-session(:current_progression_id='progression_id'
+                              ref='in_session')
 </template>
 
 <script lang="coffee">

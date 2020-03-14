@@ -1,16 +1,16 @@
 <template lang="pug">
-.progressions-in-session.ui.three.column.grid
-  .progressions-in-session-prev.column
-    shared-link(v-if='prev_progression' :to='prev_progression.executePath()')
-      | &larr;
-      | {{ prev_progression.exercise_name }}
+.flex-row.flex-centered
+  shared-link.flex-item(v-if='prev_progression' :to='prev_progression.executePath()')
+    | &larr;
+    | {{ prev_progression.exercise_name }}
 
-  .progressions-in-session-session.column(v-if='current_session')
-    shared-link(:to='current_session.path()')
-      h3 Session
-      | {{ current_session.name }}
+  shared-link.flex-item.grow-2(v-if='current_session' :to='current_session.path()')
+    h2.centered(style='margin: 0')
+      | Session
+      .h-detail
+        | {{ current_session.name }}
 
-  .progressions-in-session-next.column
+  .flex-item.right-aligned
     shared-link(v-if='next_progression' :to='next_progression.executePath()')
       | {{ next_progression.exercise_name }}
       | &rarr;

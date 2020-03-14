@@ -48,6 +48,9 @@ $header-buttom-dim: $header-height - $d2
     position: relative
 
 .flex-column, .flex-row, .flex-item
+  &.flex-centered
+    align-items: center
+
   &.grow-0
     flex-grow: 0
     flex-basis: auto
@@ -96,35 +99,3 @@ $header-buttom-dim: $header-height - $d2
   .v-paddeds-#{$i}-list
     @extend .v-paddeds-#{$i}
     padding-bottom: 0
-
-/* .header-contents-footer
-/*   height: 100%
-/*   display: flex
-/*   flex-direction: column
-
-/*   .header-contents-footer-header
-/*     flex-grow: 0
-
-/*   .header-contents-footer-contents
-/*     height: 100%
-/*     overflow-y: auto
-/*     overflow-x: hidden
-/*     flex-grow: 1
-
-/*   .header-contents-footer-footer
-/*     flex-grow: 0
-/*     padding-top: $d4
-
-/*     &.bottom-attached-footer
-/*       margin-bottom: -$d2
-/*       margin-right: -$d2
-/*       margin-left: -$d2
-
-/*     &.slim-bottom-attached-footer
-/*       margin-bottom: -$d
-/*       margin-right: -$d
-/*       margin-left: -$d
-
-/*     &.action-footer
-/*       padding-top: $d2
-/*
