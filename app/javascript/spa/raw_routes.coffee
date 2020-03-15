@@ -14,6 +14,10 @@ routes = [
     view: 'timelogs/week'
   },
   {
+    path: '/statistics'
+    view: 'statistics/index'
+  },
+  {
     path: '/today'
     view: 'sessions/today'
   },

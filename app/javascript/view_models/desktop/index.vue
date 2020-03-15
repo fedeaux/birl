@@ -4,7 +4,7 @@
     #menu.ui.inverted.menu
       router-link.item(:to='"/"') Home
       router-link.item(:to='"/timelogs/week"') Week
-      .item(@click='requestNotificationsPermission') Notifications
+      router-link.item(:to='"/statistics"') Statistics
 
   #contents-wrapper.flex-column
     #contents.flex-column
@@ -14,8 +14,6 @@
 <script lang="coffee">
   export default
     data: ->
-      # views: ['/tags', '/memes', '/timelogs/today']
-      # views: ['/timelogs/week']
       views: ['/timelogs/today']
 
     methods:

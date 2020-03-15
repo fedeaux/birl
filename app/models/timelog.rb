@@ -19,6 +19,10 @@ class Timelog < ApplicationRecord
     tag_taggables.find_by("meta->>'main' = ?", true.to_json)&.tag
   end
 
+  def main_tag_id
+    main_tag&.id
+  end
+
   def main_tag=(main_tag_params)
     @main_tag = if main_tag_params.nil? || main_tag_params.is_a?(Tag)
                   main_tag_params
@@ -36,5 +40,10 @@ class Timelog < ApplicationRecord
 
   def ensure_day
     self.day ||= Day.ensure(user, date: start)
+  end
+
+  def reeval_day!
+    self.day = Day.ensure(user, date: start)
+    save!
   end
 end
