@@ -1,24 +1,26 @@
 <template lang="pug">
   .desktop-home.flex-row
-    .desktop-home-tags-and-memes.flex-column.grow-2
-      .desktop-home-memes.flex-column.padded-1
-        h1.flex-item-fixed.centered Memes
-        template(v-if='timelineable_tag')
-          shared-view.flex-item(:path='timelineable_tag.path()')
-
-        template(v-else)
-          shared-view.flex-item(:path='"/memes"')
-
-      .desktop-home-tags.flex-column.padded-1
-        h1.flex-item-fixed.centered Tags
-        shared-view.flex-item(:path='"/tags"')
-
-    shared-view.flex-item.grow-3.padded-1(:path='"/timelogs/today"')
-
-    .flex-column.grow-1.padded-1(v-if='false')
+    .flex-column.grow-3.padded-1
+    .flex-column.grow-3.padded-1
       h1.flex-item-fixed.centered Goaler
       shared-view.flex-item.scroll-y(:path='"/goaler"')
 
+    shared-view.flex-item.grow-6.padded-1(:path='"/timelogs/today"')
+
+    .desktop-home-tags-and-memes.flex-column.grow-8
+      .flex-item.grow-3
+      .flex-row.paddeds-1.grow-7
+        .desktop-home-tags.flex-column
+          h1.flex-item-fixed.centered Tags
+          shared-view.flex-item(:path='"/tags"')
+
+        .desktop-home-memes.flex-column
+          h1.flex-item-fixed.centered Memes
+          template(v-if='timelineable_tag')
+            shared-view.flex-item(:path='timelineable_tag.path()')
+
+          template(v-else)
+            shared-view.flex-item(:path='"/memes"')
 </template>
 
 <script lang="coffee">
