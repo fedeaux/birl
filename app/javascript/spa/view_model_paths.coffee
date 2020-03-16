@@ -66,6 +66,8 @@ paths = [
   'goaler/widget'
   'goaler/widget/group'
   'goaler/widget/item'
+
+  'statistics/line'
 ]
 
 meme_types = [

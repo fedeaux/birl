@@ -1,7 +1,8 @@
 <template lang="pug">
-.timelogs-range
-  .timelogs-range-day(v-for='date in dates')
-    timelogs-today(:override_base_date='date')
+.timelogs-range.scroll-y
+  .flex-row
+    tags-hierarchy.flex-item
+    timelogs-today.flex-item(v-for='date in dates' :override_base_date='date' :header='"simple"')
 </template>
 
 <script lang="coffee">

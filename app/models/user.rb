@@ -26,4 +26,8 @@ class User < ApplicationRecord
   def in_time_zone(date_time)
     date_time.in_time_zone(timezone)
   end
+
+  def start_of_week
+    (time_now + 1.week).beginning_of_week - 1.day
+  end
 end

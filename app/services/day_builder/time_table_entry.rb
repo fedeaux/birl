@@ -14,21 +14,26 @@ module DayBuilder
       @user = params[:user]
     end
 
+    def self.duration_in_days(duration)
+      hours = duration.scan(/(\d+)h/).first&.first.to_i || 0
+      minutes = duration.scan(/(\d+)min/).first&.first.to_i || 0
+
+      hours.hours + minutes.minutes
+    end
+
     def duration_in_days
-      unless @duration_in_days
-        hours = @duration.scan(/(\d+)h/).first&.first.to_i || 0
-        minutes = @duration.scan(/(\d+)min/).first&.first.to_i || 0
-
-        @duration_in_days = hours.hours + minutes.minutes
-      end
-
-      @duration_in_days
+      @duration_in_days ||= TimeTableEntry.duration_in_days @duration
     end
 
     def finish
       return start + duration_in_days unless @finish
 
-      TimeTableEntry.time_in start, @finish
+      candidate = TimeTableEntry.time_in start, @finish
+
+      # finish 00:00 hot fix
+      return candidate + 1.day if @finish == '00:00'
+
+      candidate
     end
 
     def tag

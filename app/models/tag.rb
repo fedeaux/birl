@@ -46,4 +46,30 @@ class Tag < ApplicationRecord
       tag.update colors
     end
   end
+
+  def seeds
+    elements = [
+      '{',
+      "  name: '#{name}',",
+      "  color: '#{color['hex']}',",
+      "  background_color: '#{background_color['hex']}',"
+    ]
+
+    children_seeds = children.map(&:seeds)
+
+    if children_seeds.any?
+      elements.push '  children: ['
+      elements.append children_seeds # .split("\n").map { |line| "  #{line}" }.join(",\n"))
+      elements.push '  ]'
+    else
+      elements.push '  children: []'
+    end
+
+    elements.push '},'
+    elements
+  end
+
+  def self.seeds(user)
+    user.tags.roots.map(&:seeds).join("\n")
+  end
 end

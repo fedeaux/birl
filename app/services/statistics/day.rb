@@ -17,19 +17,19 @@ module Statistics
     end
 
     def timelogs_statistics
-      map = {}
+      statistics_by_tag_id = {}
 
       timelogs.each do |timelog|
         map_key = timelog.main_tag_id
         next unless map_key
 
-        map[map_key] ||= TimelogCollectionStatistics.new(days: 1)
+        statistics_by_tag_id[map_key] ||= TimelogCollectionStatistics.new(days: 1)
 
-        collection = map[map_key]
+        collection = statistics_by_tag_id[map_key]
         collection.add Statistics::TimelogStatistics.new timelog
       end
 
-      map.map { |key, collection| [key, collection.tap(&:calculate).as_json] }.to_h
+      statistics_by_tag_id.map { |tag_id, collection| { values: collection.tap(&:calculate).as_json, tag: Tag.find(tag_id) } }
     end
 
     def save!

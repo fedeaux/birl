@@ -1,20 +1,22 @@
 <template lang="pug">
-.entity-timeline.timelogs-timeline.flex-column(@mouseup='stopDragging')
-  .flex-item-fixed
+.flex-column(@mouseup='stopDragging')
+  .flex-item-fixed(v-if='header')
     h1.centered
-      span.action-text(@click='backward')
+      span.action-text(@click='backward' v-if='header == "complete"')
         | &larr;
 
       span.contents(v-if='base_date')
         | {{ base_date.format('ddd, MMM DD') }}
 
-      span.action-text(@click='forward')
+      span.action-text(@click='forward' v-if='header == "complete"')
         | &rarr;
 
-    timelogs-day-planner(:base_date='base_date'
+    timelogs-day-planner(v-if='header == "complete"'
+                         :base_date='base_date'
                          @dayPlanned='loadTimelogs')
 
-    timelogs-timer(v-model='form_timelog'
+    timelogs-timer(v-if='header == "complete"'
+                   v-model='form_timelog'
                    @cancel='clearFormTimelog()'
                    @save='saveFormTimelog()'
                    @new='newTimelogWithRange')
@@ -42,6 +44,9 @@ export default
   props:
     override_base_date:
       default: -> moment()
+
+    header:
+      default: "complete"
 
   data: ->
     range: false
