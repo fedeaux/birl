@@ -19,7 +19,7 @@ after(:users) do
   [
     {
       name: 'chores',
-      color: '#f00',
+      color: '#fff',
       background_color: '#F2C82E',
       children: [
         {

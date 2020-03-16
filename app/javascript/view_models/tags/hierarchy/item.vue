@@ -28,7 +28,11 @@
        i.cancel.icon
 
   .tags-hierarchy-item
-    tags-display(v-if='!confirming_destroy && !showing_actions' :tag='tag' :state='state' @toogleState='toogleState' @action='showActions')
+    tags-display(v-if='!confirming_destroy && !showing_actions'
+                 :tag='tag'
+                 :state='state'
+                 @toogleState='toogleState'
+                 @action='showActions')
       i.ellipsis.vertical.icon
 
     tags-hierarchy(v-if='state == "open" && tag.children.length > 0'

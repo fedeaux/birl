@@ -36,7 +36,7 @@ export default
         @tagsLoaded tags: @parent_tags
         return
 
-      @tags_resource.index @tagsLoaded, @context
+      @tags_resource.hierarchy @tagsLoaded, @context
 
     tagsLoaded: (response) ->
       @tags = response.tags

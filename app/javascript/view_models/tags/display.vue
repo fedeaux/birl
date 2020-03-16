@@ -10,8 +10,8 @@
       //- BrainDamage: Details Start
       //- BrainDamage: Details End
 
-  .top-right-actions(v-if='allow_actions' @click='action($event)')
-    slot
+  .entity-display-actions.top-right-actions(v-if='allow_actions' @click='action($event)')
+    slot.action-text
 </template>
 
 <script lang="coffee">

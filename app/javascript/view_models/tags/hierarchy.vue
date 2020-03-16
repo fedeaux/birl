@@ -6,8 +6,8 @@
               @cancel='clearFormTag()')
 
   .flex-column(v-else)
-    #new-tag-button.flex-item-fixed.b-padded-1(v-if='root' @click='newTag')
-      .ui.primary.top.attached.fluid.small.icon.button
+    .flex-item-fixed.action-block.b-padded-1(v-if='root')
+      .ui.primary.action-block-button.small.icon.button(@click='newTag')
         i.plus.icon
         |  Add Tag
 
