@@ -99,3 +99,16 @@ $header-buttom-dim: $header-height - $d2
   .v-paddeds-#{$i}-list
     @extend .v-paddeds-#{$i}
     padding-bottom: 0
+
+    & > *
+      padding: ($d * $i) 0
+
+  .h-paddeds-#{$i}-list
+    & > *
+      padding: 0 ($d * $i)
+
+      &:first-child
+        padding-left: 0
+
+      &:last-child
+        padding-right: 0

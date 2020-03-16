@@ -1,6 +1,6 @@
 <template lang="pug">
-  .goaler
-    .goal-period.v-padded-2(v-for='period in goals_periods')
+  .goaler.flex-row.h-paddeds-1-list
+    .goal-period.flex-item(v-for='period in goals_periods')
       .goal-period-header
         .goal-period-header-name {{ period.name }}
       .goal-period-body.v-paddeds-2-list
@@ -28,54 +28,7 @@
 
       goalPeriodsLoaded: (data) ->
         @goals_periods = data.goals_periods
-        # @goal_periods = [
-        #   {
-        #     name: 'Yesterday'
-        #     items: [
-        #       new Goal(
-        #         name: 'Do not smoke weed after 21:00'
-        #         type: 'yes-no'
-        #       )
-        #       new Goal(
-        #         name: 'Commit to sleep @ 23:00'
-        #         type: 'yes-no'
-        #       )
-        #       new GoalGroup(
-        #         name: 'Runa'
-        #         goals: [
-        #           { name: 'Review one PR', type: 'yes-no' }
-        #         ]
-        #       ),
-        #     ]
-        #   },
-        #   {
-        #     name: 'Today'
-        #     items: [
-        #       new GoalGroup(
-        #         name: 'Runa'
-        #         goals: [
-        #           { name: '5h on SquadRon', type: 'timelog-track' }
-        #           { name: 'Review one PR', type: 'yes-no' }
-        #         ]
-        #       ),
-        #     ]
-        #   },
-        #   {
-        #     name: 'This week'
-        #     items: [
-        #       new GoalGroup(
-        #         name: 'Runa'
-        #         goals: [
-        #           { name: '25h on SquadRon', type: 'timelog-track' }
-        #           { name: '5h on Front end architecture', type: 'timelog-track' }
-        #           { name: '5h on QAA', type: 'timelog-track' }
-        #         ]
-        #       ),
-        #     ]
-        #   }
-        # ]
 
     created: ->
       @loadGoalPeriods()
-      console.log @goal_periods
 </script>

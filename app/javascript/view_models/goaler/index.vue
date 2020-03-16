@@ -1,5 +1,5 @@
 <template lang="pug">
-  .goaler(v-if='false')
+  .goaler
     .goal-period(v-for='period in goal_periods')
       .goal-period-name {{ period.name }}
       template(:is="''")

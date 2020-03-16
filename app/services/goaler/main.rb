@@ -16,7 +16,8 @@ module Goaler
     def build
       [
         goals_period_yesterday,
-        goals_period_today
+        goals_period_today,
+        goals_period_ongoing
       ]
     end
 
@@ -33,6 +34,16 @@ module Goaler
 
       RecursiveOpenStruct.new(
         name: 'Yesterday',
+        goal_entries: @user.goals.map { |goal| goal.ensure_entry(options) }
+      )
+    end
+
+    def goals_period_ongoing
+      options = @options.deep_dup
+      options[:base_date] = @options[:base_date] + 2.days
+
+      RecursiveOpenStruct.new(
+        name: 'Ongoing',
         goal_entries: @user.goals.map { |goal| goal.ensure_entry(options) }
       )
     end
