@@ -9,8 +9,6 @@ module DayBuilder
     end
 
     def build
-      Timelog.destroy_all
-
       start_day = @options.key?(:start) ? DateTime.parse(@options[:start]) : user.start_of_week
       final_day = start_day + 7.days
       current_day = start_day.dup.beginning_of_day
