@@ -50,4 +50,16 @@ class Standalone3dEngine
       @engine.resize()
 
 $ ->
-  new Standalone3dEngine()
+  if $('#furniturer').length > 0
+    new Standalone3dEngine()
+
+  # if $('#math-board').length > 0
+  #   Mathjax.init(loader: load: [
+  #     'input/tex'
+  #     'output/svg'
+  #   ]).then((MathJax) ->
+  #     svg = MathJax.tex2svg('\\frac{1}{x^2-1}', display: true)
+  #     console.log MathJax.startup.adaptor.outerHTML(svg)
+  #     console.log 'buceta'
+  #   ).catch (err) ->
+  #     console.log err.message

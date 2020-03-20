@@ -35,6 +35,7 @@ Rails.application.routes.draw do
 
   # Everything else goes to spa. TODO: Use app/javascript/spa/raw_routes.coffee to draw something more secure
   get 'furniturer' => 'standalone#furniturer'
+  get 'math_board' => 'standalone#math_board'
   get '*all' => 'spa#index'
   root 'spa#index'
 end
