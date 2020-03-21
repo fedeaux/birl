@@ -47,11 +47,13 @@ paths = [
   'timelogs/range'
   'timelogs/timer'
   'timelogs/today'
+  'timelogs/week'
 
   'timeline/day'
   'timeline/item'
   'timeline/rule'
-  'timeline/step'
+  'timeline/step/space'
+  'timeline/step/time'
 
   'executor/audio_controls'
   'executor/counter'

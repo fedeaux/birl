@@ -11,7 +11,7 @@
         i.plus.icon
         |  Add Tag
 
-    .flex-column
+    .flex-column.scroll-y
       .flex-column
         tags-hierarchy-item(v-for='tag in tags'
                             :tag='tag'

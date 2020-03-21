@@ -54,6 +54,10 @@ routes = [
     view: 'timelogs/week'
   },
   {
+    path: '/timelogs/weeks'
+    view: 'timelogs/weeks'
+  },
+  {
     path: '/goaler'
     view: 'goaler/widget'
   },

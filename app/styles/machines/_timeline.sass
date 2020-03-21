@@ -1,26 +1,32 @@
-.timeline
+.timeline-wrapper
   position: relative
+
+  .timeline
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
 
   *
     user-select: none
 
   .timeline-item-wrapper
     border-radius: $d
-    left: 30px
     opacity: 0.9
+    overflow-y: hidden
     padding: $d $d2
     position: absolute
-    width: calc(100%-35px)
-    overflow-y: hidden
+    width: 100%
 
     .timeline-item-upper-handle, .timeline-item-lower-handle
       @include texture(rgba(black, 0.5), 1, 1)
       cursor: ns-resize
+      display: none
       height: $d
       left: 0
       position: absolute
       right: 0
-      display: none
 
     .timeline-item-upper-handle
       top: 0
@@ -37,8 +43,8 @@
 
   .timeline-item
     color: inherit
-    position: relative
     height: 100%
+    position: relative
 
     .timeline-item-header
       color: inherit
@@ -51,10 +57,10 @@
 
       .timeline-item-header-actions
         color: inherit
-        text-align: right
         position: absolute
-        top: 0
         right: -$d2
+        text-align: right
+        top: 0
 
     .timeline-item-footer
       bottom: $d
@@ -66,16 +72,16 @@
       right: 0
 
       .timeline-item-footer-range
-        color: inherit
-        position: absolute
-        left: 0
         bottom: 0
+        color: inherit
+        left: 0
+        position: absolute
 
       .timeline-item-footer-duration
+        bottom: 0
         color: inherit
         position: absolute
         right: 0
-        bottom: 0
 
     .timeline-item-body
       color: inherit
@@ -87,23 +93,18 @@
     position: absolute
     width: 100%
 
-  .timeline-step
+  .timeline-step-time, .timeline-step-space
     height: 10px
-    display: flex
+    line-height: 10px
+    vertical-align: middle
 
-    .timeline-step-time
-      color: $text-gray
-      flex-basis: 26px
-      font-size: 8px
-      height: 10px
-      line-height: 10px
-      vertical-align: middle
-      user-select: none
-      font-family: "Courier New", Courier, monospace
+  .timeline-step-time
+    color: $text-gray
+    width: 26px
+    font-family: "Courier New", Courier, monospace
+    font-size: 8px
 
-    .timeline-step-space
-      flex-grow: 1
-
+  .timeline-step-space
     &.even
       background-color: $almost-white-gray
 
@@ -114,13 +115,13 @@
       background-color: $dark-selection-blue
 
 .timelogs-timeline-header-title
-  text-align: center
   font-size: 1.2em
   margin-bottom: $d
+  text-align: center
 
   .action
-    padding: 0 $d2
     cursor: pointer
+    padding: 0 $d2
 
 .ui.form
   .fields
@@ -138,6 +139,6 @@
         flex-grow: 1
 
     &.timer-actions
-      text-align: center
       align-items: center
       justify-content: center
+      text-align: center

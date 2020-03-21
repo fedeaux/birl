@@ -23,9 +23,11 @@
 
   .flex-item
     timeline-day(v-if='timelogs'
-                 :timelineables='all_timelogs'
                  :start='start'
                  :finish='finish'
+                 :timelineables='all_timelogs'
+                 :show_steps_times='show_steps_times'
+                 :minutes_per_step='minutes_per_step'
                  @edit='editTimelog($event)'
                  @destroy='destroyTimelog($event)'
                  @rangeSelected='rangeSelected'
@@ -42,11 +44,17 @@ export default
   mixins: [TimelogsManagerMixin]
 
   props:
+    minutes_per_step:
+      default: 10
+
     override_base_date:
       default: -> moment()
 
     header:
       default: "complete"
+
+    show_steps_times:
+      default: true
 
   data: ->
     range: false

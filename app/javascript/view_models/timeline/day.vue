@@ -1,20 +1,32 @@
 <template lang="pug">
-  .timeline
+  .timeline-wrapper
+    .timeline-steps-spaces
+      timeline-step-space(v-for='step in steps'
+                          :step='step'
+                          :class='{ selected: isSelected(step) }'
+                          @selectionStarted='startASelection'
+                          @selectionUpdated='updateCurrentSelection'
+                          @selectionFinished='finishCurrentSelection')
+
+    .timeline.flex-row.h-paddeds
+      .timeline-steps-times(v-if='show_steps_times')
+        timeline-step-time(v-for='step in steps'
+                           :step='step'
+                           :class='{ selected: isSelected(step) }'
+                           @selectionStarted='startASelection'
+                           @selectionUpdated='updateCurrentSelection'
+                           @selectionFinished='finishCurrentSelection')
+
+      .timeline-items.flex-item
+        timeline-item(v-for='timelineable in timelineables'
+                      :timelineable='timelineable'
+                      :key='timelineable.id'
+                      :minutes_per_step='minutes_per_step'
+                      @edit='$emit("edit", { timelog: timelineable })'
+                      @destroy='$emit("destroy", { timelog: timelineable })'
+                      @startDragging='startDragging')
+
     timeline-rule(:at='hora_certa' :start='start')
-
-    timeline-step(v-for='step in steps'
-                  :step='step'
-                  :class='{ selected: isSelected(step) }'
-                  @selectionStarted='startASelection'
-                  @selectionUpdated='updateCurrentSelection'
-                  @selectionFinished='finishCurrentSelection')
-
-    timeline-item(v-for='timelineable in timelineables'
-                  :timelineable='timelineable'
-                  :key='timelineable.id'
-                  @edit='$emit("edit", { timelog: timelineable })'
-                  @destroy='$emit("destroy", { timelog: timelineable })'
-                  @startDragging='startDragging')
 </template>
 
 <script lang="coffee">
@@ -27,7 +39,7 @@
       timelineables_at_rule: []
 
     props:
-      grid:
+      minutes_per_step:
         default: 10
 
       start:
@@ -39,15 +51,18 @@
       timelineables:
         required: true
 
+      show_steps_times:
+        default: true
+
     computed:
       total_minutes: ->
         Math.round moment.duration(@finish.diff(@start)).asMinutes()
 
       number_of_steps: ->
-        @total_minutes / @grid
+        @total_minutes / @minutes_per_step
 
       steps: ->
-        (moment(@start).add(@grid * step, 'minutes') for step in [0...@number_of_steps])
+        (moment(@start).add(@minutes_per_step * step, 'minutes') for step in [0...@number_of_steps])
 
     methods:
       startASelection: (data) ->
@@ -64,7 +79,7 @@
         if !@current_selection or @current_selection.finished
           return @$emit 'stepHovered', data
 
-        @current_selection.finish = data.step.clone().add @grid, 'minutes'
+        @current_selection.finish = data.step.clone().add @minutes_per_step, 'minutes'
 
         if @current_selection.finish.isBefore @current_selection.start
           [@current_selection.start, @current_selection.finish] = [@current_selection.finish, @current_selection.start]

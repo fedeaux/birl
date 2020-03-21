@@ -4,6 +4,7 @@
     #menu.ui.inverted.menu
       router-link.item(:to='"/"') Home
       router-link.item(:to='"/timelogs/week"') Week
+      router-link.item(:to='"/timelogs/weeks"') Weeks
       router-link.item(:to='"/statistics"') Statistics
 
   #contents-wrapper.flex-column

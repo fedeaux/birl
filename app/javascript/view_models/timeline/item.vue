@@ -54,6 +54,9 @@
       timelineable:
         required: true
 
+      minutes_per_step:
+        required: true
+
     data: ->
       showing_actions: false
       confirming_destroy: false
@@ -69,9 +72,11 @@
         height = @snapToGrid(@timelineable.finish.diff @timelineable.start, 'minutes') - 3
         height = Math.max height, 10
 
+        minutes_per_step_adjustment = 10/@minutes_per_step
+
         {
-          top: "#{top}px"
-          height: "#{height}px"
+          top: "#{top * minutes_per_step_adjustment}px"
+          height: "#{height * minutes_per_step_adjustment}px"
           color: @timelineable.color()
           'background-color': @timelineable.background_color()
         }
