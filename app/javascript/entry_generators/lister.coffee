@@ -26,7 +26,7 @@ class Lister
       kyokushin_kicks_stretch: ['Uchi Mawashi Geri', 'Yoko Keage Geri']
       kyokushin_kicks_stretch_one_leg: ['Mae Keage Geri']
 
-      kyokushin_kicks_hard: ['Ushiro Mawashi Geri', 'Uchi Kakato Otoshi Geri', 'Soto Kakato Otoshi Geri']
+      kyokushin_kicks_hard: ['Ushiro Mawashi Geri', 'Uchi Kakato Oroshi Geri', 'Soto Kakato Ohoshi Geri']
       kyokushin_kicks_explosive: ['Explosive Mawashi Geri', 'Explosive Gedan Mawashi Geri']
 
       # Yoga

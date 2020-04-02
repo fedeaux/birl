@@ -16,9 +16,9 @@
 
       .muted-text These are the session progressions, not the progressions themselves
 
-    .flex-item
-      session-progressions-manager(:context='{ session_id: session.id }'
-                                   :parent_session_progressions='session.session_progressions')
+
+    session-progressions-manager.flex-item(:context='{ session_id: session.id }'
+                                           :parent_session_progressions='session.session_progressions')
 
   .flex-item-fixed.action-block
     .ui.primary.large.icon.button.action-block-button(@click='executeNextProgression' v-if='!session.done_today')

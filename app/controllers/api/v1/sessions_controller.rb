@@ -13,14 +13,6 @@ class Api::V1::SessionsController < Api::V1::ApiController
     end
 
     render json: { things_by_context: todays_things_by_context }
-    # TODO
-    # @session = current_context.current_session
-
-    # if @session
-    #   render 'show'
-    # else
-    #   head 404
-    # end
   end
 
   def show; end

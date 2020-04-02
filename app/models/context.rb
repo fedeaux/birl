@@ -52,21 +52,25 @@ class Context < ApplicationRecord
                           .where("recurrence_scheme->'sequence' = ?", 0.to_json).first
   end
 
+  # def next_sessions
+  #   recurrence_scheme_groups.map do |recurrence_scheme_group|
+  #     next_session_on_recurrence_scheme_group(recurrence_scheme_group)
+  #   end.compact
+  # end
+
   def next_sessions
-    recurrence_scheme_groups.map do |recurrence_scheme_group|
-      next_session_on_recurrence_scheme_group(recurrence_scheme_group)
-    end.compact
+    current_sessions.where("recurrence_scheme->'weekday' = ?", todays_weekday_in_timezone.to_json)
   end
 
   def todays_things
     todays_things = { context: self }
 
     if slug == 'music'
-      todays_things[:progressions] = progressions.all
+      todays_things[:progressions] = progressions.where(name: 'Guitar Basics')
     elsif slug == 'bodybuilding'
       todays_things[:sessions] = next_sessions
-    elsif slug == 'espanol'
-      todays_things[:raw_links] = [{ name: 'Questioner', path: '/questioner' }]
+    # elsif slug == 'espanol'
+    #   todays_things[:raw_links] = [{ name: 'Questioner', path: '/questioner' }]
     end
 
     todays_things
