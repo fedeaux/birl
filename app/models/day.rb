@@ -1,7 +1,9 @@
 class Day < ApplicationRecord
   has_many :timelogs
   belongs_to :user
-  before_save :ensure_name
+  belongs_to :week
+  before_validation :ensure_name
+  before_validation :ensure_week
   default_scope -> { order :stamp }
 
   def self.ensure(user, date: user.time_now)
@@ -26,5 +28,9 @@ class Day < ApplicationRecord
 
   def ensure_name
     self.name = to_date_time.strftime '%a, %b %d, %Y'
+  end
+
+  def ensure_week
+    self.week = Week.ensure(user, date: to_date_time)
   end
 end

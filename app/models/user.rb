@@ -7,10 +7,12 @@ class User < ApplicationRecord
   belongs_to :current_context, class_name: 'Context', optional: true
 
   has_many :contexts
-  has_many :days
   has_many :goals
   has_many :memes
   has_many :timelogs
+
+  has_many :days
+  has_many :weeks
 
   has_many :tags
   has_many :tag_taggables, through: :tags

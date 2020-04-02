@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_15_010931) do
+ActiveRecord::Schema.define(version: 2020_04_02_051213) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,7 +44,9 @@ ActiveRecord::Schema.define(version: 2020_03_15_010931) do
     t.datetime "updated_at", null: false
     t.jsonb "meta", default: {}
     t.string "name"
+    t.bigint "week_id"
     t.index ["user_id"], name: "index_days_on_user_id"
+    t.index ["week_id"], name: "index_days_on_week_id"
   end
 
   create_table "entries", force: :cascade do |t|
@@ -232,8 +234,19 @@ ActiveRecord::Schema.define(version: 2020_03_15_010931) do
     t.integer "priority", default: 1
   end
 
+  create_table "weeks", force: :cascade do |t|
+    t.string "name"
+    t.string "stamp"
+    t.bigint "user_id"
+    t.jsonb "meta", default: {}
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_weeks_on_user_id"
+  end
+
   add_foreign_key "contexts", "users"
   add_foreign_key "days", "users"
+  add_foreign_key "days", "weeks"
   add_foreign_key "entries", "progressions"
   add_foreign_key "exercises", "groups"
   add_foreign_key "goal_entries", "goals"
@@ -249,4 +262,5 @@ ActiveRecord::Schema.define(version: 2020_03_15_010931) do
   add_foreign_key "timelogs", "days"
   add_foreign_key "timelogs", "users"
   add_foreign_key "users", "contexts", column: "current_context_id"
+  add_foreign_key "weeks", "users"
 end

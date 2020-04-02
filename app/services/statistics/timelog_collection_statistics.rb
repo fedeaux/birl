@@ -12,6 +12,12 @@ module Statistics
       self.duration = duration + timelog_statistics.duration
     end
 
+    def merge(timelog_collection_statistics)
+      self.count += timelog_collection_statistics.count
+      self.duration += timelog_collection_statistics.duration
+      self.days += timelog_collection_statistics.days
+    end
+
     def calculate
       self.mean_duration_by_count = (duration.to_f / count).round unless count.zero?
       self.mean_duration_by_day = (duration.to_f / days).round unless days.zero?
