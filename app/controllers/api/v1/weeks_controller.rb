@@ -2,7 +2,7 @@ class Api::V1::WeeksController < Api::V1::ApiController
   before_action :set_week, only: %i[show update destroy]
 
   def index
-    @weeks = current_context.weeks
+    @weeks = current_user.weeks
   end
 
   def show
@@ -17,7 +17,7 @@ class Api::V1::WeeksController < Api::V1::ApiController
   end
 
   def create
-    @week = current_context.weeks.new week_params
+    @week = current_user.weeks.new week_params
     if @week.save
       render 'show', status: :created
     else
@@ -32,10 +32,10 @@ class Api::V1::WeeksController < Api::V1::ApiController
   private
 
   def set_week
-    @week = current_context.weeks.find(params[:id])
+    @week = current_user.weeks.find(params[:id])
   end
 
   def week_params
-    params.require(:week).permit(:id, :name, :stamp, :user_id, :meta)
+    params.require(:week).permit(:id, :name, :stamp, :user_id, :planned, :meta)
   end
 end

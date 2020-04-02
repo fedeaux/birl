@@ -53,6 +53,9 @@ for view_model_path in view_model_paths.paths
 import { Chrome } from 'vue-color'
 Vue.component 'color-picker', Chrome
 
+import VueApexCharts from 'vue-apexcharts'
+Vue.component 'apexchart', VueApexCharts
+
 import filters from '../spa/filters'
 
 for name, filter of filters

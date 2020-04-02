@@ -70,6 +70,8 @@ paths = [
   'goaler/widget/item'
 
   'statistics/line'
+  'statistics/pie'
+  'statistics/bars'
 ]
 
 meme_types = [

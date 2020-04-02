@@ -25,7 +25,12 @@ module Statistics
         end
       end
 
-      statistics_by_tag_id.map { |tag_id, collection| { values: collection.tap(&:calculate).as_json, tag: Tag.find(tag_id) } }
+      statistics_by_tag_id.map do |tag_id, collection|
+        {
+          values: collection.tap(&:calculate).as_json,
+          tag: Tag.find(tag_id)
+        }
+      end
     end
 
     def save!

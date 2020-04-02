@@ -1,7 +1,7 @@
 <template lang="pug">
 .statistics-line.flex-row
   .statistics-line-label.flex-item-fixed
-    | {{ day.name }}
+    | {{ statiscable.name }}
   .statistics-line-bars.flex-item
     .statistics-line-bar.center-aligned(v-for='item in items' :style='barStyle(item)')
       | {{ item.tag.fullname }}
@@ -9,7 +9,7 @@
 
 <script lang="coffee">
 export default
-  props: ['day', 'base']
+  props: ['statiscable', 'base']
 
   methods:
     barStyle: (item) ->
@@ -23,5 +23,5 @@ export default
 
   computed:
     items: ->
-      @day.meta.statistics.timelogs.sort (a, b) -> b.values.duration - a.values.duration
+      @statiscable.meta.statistics.timelogs.sort (a, b) -> b.values.duration - a.values.duration
 </script>
