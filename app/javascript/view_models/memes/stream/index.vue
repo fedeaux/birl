@@ -24,16 +24,16 @@
                  @cancel='clearFormMeme()')
 
   .memes-stream-list-wrapper.flex-column.b-padded-1(v-if='!form_meme')
-    memes-stream-list.flex-item(:memes='memes'
-                                :allow_actions='true'
-                                :context='context'
-                                :select_mode='select_mode'
-                                :selected_ids='selected_ids'
-                                :show_header='!select_mode'
-                                @enableSelectMode='enableSelectMode'
-                                @selectModeToggleSelected='selectModeToggleSelected'
-                                @edit='editMeme($event)'
-                                @destroy='destroyMeme($event)')
+    memes-stream-list.padded-1.flex-item(:memes='memes'
+                                         :allow_actions='true'
+                                         :context='context'
+                                         :select_mode='select_mode'
+                                         :selected_ids='selected_ids'
+                                         :show_header='!select_mode'
+                                         @enableSelectMode='enableSelectMode'
+                                         @selectModeToggleSelected='selectModeToggleSelected'
+                                         @edit='editMeme($event)'
+                                         @destroy='destroyMeme($event)')
 
   //- .action-footer.slim-bottom-attached-footer
   .memes-stream-input-wrapper.flex-item.grow-0.flex-row

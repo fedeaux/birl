@@ -5,9 +5,9 @@
       sui-checkbox
     | {{ text }}
 
-    //- BrainDamage: Details Start
-    tags-tags(:tags='meme.tags' :hide='context.tag_id')
-    //- BrainDamage: Details End
+  //- BrainDamage: Details Start
+  tags-tags(:tags='meme.tags' :hide='context.tag_id')
+  //- BrainDamage: Details End
 
   .top-right-actions(v-if='allow_actions' @click='action($event)')
     slot

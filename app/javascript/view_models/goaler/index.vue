@@ -1,8 +1,9 @@
 <template lang="pug">
   .goaler
-    .goal-period(v-for='period in goal_periods')
-      .goal-period-name {{ period.name }}
-      template(:is="''")
+    h1 The Four Feats of Superhuman Strength
+    //- .goal-period(v-for='period in goal_periods')
+    //-   .goal-period-name {{ period.name }}
+    //-   template(:is="''")
 </template>
 
 <script lang="coffee">
