@@ -47,11 +47,16 @@
         body = data.added_timelineables[0].description || ''
         @notify title: "Starting #{data.added_timelineables[0].main_tag.fullname}", options: { body: body }
 
+      alarm: (data) ->
+        @notify title: "Alarm: #{data.title}", options: { body: data.body }
+
     mounted: ->
       Global.events.$on 'Desktop::GoTo', @goTo
       Global.events.$on 'Timeline::CurrentTimelineables', @currentTimelineablesChanged
+      Global.events.$on 'Timeline::Alarm', @alarm
 
     beforeDestroy: ->
       Global.events.$off 'Desktop::GoTo', @goTo
       Global.events.$off 'Timeline::CurrentTimelineables', @currentTimelineablesChanged
+      Global.events.$off 'Timeline::Alarm', @alarm
 </script>
