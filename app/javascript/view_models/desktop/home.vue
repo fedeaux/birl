@@ -1,26 +1,28 @@
 <template lang="pug">
-  .desktop-home.flex-row
-    .flex-column.grow-4
-      //- .flex-row.paddeds-1
-      .desktop-home-tags.flex-column
-        h1.flex-item-fixed.centered Tags
-        shared-view.flex-item(:path='"/tags"')
+  .desktop-home.flex-row.padded-1
+    .desktop-home-tags-and-memes.flex-column.grow-3
+      .padded-1.flex-column
+        .desktop-home-tags.desktop-home-card.flex-column.padded-1
+          h1.flex-item-fixed.centered Tags
+          shared-view.flex-item(:path='"/tags"')
 
-      .desktop-home-memes.flex-column
-        h1.flex-item-fixed.centered Memes
-        template(v-if='timelineable_tag')
-          shared-view.flex-item(:path='timelineable_tag.path()')
-
-        template(v-else)
+      .padded-1.flex-column
+        .desktop-home-tags.desktop-home-card.flex-column.padded-1
+          h1.flex-item-fixed.centered Memes
           shared-view.flex-item(:path='"/memes"')
 
-    shared-view.flex-item.grow-3.padded-1(:path='"/timelogs/today"')
+    .flex-column.grow-3.padded-1
+      shared-view.desktop-home-card.flex-item.padded-2(:path='"/timelogs/today"')
 
-    .desktop-home-tags-and-memes.flex-column.grow-12
-      .flex-column.grow-3.padded-1
+    .flex-column.grow-3.padded-1
+      .desktop-home-card.flex-column.padded-2
+        h1.flex-item-fixed.centered Periods
+        goaler-periods.flex-item.scroll-y
+
+    .flex-column.grow-6.padded-1
+      .desktop-home-card.flex-column.padded-2
         h1.flex-item-fixed.centered Goaler
         shared-view.flex-item.scroll-y(:path='"/goaler"')
-
 </template>
 
 <script lang="coffee">
@@ -38,5 +40,4 @@
 
     beforeDestroy: ->
       Global.events.$off 'Timeline::CurrentTimelineables', @currentTimelineablesChanged
-
 </script>

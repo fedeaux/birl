@@ -65,6 +65,7 @@ paths = [
 
   'questioner/item'
 
+  'goaler/periods'
   'goaler/widget'
   'goaler/widget/group'
   'goaler/widget/item'
