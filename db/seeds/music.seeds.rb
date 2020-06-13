@@ -31,7 +31,7 @@ after(:contexts) do
 
   progression.update(override_entry_data_model: {
                        generator: {
-                         name: :basic_cromatisms
+                         name: :x_cromatisms
                        }
                      })
 

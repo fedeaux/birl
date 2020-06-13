@@ -9,8 +9,8 @@ class Lister
       cromatisms_warmup: ['1234', '2341', '3412', '4123']
       cromatisms_hard: ['1342', '2431', '3124', '4213']
       cromatisms_regular: ['1243', '2134', '1324', '2413', '1423', '2314']
-      easy_cromatisms_variations: ['stairs', 'pestana', 'one string']
-      hard_cromatisms_variations: ['x', 'string jump']
+      easy_cromatisms_variations: ['stairs', 'pestana', 'one string', 'string jump']
+      hard_cromatisms_variations: ['x']
 
       guitar_expressions: ['hammers&pulls', 'vibrato', 'bends', 'trills', 'octave playng',
                            'double bends', 'left tapping', 'slide', 'volume swell']
