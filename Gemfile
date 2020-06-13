@@ -36,7 +36,7 @@ gem 'slim'
 gem 'table_print', '~> 1.5'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
-gem 'webpacker', '~> 4.2.2'
+gem 'webpacker', '~> 5.x'
 
 group :development, :test do
   gem 'better_errors'
