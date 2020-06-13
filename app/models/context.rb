@@ -40,8 +40,6 @@ class Context < ApplicationRecord
   def next_session_on_recurrence_scheme_group(recurrence_scheme_group)
     sessions = current_sessions.where("recurrence_scheme->'group' = ?", recurrence_scheme_group.to_json)
 
-    # return nil if sessions.select(&:done_today?).any?
-
     oldest_recurrence_scheme_sequence = oldest_recurrence_scheme_sequence_in_group recurrence_scheme_group
 
     next_in_sequence = sessions
@@ -52,14 +50,9 @@ class Context < ApplicationRecord
                           .where("recurrence_scheme->'sequence' = ?", 0.to_json).first
   end
 
-  # def next_sessions
-  #   recurrence_scheme_groups.map do |recurrence_scheme_group|
-  #     next_session_on_recurrence_scheme_group(recurrence_scheme_group)
-  #   end.compact
-  # end
-
   def next_sessions
-    current_sessions.where("recurrence_scheme->'weekday' = ?", todays_weekday_in_timezone.to_json)
+    # current_sessions.where("recurrence_scheme->'weekday' = ?", todays_weekday_in_timezone.to_json)
+    current_sessions.order('executed_at DESC', :id).limit(1)
   end
 
   def todays_things

@@ -30,30 +30,26 @@
         event.stopPropagation()
         @$emit 'action', event
 
-   # BrainDamage: Other Start
-   computed:
-     klass: ->
-       return 'text-green' if @progression.done_today
+    computed:
+      klass: ->
+        return 'text-green' if @progression.done_today
 
-     details: ->
-       els = []
+      details: ->
+        els = []
 
-       if @progression.challenge_name != @progression.name
-         els.push @progression.challenge_name
+        if @progression.challenge_name != @progression.name
+          els.push @progression.challenge_name
 
-       if @progression.details
-         els.push @progression.details
+        if @progression.details
+          els.push @progression.details
 
-       if @progression.entries_count > 0
-         els.push @progression.entries_count
-       else
-         els.push 'Never trained'
+        if @progression.entries_count > 0
+          els.push @progression.entries_count
+        else
+          els.push 'Never trained'
 
-       if @progression.last_entry_at
-         els.push @progression.last_entry_at.fromNow()
+        if @progression.last_entry_at
+          els.push @progression.last_entry_at.fromNow()
 
-       els.join ' &middot; '
-   # BrainDamage: Other End
+        els.join ' &middot; '
 </script>
-
-BrainDamage: NO-OVERRIDE
